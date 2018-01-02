@@ -12,7 +12,8 @@
     </figure>
     <p>Rich currently resides in Salt Lake City, Utah and works at <a href="https://rubiconproject.com/"
                                                                       target="_blank">The Rubicon Project</a>
-      where he spends most of his time contributing to the <a href="https://github.com/prebid/Prebid.js" target="_blank">Prebid.org</a>
+      where he spends most of his time contributing to the <a href="https://github.com/prebid/Prebid.js"
+                                                              target="_blank">Prebid.org</a>
       project.
       He also holds a Bachelor of Science in Computer Science from <a
         href="http://www.uvu.edu/" target="_blank">Utah Valley University</a>.</p>
