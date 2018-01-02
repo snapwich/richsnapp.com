@@ -10,12 +10,11 @@
       <img src="/img/responsive-workstation.jpg"/>
       <figcaption>Where the magic happens.</figcaption>
     </figure>
-    <p>Rich currently resides in Salt Lake City, Utah and works at <a href="https://www.needle.com/"
-                                                                      target="_blank">Needle</a>,
-      spearheading
-      <a href="https://en.wikipedia.org/wiki/Responsive_web_design" target="_blank">responsive design</a>
-      (mobile/tablet friendly) in <a href="https://www.needle.com/responsive/" target="_blank">Needle's
-        advocacy based chat platform</a>. He also holds a Bachelor of Science in Computer Science from <a
+    <p>Rich currently resides in Salt Lake City, Utah and works at <a href="https://rubiconproject.com/"
+                                                                      target="_blank">The Rubicon Project</a>
+      where spends most his time contributing to the <a href="https://github.com/prebid/Prebid.js" target="_blank"
+                                                            }>Prebid.org</a> project.
+      He also holds a Bachelor of Science in Computer Science from <a
         href="http://www.uvu.edu/" target="_blank">Utah Valley University</a>.</p>
     <p>More information on his skills and experience can be found at his <a
       href="https://www.linkedin.com/in/richsnapp" target="_blank">LinkedIn page</a>.</p>
