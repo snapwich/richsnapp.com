@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="btn-group btn-group-justified form-group social-links visible-xs visible-sm" role="group">
-      <a href="https://www.facebook.com/rich.snapp" target="_blank" class="btn fa fa-facebook"></a>
       <a href="https://twitter.com/snapwich" target="_blank" class="btn fa fa-twitter"></a>
       <a href="https://github.com/snapwich" target="_blank" class="btn fa fa-github-alt"></a>
       <a href="http://www.linkedin.com/in/richsnapp" target="_blank" class="btn fa fa-linkedin"></a>
