@@ -9,7 +9,7 @@
   export default {
     data() {
       return {
-        pages: this.$store.state.blogs
+        pages: require('./getPages.js')
       }
     }
   }
