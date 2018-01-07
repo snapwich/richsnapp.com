@@ -10,7 +10,7 @@
   So... after much struggle and some consistent head to desk interactions I have successfully added blog functionality
   to my static website!  Since each of my articles on this website are [Single File Vue Components](https://vuejs.org/v2/guide/single-file-components.html)
   , the mingling of text and technical code examples should be a seamless experience.  Also, since [this website is hosted
-  on Github Pages](https://github.com/snapwich/richsnapp.com/blob/master/pages/blog/2018/01-07-we-have-a-blog.vue),
+  on Github Pages](https://github.com/snapwich/richsnapp.com/blob/master/blog/2018/01-07-we-have-a-blog.vue),
   readers have a way to provide easy feedback and hopefully updates to my more-than-likely buggy demonstrations.  I like
   my code to be open source, so why not my articles?
 
