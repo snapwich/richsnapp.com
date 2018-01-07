@@ -120,3 +120,39 @@
     }
   }
 </script>
+
+<style lang="less" scoped>
+  @import "../assets/variables";
+
+  textarea {
+    min-height: 250px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  .social-links a {
+    padding: 6px;
+    font-size: 26px;
+    color: @gray;
+  }
+  form {
+    input[type=submit] {
+      width: 100%;
+    }
+
+    .has-error {
+      .recaptcha {
+        position: relative;
+        :before {
+          content: "*";
+          position: absolute;
+          font-size: 28px;
+          font-weight: 700;
+          color: #a94442;
+          left: 3px;
+          top: -11px;
+        }
+      }
+    }
+  }
+</style>

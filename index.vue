@@ -1,33 +1,68 @@
-<template lang="md">
-  Rich Snapp is a Software Engineer focusing on web application development and is involved in both
-  building and pushing forward the capabilities of software designed for the web. His efforts are
-  currently concentrated in Javascript programming and front-end frameworks, but he has a strong
-  familiarity with the full technology stack necessary for creating modern
-  [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) applications.
-
-  <figure v-toggle-class-on-click="'clicked'">
-    <img src="/img/responsive-workstation.jpg"/>
-    <figcaption>Where the magic happens.</figcaption>
-  </figure>
-
-  Rich currently resides in Salt Lake City, Utah and works at [The Rubicon Project](https://rubiconproject.com/)
-  where he spends most of his time contributing to the [Prebid.org](https://github.com/prebid/Prebid.js) project.
-  He also holds a Bachelor of Science in Computer Science from [Utah Valley University](http://www.uvu.edu/).
-
-  More information on his skills and experience can be found at his
-  [LinkedIn page](https://www.linkedin.com/in/richsnapp).
-
-  ### About This Site
-
-  As an open-source software contributor and consumer, as well as appreciator of free services; here's a few notes
-  concerning the making of this website:
-
-  * This is a [static web page](https://en.wikipedia.org/wiki/Static_web_page) generated with
-    [Nuxt.js](https://github.com/nuxt/nuxt.js/) and various other npm libraries.
-  * Hosted with [GitHub Pages](https://pages.github.com/)
-  * Uses some [Twitter Bootstrap](http://getbootstrap.com/) components (such as the grid) and
-    [Font Awesome](ttps://fortawesome.github.io/Font-Awesome/) icons.
-  * Type fonts provided by [Google Fonts](https://www.google.com/fonts).
-  * Intentionally made as simple and unparallaxy as possible,
-    [sorry for the convenience](http://www.quotationspage.com/quote/39411.html).
+<template>
+  <div>
+    <section v-for="page in pages" class="page-preview">
+      <header>
+        <h2><nuxt-link :to="page.path">{{ page.meta.title || page.displayName }}</nuxt-link></h2>
+        <p class="date">{{ niceDate(page.date) }}</p>
+      </header>
+      <div v-html="page.blurb"></div>
+      <footer v-if="page.more">
+        <p><nuxt-link :to="page.path">Read more →</nuxt-link></p>
+      </footer>
+    </section>
+  </div>
 </template>
+
+<script>
+
+  let moment = require('moment');
+
+  export default {
+    fetch({ store }) {
+      store.commit('meta', {
+        title: 'Home'
+      });
+    },
+    data() {
+      return {
+        pages: require('~/assets/preval/getBlog.js')
+      }
+    },
+    methods: {
+      niceDate(date) {
+        return moment(date).format('MMMM Do YYYY');
+      }
+    }
+  }
+
+</script>
+
+<style lang="less" scoped>
+  @import "../assets/variables";
+
+  a {
+    border-bottom: 0;
+  }
+
+  .page-preview {
+    &:first-child {
+      margin-top: 1em;
+    }
+    margin-bottom: 3em;
+
+    header {
+      h2 {
+        margin-bottom: 10px;
+      }
+    }
+
+    footer {
+      p {
+        text-align: right;
+      }
+    }
+  }
+
+
+
+</style>
