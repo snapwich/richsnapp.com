@@ -5,7 +5,7 @@
   familiarity with the full technology stack necessary for creating modern
   [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) applications.
 
-  <figure v-toggle-class-on-click="'clicked'">
+  <figure>
     <img src="/img/responsive-workstation.jpg"/>
     <figcaption>Where the magic happens.</figcaption>
   </figure>
