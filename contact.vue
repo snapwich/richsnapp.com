@@ -124,6 +124,10 @@
 <style lang="less" scoped>
   @import "../assets/variables";
 
+  .btn:active {
+    box-shadow: none;
+  }
+
   textarea {
     min-height: 250px;
     width: 100%;
