@@ -7,6 +7,11 @@
   limitations of the platform. I'm of the strong opinion that **learning is doing**, and limiting educational writing
   to text and graphics isn't the best medium for doing.
 
+  <figure class="small right">
+    <img src="./fireworks.gif" />
+    <figcaption>With new years comes new resolutions.</figcaption>
+  </figure>
+
   So... after much struggle and some consistent head to desk interactions I have successfully added blog functionality
   to my static website!  Since each of my articles on this website are [Single File Vue Components](https://vuejs.org/v2/guide/single-file-components.html)
   , the mingling of text and technical code examples should be a seamless experience.  Also, since [this website is hosted

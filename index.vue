@@ -52,17 +52,16 @@
 
     header {
       h2 {
-        margin-bottom: 10px;
+        font-size: 30px;
       }
     }
 
     footer {
       p {
         text-align: right;
+        text-indent: 0;
       }
     }
   }
-
-
 
 </style>
