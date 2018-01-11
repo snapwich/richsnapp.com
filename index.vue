@@ -25,7 +25,7 @@
     },
     data() {
       return {
-        pages: require('~/assets/preval/getBlog.js')
+          pages: require('~/static/api/blog-latest.json')
       }
     },
     methods: {

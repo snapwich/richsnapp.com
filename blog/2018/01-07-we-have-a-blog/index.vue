@@ -1,4 +1,11 @@
 
+<script>
+  module.exports = {
+    title: 'Houston, we have a blog!',
+    tags: ['vue.js', 'blog', 'technical writing']
+  }
+</script>
+
 <template lang="md">
   One of my goals with this new year has been to start writing more frequently, be it technical articles or just my
   thoughts and ramblings.  I've considered [Medium](http://www.medium.com/@snapwich) in the past (and still might
@@ -33,19 +40,3 @@
   articles under its belt and some new features, it can prove to be a valuable learning resource for others as well!
 </template>
 
-<script>
-  module.exports = {
-    head() {
-      return {
-        meta: [
-          { hid: 'keywords', name: 'keywords', content: 'vue.js, blog, technical writing' }
-        ]
-      }
-    },
-    fetch({ store }) {
-      store.commit('meta', {
-        title: 'Houston, we have a blog!'
-      });
-    }
-  }
-</script>

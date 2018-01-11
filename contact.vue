@@ -56,7 +56,6 @@
   import Vue from 'vue';
   import VeeValidate from 'vee-validate';
   import VueRecaptcha from 'vue-recaptcha';
-  import axios from 'axios';
   import * as _ from 'lodash';
 
   Vue.use(VeeValidate);
@@ -85,7 +84,7 @@
         this.submitAttempted = true;
         this.$validator.validateAll().then((valid) => {
           if (valid) {
-            axios.post('http://api.richsnapp.com/mail', {
+            this.$axios.post('http://api.richsnapp.com/mail', {
               name: this.name,
               email: this.email,
               message: this.message,
