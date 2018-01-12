@@ -25,9 +25,8 @@
   * This is a [static web page](https://en.wikipedia.org/wiki/Static_web_page) generated with
     [Nuxt.js](https://github.com/nuxt/nuxt.js/) and various other npm libraries.
   * Hosted with [GitHub Pages](https://pages.github.com/)
-  * Uses some [Twitter Bootstrap](http://getbootstrap.com/) components (such as the grid) and
+  * Using some [Twitter Bootstrap](http://getbootstrap.com/) components (such as the grid) and
     [Font Awesome](ttps://fortawesome.github.io/Font-Awesome/) icons.
-  * Type fonts provided by [Google Fonts](https://www.google.com/fonts).
-  * Intentionally made as simple and unparallaxy as possible,
-    [sorry for the convenience](http://www.quotationspage.com/quote/39411.html).
+  * Type fonts by [Google Fonts](https://www.google.com/fonts).
+  * Intentionally made as simple and unparallaxy as possible.
 </template>
