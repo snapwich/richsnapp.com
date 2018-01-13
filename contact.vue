@@ -117,7 +117,7 @@
     components: {
       VueRecaptcha
     }
-  }
+  };
 </script>
 
 <style lang="less" scoped>

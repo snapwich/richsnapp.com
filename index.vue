@@ -2,10 +2,10 @@
   <div>
     <section v-for="page in pages" class="page-preview">
       <header>
-        <h2><nuxt-link :to="page.path">{{ page.meta.title || page.displayName }}</nuxt-link></h2>
+        <h2><nuxt-link :to="page.path">{{ page.title || page.displayName }}</nuxt-link></h2>
         <p class="date">{{ niceDate(page.date) }}</p>
       </header>
-      <div v-html="page.blurb"></div>
+      <p v-html="page.blurb"></p>
       <footer v-if="page.more">
         <p><nuxt-link :to="page.path">Read more →</nuxt-link></p>
       </footer>
@@ -17,12 +17,9 @@
 
   let moment = require('moment');
 
-  export default {
-    fetch({ store }) {
-      store.commit('meta', {
-        title: 'Home'
-      });
-    },
+  module.exports = {
+    title: 'Home',
+    description: 'The latest news out of Rich Snapp\'s blog.',
     data() {
       return {
           pages: require('~/static/api/blog-latest.json')
@@ -33,7 +30,7 @@
         return moment(date).format('MMMM Do YYYY');
       }
     }
-  }
+  };
 
 </script>
 
