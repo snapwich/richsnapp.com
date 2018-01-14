@@ -72,11 +72,12 @@
     .header-info {
       display: flex;
       justify-content: space-evenly;
-      margin-bottom: 0;
+      margin: 0 10px;
       p.date {
         white-space: nowrap;
       }
       p.tags {
+        padding-left: 20px;
         justify-self: right;
       }
     }
