@@ -3,7 +3,13 @@
     <section v-for="page in pages" class="page-preview">
       <header>
         <h2><nuxt-link :to="page.path">{{ page.title || page.displayName }}</nuxt-link></h2>
-        <p class="date">{{ niceDate(page.date) }}</p>
+        <div class="header-info">
+          <p class="date">{{ niceDate(page.date) }}</p>
+          <p class="tags" v-if="page.tags">
+            <i class="fa fa-tags"></i>
+            {{ displayArr(page.tags) }}
+          </p>
+        </div>
       </header>
       <p v-html="page.blurb"></p>
       <footer v-if="page.more">
@@ -28,6 +34,9 @@
     methods: {
       niceDate(date) {
         return moment(date).format('MMMM Do YYYY');
+      },
+      displayArr(arr) {
+        return arr.join(', ');
       }
     }
   };
@@ -57,6 +66,18 @@
       p {
         text-align: right;
         text-indent: 0;
+      }
+    }
+
+    .header-info {
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 0;
+      p.date {
+        white-space: nowrap;
+      }
+      p.tags {
+        justify-self: right;
       }
     }
   }

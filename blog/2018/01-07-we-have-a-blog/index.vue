@@ -30,7 +30,7 @@
   hopefully I'll get to these soon:
   * ~~Add a comments section at the end of each article (most likely with [Disqus](http://www.disqus.com))~~ Ended up
     going with the [Facebook Comments Plugin](https://developers.facebook.com/docs/plugins/comments/) because it's free.
-  * Add sharing capabilties and RSS functionality (where Medium shines)
+  * ~~Add sharing capabilties~~, RSS functionality, maybe a newsletter (where Medium shines)
   * ~~Add a search feature~~
   * ~~Update the blog index page to be a little more robust.  Currently it's loading the pages using the [preval babel plugin](https://github.com/kentcdodds/babel-plugin-preval)
   which, as cool as it is, seems to behave a bit flakey at times and also have some issues with caching when I'm doing
