@@ -26,7 +26,7 @@
     [Nuxt.js](https://github.com/nuxt/nuxt.js/) and various other npm libraries.
   * Hosted with [GitHub Pages](https://pages.github.com/)
   * Using some [Twitter Bootstrap](http://getbootstrap.com/) components (such as the grid) and
-    [Font Awesome](ttps://fortawesome.github.io/Font-Awesome/) icons.
+    [Font Awesome](https://fortawesome.github.io/Font-Awesome/) icons.
   * Type fonts by [Google Fonts](https://www.google.com/fonts).
   * Intentionally made as simple and unparallaxy as possible.
 </template>
