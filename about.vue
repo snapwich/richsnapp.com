@@ -27,6 +27,9 @@
   * Hosted with [GitHub Pages](https://pages.github.com/)
   * Using some [Twitter Bootstrap](http://getbootstrap.com/) components (such as the grid) and
     [Font Awesome](https://fortawesome.github.io/Font-Awesome/) icons.
+  * Search by [Google Custom Search Engine](https://www.google.com/cse).
+  * Share functionality by [ShareThis](http://www.sharethis.com).
   * Type fonts by [Google Fonts](https://www.google.com/fonts).
+  * Comments using the [Facebook Social Comments](https://developers.facebook.com/docs/plugins/comments/) plugin.
   * Intentionally made as simple and unparallaxy as possible.
 </template>
