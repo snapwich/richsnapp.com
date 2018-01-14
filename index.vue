@@ -71,10 +71,11 @@
 
     .header-info {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-around;
       margin: 0 10px;
       p.date {
         white-space: nowrap;
+        padding-left: 30px;
       }
       p.tags {
         padding-left: 20px;
