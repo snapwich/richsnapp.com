@@ -4,11 +4,11 @@
       <header>
         <h2><nuxt-link :to="page.path">{{ page.title || page.displayName }}</nuxt-link></h2>
         <div class="header-info">
-          <p class="date">{{ niceDate(page.date) }}</p>
-          <p class="tags" v-if="page.tags">
+          <div class="date">{{ niceDate(page.date) }}</div>
+          <div class="tags" v-if="page.tags">
             <i class="fa fa-tags"></i>
             {{ displayArr(page.tags) }}
-          </p>
+          </div>
         </div>
       </header>
       <p v-html="page.blurb"></p>
@@ -71,13 +71,16 @@
 
     .header-info {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-evenly;
       margin: 0 10px;
-      p.date {
-        white-space: nowrap;
-        padding-left: 30px;
+      & > div {
+        flex: 1 1 auto;
       }
-      p.tags {
+      .date {
+        padding-left: 20px;
+        white-space: nowrap;
+      }
+      .tags {
         padding-left: 20px;
         justify-self: right;
       }

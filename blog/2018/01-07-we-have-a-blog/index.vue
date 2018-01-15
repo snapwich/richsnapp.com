@@ -2,7 +2,7 @@
 <script>
   module.exports = {
     title: 'Houston, we have a blog!',
-    tags: ['vue.js', 'blog', 'technical writing']
+    tags: ['vue.js', 'blog']
   }
 </script>
 
