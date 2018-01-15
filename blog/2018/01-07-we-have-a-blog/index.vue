@@ -35,8 +35,8 @@
   * ~~Update the blog index page to be a little more robust.  Currently it's loading the pages using the [preval babel plugin](https://github.com/kentcdodds/babel-plugin-preval)
   which, as cool as it is, seems to behave a bit flakey at times and also have some issues with caching when I'm doing
   dev work.  Also those little blog previews don't currently allow for nice things such as displaying vue components
-  since I'm being naughty with the `v-html` attribute.~~ Updated this to use a custom webpack loader to generate the
-  index pages, although I'm still being naughty with `v-html`.
+  since I'm being naughty with the `v-html` attribute.~~  _Updated this to use a custom webpack loader to generate the
+  index pages, although I'm still being naughty with `v-html`_.
 
   This site has already proven to be a valuable learning experience as I've developed it.  Hopefully, with a few
   articles under its belt and some new features, it can prove to be a valuable learning resource for others as well!
