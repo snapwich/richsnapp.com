@@ -20,17 +20,17 @@
   feeling lucky_ button, I find the added work of a multi-step process can often pay dividends in the
   feelings-of-accomplishment department.
 
-  <figure class="small right">
-  <img src="./google-site-search.png" />
-  <figcaption>Yup, it's a Google product.</figcaption>
-  </figure>
-
   Straight out of the gate we'll see that Google has a tool with a feature list capable of scratching our every
   itch: [Google Site Search](https://enterprise.google.com/search/products/gss.html). However, before getting too
   excited it's important to scan _every_ Google product page for the ominous shutdown notice, and with our cursory glance
   we'll see that our product is indeed deprecated. An unfortunate sight, but rather than being filled with disappointment
   we should consider the hours we might have poured into the ill-fated Google product had we been unaware of the
   impending shutdown.
+
+  <figure class="small right">
+    <img src="./google-site-search.png" />
+    <figcaption>Yup, it's a Google product.</figcaption>
+  </figure>
 
   Repeating our search again with  "Google Site Search Alternatives" will lead us to another, slightly less spectacular
   solution: [Google Custom Search](http://www.google.com/cse).  While lacking many of the bells and whistles of our first
@@ -307,7 +307,7 @@
     color: @gray;
     font-size: 100px;
     margin: 40px auto 20px;
-    width: 100px;
+    width: 60px;
     svg {
       left: -42px;
       top: -45px;
