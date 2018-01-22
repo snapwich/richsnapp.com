@@ -72,7 +72,7 @@
     .header-info {
       display: flex;
       justify-content: space-evenly;
-      margin: 0 10px;
+      margin: -8px 10px 5px;
       & > div {
         flex: 1 1 auto;
       }
