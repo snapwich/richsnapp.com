@@ -4,7 +4,7 @@
       <header>
         <h2><nuxt-link :to="page.path">{{ page.title || page.displayName }}</nuxt-link></h2>
         <div class="header-info">
-          <div class="date">{{ niceDate(page.date) }}</div>
+          <div class="date">{{ formatDate(page.date) }}</div>
           <div class="tags" v-if="page.tags">
             <i class="fa fa-tags"></i>
             {{ displayArr(page.tags) }}
@@ -21,7 +21,7 @@
 
 <script>
 
-  let moment = require('moment');
+  let formatDate = require('~/assets/dateUtils.js').formatDate;
 
   module.exports = {
     title: 'Home',
@@ -32,9 +32,7 @@
       }
     },
     methods: {
-      niceDate(date) {
-        return moment(date).format('MMMM Do YYYY');
-      },
+      formatDate,
       displayArr(arr) {
         return arr.join(', ');
       }
