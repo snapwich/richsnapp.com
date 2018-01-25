@@ -84,7 +84,7 @@
         this.submitAttempted = true;
         this.$validator.validateAll().then((valid) => {
           if (valid) {
-            this.$axios.post('http://api.richsnapp.com/mail', {
+            this.$axios.post('https://us-central1-richsnapp-174618.cloudfunctions.net/mail', {
               name: this.name,
               email: this.email,
               message: this.message,
