@@ -308,6 +308,7 @@
     font-size: 100px;
     margin: 40px auto 20px;
     width: 60px;
+    clear: both;
     svg {
       left: -42px;
       top: -45px;
