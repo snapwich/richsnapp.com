@@ -152,11 +152,12 @@
   Yes, yes it could.  However, it looks like that's just the risk we're going to have to take.  Code doesn't update that
   frequently these days, right?  And it's always backwards compatible when it does!
 
+  <div class="clear"></div>
+
   <figure class="smallest">
     <img src="./iphone-search.png" />
     <figcaption>Mobile leaves something to be desired</figcaption>
   </figure>
-
 
   We haven't checked out the search results page yet; I wonder what that looks like?  Google Custom Search has a nice
   overlay option which means we don't have to worry about where the results will fit into our page and it ends up looking
@@ -170,7 +171,7 @@
   Custom Search does have a configuration option that allows us to open the search results in a separate page... but
   then how is that better than just manually redirecting our visitors to a google search results page to begin with?
 
-  <div class="lightbulb">
+  <div class="lightbulb" v-repaint>
     <svg width="140" height="140">
       <line stroke-linecap="round"
             stroke-width="5"
@@ -308,7 +309,6 @@
     font-size: 100px;
     margin: 40px auto 20px;
     width: 60px;
-    clear: both;
     svg {
       left: -42px;
       top: -45px;
