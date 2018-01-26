@@ -12,7 +12,7 @@
 
   Rich currently resides in Salt Lake City, Utah and works at [The Rubicon Project](https://rubiconproject.com/)
   where he spends most of his time contributing to the [Prebid.org](https://github.com/prebid/Prebid.js) project.
-  He also holds a Bachelor of Science in Computer Science from [Utah Valley University](http://www.uvu.edu/).
+  He also holds a Bachelor of Science in Computer Science from [Utah Valley University](https://www.uvu.edu/).
 
   More information on his skills and experience can be found at his
   [LinkedIn page](https://www.linkedin.com/in/richsnapp).
@@ -25,10 +25,10 @@
   * This is a [static web page](https://en.wikipedia.org/wiki/Static_web_page) generated with
     [Nuxt.js](https://github.com/nuxt/nuxt.js/) and various other npm libraries.
   * Hosted with [GitHub Pages](https://pages.github.com/)
-  * Using some [Twitter Bootstrap](http://getbootstrap.com/) components (such as the grid) and
+  * Using some [Twitter Bootstrap](https://getbootstrap.com/) components (such as the grid) and
     [Font Awesome](https://fortawesome.github.io/Font-Awesome/) icons.
   * Search by [Google Custom Search Engine](https://www.google.com/cse).
-  * Share functionality by [ShareThis](http://www.sharethis.com).
+  * Share functionality by [ShareThis](https://www.sharethis.com).
   * Type fonts by [Google Fonts](https://www.google.com/fonts).
   * Comments using the [Facebook Social Comments](https://developers.facebook.com/products/social-plugins/comments/) plugin.
   * Intentionally made as simple and unparallaxy as possible.

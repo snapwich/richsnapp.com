@@ -3,7 +3,7 @@
     <div class="btn-group btn-group-justified form-group social-links visible-xs visible-sm" role="group">
       <a href="https://twitter.com/snapwich" target="_blank" class="btn fa fa-twitter"></a>
       <a href="https://github.com/snapwich" target="_blank" class="btn fa fa-github-alt"></a>
-      <a href="http://www.linkedin.com/in/richsnapp" target="_blank" class="btn fa fa-linkedin"></a>
+      <a href="https://www.linkedin.com/in/richsnapp" target="_blank" class="btn fa fa-linkedin"></a>
     </div>
     <p>Feel free to contact by clicking the social icons above or using the form below. Be sure to include a return
       email address or some form of contact information in the message body if you'd appreciate a response.</p>
