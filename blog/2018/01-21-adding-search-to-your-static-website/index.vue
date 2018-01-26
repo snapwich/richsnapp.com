@@ -27,7 +27,7 @@
   we should consider the hours we might have poured into the ill-fated Google product had we been unaware of the
   impending shutdown.
 
-  <figure class="small right">
+  <figure class="scale right">
     <img src="./google-site-search.png" />
     <figcaption>Yup, it's a Google product.</figcaption>
   </figure>
@@ -49,7 +49,7 @@
   thing just looks plain broken...  Let's dig into the DOM that was added to our site to see what created
   this monstrosity.
 
-  <figure class="small">
+  <figure class="scale">
   <img src="./google-dom.png" />
   </figure>
 
@@ -152,18 +152,16 @@
   Yes, yes it could.  However, it looks like that's just the risk we're going to have to take.  Code doesn't update that
   frequently these days, right?  And it's always backwards compatible when it does!
 
-  <div class="clear"></div>
-
-  <figure class="smallest">
-    <img src="./iphone-search.png" />
-    <figcaption>Mobile leaves something to be desired</figcaption>
-  </figure>
-
   We haven't checked out the search results page yet; I wonder what that looks like?  Google Custom Search has a nice
   overlay option which means we don't have to worry about where the results will fit into our page and it ends up looking
   pretty good on my desktop machine.  Let's see how it looks on a mobile device... It is 2018 and everything is
   [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) these days, so hopefully Google has implemented
   some sort of responsive behavior.
+
+  <figure class="center scale">
+    <img src="./iphone-search.png" />
+    <figcaption>Mobile leaves something to be desired</figcaption>
+  </figure>
 
   Optimistic as I was that we were almost done, it looks like we have a problem... In addition to looking pretty bad,
   the mobile results don't scroll properly; and unfortunately for an overlay that decides to shove all the ads
@@ -209,7 +207,7 @@
   (without any of the headache and third-party code inclusions) by just creating a search box that manually redirects
   them to a pre-populated Google search results page.
 
-  <figure class="search-figure">
+  <figure class="search-figure center">
     <div>
 
     ```html
@@ -322,7 +320,6 @@
       display: flex;
       flex-direction: column;
       code {
-        font-size: .8em;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         border-bottom: 1px solid @gray-lighter;
