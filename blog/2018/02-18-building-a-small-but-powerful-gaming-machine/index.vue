@@ -37,8 +37,54 @@
         <h4 class="title">Small form factor gaming machine</h4>
         <p>by snapwich</p>
       </div>
+      <i class="fa fa-external-link-square" />
     </a>
   </figure>
+
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td>CPU</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/Mr2rxr/intel-core-i5-8600k-36ghz-6-core-processor-bx80684i58600k">Intel - Core i5-8600K 3.6GHz 6-Core Processor</a></td>
+      </tr>
+      <tr>
+        <td>CPU Cooler</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/TDdFf7/cooler-master-masterliquid-lite-120-667-cfm-liquid-cpu-cooler-mlw-d12m-a20pw-r1">Cooler Master - MasterLiquid Lite 120 66.7 CFM Liquid CPU Cooler</a></td>
+      </tr>
+      <tr>
+        <td>Motherboard</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/VRjWGX/asus-rog-strix-z370-i-gaming-mini-itx-lga1151-motherboard-strix-z370-i-gaming">Asus - ROG Strix Z370-I Gaming Mini ITX LGA1151 Motherboard</a></td>
+      </tr>
+      <tr>
+        <td>Memory</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/gWM323/corsair-vengeance-rgb-32gb-2-x-16gb-ddr4-3333-memory-cmr32gx4m2c3333c16">Corsair - Vengeance RGB 32GB (2 x 16GB) DDR4-3333 Memory</a></td>
+      </tr>
+      <tr>
+        <td>Storage</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/FcGj4D/samsung-960-pro-20tb-m2-2280-solid-state-drive-mz-v6p2t0bw">Samsung - 960 Pro 2TB M.2-2280 Solid State Drive</a></td>
+      </tr>
+      <tr>
+        <td>Video Card</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/CBjWGX/pny-geforce-gtx-1070-8gb-founders-edition-video-card-gf1070gtx8grpb">PNY - GeForce GTX 1070 8GB Founders Edition Video Card</a></td>
+      </tr>
+      <tr>
+        <td>Case</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/RgVBD3/silverstone-rvz03b-mini-itx-desktop-case-rvz03b">Silverstone - RVZ03B Mini ITX Desktop Case</a></td>
+      </tr>
+      <tr>
+        <td>Power Supply</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/yc38TW/seasonic-focus-plus-platinum-650w-80-platinum-certified-fully-modular-atx-power-supply-ssr-650px">SeaSonic - FOCUS Plus Platinum 650W 80+ Platinum Certified Fully-Modular ATX Power Supply</a></td>
+      </tr>
+      <tr>
+        <td>Case Fan</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/4QzZxr/silverstone-case-fan-fw121">Silverstone - FW121 32.6 CFM  120mm Fan</a></td>
+      </tr>
+      <tr>
+        <td>Monitor</td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/rtJkcf/acer-monitor-xb270hubprz">Acer - XB270HU bprz 27.0" 2560x1440 144Hz Monitor</a></td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <style lang="less">
@@ -77,6 +123,9 @@
       .title {
         margin-bottom: 10px;
         font-weight: bold;
+      }
+      i {
+        margin-left: 4px;
       }
       p {
         font-family: 'Open Sans', sans-serif;
