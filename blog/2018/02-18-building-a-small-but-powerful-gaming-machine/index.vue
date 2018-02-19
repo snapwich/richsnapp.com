@@ -23,12 +23,12 @@
   it had given up the ghost never to be turned on again (bad motherboard).  I salvaged the parts I could while using the
   opportunity to upgrade some others and eventually ended up with the build we see here in its final form.
 
-  Make no mistake, its creation was not without struggle.  Blood, sweat, tears, and possible a few curse words were
-  included in the process of making everything fit in this small technological carapace.
+  Make no mistake, its creation was not without struggle.  Blood, sweat, tears, and possibly a few curse words were
+  included in the process of making everything fit into this small technological carapace.
 
-  If you would like more details on what's included or details on how to make your own (and avoid some pitfalls and
-  bloodshed), I documented some of the complications as well as included a build list with all the parts involved at
-  [PCPartPicker.com](https://pcpartpicker.com/b/DV29TW).
+  If you would like more details on what's included or details on how to make your own (and possibly avoid some pitfalls
+  and/or bloodshed), I documented some of the complications as well as included a build list with all the parts involved
+  at [PCPartPicker.com](https://pcpartpicker.com/b/DV29TW).
 
   <figure class="pcpartpicker center scale">
     <a class="pcpartpicker-button" href="https://pcpartpicker.com/b/DV29TW" target="_blank">
