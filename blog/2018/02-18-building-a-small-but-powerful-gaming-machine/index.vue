@@ -88,7 +88,7 @@
 </template>
 
 <style lang="less">
-  @import '../../../../assets/variables';
+  @import '../../../../assets/variables.less';
 
   figure.images {
     div {

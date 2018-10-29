@@ -42,7 +42,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import "../assets/variables";
+  @import "../assets/variables.less";
 
   a {
     border-bottom: 0;

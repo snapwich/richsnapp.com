@@ -121,7 +121,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import "../assets/variables";
+  @import "../assets/variables.less";
 
   .btn:active {
     box-shadow: none;
