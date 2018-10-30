@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section v-for="page in pages" class="page-preview">
+    <article v-for="page in pages" class="page-preview">
       <header>
         <h2><nuxt-link :to="page.path">{{ page.title || page.displayName }}</nuxt-link></h2>
         <div class="header-info">
@@ -15,7 +15,7 @@
       <footer v-if="page.more">
         <p><nuxt-link :to="page.path">Read more →</nuxt-link></p>
       </footer>
-    </section>
+    </article>
   </div>
 </template>
 

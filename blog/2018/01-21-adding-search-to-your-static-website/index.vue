@@ -298,7 +298,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import '../../../../assets/variables.less';
+  @import '~assets/variables.less';
 
   .lightbulb {
     position: relative;
