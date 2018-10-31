@@ -87,7 +87,7 @@
   </table>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
   @import '../../../../assets/variables.less';
 
   figure.images {
