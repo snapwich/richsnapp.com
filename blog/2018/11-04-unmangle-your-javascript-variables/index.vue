@@ -2,12 +2,12 @@
 <template lang="md">
   There are many tools you can find for [unminifying](https://en.wikipedia.org/wiki/Minification_(programming))
   javascript code.  However, _most_ of these tools just add proper formatting and call it a day. Considering
-  most minifiers' restrict local identifiers to one or two characters and _reuse_ those identifiers frequently,
-  this can result in some code that is still quite painful to read.  I think we can do
-  better.
+  many minifiers' [mangle](https://github.com/mishoo/UglifyJS2#cli-mangle-options) local identifiers to one or two
+  characters and _reuse_ those identifiers frequently, this can result in some code that is still quite painful to read.
+  I think we can do better.
 
   I've created this online tool to not only format code (using [prettier](https://prettier.io/)), but
-  also go one step further by marking global variables and renaming minified variables to be globally unique.
+  also go one step further by marking global variables and renaming mangled variables to be globally unique.
   It does this by renaming each variable to its type and the line number where it was defined (e.g.
   `let let99 = 10;` if defined on line 99).  It's not the best, but it's _better_.
 
@@ -20,8 +20,22 @@
     <figure class="right">
       <div>
         <header>
-            <div><button class="btn-sm" @click="update">Unminify</button></div>
-            <div><input type="checkbox" v-model="rename" /> rename variables</div>
+            <div><button class="btn btn-sm" @click="update">Unminify</button></div>
+            <div class="input-group" :class="{disabled: !rename}">
+              <span class="input-group-addon" @click="rename = !rename">
+                <input type="checkbox" v-model="rename" /> unmangle variables as a
+              </span>
+              <div class="input-group-btn" :class="{open: typeOpen}">
+                <button type="button"
+                  :disabled="!rename"
+                  class="btn btn-sm dropdown-toggle"
+                  @click="typeOpen = true">{{ typeSelected }}</button>
+                <ul class="dropdown-menu">
+                  <li><a @click="typeSelected = 'script';">script</a></li>
+                  <li><a @click="typeSelected = 'module';">module</a></li>
+                </ul>
+              </div>
+            </div>
         </header>
         <CodeEditor :code="code" :options="options" @input="setCode" @focus="clear"></CodeEditor>
       </div>
@@ -31,7 +45,7 @@
 </template>
 
 <style lang="less" scoped>
-  @import '~assets/variables.less';
+  @import (reference) '~assets/site.less';
 
   .unminify {
     font-family: @font-family-base;
@@ -44,6 +58,29 @@
       background-color: #f7f7f7;
       border-bottom: 1px solid #ddd;
       align-items: flex-end;
+      font-size: 14px;
+      .btn {
+        font-size: 14px;
+      }
+      .input-group {
+        .input-group-addon {
+          cursor: pointer;
+          font-size: 14px;
+          background-color: #eee;
+        }
+        &.disabled {
+          .opacity(.65);
+        }
+        .dropdown-menu {
+          font-size: 14px;
+        }
+        .btn {
+          border: 1px solid  #ccc;
+        }
+      }
+      a {
+        cursor: pointer;
+      }
       div {
         margin-left: 20px;
       }
@@ -61,7 +98,7 @@
   import * as babylon from 'prettier/parser-babylon';
   import traverse from '@babel/traverse';
 
-  let exampleCode = "(function c(w){var a='name';w.component(a);return c;})(Vue)";
+  let exampleCode = "var Exported=(function c(w){var a='name';return w.component(a);})(Vue)";
 
   export default {
     tags: ['programming', 'javascript', 'prettier', 'unminify'],
@@ -70,6 +107,8 @@
         code: exampleCode,
         error: null,
         rename: true,
+        typeOpen: false,
+        typeSelected: "script",
         options: {
           tabSize: 2,
           mode: 'text/javascript',
@@ -80,6 +119,12 @@
         }
       }
     },
+    mounted() {
+      window.addEventListener('click', this.close, true);
+    },
+    destroyed() {
+      window.removeEventListener('click', this.close, true);
+    },
     components: {
       CodeEditor
     },
@@ -89,6 +134,9 @@
       }
     },
     methods: {
+      close() {
+        this.typeOpen = false;
+      },
       setCode(code) {
         this.code = code;
         this.error = null;
@@ -150,10 +198,13 @@
                   util.addLeadingComment(node, {type: 'CommentBlock', value: tag});
                 }
               });
-              _.forEach(path.scope.bindings, (node, name) => {
-                let line = node.identifier.loc.start.line;
-                path.scope.rename(name, getName(node.kind, line));
-              });
+
+              if (!(vm.typeSelected === 'script' && path.container.type === 'File')) {
+                _.forEach(path.scope.bindings, (node, name) => {
+                  let line = node.identifier.loc.start.line;
+                  path.scope.rename(name, getName(node.kind, line));
+                });
+              }
             }
           });
           return ast;
