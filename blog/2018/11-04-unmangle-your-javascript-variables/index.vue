@@ -64,6 +64,7 @@
         border: 1px solid  #ccc;
       }
       .input-group {
+        width: 1%;
         .input-group-addon {
           cursor: pointer;
           font-size: 14px;
@@ -80,6 +81,7 @@
         cursor: pointer;
       }
       div {
+        flex: 0 0 auto;
         margin-left: 20px;
       }
     }
