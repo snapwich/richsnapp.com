@@ -2,7 +2,7 @@
 <template lang="md">
   There are many tools you can find for [unminifying](https://en.wikipedia.org/wiki/Minification_(programming))
   javascript code.  However, _most_ of these tools just add proper formatting and call it a day. Considering
-  many minifiers' [mangle](https://github.com/mishoo/UglifyJS2#cli-mangle-options) local identifiers to one or two
+  many minifiers [mangle](https://github.com/mishoo/UglifyJS2#cli-mangle-options) local identifiers to one or two
   characters and _reuse_ those identifiers frequently, this can result in some code that is still quite painful to read.
   I think we can do better.
 
