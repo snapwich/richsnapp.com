@@ -23,7 +23,7 @@
             <div><button class="btn btn-sm" @click="update">Unminify</button></div>
             <div class="input-group" :class="{disabled: !rename}">
               <span class="input-group-addon" @click="rename = !rename">
-                <input type="checkbox" v-model="rename" /> unmangle variables as a
+                <input type="checkbox" v-model="rename" /> unmangle <span class="hidden-xs">variable names</span> as a
               </span>
               <div class="input-group-btn" :class="{open: typeOpen}">
                 <button type="button"
@@ -61,6 +61,7 @@
       font-size: 14px;
       .btn {
         font-size: 14px;
+        border: 1px solid  #ccc;
       }
       .input-group {
         .input-group-addon {
@@ -73,9 +74,6 @@
         }
         .dropdown-menu {
           font-size: 14px;
-        }
-        .btn {
-          border: 1px solid  #ccc;
         }
       }
       a {
