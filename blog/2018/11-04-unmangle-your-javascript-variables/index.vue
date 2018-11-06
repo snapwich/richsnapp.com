@@ -11,7 +11,7 @@
   It does this by renaming each variable to its type and the line number where it was defined (e.g.
   `let let99 = 10;` if defined on line 99).  It's not the best, but it's _better_.
 
-  Give it a shot below.  I've also made a redirect to this page at <nuxt-link to="/unminify">richsnapp.com/unminify</nuxt-link>
+  Give it a shot below.  I've also made a redirect to this page at <a href="/unminify">richsnapp.com/unminify</a>
   for convenience. If you think there's a better way to do this, found a bug, or think a feature would be easy to add,
   send a comment or <a :href="forkLink">pull-request</a> my way!
 
