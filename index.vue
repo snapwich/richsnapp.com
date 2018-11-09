@@ -2,14 +2,14 @@
   <div>
     <article v-for="page in pages" class="page-preview">
       <header>
-        <h2><nuxt-link :to="page.path">{{ page.title || page.displayName }}</nuxt-link></h2>
         <div class="header-info">
           <div class="date">{{ formatDate(page.date) }}</div>
-          <div class="tags" v-if="page.tags">
-            <i class="fa fa-tags"></i>
-            {{ displayArr(page.tags) }}
-          </div>
+          <!--<div class="tags" v-if="page.tags">-->
+            <!--<i class="fa fa-tags"></i>-->
+            <!--{{ displayArr(page.tags) }}-->
+          <!--</div>-->
         </div>
+        <h2><nuxt-link :to="page.path">{{ page.title || page.displayName }}</nuxt-link></h2>
       </header>
       <p v-html="page.blurb"></p>
       <footer v-if="page.more">
@@ -21,9 +21,9 @@
 
 <script>
 
-  let formatDate = require('~/assets/dateUtils.js').formatDate;
+  import { formatDate } from '~/assets/dateUtils.js'
 
-  module.exports = {
+  export default {
     title: 'Home',
     description: 'The latest news out of Rich Snapp\'s blog.',
     data() {
@@ -57,6 +57,7 @@
     header {
       h2 {
         font-size: 30px;
+        /*margin-top: 0;*/
       }
     }
 
@@ -70,12 +71,12 @@
     .header-info {
       display: flex;
       justify-content: space-evenly;
-      margin: -8px 10px 5px;
+      /*margin: -8px 10px 5px;*/
       & > div {
-        flex: 1 1 auto;
+        flex: 0 1 auto;
       }
       .date {
-        padding-left: 20px;
+        /*padding-left: 20px;*/
         white-space: nowrap;
       }
       .tags {
