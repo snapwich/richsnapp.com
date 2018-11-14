@@ -65,7 +65,7 @@
       </tr>
       <tr>
         <td>Video Card</td>
-        <td><a target="_blank" href="https://pcpartpicker.com/product/CBjWGX/pny-geforce-gtx-1070-8gb-founders-edition-video-card-gf1070gtx8grpb">PNY - GeForce GTX 1070 8GB Founders Edition Video Card</a></td>
+        <td><a target="_blank" href="https://pcpartpicker.com/product/vtqhP6/asus-geforce-rtx-2080-ti-11gb-turbo-video-card-turbo-rtx2080ti-11g">Asus - GeForce RTX 2080 Ti 11 GB Turbo Video Card</a></td>
       </tr>
       <tr>
         <td>Case</td>
@@ -73,7 +73,7 @@
       </tr>
       <tr>
         <td>Power Supply</td>
-        <td><a target="_blank" href="https://pcpartpicker.com/product/yc38TW/seasonic-focus-plus-platinum-650w-80-platinum-certified-fully-modular-atx-power-supply-ssr-650px">SeaSonic - FOCUS Plus Platinum 650W 80+ Platinum Certified Fully-Modular ATX Power Supply</a></td>
+        <td><a target="_blank" href="https://www.newegg.com/Product/Product.aspx?Item=N82E16817151190">Seasonic FOCUS Plus Series SSR-850PX 850W 80+ Platinum ATX12V</a></td>
       </tr>
       <tr>
         <td>Case Fan</td>
