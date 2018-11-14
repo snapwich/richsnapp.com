@@ -136,7 +136,10 @@
   .social-links a {
     padding: 6px;
     font-size: 26px;
-    color: @gray;
+    color: @gray-lighter;
+    &:hover {
+      color: @brand-primary;
+    }
   }
   form {
     input[type=submit] {
