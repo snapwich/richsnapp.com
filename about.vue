@@ -24,7 +24,7 @@
 
   * This is a [static web page](https://en.wikipedia.org/wiki/Static_web_page) generated with
     [Nuxt.js](https://github.com/nuxt/nuxt.js/) and various other npm libraries.
-  * Hosted with [GitHub Pages](https://pages.github.com/)
+  * Hosted with [Netlify](https://www.netlify.com/)
   * Using some [Twitter Bootstrap](https://getbootstrap.com/) components (such as the grid) and
     [Font Awesome](https://fortawesome.github.io/Font-Awesome/) icons.
   * Search by [Google Custom Search Engine](https://www.google.com/cse).
