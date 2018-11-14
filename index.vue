@@ -80,7 +80,7 @@
       display: flex;
       justify-content: space-evenly;
       & > div {
-        flex: 0 1 auto;
+        flex: 1 1 auto;
       }
       .date {
         /*padding-left: 20px;*/
