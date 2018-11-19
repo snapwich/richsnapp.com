@@ -56,7 +56,7 @@
 
     header {
       h2 {
-        font-size: 30px;
+        font-size: 40px;
         /*margin-top: 0;*/
       }
     }
@@ -65,8 +65,9 @@
       display: flex;
       color: @gray-light;
       font-size: .9em;
-      font-family: @font-family-sans-serif;
+      font-family: @font-family-sans-serif2;
       font-weight: 300;
+      margin-top: -5px;
       p {
         margin-left: auto;
         padding-left: 20px;
@@ -79,6 +80,7 @@
     .header-info {
       display: flex;
       justify-content: space-evenly;
+      font-size: 1.2em;
       & > div {
         flex: 1 1 auto;
       }
