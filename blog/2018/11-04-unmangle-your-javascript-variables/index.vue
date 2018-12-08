@@ -48,7 +48,7 @@
   @import (reference) '~assets/site.less';
 
   .unminify {
-    font-family: @font-family-base;
+    font-family: @font-family-sans-serif2;
     .error {
       font-size: 14px;
     }
