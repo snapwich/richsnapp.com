@@ -10,7 +10,7 @@
     <figcaption>Where the magic happens.</figcaption>
   </figure>
 
-  Rich currently resides in Salt Lake City, Utah and works at [The Rubicon Project](https://rubiconproject.com/)
+  Rich currently resides in Salt Lake City, Utah and works at [Rakuten Marketing](https://rakutenmarketing.com/)
   where he spends most of his time contributing to the [Prebid.org](https://github.com/prebid/Prebid.js) project.
   He also holds a Bachelor of Science in Computer Science from [Utah Valley University](https://www.uvu.edu/).
 
