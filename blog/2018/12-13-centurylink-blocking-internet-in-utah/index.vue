@@ -47,7 +47,7 @@
 
   It was an _advertisement_ for security products! ...and not very good ones...
 
-  I went to Twitter to see if I was the only one having this very bizarre experience, and it turns out I was not alone.
+  I went to Twitter to see if I was the only one having this very bizarre experience and it turns out I was not alone.
   Fellow Utahns were also expressing their discontent with CenturyLink's behavior.
 
   <figure class="center">
@@ -67,10 +67,8 @@
   <figure class="right">
     <div>
 
-    ```
-    (b) (i) A service provider shall, before December 30, 2018, notify in a conspicuous
-     manner all of the service provider's consumers with a Utah residential address that the
-     consumer may request material harmful to minors be blocked under Subsection (1)(a).
+    ```{.word-break-normal}
+    (b) (i) A service provider shall, before December 30, 2018, notify in a conspicuous manner all of the service provider's consumers with a Utah residential address that the consumer may request material harmful to minors be blocked under Subsection (1)(a).
     (ii) A service provider may provide the notice described in Subsection (2)(b)(i):
      (A) by electronic communication;
      (B) with a consumer's bill; or
@@ -111,3 +109,8 @@
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </template>
 
+<style scoped>
+  .word-break-normal {
+    word-break: normal;
+  }
+</style>
