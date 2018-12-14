@@ -11,7 +11,7 @@
     ],
     head: {
       meta: [
-        { hid: 'og:image', name: 'og:image', content: require('./og-image.jpg') }
+        { hid: 'og:image', name: 'og:image', content: process.env.baseUrl + require('./og-image.jpg') }
       ]
     }
   }
