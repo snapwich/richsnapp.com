@@ -8,7 +8,12 @@
       'Notification is injected into customer\'s browsing sessions using ethically questionable DNS Hijacking',
       'CenturyLink claims this is required due to Utah S.B. 134 but bill sponsor says "not like this"',
       'Those using streaming devices (FireTV, Chromecast, etc) or their own DNS offering (OpenDNS/GoogleDNS) don\'t receive notification to unblock their internet and are effectively SOL'
-    ]
+    ],
+    head: {
+      meta: [
+        { hid: 'og:image', name: 'og:image', href: require('./og-image.jpg') }
+      ]
+    }
   }
 </script>
 
