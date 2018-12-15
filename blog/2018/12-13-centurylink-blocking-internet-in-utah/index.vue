@@ -4,8 +4,8 @@
     title: 'CenturyLink is blocking its customers\' internet while saying Utah legislators told them to',
     tags: ['Net Neutrality', 'Networking'],
     tldr: [
-      'CenturyLink is blocking its customer\'s internet until they confirm they\'ve seen notification for paid security offering',
-      'Notification is injected into customer\'s browsing sessions using ethically questionable DNS Hijacking',
+      'CenturyLink is blocking its customers\' internet until they confirm they\'ve seen notification for paid security offering',
+      'Notification is injected into customers\' browsing sessions using ethically questionable DNS Hijacking',
       'CenturyLink claims this is required due to Utah S.B. 134 but bill sponsor says not like this',
       'Those using streaming devices (FireTV, Chromecast, etc) or their own DNS offering (OpenDNS/GoogleDNS) don\'t receive notification to unblock their internet and are effectively SOL'
     ],
