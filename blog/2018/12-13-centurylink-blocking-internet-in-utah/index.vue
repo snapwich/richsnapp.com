@@ -137,12 +137,16 @@
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
   .word-break-normal {
     word-break: normal;
   }
   .update {
     font-style: italic;
     font-family: Georgia, serif;
+    margin-bottom: 2em;
+    p {
+      margin-bottom: 5px;
+    }
   }
 </style>
