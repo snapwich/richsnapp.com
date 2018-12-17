@@ -38,6 +38,7 @@
     that a man-in-the-middle attack was used to inject code into an insecure HTTP request. I'm not sure if that is
     ethically better or worse than DNS Hijacking, but would definitely still remain error prone considering the ubiquity
     of HTTPS and VPNs these days.</p>
+    <p>CenturyLink does not deny that they blocked customers' internet until the notice was acknowledged.</p>
   </section>
 
   We've all experienced frustration with the internet going down.  Now imagine how frustrated you'd be if you found out
