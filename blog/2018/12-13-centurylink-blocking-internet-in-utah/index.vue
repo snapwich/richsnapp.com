@@ -5,9 +5,9 @@
     tags: ['Net Neutrality', 'Networking'],
     tldr: [
       'CenturyLink is blocking its customers\' internet until they confirm they\'ve seen notification for paid security offering',
-      'Notification is injected into customers\' browsing sessions using ethically questionable DNS Hijacking',
+      'Notification is injected into customers\' browsing sessions using ethically questionable man-in-the-middle attack',
       'CenturyLink claims this is required due to Utah S.B. 134 but bill sponsor says not like this',
-      'Those using streaming devices (FireTV, Chromecast, etc) or their own DNS offering (OpenDNS/GoogleDNS) don\'t receive notification to unblock their internet and are effectively SOL'
+      'Those using streaming devices (FireTV, Chromecast, etc) or other communications unaffected by the MITM attack don\'t receive notification to unblock their internet and are effectively SOL'
     ],
     head: {
       meta: [
@@ -18,6 +18,28 @@
 </script>
 
 <template lang="md">
+
+  <section class="update">
+    <p>
+    <b>Update:</b> I was contacted by a communications manager at CenturyLink that let me know this method of "block
+     and notify" was only employed for residential customers and wanted me to relay CenturyLink's official position:
+    <blockquote>The intent of the Utah state legislation is to ensure that Utah internet consumers are aware of content
+    filtering options to protect minors. The statute provides for various options, but the method of notification
+    is to be conspicuous to ensure the message is read. We felt, given the gravity surrounding the protection of
+    this most vulnerable population, the most conspicuous method of notification is a pop-up. CenturyLink did not
+    engage in DNS hijacking and the pop-up message is being used to adhere to state law.
+    -- <cite>CenturyLink</cite></blockquote>
+    </p>
+    <p>Unfortunately CenturyLink's representative would not provide me with further technical details and I'm unable to
+    verify whether or not CenturyLink did in fact use DNS Hijacking for this notification as I was directed to the
+    notice while on my phone. I do know that CenturyLink routinely engages in DNS Hijacking for invalid domain lookups,
+    so using it for a notice would be unsurprising. If anyone has information on how this notice was delivered, please
+    let me know through my contact form. Since I was forcefully redirected to this "pop-up", the best I can assume was
+    that a man-in-the-middle attack was used to inject code into an insecure HTTP request. I'm not sure if that is
+    ethically better or worse than DNS Hijacking, but would definitely still remain error prone considering the ubiquity
+    of HTTPS and VPNs these days.</p>
+  </section>
+
   We've all experienced frustration with the internet going down.  Now imagine how frustrated you'd be if you found out
   that your ISP _intentionally_ blocked your internet access for the purpose of advertising their software; and better
   yet, your ISP claimed that state legislators required them to do it! Well that's exactly what is happening to
@@ -117,5 +139,9 @@
 <style scoped>
   .word-break-normal {
     word-break: normal;
+  }
+  .update {
+    font-style: italic;
+    font-family: Georgia, serif;
   }
 </style>
