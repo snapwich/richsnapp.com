@@ -148,5 +148,8 @@
     p {
       margin-bottom: 5px;
     }
+    blockquote {
+      margin: 12px 0;
+    }
   }
 </style>
