@@ -175,7 +175,8 @@ SetOrCopyDataProperties( /* ... */ ) {
 
   I've included our two discussed solutions `reduce mutate` and `reduce...spread` in these tests as well as some
   additional benchmarks including the `for..of`, referenced above, and some solutions using immutable data
-  structures for our later talk on functional programming. You can [see the code that was used to run these benchmarks here](./benchmarks.js).
+  structures for our later talk on functional programming. You can
+  [see the code that was used to run these benchmarks here](https://gist.github.com/snapwich/7604b2d827f320e470a07e088e0293f3).
 
   One thing immediately noticeable is how much faster `reduce mutate` and `for..of` are than the competition when
   it comes to a small amount of items. Why that is, I'm not quite sure; I thought it might have something to do with the
@@ -250,7 +251,8 @@ SetOrCopyDataProperties( /* ... */ ) {
 
   If you would like to generalize the `reduce mutate` code to work in situations where you may be working with data that doesn't
   belong to you, I suggest either making a copy of that data _before_ iterating or using an immutable data structure
-  (as that is what they are created for). [In the benchmarks](./benchmarks.js) I've included some examples of using
+  (as that is what they are created for). [In the benchmarks](https://gist.github.com/snapwich/7604b2d827f320e470a07e088e0293f3)
+  I've included some examples of using
   [immutable.js](https://github.com/immutable-js/immutable-js) with and without mutations (that's right, an
   immutable library provides helpers for mutating data) and [immer.js](https://github.com/immerjs/immer). Immutable
   data structures provide the benefit of allowing destructive operations without modifying the original
