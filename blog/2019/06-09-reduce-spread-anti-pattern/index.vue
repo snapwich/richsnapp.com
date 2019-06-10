@@ -210,7 +210,7 @@ SetOrCopyDataProperties( /* ... */ ) {
   Most of us have heard part of that quote, but usually not the whole thing. There _is_ such thing as premature
   optimization, however this is not one. If anything, I'd suggest that `reduce...spread` is a premature de-optimization.
   Premature optimizations are things such as choosing to use the fastest 𝑂(n) solution provided in my benchmarks
-  over the other 𝑂(n) solutions _because it is the fastest_. Which one you choose is probably inconsequential from a
+  over the other 𝑂(n) solutions _because it is the fastest_. Which 𝑂(n) solution you choose is probably inconsequential from a
   performance standpoint; it's entirely possible that you'd see different results in different Javascript engines and
   that advancements in v8's optimizing compiler could change these results tomorrow.
 
