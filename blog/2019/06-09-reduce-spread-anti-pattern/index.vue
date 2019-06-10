@@ -297,7 +297,6 @@ SetOrCopyDataProperties( /* ... */ ) {
   import { Chart } from "highcharts-vue";
   import Highcharts from 'highcharts'
   import exporting from 'highcharts/modules/exporting'
-  import CodeEditor from '~/components/CodeEditor.vue';
 
   if (typeof Highcharts === 'object') {
     exporting(Highcharts);
@@ -344,8 +343,7 @@ SetOrCopyDataProperties( /* ... */ ) {
       "if you're using reduce ...spread for reasons of immutability, you should copy once or use immutable helper libraries"
     ],
     components: {
-      chart: Chart,
-      CodeEditor
+      chart: Chart
     },
     data() {
       return {
