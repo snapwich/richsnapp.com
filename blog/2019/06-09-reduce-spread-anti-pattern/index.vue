@@ -224,9 +224,9 @@ SetOrCopyDataProperties( /* ... */ ) {
   </blockquote>
 
   Now that's not saying it can't be optimized; obviously it can, because we did it by utilizing mutation. But looking at
-  our benchmarks it's obvious they don't and it's unlikely they ever will. _You can see a few discussions around
-  this exact pattern on [this tweet](https://twitter.com/bmeurer/status/1137025197557669888) asking for potential
-  optimizations to spreading inside object literals, if you're interested._
+  our benchmarks it's obvious that it is not currently optimized and it's unlikely it ever will be. _You can see a few
+  discussions around this exact pattern on [this tweet](https://twitter.com/bmeurer/status/1137025197557669888) asking
+  for potential optimizations to spreading inside object literals, if you're interested._
 
   ### Functional purity
 
