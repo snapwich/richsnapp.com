@@ -246,10 +246,10 @@ SetOrCopyDataProperties( /* ... */ ) {
   Is your linter complaining? If so, that's exactly why linters give us the ability to ignore certain lines. Linters are
   usful in alerting us to potential trade-offs, but in this case (with our new found wisdom) we can
   [decide to ignore it and avoid a potential pitfall](https://twitter.com/dan_abramov/status/1136897691441553409).
-  You could also use the for loop instead and avoid reduce altogether.
+  You could also use the for loop instead and avoid reduce (and linting errors) altogether.
 
   If you would like to generalize the `reduce mutate` code to work in situations where you may be working with data that doesn't
-  belong to you, I suggest either making a copy of that data _before_ iterating or using an immutable data structure
+  belong to you, I suggest either making a copy of that data _before_ iterating or using immutable data structures
   (as that is what they are created for). [In the benchmarks](https://gist.github.com/snapwich/7604b2d827f320e470a07e088e0293f3)
   I've included some examples of using
   [immutable.js](https://github.com/immutable-js/immutable-js) with and without mutations (that's right, an
