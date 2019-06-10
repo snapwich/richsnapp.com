@@ -181,8 +181,7 @@ SetOrCopyDataProperties( /* ... */ ) {
   One thing immediately noticeable is how much faster `reduce mutate` and `for..of` are than the competition when
   it comes to a small amount of items. Why that is, I'm not quite sure; I thought it might have something to do with the
   optimizer but I was unable to normalize the spikes with benchmark warmups (to ensure JIT optimizations in all our
-  results) or by limiting test cycles. My best guess is the other benchmarked solutions produced many more instructions
-  and we're seeing the result of 10 iterations of many instructions vs 10 iterations of few instructions.
+  results) or by limiting test cycles.
 
   That's not super important though as we're here to see what different time complexities means for our code; the real
   problem can be seen when we click `reduce...spread 𝑂(n^2)` on the chart above and adjust the data so we can see how it compares
