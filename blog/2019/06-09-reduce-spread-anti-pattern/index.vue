@@ -240,24 +240,24 @@ SetOrCopyDataProperties( /* ... */ ) {
   ...acc, [item.name]: item.value
 }), <span class="highlight">{}</span>)</code></pre>
 
-  The object we're avoiding mutation on is a reference _that we created_; in other words, the mutattion is not dangerous
-  and worrying about mutating it is in-fact a case of premature de-optimization.
+  The object we're avoiding mutation on is a reference _that we created_; in other words, mutating this parameter is
+  not dangerous and worrying about mutating it is in-fact a case of premature de-optimization.
 
   Is your linter complaining? If so, that's exactly why linters give us the ability to ignore certain lines. Linters are
   usful in alerting us to potential trade-offs, but in this case (with our new found wisdom) we can
   [decide to ignore it and avoid a potential pitfall](https://twitter.com/dan_abramov/status/1136897691441553409).
-  You could also use the for loop instead.
+  You could also use the for loop instead and avoid reduce altogether.
 
-  If you would like to generalize this `reduce mutate` to work in situations where you may be working with data that doesn't
+  If you would like to generalize the `reduce mutate` code to work in situations where you may be working with data that doesn't
   belong to you, I suggest either making a copy of that data _before_ iterating or using an immutable data structure
-  (as that is what they are created for). [In the benchmarks](./benchmarks.js) I've included some examples using
+  (as that is what they are created for). [In the benchmarks](./benchmarks.js) I've included some examples of using
   [immutable.js](https://github.com/immutable-js/immutable-js) with and without mutations (that's right, an
   immutable library provides helpers for mutating data) and [immer.js](https://github.com/immerjs/immer). Immutable
-  data structures provide the benefit of doing destructive operations without modifying the original
-  source object you are operating on. They also do this with the added benefit of sharing underlying data objects
+  data structures provide the benefit of allowing destructive operations without modifying the original
+  source object you are operating on. They also do this with the added benefit of sharing the underlying data
   to prevent waste like in `reduce...spread`. If you want to code with immutability in mind then I suggest using the right
   tools for the job. You also might be interested in
-  [this proposal of const value types](https://github.com/rricard/proposal-const-value-types).
+  [this proposal of a const value type](https://github.com/rricard/proposal-const-value-types).
 
   ### In conclusion
 
