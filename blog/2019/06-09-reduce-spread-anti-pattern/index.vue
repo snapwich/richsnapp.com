@@ -152,6 +152,15 @@ SetOrCopyDataProperties( /* ... */ ) {
   times and call it 𝑂(n<sup>2</sup>) since it trends that way anyways as `n` goes towards infinity, but for a more accurate
   description we could notate it as [𝜃(𝑛<sup>2</sup>) ≡ 𝑂(𝑛<sup>2</sup>) 𝑎𝑛𝑑 Ω(𝑛<sup>2</sup>)](https://cs.stackexchange.com/a/4608).
 
+  <div class="alert alert-info">
+    <b>Note:</b> The above assumes <em>no duplicate keys</em> are generated in your target object. For most example cases
+    I've seen of mapping an array of objects to object key->values that holds true and I think is a fair assumption.
+    However, there <em>are</em> situations (such as a solution meant specifically for counting duplicates
+    [think word count]) where that's obviously <em>not true</em>. The solutions in those situations would still be classified
+    as 𝑂(𝑛<sup>2</sup>) (as big O notation is an approximation of the upper bound) but actual run times would probably
+    be best reflected by also considering best-case (all duplicates) and average-case complexity as well.
+  </div>
+
   <figure class="smallest right">
     <img src="./complexity-comparison.png" />
     <figcaption>credit to <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=50321072">Cmglee - Own work, CC BY-SA 4.0</a></figcaption>
