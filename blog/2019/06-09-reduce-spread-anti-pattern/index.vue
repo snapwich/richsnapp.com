@@ -156,9 +156,10 @@ SetOrCopyDataProperties( /* ... */ ) {
     <b>Note:</b> The above assumes <em>no duplicate keys</em> are generated in your target object. For most example cases
     I've seen of mapping an array of objects to object key->values that holds true and I think is a fair assumption.
     However, there <em>are</em> situations (such as a solution meant specifically for counting duplicates
-    [think word count]) where that's obviously <em>not true</em>. The solutions in those situations would still be classified
-    as 𝑂(𝑛<sup>2</sup>) (as big O notation is an approximation of the upper bound) but actual run times would probably
-    be best reflected by also considering best-case (all duplicates) and average-case complexity as well.
+    [think word count]) where that's obviously <em>not true</em>. The solutions in those situations using the
+    reduce...spread pattern would still be classified as 𝑂(𝑛<sup>2</sup>) (as big O notation is an approximation of
+    the upper bound) but actual run times would probably be best reflected by also considering best-case
+    (all duplicates) and average-case complexity as well.
   </div>
 
   <figure class="smallest right">
