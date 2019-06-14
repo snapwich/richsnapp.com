@@ -153,13 +153,13 @@ SetOrCopyDataProperties( /* ... */ ) {
   description we could notate it as [𝜃(𝑛<sup>2</sup>) ≡ 𝑂(𝑛<sup>2</sup>) 𝑎𝑛𝑑 Ω(𝑛<sup>2</sup>)](https://cs.stackexchange.com/a/4608).
 
   <div class="alert alert-info">
-    <b>Note:</b> The above assumes <em>no duplicate keys</em> are generated in your target object. For most example cases
-    I've seen of mapping an array of objects to object key->values that holds true and I think is a fair assumption.
-    However, there <em>are</em> situations (such as a solution meant specifically for counting duplicates
-    [think word count]) where that's obviously <em>not true</em>. The solutions in those situations using the
-    reduce...spread pattern would still be classified as 𝑂(𝑛<sup>2</sup>) (as big O notation is an approximation of
-    the upper bound) but actual run times would probably be best reflected by also considering best-case
-    (all duplicates) and average-case complexity as well.
+    <b>Note:</b> The above assumes <em>no duplicate keys</em> are generated in your target object. For most example I've
+    seen of mapping an array of objects to object key->values that holds true and I think is a fair assumption.
+    However, there <em>are</em> situations where that's obviously <em>not true</em>, like with a solution
+    specifically meant for counting duplicates (think word count). In those situations using the <code>reduce...spread</code>
+    pattern would still be classified as 𝑂(𝑛<sup>2</sup>) (as big O notation is an approximation of the upper bound)
+    but actual run times would probably be more accurately reflected by also considering best-case (all duplicates) and
+    average-case complexity as well.
   </div>
 
   <figure class="smallest right">
