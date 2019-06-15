@@ -272,7 +272,7 @@ SetOrCopyDataProperties( /* ... */ ) {
 
   ### In conclusion
 
-  Please avoid this pattern in your code. If you are reviewing code that contains this pattern, feel free reference
+  Please avoid this pattern in your code. If you are reviewing code that contains this pattern, feel free to reference
   this blog post.
 </template>
 
