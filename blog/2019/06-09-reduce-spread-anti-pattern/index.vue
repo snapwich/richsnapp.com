@@ -7,7 +7,7 @@
 
   You've probably been in a situation where you wanted to merge an array of object maps into a singular object. Here's
   two common solutions to the problem.
-  ```javascript {.center}
+  ```javascript {.center .good}
   let items = [
     {name: "something", value: true},
     // ...
@@ -35,7 +35,7 @@
   I'm not so much a fan of this latest emerging style.
 
 
-  ```javascript {.center}
+  ```javascript {.center .bad}
   // we'll call this "reduce ...spread"
   let result = items.reduce((acc, item) => ({
      ...acc, [item.name]: item.value
@@ -148,7 +148,7 @@ SetOrCopyDataProperties( /* ... */ ) {
   existing property keys and then performing our base operation for each _nested_ iteration. How many times is our base
   operation happening then?  Well, it's complicated. It doesn't exactly execute the inner loop `n` times since
   the inner loop is limited by the amount of keys it needs to copy. However, for our purposes it's good enough to say it's in the same
-  [class](https://en.wikipedia.org/wiki/Computational_complexity_theory) of solutions that exectue `n * n` or n<sup>2</sup>
+  [class](https://en.wikipedia.org/wiki/Computational_complexity_theory) of solutions that execute `n * n` or n<sup>2</sup>
   times and call it 𝑂(n<sup>2</sup>) since it trends that way anyways as `n` goes towards infinity, but for a more accurate
   description we could notate it as [𝜃(𝑛<sup>2</sup>) ≡ 𝑂(𝑛<sup>2</sup>) 𝑎𝑛𝑑 Ω(𝑛<sup>2</sup>)](https://cs.stackexchange.com/a/4608).
 
@@ -254,7 +254,7 @@ SetOrCopyDataProperties( /* ... */ ) {
   not dangerous and worrying about mutating it is in-fact a case of premature de-optimization.
 
   Is your linter complaining? If so, that's exactly why linters give us the ability to ignore certain lines. Linters are
-  usful in alerting us to potential trade-offs, but in this case (with our new found wisdom) we can
+  useful in alerting us to potential trade-offs, but in this case (with our new found wisdom) we can
   [decide to ignore it and avoid a potential pitfall](https://twitter.com/dan_abramov/status/1136897691441553409).
   You could also use the for loop instead and avoid reduce (and linting errors) altogether.
 
@@ -272,7 +272,7 @@ SetOrCopyDataProperties( /* ... */ ) {
 
   ### In conclusion
 
-  Please avoid this pattern in your code. If you are reviewing code that contains this pattern, feel free to reference
+  Please avoid this pattern in your code! If you are reviewing code that contains this pattern, feel free to reference
   this blog post.
 </template>
 
@@ -298,6 +298,23 @@ SetOrCopyDataProperties( /* ... */ ) {
         }
       }
     }
+  }
+  .good::before {
+    position: absolute;
+    content: "✔";
+    bottom: 0;
+    right: 5px;
+    color: green;
+    font-size: 40px;
+  }
+
+  .bad::before {
+    position: absolute;
+    content: "❌";
+    bottom: 5px;
+    right: 5px;
+    color: red;
+    font-size: 30px;
   }
 </style>
 
