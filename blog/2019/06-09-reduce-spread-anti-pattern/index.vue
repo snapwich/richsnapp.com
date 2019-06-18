@@ -419,6 +419,7 @@ SetOrCopyDataProperties( /* ... */ ) {
       "reduce immutable.js O(n)": 3,
       "reduce immutable.js withMutations O(n)": 2,
       "object.assign ...map O(n)": 3,
+      "object.fromEntries ...map O(n)": 3,
       "reduce immer.js O(n)": 8
     };
     let ceiling = ceilings[relativeSeries.name];
