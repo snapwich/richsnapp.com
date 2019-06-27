@@ -93,10 +93,10 @@
       <section>
         <pre><code>// bytecode
 StackCheck
-<span class="highlight">CreateObjectLiteral [0], [0], #41, r0</span>
+<mark>CreateObjectLiteral [0], [0], #41, r0</mark>
 Mov r0, r1
 Mov a0, r2
-<span class="highlight">CallRuntime [CopyDataProperties], r1-r2</span>
+<mark>CallRuntime [CopyDataProperties], r1-r2</mark>
 LdaNamedProperty a1, [1], [1]
 ToName r1
 LdaNamedProperty a1, [2], [3]
@@ -108,10 +108,10 @@ Return</code></pre>
         <pre><code class="language-c++">// builtin code generation
 SetOrCopyDataProperties( /* ... */ ) {
   // ...
-  <span class="highlight">ForEachEnumerableOwnProperty</span>(
+  <mark>ForEachEnumerableOwnProperty</mark>(
   context, source_map, CAST(source), kEnumerationOrder,
   [=](TNode&lt;Name&gt; key, TNode&lt;Object&gt; value) {
-    <span class="highlight">CallBuiltin(Builtins::kSetPropertyInLiteral</span>, context, target, key, value);
+    <mark>CallBuiltin(Builtins::kSetPropertyInLiteral</mark>, context, target, key, value);
   },
   if_runtime);
   // ...
@@ -248,7 +248,7 @@ SetOrCopyDataProperties( /* ... */ ) {
   Let's look at the code again, this time highlighting an important part.
   <pre><code class="center">let result = items.reduce((acc, item) => ({
   ...acc, [item.name]: item.value
-}), <span class="highlight">{}</span>)</code></pre>
+}), <mark>{}</mark>)</code></pre>
 
   The object we're avoiding mutation on is a reference _that we created_; in other words, mutating this parameter is
   not dangerous and worrying about mutating it is in-fact a case of premature de-optimization.
@@ -279,7 +279,7 @@ SetOrCopyDataProperties( /* ... */ ) {
 <style lang="less" scoped>
   @import (reference) '~assets/site.less';
 
-  .highlight {
+  mark {
     background-color: yellow;
   }
   .split {
