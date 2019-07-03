@@ -63,8 +63,8 @@
     footer {
       display: flex;
       color: @gray-light;
-      font-size: .9em;
-      font-family: @font-family-sans-serif2;
+      font-size: 1.1em;
+      font-family: @font-family-sans-serif;
       font-weight: 300;
       p {
         margin-left: auto;
@@ -78,7 +78,7 @@
     .header-info {
       display: flex;
       justify-content: space-evenly;
-      font-size: 1.2em;
+      font-size: 1.4em;
       & > div {
         flex: 1 1 auto;
       }

@@ -368,6 +368,7 @@ SetOrCopyDataProperties( /* ... */ ) {
       "javascript engines will probably never optimize this code",
       "if you're using reduce ...spread for reasons of immutability, you should copy once or use immutable helper libraries"
     ],
+    tags: ["programming", "javascript", "optimization"],
     components: {
       chart: Chart
     },
