@@ -59,9 +59,6 @@
   }
 
   .page-preview {
-    &:first-child {
-      margin-top: 1em;
-    }
     margin-bottom: 3.5em;
 
     header {
