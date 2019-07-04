@@ -30,7 +30,6 @@
         <div class="row">
           <div class="form-group form-group col-sm-8"
                :class="{'has-error': submitAttempted && errors.has('recaptcha')}">
-
           </div>
           <div class="form-group col-sm-4">
             <vue-recaptcha ref="captcha" @verify="onVerify" sitekey="6LdL9T4UAAAAALj9ztC5O1Unlh1Y-Mf8OjFBUpo0">
