@@ -1,6 +1,6 @@
 <template>
   <div>
-    <article v-for="page in pages" class="page-preview">
+    <article v-for="page in taggedPages()" class="page-preview">
       <header>
         <div class="header-info">
           <div class="date">{{ formatDate(page.date) }}</div>
@@ -9,10 +9,7 @@
       </header>
       <p v-html="page.blurb"></p>
       <footer v-if="page.more">
-        <div class="tags" v-if="page.tags">
-        <i class="fa fa-tags"></i>
-        {{ displayArr(page.tags) }}
-        </div>
+        <Tags :tags="page.tags"></Tags>
         <p v-if="page.more"><nuxt-link :to="page.path">Read more →</nuxt-link></p>
       </footer>
     </article>
@@ -22,10 +19,14 @@
 <script>
 
   import { formatDate } from '~/assets/dateUtils.js'
+  import Tags from '~/components/Tags';
 
   export default {
     title: 'Home',
     description: 'The latest news out of Rich Snapp\'s blog.',
+    components: {
+      Tags
+    },
     data() {
       return {
           pages: require('~/static/api/blog-latest.json')
@@ -33,6 +34,15 @@
     },
     methods: {
       formatDate,
+      taggedPages() {
+        let tag = this.$route.query.tag;
+        if (!tag) {
+          return this.pages;
+        }
+        return this.pages.filter(page => {
+          return page.tags.includes(tag);
+        });
+      },
       displayArr(arr) {
         return arr.join(', ');
       }
@@ -85,10 +95,6 @@
       .date {
         /*padding-left: 20px;*/
         white-space: nowrap;
-      }
-      .tags {
-        padding-left: 20px;
-        justify-self: right;
       }
     }
   }
