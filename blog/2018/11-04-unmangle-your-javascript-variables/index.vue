@@ -101,7 +101,7 @@
   let exampleCode = "var Exported=(function c(w){var a='name';return w.component(a);})(Vue)";
 
   export default {
-    tags: ['programming', 'javascript', 'prettier', 'unminify'],
+    tags: ['programming', 'javascript', 'devtools'],
     data() {
       return {
         code: exampleCode,

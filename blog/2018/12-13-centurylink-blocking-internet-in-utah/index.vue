@@ -2,7 +2,7 @@
 <script>
   export default {
     title: 'CenturyLink is blocking its customers\' internet while saying Utah legislators told them to',
-    tags: ['net neutrality', 'networking'],
+    tags: ['networking', 'net neutrality'],
     tldr: [
       'CenturyLink is blocking its customers\' internet until they confirm they\'ve seen notification for paid security offering',
       'Notification is injected into customers\' browsing sessions using ethically questionable man-in-the-middle attack',

@@ -2,7 +2,7 @@
 <script>
   export default {
     title: 'Houston, we have a blog!',
-    tags: ['vue.js', 'blog']
+    tags: ['general', 'vue.js']
   }
 </script>
 
