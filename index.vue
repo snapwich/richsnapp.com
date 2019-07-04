@@ -60,7 +60,9 @@
 
   .page-preview {
     margin-bottom: 3.5em;
-
+    &:first-child {
+      margin-top: 1em;
+    }
     header {
       h2 {
         font-size: 40px;
