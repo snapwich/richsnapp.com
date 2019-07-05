@@ -121,6 +121,7 @@
 
 <style lang="less" scoped>
   @import "../assets/variables.less";
+  @import (reference) '~assets/site.less';
 
   .btn:active {
     box-shadow: none;
@@ -136,6 +137,7 @@
     padding: 6px;
     font-size: 26px;
     color: @gray-lighter;
+    .no-underline();
     &:hover {
       color: @brand-primary;
     }
