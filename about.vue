@@ -27,8 +27,5 @@
   * Hosted with [Netlify](https://www.netlify.com/)
   * Using some [Twitter Bootstrap](https://getbootstrap.com/) components (such as the grid) and
     [Font Awesome](https://fortawesome.github.io/Font-Awesome/) icons.
-  * Share functionality by [ShareThis](https://www.sharethis.com).
-  * Type fonts by [Google Fonts](https://www.google.com/fonts).
-  * Comments using the [Facebook Social Comments](https://developers.facebook.com/products/social-plugins/comments/) plugin.
   * Intentionally made as simple and unparallaxy as possible.
 </template>
