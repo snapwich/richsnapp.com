@@ -1,10 +1,12 @@
 <template>
-  <PagePreviews :pages="pages"></PagePreviews>
+  <div>
+    <Tags :tags="tags" class="tags"></Tags>
+    <PagePreviews :pages="pages"></PagePreviews>
+  </div>
 </template>
 
 <script>
-
-  import Tags from '~/components/Tags';
+  import Tags from "~/components/Tags";
   import PagePreviews from '~/components/PagePreviews';
 
   export default {
@@ -16,9 +18,25 @@
     },
     data() {
       return {
-          pages: require('~/static/api/blog-latest.json')
+        tags: require("~/static/api/tags.json"),
+        pages: require('~/static/api/latest.json')
       }
     },
   };
 
 </script>
+
+<style lang="less" scoped>
+  @import "../assets/variables.less";
+
+  .tags {
+    font-family: @font-family-sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0 4em 2em;
+    @media(max-width: @screen-sm-max) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+</style>

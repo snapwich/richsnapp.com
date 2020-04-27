@@ -12,7 +12,7 @@
     },
     data() {
       return {
-          pages: require('~/static/api/blog-latest.json')
+          pages: require('~/static/api/latest.json')
       }
     },
     methods: {
