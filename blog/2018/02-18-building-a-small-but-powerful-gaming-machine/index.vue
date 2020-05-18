@@ -2,7 +2,7 @@
 <script>
   export default {
     title: 'Building a small, but powerful, gaming machine',
-    tags: ['blog', 'computers', 'pc', 'gaming']
+    tags: ['blog', 'computers', 'gaming']
   }
 </script>
 

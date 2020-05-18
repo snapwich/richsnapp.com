@@ -34,6 +34,7 @@
     font-size: 20px;
     font-weight: 300;
     margin: 0 4em 2em;
+    text-align: center;
     @media(max-width: @screen-sm-max) {
       margin-left: 0;
       margin-right: 0;

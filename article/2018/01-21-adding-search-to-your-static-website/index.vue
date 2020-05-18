@@ -287,7 +287,7 @@
 
   export default {
     title: 'How to add search to your static website',
-    tags: ['web design', 'vue.js', 'search'],
+    tags: ['web design', 'vue.js'],
     mounted() {
       messedUpSearch(this.$refs.messedUpSearchText);
     },
