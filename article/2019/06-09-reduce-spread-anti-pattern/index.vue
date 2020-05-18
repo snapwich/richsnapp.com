@@ -1,4 +1,3 @@
-
 <template lang="md">
   Performance is a common topic in computing, but it is especially common in the frontend world as the latest Javascript
   technologies battle for the frontend throne. Some may say React has already won (and the usage numbers seem to agree)
@@ -277,175 +276,175 @@ SetOrCopyDataProperties( /* ... */ ) {
 </template>
 
 <style lang="less" scoped>
-  @import (reference) '~assets/site.less';
+@import (reference) "~assets/site.less";
 
-  mark {
-    background-color: yellow;
-  }
-  .split {
-    display: flex;
-    @media(max-width: @screen-xs-max) {
-      flex-direction: column;
-      section + section {
-        border-top: 1px solid @gray-lighter;
-      }
-    }
-    @media(min-width: @screen-sm-min) {
-      section {
-        width: 50%;
-        & + section {
-          border-left: 1px solid @gray-lighter;
-        }
-      }
+mark {
+  background-color: yellow;
+}
+.split {
+  display: flex;
+  @media (max-width: @screen-xs-max) {
+    flex-direction: column;
+    section + section {
+      border-top: 1px solid @gray-lighter;
     }
   }
-  .good::before {
-    position: absolute;
-    content: "✔";
-    bottom: 0;
-    right: 5px;
-    color: green;
-    font-size: 40px;
+  @media (min-width: @screen-sm-min) {
+    section {
+      width: 50%;
+      & + section {
+        border-left: 1px solid @gray-lighter;
+      }
+    }
   }
+}
+.good::before {
+  position: absolute;
+  content: "✔";
+  bottom: 0;
+  right: 5px;
+  color: green;
+  font-size: 40px;
+}
 
-  .bad::before {
-    position: absolute;
-    content: "❌";
-    bottom: 5px;
-    right: 5px;
-    color: red;
-    font-size: 30px;
-  }
+.bad::before {
+  position: absolute;
+  content: "❌";
+  bottom: 5px;
+  right: 5px;
+  color: red;
+  font-size: 30px;
+}
 </style>
 
 <script>
-  import _ from "lodash";
-  import { Chart } from "highcharts-vue";
-  import Highcharts from 'highcharts'
-  import exporting from 'highcharts/modules/exporting'
+import _ from "lodash";
+import { Chart } from "highcharts-vue";
+import Highcharts from "highcharts";
+import exporting from "highcharts/modules/exporting";
 
-  if (typeof Highcharts === 'object') {
-    exporting(Highcharts);
-  }
+if (typeof Highcharts === "object") {
+  exporting(Highcharts);
+}
 
-
-  let chartData = {
+let chartData = {
+  title: {
+    text: "Operations per second"
+  },
+  chart: {
+    // type: "line"
+    // height: "50%"
+  },
+  tooltip: {
+    enabled: false
+  },
+  xAxis: {
     title: {
-      text: "Operations per second"
+      text: "<b>n</b> (item count)"
+    }
+  },
+  yAxis: {
+    // type: 'logarithmic',
+    ceiling: 800000,
+    title: {
+      text: "ops/sec"
     },
-    chart: {
-      // type: "line"
-      // height: "50%"
-    },
-    tooltip: {
-      enabled: false
-    },
-    xAxis: {
-      title: {
-        text: "<b>n</b> (item count)"
-      }
-    },
-    yAxis: {
-      // type: 'logarithmic',
-      ceiling: 800000,
-      title: {
-        text: "ops/sec"
-      },
-      labels: {
-        formatter: false
-      }
-    },
-    series: _.map(require("./data.json"), (result, name, i) => ({
-      name,
-      data: result
-    })),
-  };
+    labels: {
+      formatter: false
+    }
+  },
+  series: _.map(require("./data.json"), (result, name, i) => ({
+    name,
+    data: result
+  }))
+};
 
-  export default {
-    title: "The reduce ({...spread}) anti-pattern",
-    tldr: [
-      "reduce ...spread belongs to a different complexity class than the optimal solutions, which is bad",
-      "javascript engines will probably never optimize this code",
-      "if you're using reduce ...spread for reasons of immutability, you should copy once or use immutable helper libraries"
-    ],
-    tags: ["programming", "javascript", "optimization"],
-    components: {
-      chart: Chart
+export default {
+  title: "The reduce ({...spread}) anti-pattern",
+  tldr: [
+    "reduce ...spread belongs to a different complexity class than the optimal solutions, which is bad",
+    "javascript engines will probably never optimize this code",
+    "if you're using reduce ...spread for reasons of immutability, you should copy once or use immutable helper libraries"
+  ],
+  tags: ["programming", "javascript", "optimization"],
+  components: {
+    chart: Chart
+  },
+  data() {
+    return {
+      benchmarkData: this.getChartData()
+    };
+  },
+  methods: {
+    resetChart() {
+      this.benchmarkData = this.getChartData();
     },
-    data() {
-      return {
-        benchmarkData: this.getChartData()
-      };
-    },
-    methods: {
-      resetChart() {
-        this.benchmarkData = this.getChartData()
-      },
-      getChartData() {
-        let data = JSON.parse(JSON.stringify(chartData));
-        return Object.assign(data, {
-          plotOptions: {
-            series: {
-              events: {
-                click: (e) => {
-                  updateRelativeTo(e.point.series.chart, e.point.series.index);
-                },
-                legendItemClick: (e) => {
-                  updateRelativeTo(e.target.chart, e.target.index);
-                  return false;
-                }
+    getChartData() {
+      let data = JSON.parse(JSON.stringify(chartData));
+      return Object.assign(data, {
+        plotOptions: {
+          series: {
+            events: {
+              click: e => {
+                updateRelativeTo(e.point.series.chart, e.point.series.index);
+              },
+              legendItemClick: e => {
+                updateRelativeTo(e.target.chart, e.target.index);
+                return false;
               }
             }
-          },
-          exporting: {
-            buttons: {
-              reset: {
-                text: 'reset',
-                onclick: () => {
-                  this.resetChart();
-                }
+          }
+        },
+        exporting: {
+          buttons: {
+            reset: {
+              text: "reset",
+              onclick: () => {
+                this.resetChart();
               }
             }
-          },
-        })
-      }
+          }
+        }
+      });
     }
   }
+};
 
-  function updateRelativeTo(chart, relativeIndex) {
-    let data = chart.series;
-    let relativeSeries = chartData.series[relativeIndex];
+function updateRelativeTo(chart, relativeIndex) {
+  let data = chart.series;
+  let relativeSeries = chartData.series[relativeIndex];
 
-    let ceilings = {
-      "reduce immutable.js O(n)": 3,
-      "reduce immutable.js withMutations O(n)": 2,
-      "object.assign ...map O(n)": 3,
-      "object.fromEntries ...map O(n)": 3,
-      "reduce immer.js O(n)": 8
-    };
-    let ceiling = ceilings[relativeSeries.name];
+  let ceilings = {
+    "reduce immutable.js O(n)": 3,
+    "reduce immutable.js withMutations O(n)": 2,
+    "object.assign ...map O(n)": 3,
+    "object.fromEntries ...map O(n)": 3,
+    "reduce immer.js O(n)": 8
+  };
+  let ceiling = ceilings[relativeSeries.name];
 
-    chart.setTitle({
-      text: `ops/s relative to: ${relativeSeries.name}`
-    });
-    chart.yAxis[0].update({
-      ceiling,
-      title: {
-        text: `multiplier`
-      },
-      labels: {
-        formatter: function() {
-          return this.value + 'x';
-        }
+  chart.setTitle({
+    text: `ops/s relative to: ${relativeSeries.name}`
+  });
+  chart.yAxis[0].update({
+    ceiling,
+    title: {
+      text: `multiplier`
+    },
+    labels: {
+      formatter: function() {
+        return this.value + "x";
       }
-    });
-    data.forEach((series, i) => {
-      let currSeries = chartData.series[i];
-      series.setData(relativeSeries.data.map((point, j) => [
+    }
+  });
+  data.forEach((series, i) => {
+    let currSeries = chartData.series[i];
+    series.setData(
+      relativeSeries.data.map((point, j) => [
         point[0],
         currSeries.data[j][1] / point[1]
-      ]))
-    });
-  }
+      ])
+    );
+  });
+}
 </script>
-

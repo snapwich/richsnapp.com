@@ -1,4 +1,3 @@
-
 <template lang="md">
   One of the most important features that a website can have is a method to effectively search its content.
   There's no denying that there's such an overload of information on websites these days that helping people find what
@@ -37,7 +36,7 @@
   solution, it does provide search; and with the claims of basic configuration and a copy/paste installation, the setup
   process seems simple enough.  Let's give it a shot.
 
-  We'll create a little spot at the top of our page for the `<gcse:searchbox-only>` tag, paste the `cse.js` loading
+  We'll create a little spot at the top of our page for the &lt;gcse:searchbox-only&gt; tag, paste the `cse.js` loading
   javascript snippet somewhere into the document, and away we go!
 
   <figure>
@@ -211,7 +210,7 @@
     <div>
 
     ```html
-    <template>
+    &lt;template&gt;
       <div class="google-search">
         <button @click="search(text)">
           <i class="fa fa-search"></i>
@@ -221,9 +220,9 @@
                v-on:keyup.13="search(text)"
                v-model="text" />
       </div>
-    </template>
+    &lt;/template&gt;
 
-    <script>
+    &lt;script&gt;
       export default {
         props: [
           'site'
@@ -247,7 +246,7 @@
           }
         }
       }
-    </script>
+    &lt;/script&gt;
     ```
     <div><google-search site="richsnapp.com"></google-search></div>
     </div>
@@ -262,141 +261,140 @@
 </template>
 
 <script>
-  import GoogleSearch from '~/components/GoogleSearch.vue';
+import GoogleSearch from "~/components/GoogleSearch.vue";
 
-  function messedUpSearch(elem) {
-    type("Hey Google, what's wrong with this site?");
+function messedUpSearch(elem) {
+  type("Hey Google, what's wrong with this site?");
 
-    function type(str) {
-      let keys = str.split('');
-      let key = 0;
-      let timeout;
-      setInterval(function() {
-        if (keys[key]) {
-          elem.value = elem.value + keys[key++];
-        } else if (!timeout) {
-          timeout = setTimeout(function () {
-            elem.value = '';
-            key = 0;
-            timeout = null;
-          }, 4000);
-        }
-      }, 75);
-    }
+  function type(str) {
+    let keys = str.split("");
+    let key = 0;
+    let timeout;
+    setInterval(function() {
+      if (keys[key]) {
+        elem.value = elem.value + keys[key++];
+      } else if (!timeout) {
+        timeout = setTimeout(function() {
+          elem.value = "";
+          key = 0;
+          timeout = null;
+        }, 4000);
+      }
+    }, 75);
   }
+}
 
-  export default {
-    title: 'How to add search to your static website',
-    tags: ['web design', 'vue.js'],
-    mounted() {
-      messedUpSearch(this.$refs.messedUpSearchText);
-    },
-    components: {
-      GoogleSearch
-    }
+export default {
+  title: "How to add search to your static website",
+  tags: ["web design", "vue.js"],
+  mounted() {
+    messedUpSearch(this.$refs.messedUpSearchText);
+  },
+  components: {
+    GoogleSearch
   }
+};
 </script>
 
 <style lang="less" scoped>
-  @import '~assets/variables.less';
+@import "~assets/variables.less";
 
-  .lightbulb {
-    position: relative;
+.lightbulb {
+  position: relative;
+  display: flex;
+  color: @gray;
+  font-size: 100px;
+  margin: 40px auto 20px;
+  width: 60px;
+  svg {
+    left: -42px;
+    top: -45px;
+    position: absolute;
+    color: #edef3f;
+  }
+}
+
+.search-figure {
+  & > div {
     display: flex;
-    color: @gray;
-    font-size: 100px;
-    margin: 40px auto 20px;
-    width: 60px;
-    svg {
-      left: -42px;
-      top: -45px;
-      position: absolute;
-      color: #edef3f;
+    flex-direction: column;
+    code {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: 1px solid @gray-lighter;
     }
   }
-
-  .search-figure {
-    & > div {
-      display: flex;
-      flex-direction: column;
-      code {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        border-bottom: 1px solid @gray-lighter;
-      }
-    }
-    .google-search {
-      margin: 20px auto 40px;
-    }
+  .google-search {
+    margin: 20px auto 40px;
   }
+}
 
-  .styled-search {
-    display: block;
-    margin: 20px auto;
+.styled-search {
+  display: block;
+  margin: 20px auto;
+}
+
+.regular-search {
+  width: 300px;
+  margin: 0 auto 20px;
+  display: flex;
+  input {
+    flex: 1 0 auto;
   }
+}
 
-  .regular-search {
-    width: 300px;
-    margin: 0 auto 20px;
-    display: flex;
-    input {
-      flex: 1 0 auto;
-    }
+.messed-up-search {
+  position: relative;
+  overflow: auto;
+  padding: 30px;
+  width: 300px;
+  margin: 0 auto 20px;
+  background: url(./messed-up-search.png) -45px 0;
+  input {
+    position: absolute;
+    left: 35px;
+    top: 30px;
+    transform-origin: top center;
+    animation: swing 5s infinite;
+    background: none;
+    font-size: 12px;
+    width: 240px;
+    height: 30px;
+    border: 0;
+    border-bottom: 2px solid @gray-lighter;
   }
-
-  .messed-up-search {
+  button {
     position: relative;
-    overflow: auto;
-    padding: 30px;
-    width: 300px;
-    margin: 0 auto 20px;
-    background: url(./messed-up-search.png) -45px 0;
-    input {
-      position: absolute;
-      left: 35px;
-      top: 30px;
-      transform-origin: top center;
-      animation: swing 5s infinite;
-      background: none;
-      font-size: 12px;
-      width: 240px;
-      height: 30px;
-      border: 0;
-      border-bottom: 2px solid @gray-lighter;
-    }
-    button {
-      position: relative;
-      left: -15px;
-      top: -15px;
-      animation: spin 4s linear infinite;
-    }
+    left: -15px;
+    top: -15px;
+    animation: spin 4s linear infinite;
   }
+}
 
-  @keyframes swing {
-    20% {
-      transform: rotate3d(0, 0, 1, 13deg);
-    }
-    40% {
-      transform: rotate3d(0, 0, 1, -10deg);
-    }
-    60% {
-      transform: rotate3d(0, 0, 1, 5deg);
-    }
-    80% {
-      transform: rotate3d(0, 0, 1, -5deg);
-    }
-    100% {
-      transform: rotate3d(0, 0, 1, 0deg);
-    }
+@keyframes swing {
+  20% {
+    transform: rotate3d(0, 0, 1, 13deg);
   }
-
-  @keyframes spin {
-    from {
-      transform:rotate(0deg);
-    }
-    to {
-      transform:rotate(359deg);
-    }
+  40% {
+    transform: rotate3d(0, 0, 1, -10deg);
   }
+  60% {
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+  80% {
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+  100% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
 </style>

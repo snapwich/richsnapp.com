@@ -1,34 +1,39 @@
-
 <script>
-  export default {
-    title: 'CenturyLink is blocking its customers\' internet while saying Utah legislators told them to',
-    tags: ['networking', 'net neutrality'],
-    tldr: [
-      'CenturyLink is blocking its customers\' internet until they confirm they\'ve seen notification for paid security offering',
-      'Notification is injected into customers\' browsing sessions using ethically questionable man-in-the-middle attack',
-      'CenturyLink claims this is required due to Utah S.B. 134 but bill sponsor says not like this',
-      'Those using streaming devices (FireTV, Chromecast, etc) or other communications unaffected by the MITM attack don\'t receive notification to unblock their internet and are effectively SOL'
-    ],
-    head: {
-      meta: [
-        { hid: 'og:image', property: 'og:image', content: process.env.baseUrl + require('./og-image.jpg') }
-      ]
-    }
+export default {
+  title:
+    "CenturyLink is blocking its customers' internet while saying Utah legislators told them to",
+  tags: ["networking", "net neutrality"],
+  tldr: [
+    "CenturyLink is blocking its customers' internet until they confirm they've seen notification for paid security offering",
+    "Notification is injected into customers' browsing sessions using ethically questionable man-in-the-middle attack",
+    "CenturyLink claims this is required due to Utah S.B. 134 but bill sponsor says not like this",
+    "Those using streaming devices (FireTV, Chromecast, etc) or other communications unaffected by the MITM attack don't receive notification to unblock their internet and are effectively SOL"
+  ],
+  head: {
+    meta: [
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: process.env.baseUrl + require("./og-image.jpg")
+      }
+    ]
   }
+};
 </script>
 
 <template lang="md">
-
   <section class="update">
     <p>
     <b>Update:</b> I was contacted by a communications manager at CenturyLink that let me know this method of "block
      and notify" was only employed for residential customers and wanted me to relay CenturyLink's official position:
-    <blockquote>The intent of the Utah state legislation is to ensure that Utah internet consumers are aware of content
-    filtering options to protect minors. The statute provides for various options, but the method of notification
-    is to be conspicuous to ensure the message is read. We felt, given the gravity surrounding the protection of
-    this most vulnerable population, the most conspicuous method of notification is a pop-up. CenturyLink did not
-    engage in DNS hijacking and the pop-up message is being used to adhere to state law.
-    -- <cite>CenturyLink</cite></blockquote>
+    <blockquote>
+      The intent of the Utah state legislation is to ensure that Utah internet consumers are aware of content
+      filtering options to protect minors. The statute provides for various options, but the method of notification
+      is to be conspicuous to ensure the message is read. We felt, given the gravity surrounding the protection of
+      this most vulnerable population, the most conspicuous method of notification is a pop-up. CenturyLink did not
+      engage in DNS hijacking and the pop-up message is being used to adhere to state law.
+      -- <cite>CenturyLink</cite>
+    </blockquote>
     </p>
     <p>Unfortunately CenturyLink's representative would not provide me with further technical details and I'm unable to
     verify whether or not CenturyLink did in fact use DNS Hijacking for this notification as I was directed to the
@@ -138,18 +143,18 @@
 </template>
 
 <style lang="less" scoped>
-  .word-break-normal {
-    word-break: normal;
+.word-break-normal {
+  word-break: normal;
+}
+.update {
+  font-style: italic;
+  font-family: Georgia, serif;
+  margin-bottom: 2em;
+  p {
+    margin-bottom: 5px;
   }
-  .update {
-    font-style: italic;
-    font-family: Georgia, serif;
-    margin-bottom: 2em;
-    p {
-      margin-bottom: 5px;
-    }
-    blockquote {
-      margin: 12px 0;
-    }
+  blockquote {
+    margin: 12px 0;
   }
+}
 </style>

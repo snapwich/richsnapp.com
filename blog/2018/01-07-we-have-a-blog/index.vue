@@ -1,9 +1,8 @@
-
 <script>
-  export default {
-    title: 'Houston, we have a blog!',
-    tags: ['blog', 'vue.js']
-  }
+export default {
+  title: "Houston, we have a blog!",
+  tags: ["blog", "vue.js"]
+};
 </script>
 
 <template lang="md">
@@ -42,4 +41,3 @@
   This site has already proven to be a valuable learning experience as I've developed it.  Hopefully, with a few
   articles under its belt and some new features, it can prove to be a valuable learning resource for others as well!
 </template>
-

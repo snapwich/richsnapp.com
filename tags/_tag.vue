@@ -3,29 +3,27 @@
 </template>
 
 <script>
+import PagePreviews from "~/components/PagePreviews";
 
-  import PagePreviews from '~/components/PagePreviews';
-
-  export default {
-    components: {
-      PagePreviews
-    },
-    data() {
-      return {
-          pages: require('~/static/api/latest.json')
+export default {
+  components: {
+    PagePreviews
+  },
+  data() {
+    return {
+      pages: require("~/static/api/latest.json")
+    };
+  },
+  methods: {
+    taggedPages() {
+      let tag = this.$route.params.tag.replace("-", " ");
+      if (!tag) {
+        return this.pages;
       }
-    },
-    methods: {
-      taggedPages() {
-        let tag = this.$route.params.tag.replace("-", " ");
-        if (!tag) {
-          return this.pages;
-        }
-        return this.pages.filter(page => {
-          return page.tags.includes(tag);
-        });
-      }
+      return this.pages.filter(page => {
+        return page.tags.includes(tag);
+      });
     }
-  };
-
+  }
+};
 </script>

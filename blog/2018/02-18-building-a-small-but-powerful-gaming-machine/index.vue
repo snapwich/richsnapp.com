@@ -1,9 +1,8 @@
-
 <script>
-  export default {
-    title: 'Building a small, but powerful, gaming machine',
-    tags: ['blog', 'computers', 'gaming']
-  }
+export default {
+  title: "Building a small, but powerful, gaming machine",
+  tags: ["blog", "computers", "gaming"]
+};
 </script>
 
 <template lang="md">
@@ -88,53 +87,53 @@
 </template>
 
 <style lang="less" scoped>
-  @import '../../../../assets/variables.less';
+@import "../../../../assets/variables.less";
 
-  figure.images {
-    div {
-      display: flex;
-      margin-top: 15px;
-      @media (max-width: @screen-xs-max) {
-        margin-left: 15px;
-      }
-      img {
-        height: 100px;
-        margin-right: 15px;
-      }
+figure.images {
+  div {
+    display: flex;
+    margin-top: 15px;
+    @media (max-width: @screen-xs-max) {
+      margin-left: 15px;
+    }
+    img {
+      height: 100px;
+      margin-right: 15px;
     }
   }
+}
 
-  .pcpartpicker {
-    a {
-      @media (min-width: @screen-xs-min) {
-        max-width: 350px !important;
-      }
-      padding: 10px;
-      color: white;
+.pcpartpicker {
+  a {
+    @media (min-width: @screen-xs-min) {
+      max-width: 350px !important;
+    }
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    background: #f77c0c;
+    border: 0;
+    border-radius: 6px;
+    text-align: left;
+    img {
+      float: left;
+      margin: 0 20px 0 5px;
+    }
+    .title {
+      margin-bottom: 10px;
       font-weight: bold;
-      background: #F77C0C;
-      border: 0;
-      border-radius: 6px;
-      text-align: left;
-      img {
-        float: left;
-        margin: 0 20px 0 5px;
-      }
-      .title {
-        margin-bottom: 10px;
-        font-weight: bold;
-      }
-      i {
-        margin-left: 4px;
-      }
-      p {
-        font-family: 'Open Sans', sans-serif;
-        text-indent: 0;
-        text-align: right;
-        margin: 5px 10px;
-        font-weight: lighter;
-        font-size: smaller;
-      }
+    }
+    i {
+      margin-left: 4px;
+    }
+    p {
+      font-family: "Open Sans", sans-serif;
+      text-indent: 0;
+      text-align: right;
+      margin: 5px 10px;
+      font-weight: lighter;
+      font-size: smaller;
     }
   }
+}
 </style>
