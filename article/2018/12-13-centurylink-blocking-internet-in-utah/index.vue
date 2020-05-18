@@ -16,6 +16,13 @@ export default {
         property: "og:image",
         content: process.env.baseUrl + require("./og-image.jpg")
       }
+    ],
+    script: [
+      {
+        src: "https://platform.twitter.com/widgets.js",
+        async: true,
+        defer: true
+      }
     ]
   }
 };
@@ -138,8 +145,6 @@ export default {
   this issue more public will help CenturyLink make better decisions, but when you consider our administration's
   successful [repeal of net neutrality late last year](https://www.nytimes.com/2017/12/14/technology/net-neutrality-repeal-vote.html),
   we'll probably just need to start accepting this kind of behavior as the new norm.
-
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </template>
 
 <style lang="less" scoped>
