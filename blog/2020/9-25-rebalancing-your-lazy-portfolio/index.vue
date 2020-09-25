@@ -53,8 +53,11 @@
 
   <p>
     To come back to this same portfolio at a later time with your data prepopulated (for your next rebalance maybe) or
-    to share your portfolio with someone else you can use <a :href="query">this link encoded with your portfolio data</a>.
-    <textarea class="form-control link" ref="link" readonly>{{ link }}</textarea>
+    to share your portfolio with someone else you can use
+    <client-only>
+      <a :href="query">this link encoded with your portfolio data</a>.
+      <textarea class="form-control link" ref="link" readonly>{{ link }}</textarea>
+    </client-only>
   </p>
 
   ### The why and how
