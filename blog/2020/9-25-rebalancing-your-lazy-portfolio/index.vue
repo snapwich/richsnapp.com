@@ -11,12 +11,14 @@
   when/why/how you rebalance then a lazy portfolio might be for you.
 
   <figure>
-    <LazyPortfolio
-      :currencies="currencies"
-      :funds="funds"
-      :portfolios="portfolios"
-      :startingPortfolio="startingPortfolio"
-      :urlEncodedValue.sync="encodedStr" />
+    <client-only>
+      <LazyPortfolio
+        :currencies="currencies"
+        :funds="funds"
+        :portfolios="portfolios"
+        :startingPortfolio="startingPortfolio"
+        :urlEncodedValue.sync="encodedStr" />
+    </client-only>
   </figure>
 
   ### How to use
