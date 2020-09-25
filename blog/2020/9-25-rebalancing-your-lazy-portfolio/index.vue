@@ -1,6 +1,6 @@
 <template lang="md">
   [Lazy portfolios](https://www.bogleheads.org/wiki/Lazy_portfolios) are a simple and safe way I've been
-  using for some time to successfullly invest in the market. The general idea is to allocate your investments into a few
+  using for some time to successfully invest in the market. The general idea is to allocate your investments into a few
   broad funds (usually [index funds](https://www.bogleheads.org/wiki/Index_fund)) proportionally to your desired risk
   profile and let them sit and grow over time. Once you've purchased your funds at your desired allocations the
   only action required is to occasionally [rebalance](https://www.bogleheads.org/wiki/Rebalancing) them and bring
@@ -23,15 +23,15 @@
 
   ### How to use
 
-  A rebalancing calculautor, such as this one, will help you determine which funds you need to buy and/or sell and in
+  A rebalancing calculator (such as this one) will help you determine which funds you need to buy and/or sell and in
   what amounts to get your portfolio back to your desired allocation percentages. To use:
 
-  * Select a fund allocation strategy. If you don't like any of the provided options you can add/remove funds and
-    edit target percentages in the table to make your own "Custom" investment strategy.
+  * Select a preset fund allocation strategy under "Lazy Portfolio." If you don't like any of the provided options you can add/remove funds and
+    edit target percentages directly in the table to make your own "Custom" investment strategy.
   * Choose your desired currency (or leave in USD).
   * Input the current value of each of your funds (or leave at `0.00` if you're just starting).
   * Input your positive contribution amount (or input a negative amount to withdraw). You can also use the
-    "Auto Calculate" button to input the contribution amount for you. It will calculate the minimum contribution
+    "Auto Calculate" button to set the contribution amount for you. It will calculate the minimum contribution
     you'd have to make to get your portfolio perfectly balanced.
   * Use the buy/sell checkbox to indicate if you are willing to sell (if contributing) or buy (if withdrawing) an asset
     in order to better reach your desired allocation. Keep in mind that selling may be a taxable event if your funds
