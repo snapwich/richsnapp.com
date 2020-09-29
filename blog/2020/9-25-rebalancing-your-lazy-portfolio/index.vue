@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import LazyPortfolio from "~/components/LazyPortfolio";
+import LazyPortfolio from "./-LazyPortfolio";
 export default {
   tags: ["tools", "investing"],
   components: {
