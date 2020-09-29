@@ -83,7 +83,14 @@
   constraints such as maximum sell amount and the "can buy/sell?" checkboxes.
 
   Similar to the referenced calculator, this page does not send your portfolio data to a backend server. All
-  calculations are performed directly on this page in Javascript.
+  calculations are performed directly on this page in Javascript with thanks to the following free software:
+
+  * [**Vue.js**](https://vuejs.org/) ([MIT](https://github.com/vuejs/vue/blob/dev/LICENSE))
+  * [**Lodash**](https://lodash.com/) ([MIT](https://github.com/lodash/lodash/blob/master/LICENSE))
+  * [**Currency.js**](https://currency.js.org/) ([MIT](https://github.com/scurker/currency.js/blob/master/license))
+  * [**Vue Select**](https://vue-select.org/) ([MIT](https://github.com/sagalbot/vue-select/blob/master/LICENSE.md))
+  * [**Vue Currency Input**](https://dm4t2.github.io/vue-currency-input/) ([MIT](https://github.com/dm4t2/vue-currency-input/blob/master/LICENSE))
+  * [**Highcharts**](https://www.highcharts.com/) ([Attribution-NonCommercial CC](https://creativecommons.org/licenses/by-nc/3.0/us/))
 
   ### The future
 
