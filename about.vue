@@ -3,7 +3,7 @@
   building and pushing forward the capabilities of software designed for the web. His efforts are
   currently concentrated in Javascript programming and front-end frameworks, but he has a strong
   familiarity with the full technology stack necessary for creating modern
-  [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) applications.
+  [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) applications And softwares.
 
   <figure>
     <img src="/img/responsive-workstation.jpg"/>
