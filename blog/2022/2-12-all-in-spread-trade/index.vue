@@ -116,13 +116,13 @@
     to do the spread trade." [emphasis added]
 
   It's important to notice that Chamath mentions he was already holding these tech companies that most likely comprised
-  the long portion of his spread trade; and, after one of the biggest tech rallies in history, was most probably
+  the long portion of his spread trade; and, after one of the biggest tech rallies in history, was almost certainly
   sitting on a significant amount of capital gains. So while _we_ could have held cash to beat this trade (albeit lose to
   inflation) he has to _sell his stocks_ to get to a cash position which requires him to pay somewhere between 20-40%
   on his significant chunk of capital gains. It's almost a certainty that a 2.42% loss pales in comparison to the amount
   of taxes he would have paid to completely divest himself from his stock position.
 
-  From that we gather the morale of the story: don't shadow trade billionaires.
+  From that we gather the moral of the story: don't shadow trade billionaires.
 
 </template>
 
