@@ -130,7 +130,11 @@
 <script>
   export default {
     tags: ['investing'],
-    title: "Was the \"all-in\" spread trade a success?"
+    title: "Was the \"all-in\" spread trade a success?",
+    tldr: [
+      "If you were a listener copying the trade when you heard about it on the all-in podcast, probably no",
+      "If you were Chamath and avoiding taxes on your capital gains, probably yes"
+    ],
   }
 </script>
 
