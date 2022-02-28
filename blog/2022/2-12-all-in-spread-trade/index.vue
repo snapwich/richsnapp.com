@@ -163,7 +163,9 @@
     }
   }
 
-  .spreadsheet {
-    width: 1000px;
+  @media (min-width: @screen-lg-min) {
+    .spreadsheet {
+      width: 1000px;
+    }
   }
 </style>
