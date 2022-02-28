@@ -84,7 +84,7 @@
   less-than-stellar earnings reports from FB and NFLX.
 
   <figure class="small right">
-    <img src="./spread-equal.png" />
+    <img v-img src="./spread-equal.png" />
     <figcaption>The equal-weighted spread trade's performance since inception</figcaption>
   </figure>
 
