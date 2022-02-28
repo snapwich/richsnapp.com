@@ -58,7 +58,7 @@ export default {
   yet, your ISP claimed that state legislators required them to do it! Well that's exactly what is happening to
   CenturyLink customers in Utah right now.
 
-  <figure class="center">
+  <figure class="center no-shadow">
     <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Just had <a href="https://twitter.com/CenturyLink?ref_src=twsrc%5Etfw">@CenturyLink</a> block my internet and then inject this page into my browser (dns spoofing I think) to advertise their paid filtering software to me.  Clicking OK on the notice then restored my internet...  this is NOT okay! <a href="https://t.co/NtCZUeJF8I">pic.twitter.com/NtCZUeJF8I</a></p>&mdash; Rich Snapp (@Snapwich) <a href="https://twitter.com/Snapwich/status/1071915296250712064?ref_src=twsrc%5Etfw">December 9, 2018</a></blockquote>
   </figure>
 
@@ -90,11 +90,11 @@ export default {
   I went to Twitter to see if I was the only one having this very bizarre experience and it turns out I was not alone.
   Fellow Utahns were also expressing their discontent with CenturyLink's behavior.
 
-  <figure class="center">
+  <figure class="center no-shadow">
     <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">It’s always a fun day when <a href="https://twitter.com/CenturyLink?ref_src=twsrc%5Etfw">@centurylink</a> blocks your internet access until you go to troubleshoot the problem and are forced to read a letter about filtering services they offer before they will restore your internet. Wow what a cool way to hold us hostage! Total bullshit.</p>&mdash; Chryshele Cottle (@Maccagirl1) <a href="https://twitter.com/Maccagirl1/status/1071880457803857920?ref_src=twsrc%5Etfw">December 9, 2018</a></blockquote>
   </figure>
 
-  <figure class="center">
+  <figure class="center no-shadow">
     <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/CenturyLink?ref_src=twsrc%5Etfw">@CenturyLink</a> dont disable my damn internet to send me a message about software to block my kid from harmful sites. You know what blocks my kid from harmful sites? Me! Not some bloatware.</p>&mdash; 🎃XxCrispxX🎃 (@XxCrispXzero5xX) <a href="https://twitter.com/XxCrispXzero5xX/status/1071885034892681216?ref_src=twsrc%5Etfw">December 9, 2018</a></blockquote>
   </figure>
 
@@ -131,10 +131,10 @@ export default {
   Curious if this is really what Utah legislators were intending, I reached out to the listed sponsor of the bill on
   twitter.
 
-  <figure class="center">
+  <figure class="center no-shadow">
     <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I have yet to see an internet response that appreciates them doing this, but I see a lot of angry and upset people on twitter and reddit.  This is such a terribly dumb idea, was this the intent of your bill?</p>&mdash; Rich Snapp (@Snapwich) <a href="https://twitter.com/Snapwich/status/1071931301068865536?ref_src=twsrc%5Etfw">December 10, 2018</a></blockquote>
   </figure>
-  <figure class="center">
+  <figure class="center no-shadow">
     <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">I’m sorry you are having problems. SB134 did not require that — and no other ISP has done that to comply with the law. They were only required to notify customers of options via email or with an invoice.</p>&mdash; Todd Weiler (@gopTODD) <a href="https://twitter.com/gopTODD/status/1072189463252488192?ref_src=twsrc%5Etfw">December 10, 2018</a></blockquote>
   </figure>
 

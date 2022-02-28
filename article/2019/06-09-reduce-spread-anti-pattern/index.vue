@@ -47,7 +47,7 @@
   we're copying to a newly created object. Can you see the problem? I'm not referring to the object initialization,
   that's only slightly problematic.
 
-  <figure class="center">
+  <figure class="center no-shadow">
   <blockquote class="twitter-tweet"><p lang="en" dir="ltr">One functional downside: hidden iteration. Seems some coders
   would balk at for;for;for; but have no qualms with .map.filter.reduce.</p>&mdash; Rich Snapp (@snapwich)
   <a href="https://twitter.com/snapwich/status/789139298738016256?ref_src=twsrc%5Etfw">October 20, 2016</a></blockquote>
