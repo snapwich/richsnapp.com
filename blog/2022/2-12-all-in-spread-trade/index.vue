@@ -60,7 +60,7 @@
 
   The funds probably should be split 50-50 between long and short but the allocation among each company is a little
   less straightforward. The allocation that makes the most sense to _me_ would be market cap weighted so that you own
-  an equal portion of each company. This also makes sense given QQQ is market cap weighted which means inflows into the
+  _an equal portion of each company_. This also makes sense given QQQ is market cap weighted which means inflows into the
   index fund would be allocated similarly to the position we're setting up. [Equal weighting](https://www.investopedia.com/articles/exchangetradedfunds/08/market-equal-weight.asp)
   is another option although using this kind of weighting would mean that you own a larger portion of the smaller
   companies and smaller portion of the larger companies.
@@ -84,8 +84,8 @@
   less-than-stellar earnings reports from FB and NFLX.
 
   <figure class="small right">
-    <img src="./spread-even.png" />
-    <figcaption>The even-weighted spread trade's performance since inception</figcaption>
+    <img src="./spread-equal.png" />
+    <figcaption>The equal-weighted spread trade's performance since inception</figcaption>
   </figure>
 
   The equal weighted spread trade faired better (_up_ 3.73%), but that's primarily because it was less exposed to the
@@ -108,8 +108,8 @@
   </figure>
 
   Yet if you were to have entered this trade Nov 8th (using my reasonable assumptions) you would be down 2.42%... so
-  what gives? Was this a bad trade for Chamath? A quote from the latest episode signals to me why this trade would
-  probably have been considered successful _for Chamath_ (but not for you):
+  what gives? Was this a bad trade for Chamath? [A quote from the latest episode](https://www.youtube.com/watch?v=uSUM1mvw17w&t=2843s)
+  signals to me why this trade would probably have been considered successful _for Chamath_ (but not for you):
 
   > "I sold some of that high-growth tech, but then I also wanted to figure out a way where I could be less exposed to
     some of that volatility _by continuing to hold what I had_; and the best way that I figured out how to do that was
