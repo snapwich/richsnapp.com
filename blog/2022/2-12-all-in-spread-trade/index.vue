@@ -93,7 +93,7 @@
   movement as much as 20% over it's early November prices](https://www.google.com/finance/quote/AAPL:NASDAQ?window=5Y).
 
   It turns out that one of the original reasons cited for having AAPL and AMZN on the short side of this trade,
-  disruptions in global supply chains, turned out not to big that big of a deal after all. The latest all-in podcast
+  disruptions in global supply chains, turned out not to be that big of a deal after all. The latest all-in podcast
   had some [opinions as to why that may be](https://youtu.be/uSUM1mvw17w?t=773) (in short, larger companies having more
   control over their supply chains).
 
