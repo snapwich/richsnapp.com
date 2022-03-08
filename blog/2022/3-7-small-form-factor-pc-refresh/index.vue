@@ -70,10 +70,10 @@ export default {
         <td class="pcpp-part-list-type">Case</td>
         <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/BCcG3C/dan-cases-a4-h20-a4-mini-itx-desktop-case-a4-h20-a4">DAN Cases A4-H20 A4 Mini ITX Desktop Case</a></td>
       </tr>
-      <tr>
-        <td class="pcpp-part-list-type">Power Supply</td>
-        <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/pt3gXL/evga-supernova-gm-850-w-80-gold-certified-fully-modular-sfx-power-supply-123-gm-0850-x1">EVGA SuperNOVA GM 850 W 80+ Gold Certified Fully Modular SFX Power Supply</a></td>
-      </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Power Supply</td>
+      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/nJrmP6/corsair-750-w-80-platinum-certified-fully-modular-sfx-power-supply-cp-9020186-na">Corsair SF 750 W 80+ Platinum Certified Fully Modular SFX Power Supply</a></td>
+    </tr>
       <tr>
         <td class="pcpp-part-list-type">Case Fan</td>
         <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/YwmmP6/phanteks-ph-f120t30-67-cfm-120-mm-fans-3-pack-ph-f120t30_bg_3p">Phanteks PH-F120T30 67 CFM 120 mm Fans 3-Pack</a></td>
