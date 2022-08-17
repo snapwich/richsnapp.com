@@ -187,7 +187,7 @@ export default {
                 }[kind] || kind;
               if (!kindCount[kind + line]) {
                 kindCount[kind + line] = 1;
-                return `${kind}${line}`;
+                return `${kind}${line}_`;
               }
               return `${kind}${line}_${++kindCount[kind + line]}`;
             }
