@@ -7,17 +7,22 @@
       <a
         href="https://twitter.com/snapwich"
         target="_blank"
-        class="btn fa fa-twitter"
+        class="btn fa-brands fa-twitter"
+      ></a>
+      <a
+        href="https://hachyderm.io/@snapwich"
+        target="_blank"
+        class="btn fa-brands fa-mastodon"
       ></a>
       <a
         href="https://github.com/snapwich"
         target="_blank"
-        class="btn fa fa-github-alt"
+        class="btn fa-brands fa-github-alt"
       ></a>
       <a
         href="https://www.linkedin.com/in/richsnapp"
         target="_blank"
-        class="btn fa fa-linkedin"
+        class="btn fa-brands fa-linkedin"
       ></a>
     </div>
     <p>
@@ -201,7 +206,7 @@ textarea {
   color: @gray-lighter;
   .no-underline();
   &:hover {
-    color: @brand-primary;
+    background-color: @brand-primary;
   }
 }
 form {
