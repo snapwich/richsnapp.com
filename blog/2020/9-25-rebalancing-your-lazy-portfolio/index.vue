@@ -100,11 +100,12 @@
 </template>
 
 <script>
-import LazyPortfolio from "./-LazyPortfolio";
+import _ from "lodash";
 export default {
   tags: ["tools", "investing"],
   components: {
-    LazyPortfolio
+    LazyPortfolio: async () =>
+      process.browser ? import("./-LazyPortfolio") : {}
   },
   data({ $route }) {
     return {
@@ -196,7 +197,7 @@ export default {
                 "Total Bond": 40,
                 "Total Stock": 30,
                 "Total International Stock": 24,
-                "REIT": 6
+                REIT: 6
               }
             },
             {
@@ -205,7 +206,7 @@ export default {
                 "Total Bond": 20,
                 "Total Stock": 40,
                 "Total International Stock": 32,
-                "REIT": 8
+                REIT: 8
               }
             }
           ]
@@ -221,7 +222,7 @@ export default {
                 "Small Blend": 10,
                 "Small Value": 10,
                 "Total International Stock": 10,
-                "REIT": 10,
+                REIT: 10,
                 "Total Bond": 40
               }
             }
@@ -232,11 +233,13 @@ export default {
   },
   computed: {
     link() {
-      return typeof location === "undefined" ? "" :
-        [location.protocol, '//', location.host, location.pathname].join('') + this.query;
+      return typeof location === "undefined"
+        ? ""
+        : [location.protocol, "//", location.host, location.pathname].join("") +
+            this.query;
     },
     query() {
-      return `?p=${this.encodedStr}`
+      return `?p=${this.encodedStr}`;
     }
   },
   watch: {
@@ -247,10 +250,10 @@ export default {
   methods: {
     resize() {
       let ta = this.$refs.link;
-      if(ta) {
+      if (ta) {
         this.$nextTick(() => {
           ta.style.height = "";
-          ta.style.height = ta.scrollHeight + 'px';
+          ta.style.height = ta.scrollHeight + "px";
         });
       }
     }
@@ -258,18 +261,21 @@ export default {
   mounted() {
     this.$nextTick(this.resize);
     if (typeof addEventListener !== "undefined") {
-      addEventListener("resize", _.debounce(() => {
-        this.resize();
-      }, 100));
+      addEventListener(
+        "resize",
+        _.debounce(() => {
+          this.resize();
+        }, 100)
+      );
     }
   }
 };
 </script>
 
 <style scoped>
-  .link {
-    margin: 20px 0;
-    overflow: hidden;
-    background-color: #fff;
-  }
+.link {
+  margin: 20px 0;
+  overflow: hidden;
+  background-color: #fff;
+}
 </style>

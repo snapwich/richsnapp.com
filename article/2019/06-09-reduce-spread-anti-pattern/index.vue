@@ -179,7 +179,9 @@ SetOrCopyDataProperties( /* ... */ ) {
   characteristics. Let's see how they pan out in actual benchmarks.
 
   <figure>
-    <chart :options="benchmarkData"></chart>
+    <client-only>
+      <chart :options="benchmarkData"></chart>
+    </client-only>
   </figure>
 
   I've included our two discussed solutions `reduce mutate` and `reduce...spread` in these tests as well as some
@@ -319,7 +321,6 @@ mark {
 
 <script>
 import _ from "lodash";
-import { Chart } from "highcharts-vue";
 import Highcharts from "highcharts";
 import exporting from "highcharts/modules/exporting";
 
@@ -368,7 +369,8 @@ export default {
   ],
   tags: ["programming", "javascript", "optimization"],
   components: {
-    chart: Chart
+    Chart: async () =>
+      process.browser ? (await import("highcharts-vue")).Chart : {}
   },
   data() {
     return {
