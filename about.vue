@@ -1,11 +1,11 @@
 <template lang="md">
   Rich Snapp is a Software Engineer focusing on web application development and is involved in both
   building and pushing forward the capabilities of software designed for the web. His efforts are
-  currently concentrated in Javascript programming and front-end frameworks, but he has a strong
+  currently concentrated in Javascript/Typescript and front-end frameworks, but he has a strong
   familiarity with the full technology stack necessary for creating modern
   [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) applications.
 
-  <figure>
+  <figure class="left">
     <img src="/img/responsive-workstation.jpg"/>
     <figcaption>Where the magic happens.</figcaption>
   </figure>
