@@ -199,7 +199,7 @@
             stroke="currentColor"
             x1="100" y1="110" x2="120" y2="125" />
     </svg>
-    <i class="fa fa-lightbulb-o"></i>
+    <i class="fa-regular fa-lightbulb"></i>
   </div>
 
   Wait, that's _genius_!  We can give our visitors the same experience they would have had with Google Custom Search
@@ -307,7 +307,7 @@ export default {
   margin: 40px auto 20px;
   width: 60px;
   svg {
-    left: -42px;
+    left: -32px;
     top: -45px;
     position: absolute;
     color: #edef3f;
