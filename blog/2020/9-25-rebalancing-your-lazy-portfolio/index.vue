@@ -1,4 +1,11 @@
 <template lang="md">
+  <section class="update">
+    <p>
+    <b>Update:</b> This tool can now be installed as a Progressive Web App (PWA) on your desktop or mobile device. See
+    <a href="/blog/2023/5-28-new-pwa-tools-section">this blog post</a> for more details.
+    </p>
+  </section>
+
   [Lazy portfolios](https://www.bogleheads.org/wiki/Lazy_portfolios) are a simple and safe way I've been
   using for some time to successfully invest in the market. The general idea is to allocate your investments into a few
   broad funds (usually [index funds](https://www.bogleheads.org/wiki/Index_fund)) proportionally to your desired risk
@@ -168,5 +175,13 @@ export default {
   margin: 20px 0;
   overflow: hidden;
   background-color: #fff;
+}
+.update {
+  font-style: italic;
+  font-family: Georgia, serif;
+  margin-bottom: 2em;
+  p {
+    margin-bottom: 5px;
+  }
 }
 </style>
