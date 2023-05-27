@@ -1,56 +1,95 @@
-<template lang="md">
-  There are many tools you can find for [unminifying](https://en.wikipedia.org/wiki/Minification_(programming))
-  javascript code.  However, _most_ of these tools just add proper formatting and call it a day. Considering
-  many minifiers [mangle](https://github.com/mishoo/UglifyJS2#cli-mangle-options) local identifiers to one or two
-  characters and _reuse_ those identifiers frequently, this can result in some code that is still quite painful to read.
-  I think we can do better.
-
-  I've created this online tool to not only format code (using [prettier](https://prettier.io/)), but
-  also go one step further by marking global variables and renaming mangled variables to be globally unique.
-  It does this by renaming each variable to its type and the line number where it was defined (e.g.
-  `let let99_ = 10;` if defined on line 99). The underscore helps differentiate `let 9_` vs `let 99_` when searching.
-  Unmangling as a module vs script will determine whether top-level variable definitions are unmangled or not.
-
-  Give it a shot below or use the <a href="/tools/code-unmangler">full-screen version here</a>.
-  If you think there's a better way to do this, found a bug, or think a feature would be easy to add,
-  send a comment or <a :href="forkLink">pull-request</a> my way!
-
+<template>
   <div class="unminify">
-    <div class="alert alert-danger error" role="alert" v-if="error">{{ error }}</div>
-    <figure class="right">
-      <div>
-        <header>
-            <div><button class="btn btn-sm" @click="update">Unminify</button></div>
-            <div class="input-group" :class="{disabled: !rename}">
-              <span class="input-group-addon" @click="rename = !rename">
-                <input type="checkbox" v-model="rename" /> unmangle <span class="hidden-xs">variable names</span> as a
-              </span>
-              <div class="input-group-btn" :class="{open: typeOpen}">
-                <button type="button"
-                  :disabled="!rename"
-                  class="btn btn-sm dropdown-toggle"
-                  @click="typeOpen = true">{{ typeSelected }}</button>
-                <ul class="dropdown-menu">
-                  <li><a @click="typeSelected = 'script';">script</a></li>
-                  <li><a @click="typeSelected = 'module';">module</a></li>
-                </ul>
-              </div>
-            </div>
-        </header>
-        <CodeEditor :code="code" :options="options" @input="setCode" @focus="clear"></CodeEditor>
+    <div class="alert alert-danger error" role="alert" v-if="error">
+      {{ error }}
+    </div>
+    <header>
+      <div><button class="btn btn-sm" @click="update">Unminify</button></div>
+      <div class="input-group" :class="{ disabled: !rename }">
+        <span class="input-group-addon" @click="rename = !rename">
+          <input type="checkbox" v-model="rename" /> unmangle
+          <span class="hidden-xs">variable names</span> as a
+        </span>
+        <div class="input-group-btn" :class="{ open: typeOpen }">
+          <button
+            type="button"
+            :disabled="!rename"
+            class="btn btn-sm dropdown-toggle"
+            @click="typeOpen = true"
+          >
+            {{ typeSelected }}
+          </button>
+          <ul class="dropdown-menu">
+            <li><a @click="typeSelected = 'script'">script</a></li>
+            <li><a @click="typeSelected = 'module'">module</a></li>
+          </ul>
+        </div>
+        <a
+          class="script-info"
+          href="/blog/2018/11-04-unmangle-your-javascript-variables"
+        >
+          <i class="fa fa-info-circle"></i
+        ></a>
       </div>
-    </figure>
+    </header>
+    <CodeEditor
+      :code="code"
+      :options="options"
+      @input="setCode"
+      @focus="clear"
+    ></CodeEditor>
   </div>
-
 </template>
+
+<style lang="less">
+.page {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  margin: 0 !important;
+  min-height: auto !important;
+}
+.container {
+  width: 100% !important;
+  padding: 0 !important;
+}
+.push {
+  display: none;
+}
+.vue-codemirror,
+.CodeMirror {
+  height: 100% !important;
+}
+footer {
+  border-top: 1px solid #ddd;
+}
+</style>
 
 <style lang="less" scoped>
 @import (reference) "~assets/site.less";
 
 .unminify {
   font-family: @font-family-sans-serif2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  .script-info {
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
   .error {
     font-size: 14px;
+  }
+  .code-editor {
+    flex: 1;
+    overflow: scroll;
   }
   header {
     display: flex;
@@ -101,6 +140,15 @@ let exampleCode =
 
 export default {
   tags: ["tools", "programming", "javascript", "devtools"],
+  layout: "tools",
+  head: {
+    link: [
+      {
+        rel: "manifest",
+        href: "/tools/code-unmangler/manifest.json"
+      }
+    ]
+  },
   data() {
     return {
       code: exampleCode,

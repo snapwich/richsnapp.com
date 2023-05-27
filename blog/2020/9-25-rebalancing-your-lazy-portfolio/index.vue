@@ -101,134 +101,25 @@
 
 <script>
 import _ from "lodash";
+
+import currencies from "~/components/investing/currencies.json";
+import funds from "@/components/investing/funds.json";
+import portfolios from "~/components/investing/lazyPortfolios.json";
+
 export default {
   tags: ["tools", "investing"],
   components: {
     LazyPortfolio: async () =>
-      process.browser ? import("./-LazyPortfolio") : {}
+      process.browser &&
+      import("../../../../components/investing/LazyPortfolio")
   },
   data({ $route }) {
     return {
       encodedStr: $route.query.p,
-      currencies: {
-        USD: "United States dollar",
-        EUR: "Euro",
-        JPY: "Japanese yen",
-        GBP: "Pound sterling",
-        AUD: "Australian dollar",
-        CAD: "Canadian dollar",
-        CHF: "Swiss franc",
-        CNY: "Renminbi",
-        HKD: "Hong Kong dollar",
-        NZD: "New Zealand dollar",
-        SEK: "Swedish krona",
-        KRW: "South Korean won",
-        SGD: "Singapore dollar",
-        NOK: "Norwegian krone",
-        MXN: "Mexican peso",
-        INR: "Indian rupee",
-        RUB: "Russian ruble",
-        ZAR: "South African rand",
-        TRY: "Turkish lira",
-        BRL: "Brazilian real",
-        TWD: "New Taiwan dollar",
-        DKK: "Danish krone",
-        PLN: "Polish złoty",
-        THB: "Thai baht",
-        IDR: "Indonesian rupiah",
-        HUF: "Hungarian forint",
-        CZK: "Czech koruna",
-        ILS: "Israeli new shekel",
-        CLP: "Chilean peso",
-        PHP: "Philippine peso"
-      },
-      funds: [
-        "Total Stock",
-        "Total World Stock",
-        "Total Bond",
-        "Total International Stock",
-        "TIPS",
-        "REIT",
-        "Short Term Bonds",
-        "US Treasury Bonds",
-        "Large Blend",
-        "Large Value",
-        "Small Blend",
-        "Small Value",
-        "Emerging Markets",
-        "International Developed",
-        "Inflation-Protected Securities",
-        "Europe",
-        "Pacific"
-      ],
-      startingPortfolio: "Rick Ferri Lazy 40/40/20",
-      portfolios: [
-        {
-          text: "Two fund",
-          values: [
-            {
-              text: "Rick Ferri 40/60",
-              value: {
-                "Total Bond": 40,
-                "Total World Stock": 60
-              }
-            }
-          ]
-        },
-        {
-          text: "Three fund",
-          values: [
-            {
-              text: "Rick Ferri Lazy 40/40/20",
-              value: {
-                "Total Bond": 40,
-                "Total Stock": 40,
-                "Total International Stock": 20
-              }
-            }
-          ]
-        },
-        {
-          text: "Core four",
-          values: [
-            {
-              text: "Rick Ferri 60/40",
-              value: {
-                "Total Bond": 40,
-                "Total Stock": 30,
-                "Total International Stock": 24,
-                REIT: 6
-              }
-            },
-            {
-              text: "Rick Ferri 80/20",
-              value: {
-                "Total Bond": 20,
-                "Total Stock": 40,
-                "Total International Stock": 32,
-                REIT: 8
-              }
-            }
-          ]
-        },
-        {
-          text: "Others",
-          values: [
-            {
-              text: 'Bill Schultheis "Coffeehouse"',
-              value: {
-                "Large Blend": 10,
-                "Large Value": 10,
-                "Small Blend": 10,
-                "Small Value": 10,
-                "Total International Stock": 10,
-                REIT: 10,
-                "Total Bond": 40
-              }
-            }
-          ]
-        }
-      ]
+      currencies,
+      funds,
+      portfolios,
+      startingPortfolio: "Rick Ferri Lazy 40/40/20"
     };
   },
   computed: {
