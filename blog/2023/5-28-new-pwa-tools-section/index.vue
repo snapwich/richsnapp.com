@@ -28,6 +28,7 @@
 
 <script>
 export default {
-  title: "New PWA Tools Section with Offline Support!"
+  title: "New PWA Tools Section with Offline Support!",
+  tags: ["blog", "tools"]
 };
 </script>
