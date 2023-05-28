@@ -26,8 +26,12 @@
       </div>
       <div class="media-body">
         <h3 class="media-heading"><a>Code Unmangler</a></h3>
-        A simple calculator for rebalancing lazy portfolios. Also available
-        offline and as a progressive web app.
+        A basic text editor that can prettify
+        <a href="https://en.wikipedia.org/wiki/Name_mangling" target="_blank"
+          >name mangled</a
+        >
+        and minified javascript code. Useful for debugging code minified for
+        production.
       </div>
     </a>
   </div>
