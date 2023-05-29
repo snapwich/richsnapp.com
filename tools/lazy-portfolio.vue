@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, watch, ref } from "vue";
 
 import currencies from "~/components/investing/currencies.json";
 import funds from "~/components/investing/funds.json";
@@ -57,13 +57,9 @@ export default defineComponent({
   setup() {
     let storage = useStorage("lazy-portfolio");
 
-    let encodedStr = computed({
-      get() {
-        return storage.get<string>("encodedStr") || "";
-      },
-      set(val) {
-        storage.set("encodedStr", val);
-      }
+    let encodedStr = ref(storage.get<string>("encodedStr"));
+    watch(encodedStr, val => {
+      storage.set("encodedStr", val);
     });
 
     let shareLink = computed(() => {
