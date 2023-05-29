@@ -25,6 +25,21 @@ export default defineComponent({
   },
   layout: "tools",
   head: {
+    title: "Lazy Portfolio Rebalancer - RichSnapp.com",
+    meta: [
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "Rebalance your portfolio with the click of a button and generate a portfolio based on popular lazy strategies."
+      },
+      {
+        hid: "keywords",
+        name: "keywords",
+        content:
+          "lazy portfolio, portfolio rebalancer, portfolio rebalance, portfolio rebalancing, portfolio rebalancer tool, portfolio rebalance tool, portfolio rebalancing tool, portfolio rebalancer calculator, portfolio rebalance calculator, portfolio rebalancing calculator, portfolio rebalancer app, portfolio rebalance app, portfolio rebalancing app, portfolio rebalancer software, portfolio rebalance software, portfolio rebalancing software"
+      }
+    ],
     link: [
       {
         rel: "manifest",
@@ -46,7 +61,13 @@ export default defineComponent({
         return storage.get<string>("encodedStr") || "";
       },
       set(val) {
-        if (global.history && global.location) {
+        if (
+          global.history &&
+          global.location &&
+          // don't update the url if it's the default value
+          val !==
+            "WyJVU0QiLDAsW1siVG90YWwgQm9uZCIsNDAsMCxmYWxzZV0sWyJUb3RhbCBTdG9jayIsNDAsMCxmYWxzZV0sWyJUb3RhbCBJbnRlcm5hdGlvbmFsIFN0b2NrIiwyMCwwLGZhbHNlXV1d"
+        ) {
           let url = new URL(global.location.href);
           url.searchParams.set("p", val || "");
           global.history.replaceState(null, "", url);

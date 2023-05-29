@@ -142,6 +142,20 @@ export default {
   tags: ["tools", "programming", "javascript", "devtools"],
   layout: "tools",
   head: {
+    title: "Code Unmangler - RichSnapp.com",
+    meta: [
+      {
+        hid: "description",
+        name: "description",
+        content: "Unmangle your Javascript variable and unminify your code."
+      },
+      {
+        hid: "keywords",
+        name: "keywords",
+        content:
+          "javascript, programming, devtools, unmangle, unminify, prettier, babel"
+      }
+    ],
     link: [
       {
         rel: "manifest",
