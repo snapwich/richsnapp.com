@@ -115,6 +115,8 @@ export default {
 
   ## Parts list
 
+  Build list on [PCPartPicker.com](https://pcpartpicker.com/b/nbGqqs)
+
   <table class="table table-striped">
     <tbody>
       <tr>
