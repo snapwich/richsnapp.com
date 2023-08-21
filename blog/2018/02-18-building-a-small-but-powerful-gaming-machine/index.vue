@@ -29,17 +29,6 @@ export default {
   and/or bloodshed), I documented some of the complications as well as included a build list with all the parts involved
   at [PCPartPicker.com](https://pcpartpicker.com/b/DV29TW).
 
-  <figure class="pcpartpicker center scale">
-    <a class="pcpartpicker-button" href="https://pcpartpicker.com/b/DV29TW" target="_blank">
-      <img src="./pcpp.png" />
-      <div>
-        <h4 class="title">Small form factor gaming machine</h4>
-        <p>by snapwich</p>
-      </div>
-      <i class="fa fa-external-link-square" />
-    </a>
-  </figure>
-
   <table class="table table-striped">
     <tbody>
       <tr>
@@ -99,40 +88,6 @@ figure.images {
     img {
       height: 100px;
       margin-right: 15px;
-    }
-  }
-}
-
-.pcpartpicker {
-  a {
-    @media (min-width: @screen-xs-min) {
-      max-width: 350px !important;
-    }
-    padding: 10px;
-    color: white;
-    font-weight: bold;
-    background: #f77c0c;
-    border: 0;
-    border-radius: 6px;
-    text-align: left;
-    img {
-      float: left;
-      margin: 0 20px 0 5px;
-    }
-    .title {
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    i {
-      margin-left: 4px;
-    }
-    p {
-      font-family: "Open Sans", sans-serif;
-      text-indent: 0;
-      text-align: right;
-      margin: 5px 10px;
-      font-weight: lighter;
-      font-size: smaller;
     }
   }
 }
