@@ -5,7 +5,8 @@ export default {
     "The 4090 Founders Edition fits, but not without caveats.",
     "If you attempt this you might run into issues with riser cables, as I did.",
     "You'll need an angled 12VHPWR adapter to power the GPU."
-  ]
+  ],
+  tags: ["blog", "computers", "gaming"]
 }
 </script>
 
