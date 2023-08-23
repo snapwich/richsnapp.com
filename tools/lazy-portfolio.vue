@@ -45,6 +45,12 @@ export default defineComponent({
         name: "keywords",
         content:
           "lazy portfolio, portfolio rebalancer, portfolio rebalance, portfolio rebalancing, portfolio rebalancer tool, portfolio rebalance tool, portfolio rebalancing tool, portfolio rebalancer calculator, portfolio rebalance calculator, portfolio rebalancing calculator, portfolio rebalancer app, portfolio rebalance app, portfolio rebalancing app, portfolio rebalancer software, portfolio rebalance software, portfolio rebalancing software"
+      },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content:
+          process.env.baseUrl + "/tools/lazy-portfolio/icons/portfolio-96.png"
       }
     ],
     link: [

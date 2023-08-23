@@ -6,7 +6,14 @@ export default {
     "If you attempt this you might run into issues with riser cables, as I did.",
     "You'll need an angled 12VHPWR adapter to power the GPU."
   ],
-  tags: ["blog", "computers", "gaming"]
+  tags: ["blog", "computers", "gaming"],
+  head: {
+    meta: [{
+      hid: "og:image",
+      property: "og:image",
+      content: process.env.baseUrl + require('./IMG_8906.jpg')
+    }]
+  }
 }
 </script>
 

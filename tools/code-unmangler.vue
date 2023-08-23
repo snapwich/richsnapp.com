@@ -154,6 +154,12 @@ export default {
         name: "keywords",
         content:
           "javascript, programming, devtools, unmangle, unminify, prettier, babel"
+      },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content:
+          process.env.baseUrl + "/tools/code-unmangler/icons/unmangler-96.png"
       }
     ],
     link: [
