@@ -8,13 +8,20 @@ export default {
   ],
   tags: ["blog", "computers", "gaming"],
   head: {
-    meta: [{
-      hid: "og:image",
-      property: "og:image",
-      content: process.env.baseUrl + require('./IMG_8906.jpg')
-    }]
+    meta: [
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: process.env.baseUrl + require("./IMG_8906.jpg")
+      },
+      {
+        hid: "twitter:card",
+        name: "twitter:card",
+        content: "summary_large_image"
+      }
+    ]
   }
-}
+};
 </script>
 
 <template lang="md">
@@ -181,4 +188,3 @@ export default {
   }
 }
 </style>
-
