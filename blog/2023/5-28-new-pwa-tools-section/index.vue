@@ -27,8 +27,16 @@
 </template>
 
 <script>
+import { image } from "~/utils/meta";
+
 export default {
   title: "New PWA Tools Section with Offline Support!",
-  tags: ["blog", "tools"]
+  tags: ["blog", "tools"],
+  head: {
+    meta: image(
+      process.env.baseUrl + require("./desktop-install.png"),
+      "summary_large_image"
+    )
+  }
 };
 </script>

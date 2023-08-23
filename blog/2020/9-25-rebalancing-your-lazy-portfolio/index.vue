@@ -112,6 +112,7 @@ import _ from "lodash";
 import currencies from "~/components/investing/currencies.json";
 import funds from "@/components/investing/funds.json";
 import portfolios from "~/components/investing/lazyPortfolios.json";
+import { image } from "~/utils/meta";
 
 export default {
   tags: ["tools", "investing"],
@@ -166,6 +167,11 @@ export default {
         }, 100)
       );
     }
+  },
+  head: {
+    meta: image(
+      process.env.baseUrl + "/tools/lazy-portfolio/icons/portfolio-96.png"
+    )
   }
 };
 </script>

@@ -1,4 +1,6 @@
 <script lang="ts">
+import { image } from "~/utils/meta";
+
 export default {
   title: "Stuffing a RTX 4090 in an Dan Lian-li A4 H2O",
   tldr: [
@@ -8,18 +10,10 @@ export default {
   ],
   tags: ["blog", "computers", "gaming"],
   head: {
-    meta: [
-      {
-        hid: "og:image",
-        property: "og:image",
-        content: process.env.baseUrl + require("./IMG_8906.jpg")
-      },
-      {
-        hid: "twitter:card",
-        name: "twitter:card",
-        content: "summary_large_image"
-      }
-    ]
+    meta: image(
+      process.env.baseUrl + require("./IMG_8906.jpg"),
+      "summary_large_image"
+    )
   }
 };
 </script>
