@@ -13,11 +13,6 @@ export default {
         hid: "og:image",
         property: "og:image",
         content: process.env.baseUrl + require("./IMG_8906.jpg")
-      },
-      {
-        hid: "twitter:card",
-        name: "twitter:card",
-        content: "summary_large_image"
       }
     ]
   }
