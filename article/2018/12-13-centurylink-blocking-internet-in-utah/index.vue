@@ -135,7 +135,7 @@ export default {
     <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I have yet to see an internet response that appreciates them doing this, but I see a lot of angry and upset people on twitter and reddit.  This is such a terribly dumb idea, was this the intent of your bill?</p>&mdash; Rich Snapp (@Snapwich) <a href="https://twitter.com/Snapwich/status/1071931301068865536?ref_src=twsrc%5Etfw">December 10, 2018</a></blockquote>
   </figure>
   <figure class="center no-shadow">
-    <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">I’m sorry you are having problems. SB134 did not require that — and no other ISP has done that to comply with the law. They were only required to notify customers of options via email or with an invoice.</p>&mdash; Todd Weiler (@gopTODD) <a href="https://twitter.com/gopTODD/status/1072189463252488192?ref_src=twsrc%5Etfw">December 10, 2018</a></blockquote>
+    <blockquote data-conversation="none" data-lang="en"><p lang="en" dir="ltr">I’m sorry you are having problems. SB134 did not require that — and no other ISP has done that to comply with the law. They were only required to notify customers of options via email or with an invoice.</p>&mdash; Todd Weiler (@gopTODD) <a href="https://twitter.com/gopTODD/status/1072189463252488192?ref_src=twsrc%5Etfw">December 10, 2018</a></blockquote>
   </figure>
 
   CenturyLink is much less helpful on twitter, replying to any comments on this shady behavior with what is most likely
