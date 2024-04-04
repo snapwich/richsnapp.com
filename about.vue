@@ -6,8 +6,8 @@
   [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) applications.
 
   <figure class="left">
-    <img src="/img/responsive-workstation.jpg"/>
-    <figcaption>Where the magic happens.</figcaption>
+    <img src="/img/modern-workstation.jpg"/>
+    <figcaption>Home office infiltrated</figcaption>
   </figure>
 
   Rich currently resides in Salt Lake City, Utah and works at [Rakuten USA](https://www.rakuten.us/)
@@ -17,7 +17,17 @@
   More information on his skills and experience can be found at his
   [LinkedIn page](https://www.linkedin.com/in/richsnapp).
 
-  ### About This Site
+  <figure class="small right">
+    <img src="/img/responsive-workstation.jpg"/>
+    <figcaption>Needle office (2016)</figcaption>
+  </figure>
+
+  <figure class="small right">
+    <img src="/img/old-school-workstation.jpg"/>
+    <figcaption>Home office (y2k)</figcaption>
+  </figure>
+
+  ### About This Site {.no-clear}
 
   As an open-source software contributor and consumer, as well as appreciator of free services; here's a few notes
   concerning the making of this website:
@@ -28,4 +38,11 @@
   * Using some [Twitter Bootstrap](https://getbootstrap.com/) components (such as the grid) and
     [Font Awesome](https://fortawesome.github.io/Font-Awesome/) icons.
   * Intentionally made as simple and unparallaxy as possible.
+
 </template>
+
+<style lang="less">
+.no-clear {
+  clear: none;
+}
+</style>
