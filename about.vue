@@ -6,7 +6,7 @@
   [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) applications.
 
   <figure class="left">
-    <img v-img:images src="/img/modern-workstation.jpg"/>
+    <img src="/img/modern-workstation.jpg"/>
     <figcaption>Home office infiltrated</figcaption>
   </figure>
 
