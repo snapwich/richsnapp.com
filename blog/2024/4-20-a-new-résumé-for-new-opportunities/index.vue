@@ -10,7 +10,7 @@
   if you are in the market and are so inclined, just change the details first ;)
 
   <figure class="small right">
-    <img src="./k8s-cluster.jpg" />
+    <img v-img src="./k8s-cluster.jpg" />
     <figcaption>With k8s anything can be a node, including all my miscellaneous hardware!</figcaption>
   </figure>
 

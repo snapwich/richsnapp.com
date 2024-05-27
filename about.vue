@@ -6,7 +6,7 @@
   [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) applications.
 
   <figure class="left">
-    <img src="/img/modern-workstation.jpg"/>
+    <img v-img:images src="/img/modern-workstation.jpg"/>
     <figcaption>Home office infiltrated</figcaption>
   </figure>
 
@@ -18,12 +18,12 @@
   [LinkedIn page](https://www.linkedin.com/in/richsnapp).
 
   <figure class="small right">
-    <img src="/img/responsive-workstation.jpg"/>
+    <img v-img:images src="/img/responsive-workstation.jpg"/>
     <figcaption>Needle office (2016)</figcaption>
   </figure>
 
   <figure class="small right">
-    <img src="/img/old-school-workstation.jpg"/>
+    <img v-img:images src="/img/old-school-workstation.jpg"/>
     <figcaption>Home office (y2k)</figcaption>
   </figure>
 
