@@ -48,7 +48,7 @@ export default {
   questions are much harder and time consuming than the actual test, especially if you dive into each one to make sure you
   fully understand it.
 
-  2. Their questions are also the same format as the test and use a very similar environment. This is important as the
+  2. Their questions are the same format as the CKA test and use a very similar environment. This is important as the
   first half of me struggling with the practice session was getting used to the remote desktop environment they
   force you to use when taking the test. If you go in blind to the CKA without familiarizing yourself with that kind of
   environment then you'll probably struggle. For instance, I use [k9s](https://k9scli.io/) liberally when managing my
@@ -102,8 +102,8 @@ export default {
   2) In my CKA setup scripts above I use kubespray to install Kubernetes on the cloud cluster. The CKA will expect you
   to understand and will have questions related to using [kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/).
   While kubespray uses kubeadm behind the scenes to setup and join the cluster nodes you will not learn how to use
-  kubeadm by using kubespray, so you might plan to just setup the nodes and then manually use kubeadm at least once
-  to setup your cluster. They will also expect you to manage parts of your etcd backend
+  kubeadm by using kubespray so you might plan to just provision the base nodes and manually use kubeadm to install
+  kubernetes at least once when setting up your cluster. They will also expect you to manage parts of your etcd backend
   using [etcdctl](https://etcd.io/docs/v3.4/dev-guide/interacting_v3/).
 
 
@@ -113,32 +113,32 @@ export default {
   scratch. e.g. `kubectl run`, `kubectl create deploy`, `kubectl expose` and so on. While I usually prefer creating a
   manifest file myself it is time consuming and prone to syntax errors.
 
-  2) If you _need_ a manifest (which you will sometimes) you can create a base using one of the `kubectl` commands above
-  and output the results to a yaml to a file using `--dry-run=client -o yaml`. For example, to make a pod:
+  2) If you _need_ a manifest (which you will sometimes) you can create a yaml base by using one of the `kubectl`
+  commands above and output the results to a yaml to a file using `--dry-run=client -o yaml`. For example, to make a pod:
 
   > `kubectl run nginx --image=nginx --dry-run=client -o yaml > pod-nginx.yaml`
 
   3) Get used to poking around the `kubectl` help output with `-h`. You can use this flag at any level to get information
   on how to do very specific things. e.g. `kubectl create deploy -h | less`
 
-  4) Be comfortable with `vim`. You don't need to be a vim ninja but you _will_ be editing manifest files frequently as
-  well as writing answers in files and you don't want to be putzing around trying to figure out what's wrong with vim while
-  the clock is ticking.
+  4) Be comfortable with `vim`. You don't need to be a vim ninja but you _will_ be editing manifest files frequently in
+  a terminal as well as writing your answers in files and you don't want to be putzing around trying to figure out what's
+  wrong with vim while the clock is ticking.
 
   5) If you can, learn how to use `tmux`. The test will be taken on a remote desktop session with a single monitor.
   This will feel pretty foreign to people who are used to using multiple monitors for the last decade. For instance,
   trying to view the `kubectl -h` ouput while at the same time writing the commands into a vim session will be difficult if
-  you're trying to drag multiple windows around in this tiny, laggy (actually it wasn't that bad, but you can feel it),
+  you're trying to drag multiple windows around in this tiny and laggy (actually it wasn't that bad, but you can feel it)
   remote desktop session. Even a a two-pane `tmux` session will be extremely helpful. It's also useful for copying and
-  pasting within the terminal (the testing environment has
-  [a ctrl-c, ctrl-v gotcha](https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad#exam-technical-instructions)
+  pasting within the terminal (the testing environment has a
+  [ctrl-c, ctrl-v gotcha](https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad#exam-technical-instructions)
   you should be aware of).
 
-  6) Be familiar with using [kubernetes.io](https://kubernetes.io/docs/home/) documentation. However, you won't
-  need it very often if you familiarize yourself with the basic concepts and know how to use `kubectl` with its built-in
-  documentation. You probably won't _want_ to use it either as it can be quite verbose and often references topics that
-  are not useful to the problem at hand. At best you'll just be using it to copy/paste a few example manifests and
-  hopefully not reading it to understand how something works (do that before the test).
+  6) Be familiar with using [kubernetes.io](https://kubernetes.io/docs/home/) for documentation. However, you won't
+  need it very often during the test if you familiarize yourself with the basic concepts and know how to use `kubectl`
+  with its built-in documentation. You probably won't _want_ to use it either as it can be quite verbose and often
+  references topics that are not useful to the test problem at hand. At best you'll just be using it to copy/paste a few
+  example manifests and hopefully not reading it to understand how something works (do that before the test).
 
   ### Where to go from here
 
@@ -147,9 +147,9 @@ export default {
   [Certified Kubernetes Application Developer (CKAD)](https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/)
   and the [Certified Kubernetes Security Specialist (CKS)](https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/).
   From what I have heard the CKAD is just a simpler version of the CKA so unless you require it for some specific
-  reason there is no real reason to get it at this point. The CKS can be interesting if you're working more in the
+  purpose there is no real reason to get it at this point. The CKS could be interesting if you're working more in the
   networking field and with cyber security. It also has a completely separate set of curriculum it covers so if you're
-  interesting in going even further it might be worth looking into it. If that's the case I'd recommend getting a bundle
+  interested in going even further it might be worth looking into it. If that's the case I'd recommend getting a bundle
   that includes both the CKA and the CKS.
 
   And with that farewell and good luck!
