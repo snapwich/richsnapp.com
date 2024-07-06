@@ -18,6 +18,6 @@
 
 <script lang="ts">
 export default {
-  tags: ["blog", "notes", "web dev", "ci cd"]
+  tags: ["blog", "notes", "webdev", "devops"]
 };
 </script>

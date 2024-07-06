@@ -286,7 +286,7 @@ function messedUpSearch(elem) {
 
 export default {
   title: "How to add search to your static website",
-  tags: ["web dev", "vue.js"],
+  tags: ["webdev", "vue.js"],
   mounted() {
     messedUpSearch(this.$refs.messedUpSearchText);
   },

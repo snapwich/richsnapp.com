@@ -21,6 +21,6 @@
 
 <script>
 export default {
-  tags: ["blog", "networking"]
+  tags: ["blog", "kubernetes", "networking"]
 };
 </script>
