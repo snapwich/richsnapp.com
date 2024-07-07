@@ -5,8 +5,8 @@ export default {
   tldr: [
     "You don't need Kubernetes The Hard Way",
     "You only need the Linux Foundation's Kubernetes Fundamentals class if you're an absolute beginner with no kubernetes experience",
-    "You should <em>probably</em> buy some test sessions from <a href='https://killer.sh' target='_blank'>killer.sh</a>, especially if you've never done a proctored test like this",
-    "You should <em>probably</em> setup and run your own kubernetes cluster",
+    'You should <em>probably</em> buy some test sessions from <a href="https://killer.sh" target="_blank">killer.sh</a>, especially if you\'ve never done a proctored test like this',
+    'You should <em>probably</em> setup and run your own kubernetes cluster, <a href="https://github.com/snapwich/cka" target="_blank">here is the cloud terraform GCP + kubespray scripts</a> I used if interested',
     "Become a kubectl master"
   ]
 };
@@ -148,7 +148,7 @@ export default {
   and the [Certified Kubernetes Security Specialist (CKS)](https://training.linuxfoundation.org/certification/certified-kubernetes-security-specialist/).
   From what I have heard the CKAD is just a simpler version of the CKA so unless you require it for some specific
   purpose there is no real reason to get it at this point. The CKS could be interesting if you're working more in the
-  networking field and with cyber security. It also has a completely separate set of curriculum it covers so if you're
+  networking field and with cyber security. It has a completely separate set of curriculum it covers so if you're
   interested in going even further it might be worth looking into it. If that's the case I'd recommend getting a bundle
   that includes both the CKA and the CKS.
 
