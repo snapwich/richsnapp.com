@@ -10,9 +10,10 @@
     <figcaption>Home office infiltrated</figcaption>
   </figure>
 
-  Rich currently resides in Salt Lake City, Utah and works at [Rakuten USA](https://www.rakuten.us/)
-  where he spends most of his time contributing to the [Prebid.org](https://github.com/prebid/Prebid.js) project.
-  He also holds a Bachelor of Science in Computer Science from [Utah Valley University](https://www.uvu.edu/).
+  Rich currently resides in Salt Lake City, Utah and works at [MasterControl](https://www.mastercontrol.com)
+  on the Design System team as a Principal Software Engineer responsible for unifying their frontend architecture. 
+	He also holds a Bachelor of Science in Computer Science from 
+	[Utah Valley University](https://www.uvu.edu/).
 
   More information on his skills and experience can be found at his
   [LinkedIn page](https://www.linkedin.com/in/richsnapp).
