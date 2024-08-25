@@ -1,0 +1,67 @@
+[
+  {
+    "text": "Two fund",
+    "values": [
+      {
+        "text": "Rick Ferri 40/60",
+        "value": {
+          "Total Bond": 40,
+          "Total World Stock": 60
+        }
+      }
+    ]
+  },
+  {
+    "text": "Three fund",
+    "values": [
+      {
+        "text": "Rick Ferri Lazy 40/40/20",
+        "value": {
+          "Total Bond": 40,
+          "Total Stock": 40,
+          "Total International Stock": 20
+        }
+      }
+    ]
+  },
+  {
+    "text": "Core four",
+    "values": [
+      {
+        "text": "Rick Ferri 60/40",
+        "value": {
+          "Total Bond": 40,
+          "Total Stock": 30,
+          "Total International Stock": 24,
+          "REIT": 6
+        }
+      },
+      {
+        "text": "Rick Ferri 80/20",
+        "value": {
+          "Total Bond": 20,
+          "Total Stock": 40,
+          "Total International Stock": 32,
+          "REIT": 8
+        }
+      }
+    ]
+  },
+  {
+    "text": "Others",
+    "values": [
+      {
+        "text": "Bill Schultheis \"Coffeehouse\"",
+        "value": {
+          "Large Blend": 10,
+          "Large Value": 10,
+          "Small Blend": 10,
+          "Small Value": 10,
+          "Total International Stock": 10,
+          "REIT": 10,
+          "Total Bond": 40
+        }
+      }
+    ]
+  }
+]

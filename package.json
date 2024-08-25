@@ -1,0 +1,31 @@
+{
+  "name": "richsnapp.com",
+  "version": "1.0.0",
+  "description": "Rich Snapp's personal website",
+  "private": true,
+  "repository": "https://github.com/snapwich/richsnapp",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build"
+  },
+  "author": "Rich Snapp",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.4",
+    "@astrojs/vue": "^4.5.0",
+    "astro": "^4.14.5",
+    "bootstrap": "^3.4.1",
+    "date-fns": "^3.6.0",
+    "less": "^4.2.0",
+    "lodash-es": "^4.17.21",
+    "v-img": "^0.2.0",
+    "vue": "^3.4.38"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.5.4"
+  }
+}

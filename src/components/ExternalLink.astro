@@ -1,0 +1,26 @@
+---
+export interface Props {
+  href: string;
+  className?: string;
+}
+
+const { href, className } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={["stop-propagation", className]}
+>
+  <slot />
+</a>
+
+<script>
+  const links = document.querySelectorAll("a.stop-propagation");
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  });
+</script>

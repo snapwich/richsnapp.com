@@ -1,0 +1,52 @@
+---
+import "~/styles/site.less";
+import "~/styles/github-gist.css";
+
+import avatar from "../img/avatar.jpg";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const headTitle = title ? `${title} - RichSnapp.com` : "RichSnapp.com";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+
+<link rel="canonical" href={canonicalURL} />
+
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,400italic,700italic"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,700,300,500"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+/>
+
+<title>{headTitle}</title>
+<meta name="title" content={headTitle} />
+<meta name="description" content={description} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={headTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(avatar.src, Astro.url)} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={headTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(avatar.src, Astro.url)} />

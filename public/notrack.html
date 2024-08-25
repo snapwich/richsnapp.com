@@ -1,0 +1,11 @@
+<script>
+  try {
+    localStorage.setItem('analytics', 'off');
+
+    if (localStorage.getItem('analytics') === 'off') {
+      document.write('success');
+    }
+  } catch(e) {
+    document.write('failed');
+  }
+</script>

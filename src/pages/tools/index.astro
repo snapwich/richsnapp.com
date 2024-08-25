@@ -1,0 +1,68 @@
+---
+import BasicPage from "~/layouts/BasicPage.astro";
+import ExternalLink from "~/components/ExternalLink.astro";
+---
+
+<BasicPage title="Tools">
+  <h2>Investing</h2>
+  <div
+    onclick="window.location='/tools/lazy-portfolio'"
+    class="media panel panel-default"
+  >
+    <div class="media-left">
+      <img
+        class="media-object"
+        src="/tools/lazy-portfolio/icons/portfolio-96.png"
+      />
+    </div>
+    <div class="media-body">
+      <h3 class="media-heading">
+        <a href="/tools/lazy-portfolio">Lazy Portfolio Rebalancing Calculator</a
+        >
+      </h3>
+      A simple calculator for rebalancing lazy portfolios. Also available offline
+      and as a progressive web app.
+    </div>
+  </div>
+  <h2>Coding</h2>
+  <div
+    onclick="window.location='/tools/code-unmangler'"
+    class="media panel panel-default"
+  >
+    <div class="media-left">
+      <img
+        class="media-object"
+        src="/tools/code-unmangler/icons/unmangler-96.png"
+      />
+    </div>
+    <div class="media-body">
+      <h3 class="media-heading">
+        <a href="/tools/code-unmangler">Code Unmangler</a>
+      </h3>
+      A basic text editor that can prettify
+      <ExternalLink href="https://en.wikipedia.org/wiki/Name_mangling"
+        >name mangled</ExternalLink
+      >
+      and minified javascript code. Useful for debugging code minified for production.
+    </div>
+  </div>
+</BasicPage>
+
+<style lang="less">
+  div.media {
+    display: block;
+    clear: both;
+    text-decoration: none;
+    box-shadow: none;
+    padding: 10px;
+    cursor: pointer;
+    img {
+      width: 96px;
+      height: 96px;
+    }
+    &:hover {
+      color: inherit;
+      background: none;
+    }
+  }
+</style>
