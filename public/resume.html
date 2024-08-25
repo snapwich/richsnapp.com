@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rich Snapp's Resume</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FEZ9Y3YJWC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function() {
+      try {
+        if (localStorage.getItem("analytics") === "off") {
+          return;
+        }
+      } catch (e) {}
+      gtag('js', new Date());
+      gtag('config', 'G-FEZ9Y3YJWC');
+    })()
+  </script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,600,700italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,600,700">
+  <style>
+
+    :root {
+      --serif: "Noto Serif", serif;
+      --sans-serif: "Inter", sans-serif;
+    }
+
+    /* reset */
+    html {
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+      margin: 0;
+      padding: 0;
+      font-w*/eight: normal;
+    }
+    /* end reset */
+
+    body {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+      font-family: var(--serif);
+      line-height: 1.4;
+    }
+
+    @media not print {
+      body {
+        max-width: 1024px;
+      }
+    }
+
+    header {
+      margin: 20px 0;
+      @media not print {
+        margin: 40px 0;
+      }
+    }
+
+    section, main {
+      margin-bottom: 12px;
+    }
+
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+      &:link, &:visited, &:active {
+        color: inherit;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      li {
+        margin-bottom: 3px;
+      }
+    }
+
+    h1 {
+      font-size: 2.4em;
+    }
+
+    h3 {
+      font-size: 1.3em;
+    }
+
+    h2, h3, p {
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3, h4 {
+      font-weight: 700;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--sans-serif);
+    }
+
+    h2, h3 {
+      text-transform: uppercase;
+    }
+
+    .horizontal-list {
+      font-family: var(--sans-serif);
+      font-size: .9em;
+    }
+
+    em {
+      font-weight: 700;
+    }
+
+    h4, .title {
+      font-family: var(--sans-serif);
+      font-weight: 600;
+    }
+
+    h4 {
+      font-size: 1.2em;
+    }
+
+    @media not print {
+      h4 {
+        background-image: linear-gradient(45deg, #bb00ff, #00c2ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        -moz-text-fill-color: transparent;
+      }
+    }
+
+    .title, .date {
+      font-size: 1.06em;
+    }
+
+    .location {
+      font-size: .9em;
+    }
+
+    .date {
+      font-family: var(--sans-serif);
+      font-weight: 600;
+    }
+
+    .job {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      align-items: baseline;
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      h4 {
+        margin: 0;
+        order: 0;
+      }
+      .location {
+        order: 1;
+        &:before {
+          content: "\2014";
+          padding: 0 5px;
+        }
+      }
+      .date {
+        order: 2;
+        text-align: right;
+      }
+      .title {
+        order: 3;
+        grid-column: span 3;
+      }
+      .description {
+        order: 4;
+        grid-column: span 3;
+      }
+    }
+
+    .date {
+      .end:before {
+        content: "\2013";
+        padding: 0 5px;
+      }
+    }
+
+    @media print {
+      html {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .horizontal-list {
+        margin: 0;
+        padding: 0;
+        li {
+          list-style-type: none;
+          text-align: center;
+        }
+      }
+
+      .summary .horizontal-list {
+        font-family: var(--serif);
+        font-size: 1em;
+        padding-left: 20px;
+
+        li {
+          list-style-type: disc;
+          text-align: left;
+        }
+      }
+    }
+
+    @media not print {
+      @media (max-width: 767px) {
+        h1, h2, h3 {
+          text-align: left;
+        }
+        .horizontal-list li {
+          text-align: left;
+        }
+        .job {
+          grid-template-columns: auto auto;
+          h4, .location, .description {
+            grid-column: span 2;
+          }
+          .title {
+            order: 2;
+            grid-column: auto;
+          }
+          .date {
+            order: 3;
+            grid-column: auto;
+          }
+          .location {
+            margin-bottom: 4px;
+          }
+          .location:before {
+            content: "";
+            padding: 0;
+          }
+        }
+      }
+      @media (max-width: 540px) {
+        .job {
+          grid-template-columns: auto;
+          h4, .location, .description {
+            grid-column: auto;
+          }
+          .date {
+            font-size: .85em;
+            text-align: left;
+          }
+          .description {
+            margin-top: 6px;
+          }
+        }
+      }
+    }
+
+    @media print, screen and (min-width: 768px) {
+      .horizontal-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        & li {
+          display: inline-block;
+          margin-bottom: 0;
+          &:after {
+            content: "|";
+            display: inline-block;
+            text-align: center;
+            width: 1em;
+          }
+          &:last-child:after {
+            content: "";
+          }
+        }
+      }
+    }
+
+  </style>
+</head>
+<body>
+<header class="about">
+  <h1>Rich Snapp</h1>
+  <ul class="horizontal-list">
+    <li>Salt Lake City, UT</li>
+    <li><a href="https://linkedin.com/in/richsnapp" target="_blank">linkedin.com/in/richsnapp</a></li>
+  </ul>
+</header>
+<section class="summary">
+  <h2>Staff Software Engineer</h2>
+  <p>Skilled software engineer with significant professional experience most recently focused in ad tech and open-source platforms that compete with the major advertising incumbents (Google, et al) including building open source libraries used by hundreds of advertising companies and internally building scalable and high-performance systems that facilitate real-time ad auctions. Strong familiarity with open-source technology stacks across the frontend and backend and experience with CI/CD, caching, data storage, load balancing, server administration, and cloud-based infrastructure (mostly GCP, but some AWS). Life-long learner and web technologist that started with TI-basic and assembly language on a calculator in middle school, released an open-source message board system on the early internet using Javascript and Perl in high school, and have continued to follow the latest frontier technologies throughout my career. Currently focusing on AI and compute infrastructure in my spare time. Key skills include:</p>
+  <ul class="horizontal-list">
+    <li>Computer Science</li>
+    <li>Web Applications</li>
+    <li>Open-Source</li>
+    <li>Ad Tech</li>
+    <li>Team Leadership</li>
+    <li>Remote Collaboration</li>
+  </ul>
+</section>
+<section class="skills">
+  <h3>Technical Skills</h3>
+  <ul>
+    <li><em>Languages:</em> Javascript/Typescript, Go, Python, Bash, SQL. Past experience with C/C++,C#, Java, PHP, Perl, and Ruby.</li>
+    <li><em>Technologies:</em> Strong HTML5, CSS3, REST, GraphQL, HTTP, TCP/IP, JSON, YAML, and XML knowledge.</li>
+    <li><em>Frameworks:</em> Strong React, Vue, Nuxt, and Next knowledge. Past experience with Symfony 2, Laravel, Django, Ruby on Rails, and Wordpress.</li>
+    <li><em>DevOps:</em> Git, Docker and containerization, Kubernetes (CKA certified), Istio, FluxCD, Terraform, GCP and AWS experience. Windows, OSX, and Linux (primarily Ubuntu/Debian and Alpine).</li>
+  </ul>
+</section>
+<main class="history">
+  <h3>Professional Experience</h3>
+  <article class="job">
+    <h4>Rakuten USA</h4>
+    <div class="location">San Francisco Bay Area, CA (Remote)</div>
+    <div class="title">Lead Software Engineer</div>
+    <div class="date">
+      <date class="start">September 2018</date>
+      <date class="end">March 2024</date>
+    </div>
+    <ul class="description">
+      <li>Team lead for the UI and API teams building configuration management, dashboards, ad tag generation, and the various other technologies that manage Rakuten's supply-side advertising platform.</li>
+      <li>Contributor and feature lead for components of our real-time auction system that includes protections, targeting, cookie-syncing, adapter architecture, etc.</li>
+      <li>Contributor to our Infrastructure as Code refactor which automated cloud provisioning and provided the ability to reliably and consistently spin up cloud infrastructure and applications across multiple environments. </li>
+      <li>Prebid committee member and contributor to the open-source Prebid project.</li>
+    </ul>
+  </article>
+  <article class="job">
+    <h4>The Rubicon Project (Magnite)</h4>
+    <div class="location">Los Angeles, CA (Remote)</div>
+    <div class="title">Senior Software Engineer</div>
+    <div class="date">
+      <date class="start">August 2016</date>
+      <date class="end">September 2018</date>
+    </div>
+    <ul class="description">
+      <li>An initial contributor and architect for Prebid (contributions viewable on github <a target="_blank" href="https://github.com/prebid/Prebid.js/commits?author=snapwich">@snapwich</a>) which is now the de facto standard for implementing Header Bidding as a part of Programmatic Advertising.</li>
+      <li>Developed an automated framework for building custom Prebid.js packages that could be performantly bundled at runtime allowing Rubicon Project to quickly onboard new programmatic customers.</li>
+      <li>Contributed to Rubicon Project's proprietary Header Bidding solution (Fastlane) which was eventually succeeded by Prebid.</li>
+    </ul>
+  </article>
+  <article class="job">
+    <h4>Needle</h4>
+    <div class="location">Lehi, UT</div>
+    <div class="title">Senior Software Engineer</div>
+    <div class="date">
+      <date class="start">November 2013</date>
+      <date class="end">August 2016</date>
+    </div>
+    <ul class="description">
+      <li>Technical lead for the team that built Needle's new retail customer chat application, a responsive frontend that embedded in third-party websites as an overlay. This was a first-of-its-kind integrated chat experience that worked across desktop and mobile devices and replaced Needle's popout chat window application.</li>
+      <li>Built prototyping tools which allowed designers and junior engineers to create and test their own customized chat experiences.</li>
+      <li>Assisted solutions engineering with onboarding and debugging custom installs for clients including: Nike, Reebok, Under Armour, Carhartt, TaylorMade, Coach, Norwegian Cruise Line, and many more.</li>
+    </ul>
+  </article>
+  <article class="job">
+    <h4>Riser Agency</h4>
+    <div class="location">Pleasant Grove, UT</div>
+    <div class="title">Director of Technology</div>
+    <div class="date">
+      <date class="start">June 2012</date>
+      <date class="end">October 2013</date>
+    </div>
+    <ul class="description">
+      <li>Oversaw development on contracted projects for companies such as Google, NBC, National Geographic, Kraft, etc.</li>
+      <li>Restructured our development workflow, standardized our technology stack, and automated our infrastructure provisioning on early cloud platforms like Google App Engine and Rackspace Cloud to streamline our development process.</li>
+    </ul>
+  </article>
+</main>
+<section class="education">
+  <h3>Education</h3>
+  <ul class="horizontal-list">
+    <li>Bachelor of Science (BS) in Computer Science</li>
+    <li>Utah Valley University</li>
+  </ul>
+</section>
+</body>
+</html>

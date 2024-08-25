@@ -1,0 +1,196 @@
+---
+const { title, description, keywords } = Astro.props;
+const { pathname } = Astro.url;
+
+import BaseHead from "./shared/BaseHead.astro";
+import avatar from "./img/avatar.jpg";
+
+import GoogleSearch from "~/components/GoogleSearch.vue";
+
+const currYear = new Date().getFullYear();
+
+function isActive(path: string) {
+  return pathname === path ? "active" : "";
+}
+---
+
+<html>
+  <head>
+    <BaseHead title={title} />
+    <style lang="less" is:global>
+      @import (reference) "../styles/variables.less";
+
+      .google-search {
+        display: flex;
+        margin-left: 14%;
+        width: 200px;
+        font-family: @font-family-sans-serif2;
+        color: @gray-light;
+        i {
+          color: @gray-lighter;
+          font-size: 20px;
+        }
+        button {
+          flex: 0 0 auto;
+          width: 30px;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+        input {
+          flex: 1 1 auto;
+          outline: 0;
+          margin-right: 0;
+          border: 0;
+          background: transparent;
+          border-bottom: 2px solid @gray-lighter;
+          min-height: 30px;
+          line-height: normal;
+          width: 100%;
+        }
+        @media (max-width: @screen-sm-max) {
+          margin-left: 0;
+        }
+        @media (max-width: @screen-us-max) {
+          width: 100%;
+          input {
+            margin-right: 30px;
+          }
+        }
+      }
+    </style>
+    <style lang="less">
+      @import (reference) "../styles/variables.less";
+
+      .control-bar {
+        display: flex;
+        margin-top: 40px;
+        a {
+          text-decoration: none;
+          border-bottom: none;
+          cursor: pointer;
+          &:hover {
+            color: @brand-primary;
+          }
+        }
+      }
+
+      .social-links {
+        padding: 0;
+        margin: 0 0 0 auto;
+        li {
+          margin-right: 25px;
+          display: inline-block;
+          list-style-type: none;
+        }
+        i {
+          font-size: 20px;
+          &:hover {
+            color: @brand-primary;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="wrapper container">
+        <header class="row hidden-xs hidden-sm">
+          <div class="col-md-10 control-bar">
+            <GoogleSearch client:load site="richsnapp.com" />
+            <ul class="social-links">
+              <li>
+                <a href="https://www.linkedin.com/in/richsnapp" target="_blank"
+                  ><i class="fa-brands fa-linkedin"></i></a
+                >
+              </li>
+              <li>
+                <a href="https://www.facebook.com/rich.snapp" target="_blank"
+                  ><i class="fa-brands fa-facebook"></i></a
+                >
+              </li>
+              <li>
+                <a href="https://twitter.com/snapwich" target="_blank"
+                  ><i class="fa-brands fa-twitter"></i></a
+                >
+              </li>
+              <li>
+                <a href="https://github.com/snapwich" target="_blank"
+                  ><i class="fa-brands fa-github-alt"></i></a
+                >
+              </li>
+              <li>
+                <a href="https://www.medium.com/@snapwich" target="_blank"
+                  ><i class="fa-brands fa-medium"></i></a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://hachyderm.io/@snapwich"
+                  rel="me"
+                  target="_blank"><i class="fa-brands fa-mastodon"></i></a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/britishgracie"
+                  target="_blank"><i class="fa-brands fa-instagram"></i></a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <a href="/">
+              <figure class="avatar">
+                <img src={avatar.src} />
+              </figure>
+            </a>
+          </div>
+        </header>
+        <div class="row">
+          <nav class="col-md-2 col-md-push-10">
+            <div class="hidden-md hidden-lg">
+              <google-search site="richsnapp.com"></google-search>
+              <a href="/">
+                <figure class="avatar">
+                  <img src={avatar.src} />
+                  <figcaption>.com</figcaption>
+                </figure>
+              </a>
+            </div>
+            <ul>
+              <li>
+                <a href="/" class={isActive("/")}>Latest</a>
+              </li>
+              <li>
+                <a href="/articles" class={isActive("/articles")}>Articles</a>
+              </li>
+              <li>
+                <a href="/tools" class={isActive("/tools")}>Tools</a>
+              </li>
+              <li>
+                <a href="/about" class={isActive("/about")}>About</a>
+              </li>
+              <li>
+                <a href="/contact" class={isActive("/contact")}>Contact</a>
+              </li>
+              <li>
+                <a href="/resume.html" target="_blank">Résumé</a>
+              </li>
+            </ul>
+          </nav>
+          <main class="col-md-10 col-md-pull-2">
+            <article>
+              <slot />
+            </article>
+          </main>
+        </div>
+        <div class="push"></div>
+      </div>
+      <footer>
+        All Rights Reserved © {currYear}
+        <nuxt-link to="/src/pages/contact">Rich Snapp</nuxt-link>
+      </footer>
+    </div>
+  </body>
+</html>
