@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+import BlogPage from "~/layouts/BlogPage.astro";
+import { parse, format } from "date-fns";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: {
+      collection: "blog",
+      year: post.slug.match(/(\d{4})-\d{2}-\d{2}/)![1],
+      slug: post.slug.match(/\d{4}-(\d{2}-\d{2}-.+)$/)![1],
+    },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+
+const datePart = post.slug.split("-").slice(0, 3).join("-");
+const date = parse(datePart, "yyyy-MM-dd", new Date());
+const formattedDate = format(date, "MMMM do yyyy");
+---
+
+<BlogPage title={post.data.title} tags={post.data.tags} date={formattedDate}>
+  <Content />
+</BlogPage>
