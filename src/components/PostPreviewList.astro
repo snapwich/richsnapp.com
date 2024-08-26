@@ -1,0 +1,125 @@
+---
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeExternalLinks from "rehype-external-links";
+import rehypeStringify from "rehype-stringify";
+import * as cheerio from "cheerio";
+import Tags from "./Tags.astro";
+import { parseSlugDate } from "../utils/date";
+
+export interface Props {
+  posts: Array<{
+    collection: string;
+    slug: string;
+    body: string;
+    data: {
+      title: string;
+      tags: string[];
+    };
+  }>;
+}
+
+async function markdownToHtml(markdown: string) {
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeExternalLinks, { target: "_blank", rel: ["noopener"] })
+    .use(rehypeStringify)
+    .process(markdown);
+  return result.toString();
+}
+
+function getFirstParagraph(htmlContent: string) {
+  const $ = cheerio.load(htmlContent);
+  const paragraphs = $("p").filter((i, el) => {
+    return !$(el).text().trim().startsWith("import");
+  });
+  return paragraphs.first().html();
+}
+
+const { posts } = Astro.props;
+---
+
+<>
+  {
+    posts.map(async (post) => {
+      const { slug, year, formattedDate } = parseSlugDate(post.slug);
+      const path = `/${post.collection}/${year}/${slug}`;
+      return (
+        <article class="page-preview">
+          <header>
+            <div class="header-info">
+              <div class="date">{formattedDate}</div>
+            </div>
+            <h2>
+              <a href={path}>{post.data.title}</a>
+            </h2>
+          </header>
+          <p set:html={getFirstParagraph(await markdownToHtml(post.body))} />
+          <footer>
+            <Tags tags={post.data.tags} />
+            <p>
+              <a href={path}>Read more →</a>
+            </p>
+          </footer>
+        </article>
+      );
+    })
+  }
+</>
+
+<style lang="less">
+  @import "../styles/variables.less";
+  @import (reference) "../styles/site.less";
+
+  a {
+    .no-underline();
+  }
+
+  .page-preview {
+    margin-bottom: 2.5em;
+    &:first-child {
+      margin-top: 1em;
+    }
+    header {
+      h2 {
+        font-size: 40px;
+      }
+    }
+
+    footer {
+      display: flex;
+      color: @gray-light;
+      font-size: 1.1em;
+      font-family: @font-family-sans-serif;
+      font-weight: 300;
+      p {
+        margin-left: auto;
+        padding-left: 20px;
+        text-align: right;
+        text-indent: 0;
+        white-space: nowrap;
+      }
+    }
+
+    .header-info {
+      display: flex;
+      justify-content: space-evenly;
+      font-size: 1.4em;
+      text-align: center;
+      margin-bottom: -20px;
+      font-family: @font-family-sans-serif;
+      font-weight: 300;
+      & > div {
+        color: @gray-light;
+        text-indent: 0;
+        flex: 1 1 auto;
+      }
+      .date {
+        /*padding-left: 20px;*/
+        white-space: nowrap;
+      }
+    }
+  }
+</style>

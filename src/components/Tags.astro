@@ -1,0 +1,32 @@
+---
+export interface Props {
+  tags: string[];
+  className?: string;
+}
+
+const { tags, className, ...rest } = Astro.props;
+---
+
+<div class:list={["tags", className]} {...rest}>
+  <i class="fa fa-tags"></i>
+  {
+    tags.map((tag, index) => (
+      <>
+        <a href={"/tags/" + tag}>{tag}</a>
+        <span>{index !== tags.length - 1 ? ", " : ""}</span>
+      </>
+    ))
+  }
+</div>
+
+<style lang="less">
+  @import "../styles/variables.less";
+
+  .tags {
+    font-family: @font-family-sans-serif;
+    font-weight: 300;
+    a {
+      border-bottom-width: 1px;
+    }
+  }
+</style>
