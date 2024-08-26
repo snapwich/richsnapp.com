@@ -1,5 +1,27 @@
 ---
+import { getCollection } from "astro:content";
 import BasicPage from "~/layouts/BasicPage.astro";
+
+function parseSlug(slug: string) {
+  return {
+    year: slug.match(/(\d{4})-\d{2}-\d{2}/)![1],
+    slug: slug.match(/\d{4}-(\d{2}-\d{2}-.+)$/)![1],
+  };
+}
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 ---
 
-<BasicPage />
+<BasicPage>
+  {
+    posts.map(function (post) {
+      const { year, slug } = parseSlug(post.slug);
+      return (
+        <a href={`/blog/${year}/${slug}`}>
+          <h4 class="title">{post.data.title}</h4>
+        </a>
+      );
+    })
+  }
+</BasicPage>

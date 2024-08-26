@@ -19,6 +19,7 @@
     "date-fns": "^3.6.0",
     "less": "^4.2.0",
     "lodash-es": "^4.17.21",
+    "remark-external-links": "^9.0.1",
     "v-img": "^0.2.0",
     "vue": "^3.4.38"
   },

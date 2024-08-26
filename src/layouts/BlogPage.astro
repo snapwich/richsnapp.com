@@ -1,0 +1,151 @@
+---
+import DefaultLayout from "./DefaultLayout.astro";
+
+interface Props {
+  title: string;
+  date: string;
+  tags: string[];
+  tldr?: string[];
+}
+
+const { title, date, tags, tldr } = Astro.props;
+---
+
+<style lang="less">
+  @import (reference) "../styles/variables.less";
+
+  .sharethis-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    & > * {
+      flex: 1 1 auto;
+    }
+
+    @media (max-width: @screen-sm-max) {
+      flex-direction: row;
+      justify-content: space-evenly;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      color: #fff;
+      margin-top: 12px;
+      width: 50px;
+      opacity: 0.75;
+
+      @media (max-width: @screen-sm-max) {
+        margin-top: 0 !important;
+        margin-left: 10px;
+        &:last-child {
+          margin-right: 10px;
+        }
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: #fff;
+        opacity: 1;
+      }
+      &:first-child {
+        margin-top: 10px;
+      }
+      &.twitter {
+        background-color: #55acee;
+      }
+      &.facebook {
+        background-color: #3b5998;
+      }
+      &.email {
+        background-color: #7d7d7d;
+      }
+      &.sms {
+        background-color: #5bc236;
+      }
+      &.linkedin {
+        background-color: #0077b5;
+      }
+      &.reddit {
+        background-color: #ff4500;
+      }
+    }
+  }
+
+  .tags {
+    font-family: @font-family-sans-serif;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 300;
+    margin: -15px 0 5px;
+    i {
+      margin-right: 4px;
+    }
+    a {
+      border-bottom-width: 1px;
+    }
+  }
+
+  .header-info {
+    text-align: center;
+    margin-bottom: -20px;
+    font-family: @font-family-sans-serif;
+    font-size: 1.4em;
+    font-weight: 300;
+    div {
+      color: @gray-light;
+      text-indent: 0;
+    }
+  }
+</style>
+<DefaultLayout title={title}>
+  <div class="row" :class="{ 'hidden-xs': hideTitle, 'hidden-sm': hideTitle }">
+    <header class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-10">
+      <div class="header-info">
+        <div class="date">{date}</div>
+      </div>
+      <h1>{title}</h1>
+      <div class="tags">
+        <i class="fa fa-tags"></i>
+        {
+          tags.map((tag, index) => (
+            <>
+              <a href={"/tags/" + tag}>{tag}</a>
+              <span>{index !== tags.length - 1 ? ", " : ""}</span>
+            </>
+          ))
+        }
+      </div>
+    </header>
+  </div>
+  <div class="row">
+    <div class="row">
+      <div class="col-sm-12 col-md-2">
+        <div class="sharethis-bar" v-if="isPage">
+          <button class="btn st-custom-button twitter" data-network="twitter">
+            <i class="fa-brands fa-twitter"></i>
+          </button>
+          <button class="btn st-custom-button reddit" data-network="reddit">
+            <i class="fa-brands fa-reddit-alien"></i>
+          </button>
+          <button class="btn st-custom-button facebook" data-network="facebook">
+            <i class="fa-brands fa-facebook"></i>
+          </button>
+          <button class="btn st-custom-button linkedin" data-network="linkedin">
+            <i class="fa-brands fa-linkedin"></i>
+          </button>
+          <button
+            class="btn st-custom-button sms visible-xs"
+            data-network="sms"
+          >
+            <i class="fa fa-comment"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-10 md-clear">
+        <slot />
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
