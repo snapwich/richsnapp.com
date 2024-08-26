@@ -1,5 +1,6 @@
 ---
 import DefaultLayout from "./DefaultLayout.astro";
+import Tags from "~/components/Tags.astro";
 
 interface Props {
   title: string;
@@ -10,6 +11,47 @@ interface Props {
 
 const { title, date, tags, tldr } = Astro.props;
 ---
+
+<DefaultLayout title={title}>
+  <div class="row" :class="{ 'hidden-xs': hideTitle, 'hidden-sm': hideTitle }">
+    <header class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-10">
+      <div class="header-info">
+        <div class="date">{date}</div>
+      </div>
+      <h1>{title}</h1>
+      <Tags tags={tags} />
+    </header>
+  </div>
+  <div class="row">
+    <div class="row">
+      <div class="col-sm-12 col-md-2">
+        <div class="sharethis-bar" v-if="isPage">
+          <button class="btn st-custom-button twitter" data-network="twitter">
+            <i class="fa-brands fa-twitter"></i>
+          </button>
+          <button class="btn st-custom-button reddit" data-network="reddit">
+            <i class="fa-brands fa-reddit-alien"></i>
+          </button>
+          <button class="btn st-custom-button facebook" data-network="facebook">
+            <i class="fa-brands fa-facebook"></i>
+          </button>
+          <button class="btn st-custom-button linkedin" data-network="linkedin">
+            <i class="fa-brands fa-linkedin"></i>
+          </button>
+          <button
+            class="btn st-custom-button sms visible-xs"
+            data-network="sms"
+          >
+            <i class="fa fa-comment"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-10 md-clear">
+        <slot />
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
 
 <style lang="less">
   @import (reference) "../styles/variables.less";
@@ -73,6 +115,21 @@ const { title, date, tags, tldr } = Astro.props;
     }
   }
 
+  .header-info {
+    text-align: center;
+    margin-bottom: -20px;
+    font-family: @font-family-sans-serif;
+    font-size: 1.4em;
+    font-weight: 300;
+    div {
+      color: @gray-light;
+      text-indent: 0;
+    }
+  }
+</style>
+
+<style lang="less" is:global>
+  @import "../styles/variables.less";
   .tags {
     font-family: @font-family-sans-serif;
     text-align: center;
@@ -86,66 +143,4 @@ const { title, date, tags, tldr } = Astro.props;
       border-bottom-width: 1px;
     }
   }
-
-  .header-info {
-    text-align: center;
-    margin-bottom: -20px;
-    font-family: @font-family-sans-serif;
-    font-size: 1.4em;
-    font-weight: 300;
-    div {
-      color: @gray-light;
-      text-indent: 0;
-    }
-  }
 </style>
-<DefaultLayout title={title}>
-  <div class="row" :class="{ 'hidden-xs': hideTitle, 'hidden-sm': hideTitle }">
-    <header class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-10">
-      <div class="header-info">
-        <div class="date">{date}</div>
-      </div>
-      <h1>{title}</h1>
-      <div class="tags">
-        <i class="fa fa-tags"></i>
-        {
-          tags.map((tag, index) => (
-            <>
-              <a href={"/tags/" + tag}>{tag}</a>
-              <span>{index !== tags.length - 1 ? ", " : ""}</span>
-            </>
-          ))
-        }
-      </div>
-    </header>
-  </div>
-  <div class="row">
-    <div class="row">
-      <div class="col-sm-12 col-md-2">
-        <div class="sharethis-bar" v-if="isPage">
-          <button class="btn st-custom-button twitter" data-network="twitter">
-            <i class="fa-brands fa-twitter"></i>
-          </button>
-          <button class="btn st-custom-button reddit" data-network="reddit">
-            <i class="fa-brands fa-reddit-alien"></i>
-          </button>
-          <button class="btn st-custom-button facebook" data-network="facebook">
-            <i class="fa-brands fa-facebook"></i>
-          </button>
-          <button class="btn st-custom-button linkedin" data-network="linkedin">
-            <i class="fa-brands fa-linkedin"></i>
-          </button>
-          <button
-            class="btn st-custom-button sms visible-xs"
-            data-network="sms"
-          >
-            <i class="fa fa-comment"></i>
-          </button>
-        </div>
-      </div>
-      <div class="col-md-10 md-clear">
-        <slot />
-      </div>
-    </div>
-  </div>
-</DefaultLayout>
