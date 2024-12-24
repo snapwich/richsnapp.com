@@ -178,50 +178,50 @@
 </template>
 
 <script lang="js">
-import _ from "lodash";
-import VSelect from 'vue-select';
-import 'vue-select/dist/vue-select.css';
+import { clone, pick, zipObject, map, throttle, get } from "lodash-es";
+import VSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 import currency from "currency.js";
-import { CurrencyInput } from 'vue-currency-input'
+import { CurrencyInput } from "vue-currency-input";
 import { Chart } from "highcharts-vue";
 import { atob, btoa } from "isomorphic-base64";
 
 import { breakpoints } from "assets/screenSizes";
 
-const ENCODE_COLUMNS = ['name', 'target', 'value', 'canBuySell'];
+const ENCODE_COLUMNS = ["name", "target", "value", "canBuySell"];
 
 export default {
   components: {
     VSelect,
     CurrencyInput,
-    Chart
+    Chart,
   },
   props: {
     funds: {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     portfolios: {
       type: Array,
       default() {
-        return []
-      }
+        return [];
+      },
     },
     startingPortfolio: {
       type: String,
       default() {
-        return "custom"
-      }
+        return "custom";
+      },
     },
     urlEncodedValue: {
-      type: String
+      type: String,
     },
     currencies: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data({ currencies, urlEncodedValue }) {
     let presetPortfolio;
@@ -229,70 +229,86 @@ export default {
       presetPortfolio = "custom";
     } else {
       presetPortfolio = this.startingPortfolio;
-      if (this.portfolios.length ) {
-        this.portfolios.forEach(group => {
-          (group.values || []).forEach(portfolio => {
+      if (this.portfolios.length) {
+        this.portfolios.forEach((group) => {
+          (group.values || []).forEach((portfolio) => {
             if (portfolio.text === this.startingPortfolio) {
               presetPortfolio = portfolio.value;
             }
           });
-        })
+        });
       }
     }
 
     return {
       breakpoints,
-      currency: {code: "USD", label: `(USD) ${currencies.USD}`},
+      currency: { code: "USD", label: `(USD) ${currencies.USD}` },
       assets: [],
-      myFunds: _.clone(this.funds),
+      myFunds: clone(this.funds),
       presetPortfolio,
       contributionSliderMax: 10000,
       contributionInput: 0,
       contributionSliderInput: 0,
       showCsv: false,
       dollars: {
-        precision: 0
+        precision: 0,
       },
       cents: {
-        precision: 2
-      }
-    }
+        precision: 2,
+      },
+    };
   },
   computed: {
     urlEncoded: {
       get() {
-        return btoa(JSON.stringify([this.currency.code, this.contributionAmount, this.assets.map(asset =>
-          Object.values(_.pick(asset, ENCODE_COLUMNS))
-        )]));
+        return btoa(
+          JSON.stringify([
+            this.currency.code,
+            this.contributionAmount,
+            this.assets.map((asset) =>
+              Object.values(pick(asset, ENCODE_COLUMNS)),
+            ),
+          ]),
+        );
       },
       set(str) {
         if (str && str !== this.urlEncoded) {
-          let [currencyCode, contributionAmount, assets] = JSON.parse(atob(str));
-          this.currency = {code: currencyCode, label: `(${currencyCode}) ${this.currencies[currencyCode]}`};
+          let [currencyCode, contributionAmount, assets] = JSON.parse(
+            atob(str),
+          );
+          this.currency = {
+            code: currencyCode,
+            label: `(${currencyCode}) ${this.currencies[currencyCode]}`,
+          };
           this.contributionAmount = contributionAmount;
-          this.assets = assets.map((asset) => _.zipObject(ENCODE_COLUMNS, asset));
+          this.assets = assets.map((asset) => zipObject(ENCODE_COLUMNS, asset));
         }
-      }
+      },
     },
     tabDelimited: {
       get() {
         return [
           ["ASSET NAME", "TARGET", "VALUE", "BUY/SELL"].join("\t"),
           ...this.assets.map((asset, i) => {
-            return [asset.name || "", asset.target + "%", this.format(asset.value), this.format(this.buySell[i])].join("\t")
-          })
-        ].join("\n")
+            return [
+              asset.name || "",
+              asset.target + "%",
+              this.format(asset.value),
+              this.format(this.buySell[i]),
+            ].join("\t");
+          }),
+        ].join("\n");
       },
       set() {
         // TODO: allow user input
-      }
+      },
     },
     formattedCurrencies() {
-      let items = _.map(this.currencies, (label, code) => {
-        return ({
+      let items = map(this.currencies, (label, code) => {
+        return {
           label: `(${code}) ${label}`,
-          code
-        });
+          code,
+        };
       });
       return items;
     },
@@ -302,101 +318,119 @@ export default {
       },
       set(value) {
         this.resetContributionSlider(value);
-      }
+      },
     },
     contributionSlider: {
       get() {
         return this.contributionSliderInput;
       },
-      set: _.throttle(function(value) {
+      set: throttle(function (value) {
         this.contributionSliderInput = value;
-      }, 100)
+      }, 100),
     },
     filteredFunds() {
-      return this.myFunds.filter(fund => {
-        return !this.assets.some(asset => (asset.name || "").toLowerCase() === fund.toLowerCase())
+      return this.myFunds.filter((fund) => {
+        return !this.assets.some(
+          (asset) => (asset.name || "").toLowerCase() === fund.toLowerCase(),
+        );
       });
     },
     allocationChart() {
       return {
         chart: {
           type: "pie",
-          height: "50%"
+          height: "50%",
         },
         title: {
-          text: undefined
+          text: undefined,
         },
         exporting: {
-          enabled: false
+          enabled: false,
         },
-        series: [{
-          name: "Current%",
-          size: "60%",
-          dataLabels: {
-            enabled: false
+        series: [
+          {
+            name: "Current%",
+            size: "60%",
+            dataLabels: {
+              enabled: false,
+            },
+            data: this.finalPercentages.map((curr, i) => {
+              return {
+                name: this.assets[i].name,
+                y: this.parseNumber(curr),
+              };
+            }),
           },
-          data: this.finalPercentages.map((curr, i) => {
-            return {
-              name: this.assets[i].name,
-              y: this.parseNumber(curr)
-            }
-          })
-        }, {
-          name: "Target%",
-          size: "100%",
-          innerSize: "60%",
-          data: this.assets.map(asset => {
-            return {
-              name: asset.name || "N/A",
-              y: asset.target
-            }
-          })
-        }]
-      }
+          {
+            name: "Target%",
+            size: "100%",
+            innerSize: "60%",
+            data: this.assets.map((asset) => {
+              return {
+                name: asset.name || "N/A",
+                y: asset.target,
+              };
+            }),
+          },
+        ],
+      };
     },
     canBuySellAll: {
       get() {
-        return this.assets.every(asset => asset.canBuySell);
+        return this.assets.every((asset) => asset.canBuySell);
       },
       set(val) {
-        this.assets.forEach(asset => {
+        this.assets.forEach((asset) => {
           asset.canBuySell = val;
         });
-      }
+      },
     },
     totalTargetPercentages() {
       return this.assets.reduce((memo, asset) => {
         return memo.add(asset.target);
-      }, currency(0))
+      }, currency(0));
     },
     totalValue() {
-      return this.assets.reduce((memo, asset) =>
-        asset.value ? memo.add(asset.value) : memo
-      ,currency(0))
+      return this.assets.reduce(
+        (memo, asset) => (asset.value ? memo.add(asset.value) : memo),
+        currency(0),
+      );
     },
     totalValueWithContribution() {
       return this.totalValue.add(this.contributionAmount);
     },
     currentPercentages() {
       return this.assets.map((asset) => {
-        return !this.totalValue.value ? 0 :
-          (currency(asset.value, {precision: 4}).divide(this.totalValue) * 100)
+        return !this.totalValue.value
+          ? 0
+          : currency(asset.value, { precision: 4 }).divide(this.totalValue) *
+              100;
       });
     },
     totalCurrentPercentages() {
       return this.currentPercentages.reduce((memo, curr) => {
         return memo.add(parseFloat(curr));
-      }, currency(0))
+      }, currency(0));
     },
     optimalContribution() {
-      return currency(Math.max(...this.assets.map((asset) => {
-        return asset.target ? currency(asset.value || 0).divide(parseFloat(asset.target) / 100).value : 0;
-      }))).subtract(this.totalValue)
+      return currency(
+        Math.max(
+          ...this.assets.map((asset) => {
+            return asset.target
+              ? currency(asset.value || 0).divide(
+                  parseFloat(asset.target) / 100,
+                ).value
+              : 0;
+          }),
+        ),
+      ).subtract(this.totalValue);
     },
     optimalTotals() {
       return this.assets.map((asset) => {
-        return this.totalValueWithContribution.multiply((asset.target || 0) / 100)
-      })
+        return this.totalValueWithContribution.multiply(
+          (asset.target || 0) / 100,
+        );
+      });
     },
     buySell() {
       let buySells = this.optimalTotals.map((total, i) => {
@@ -406,25 +440,35 @@ export default {
           canBuySell: asset.canBuySell,
           target: currency(asset.target),
           value: asset.value,
-          buySell: maxSellAmount(asset.value, buySell)
-        }
+          buySell: maxSellAmount(asset.value, buySell),
+        };
       });
 
       // helper function for a sell, don't allow us to sell more than the value of the asset
       function maxSellAmount(value, buySell) {
-        return buySell.add(value).value < 0 ? currency(-value) : buySell
+        return buySell.add(value).value < 0 ? currency(-value) : buySell;
       }
 
       let needsFixing = (asset) => {
-        return !asset.canBuySell && (this.contributionAmount >= 0 ? asset.buySell.value < 0 : asset.buySell.value > 0);
+        return (
+          !asset.canBuySell &&
+          (this.contributionAmount >= 0
+            ? asset.buySell.value < 0
+            : asset.buySell.value > 0)
+        );
       };
 
       let canDistribute = (asset) => {
-        return (asset.canBuySell || (this.contributionAmount >= 0 ? asset.buySell.value > 0 : asset.buySell.value < 0));
+        return (
+          asset.canBuySell ||
+          (this.contributionAmount >= 0
+            ? asset.buySell.value > 0
+            : asset.buySell.value < 0)
+        );
       };
 
       let todo;
-      while((todo = buySells.filter(needsFixing)).length) {
+      while ((todo = buySells.filter(needsFixing)).length) {
         let targets = buySells.filter(canDistribute);
         todo.forEach((source) => {
           let buySell = source.buySell;
@@ -434,9 +478,12 @@ export default {
               return total.add(a.target);
             }, currency(0));
             targets.forEach((target) => {
-              target.buySell = maxSellAmount(target.value, target.buySell.add(
-                buySell.multiply(target.target.value / totalPortions)
-              ))
+              target.buySell = maxSellAmount(
+                target.value,
+                target.buySell.add(
+                  buySell.multiply(target.target.value / totalPortions),
+                ),
+              );
             });
           }
         });
@@ -447,82 +494,91 @@ export default {
       }
 
       // distribute extra/missing cents resulting from rounding
-      let remainder = currency(this.contributionAmount).subtract(buySells.reduce(
-        (memo, asset) => memo.add(asset.buySell),
-        currency(0)
-      ));
+      let remainder = currency(this.contributionAmount).subtract(
+        buySells.reduce((memo, asset) => memo.add(asset.buySell), currency(0)),
+      );
       if (remainder.value !== 0) {
         let targets = buySells.filter(canDistribute);
         remainder.distribute(targets.length).forEach((cents, i) => {
           let target = targets[i];
-          target.buySell = maxSellAmount(target.value, target.buySell.add(cents));
+          target.buySell = maxSellAmount(
+            target.value,
+            target.buySell.add(cents),
+          );
         });
       }
 
-      return buySells.map(asset => asset.buySell);
+      return buySells.map((asset) => asset.buySell);
     },
     totalBuySell() {
-      return this.buySell.reduce((memo, value) =>
-          value ? memo.add(value) : memo
-        ,currency(0))
+      return this.buySell.reduce(
+        (memo, value) => (value ? memo.add(value) : memo),
+        currency(0),
+      );
     },
     finalPercentages() {
       return this.finalValues.map((total) => {
         if (this.totalFinalValues.value === 0) {
           return 0;
         }
-        return (total.divide(this.totalFinalValues) * 100);
+        return total.divide(this.totalFinalValues) * 100;
       });
     },
     totalFinalPercentages() {
       return this.finalPercentages.reduce((memo, value) => {
         return memo.add(this.parseNumber(value));
-      }, currency(0))
+      }, currency(0));
     },
     finalValues() {
       return this.assets.map((asset, i) => {
-        return currency(asset.value, {precision: 4}).add(this.buySell[i])
+        return currency(asset.value, { precision: 4 }).add(this.buySell[i]);
       });
     },
     totalFinalValues() {
-      return this.finalValues.reduce((memo, value) =>
-          value ? memo.add(value) : memo
-        ,currency(0))
-    }
+      return this.finalValues.reduce(
+        (memo, value) => (value ? memo.add(value) : memo),
+        currency(0),
+      );
+    },
   },
   watch: {
     urlEncoded(val) {
-      this.$emit('update:urlEncodedValue', val);
+      this.$emit("update:urlEncodedValue", val);
     },
     urlEncodedValue: {
       handler(val) {
         this.urlEncoded = val;
       },
-      immediate: true
+      immediate: true,
     },
     assets: {
       immediate: true,
       deep: true,
       handler(assets) {
         if (assets.length) {
-          if (!this.portfolios.some(group => {
-            return group.values.some(portfolio => {
-              for (let asset of assets) {
-                if (!portfolio.value[asset.name] || portfolio.value[asset.name] !== asset.target) {
-                  return false;
+          if (
+            !this.portfolios.some((group) => {
+              return group.values.some((portfolio) => {
+                for (let asset of assets) {
+                  if (
+                    !portfolio.value[asset.name] ||
+                    portfolio.value[asset.name] !== asset.target
+                  ) {
+                    return false;
+                  }
                 }
-              }
-              if (this.parseNumber(this.totalTargetPercentages) === 100) {
-                this.presetPortfolio = portfolio.value;
-                return true;
-              }
-              return false;
-            });
-          })) {
+                if (this.parseNumber(this.totalTargetPercentages) === 100) {
+                  this.presetPortfolio = portfolio.value;
+                  return true;
+                }
+                return false;
+              });
+            })
+          ) {
             this.presetPortfolio = "custom";
           }
         }
-      }
+      },
     },
     presetPortfolio: {
       immediate: true,
@@ -533,23 +589,26 @@ export default {
             memo[asset.name] = asset;
             return memo;
           }, {});
-          this.assets = Object.keys(preset).map(name => {
+          this.assets = Object.keys(preset).map((name) => {
             let target = preset[name];
             return {
               name,
               target: target,
-              value: _.get(assets, [name, "value"], 0),
-              canBuySell: _.get(assets, [name, "canBuySell"], false)
-            }
+              value: get(assets, [name, "value"], 0),
+              canBuySell: get(assets, [name, "canBuySell"], false),
+            };
           });
         }
-      }
-    }
+      },
+    },
   },
   methods: {
     resetContributionSliderIfMax() {
-      if (Math.abs(this.contributionSlider) === Math.abs(this.contributionSliderMax)) {
-        this.resetContributionSlider(this.contributionAmount)
+      if (
+        Math.abs(this.contributionSlider) ===
+        Math.abs(this.contributionSliderMax)
+      ) {
+        this.resetContributionSlider(this.contributionAmount);
       }
     },
     resetContributionSlider(value) {
@@ -559,13 +618,13 @@ export default {
     coloredNumberClasses(number) {
       return {
         positive: number > 0,
-        negative: number < 0
-      }
+        negative: number < 0,
+      };
     },
     parseNumber(number) {
       let result = parseFloat(number || 0);
       if (Number.isNaN(result)) {
-        return 0
+        return 0;
       }
       return result;
     },
@@ -578,15 +637,15 @@ export default {
       this.assets.push({
         value: 0,
         target: 0,
-        canBuySell: false
-      })
+        canBuySell: false,
+      });
     },
     removeAsset(item) {
       this.assets.splice(this.assets.indexOf(item), 1);
       document.activeElement.blur(); // prevent next input from taking focus and expanding
     },
     hasData(assets) {
-      return assets.some(asset => {
+      return assets.some((asset) => {
         return asset.target > 0 || parseFloat(asset.current) > 0;
       });
     },
@@ -598,10 +657,13 @@ export default {
       if (typeof value === "object" && value.value) {
         value = value.value;
       }
-      return Number(value).toLocaleString(undefined, {style: "currency", currency: this.currency.code})
-    }
-  }
-}
+      return Number(value).toLocaleString(undefined, {
+        style: "currency",
+        currency: this.currency.code,
+      });
+    },
+  },
+};
 </script>
 
 <style lang="less">
