@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import BlogPage from "~/layouts/BlogPage.astro";
-import { parseSlugDate } from "~/utils/date";
+import BlogPage from "layouts/BlogPage.astro";
+import { parseSlugDate } from "utils/date";
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blog");

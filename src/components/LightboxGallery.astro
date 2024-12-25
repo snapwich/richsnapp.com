@@ -1,0 +1,18 @@
+---
+import "lightgallery/css/lightgallery.css";
+---
+
+<lightbox-gallery {...Astro.props}>
+  <slot />
+</lightbox-gallery>
+<script>
+  import lightGallery from "lightgallery";
+  class LightboxGallery extends HTMLElement {
+    connectedCallback() {
+      lightGallery(this, {
+        selector: "img[data-src]",
+      });
+    }
+  }
+  customElements.define("lightbox-gallery", LightboxGallery);
+</script>

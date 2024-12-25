@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import BasicPage from "~/layouts/BasicPage.astro";
-import { parseSlugDate } from "~/utils/date";
-import Tags from "~/components/Tags.astro";
-import PostPreviewList from "~/components/PostPreviewList.astro";
+import BasicPage from "layouts/BasicPage.astro";
+import { parseSlugDate } from "utils/date";
+import Tags from "components/Tags.astro";
+import PostPreviewList from "components/PostPreviewList.astro";
 
 const blogPosts = await getCollection("blog");
 const articlePosts = await getCollection("article");

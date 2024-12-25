@@ -5,20 +5,25 @@ tags:
   - computers
   - gaming
 ---
+import { Image } from "astro:assets";
 import image1 from './IMG_4637.jpg';
 import image2 from './IMG_4641.jpg';
 import image3 from './IMG_4540.jpg';
+import { gallery } from './styles.module.less';
+import LightboxGallery from 'components/LightboxGallery.astro';
 
 Have you ever wanted a computer that is fast and powerful but also small, sleek, and sexy?  Surely such a
 combination cannot exist!  Well, prepare to feast your eyes upon this beautiful build I recently completed.
 
-<figure class="images small right">
-  <img src={image1.src} />
-  <div>
-    <img src={image2.src} />
-    <img src={image3.src} />
-  </div>
-</figure>
+<LightboxGallery class={gallery}>
+  <figure class="small right">
+      <img src={image1.src} alt="small PC all set up" data-src={image1.src}/>
+      <div>
+        <Image src={image2} alt="inside PC with AIO cooler installed" height={100} data-src={image2.src} />
+        <Image src={image3} alt="inside PC with CPU fan installed" height={100} data-src={image3.src} />
+      </div>
+  </figure>
+</LightboxGallery>
 
 About the size of an Xbox but with computing power to spare this sweet little package was born out of necessity.  I
 turned off my old desktop computer a few weeks ago when leaving for a business trip and arrived home only to find that
