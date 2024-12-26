@@ -28,7 +28,6 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.0",
     "unified": "^11.0.5",
-    "v-img": "^0.2.0",
     "vue": "^3.4.38"
   },
   "devDependencies": {
