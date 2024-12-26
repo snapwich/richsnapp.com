@@ -5,6 +5,7 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     tags: z.array(z.string()),
+    tldr: z.array(z.string()).optional(),
   }),
 });
 
@@ -13,6 +14,7 @@ const article = defineCollection({
   schema: z.object({
     title: z.string(),
     tags: z.array(z.string()),
+    tldr: z.array(z.string()).optional(),
   }),
 });
 
