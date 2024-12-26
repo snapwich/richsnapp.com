@@ -4,8 +4,13 @@ tags:
 - webdev
 - vue.js
 ---
-
+import imgGoogleSiteSearch from "./google-site-search.png"
+import imgFirstAttempt from "./first-attempt.png";
+import imgGoogleDom from "./google-dom.png";
+import imgStyledSearch from "./styled-search.png";
+import imgIphoneSearch from "./iphone-search.png";
 import GoogleSearch from "components/GoogleSearch.vue";
+import styles from "./styles.module.less"
 
 One of the most important features that a website can have is a method to effectively search its content.
 There's no denying that there's such an overload of information on websites these days that helping people find what
@@ -35,7 +40,7 @@ we should consider the hours we might have poured into the ill-fated Google prod
 impending shutdown.
 
 <figure class="scale right">
-  <img src="./google-site-search.png" />
+  <img src={imgGoogleSiteSearch.src} />
   <figcaption>Yup, it's a Google product.</figcaption>
 </figure>
 
@@ -48,7 +53,7 @@ We'll create a little spot at the top of our page for the &lt;gcse:searchbox-onl
 javascript snippet somewhere into the document, and away we go!
 
 <figure>
-<img src="./first-attempt.png" />
+<img src={imgFirstAttempt.src} />
 <figcaption>Behold the beauty of Goggle Costom Sorch!</figcaption>
 </figure>
 
@@ -57,7 +62,7 @@ thing just looks plain broken...  Let's dig into the DOM that was added to our s
 this monstrosity.
 
 <figure class="scale">
-<img src="./google-dom.png" />
+<img src={imgGoogleDom.src} />
 </figure>
 
 The first thing you may notice is that this thing was inserted directly into our page.  No
@@ -81,7 +86,8 @@ Google Custom Search touts customization, but looking at the customization panel
 color and font-size changes; and currently our search has a few more problems than a simple color problem.  Let's see
 if we can manually fix our problem and add some better styling while we're at it.
 
-```less {.smallest .right}
+<figure class="smallest right">
+```less
 // Just a little bit of styling...
 .search-box {
   margin-right: 0;
@@ -133,11 +139,12 @@ if we can manually fix our problem and add some better styling while we're at it
   }
 }
 ```
+</figure>
 
 With some javascript to clear the placeholder text and a slight smattering of `!important` tags we end up with
 something that looks like it belongs on our site a little bit better:
 
-<img class="bordered-content styled-search" src="./styled-search.png" />
+<img class={`bordered-content ${ styles['styled-search'] } `} src={ imgStyledSearch.src } />
 
 A respectable looking search bar, if I do say so myself.
 
@@ -149,7 +156,7 @@ At this point some of you may be wondering what happens if Google ends up changi
 of their widget... Couldn't it end up looking even worse than it did originally?  Couldn't it end up looking something
 like this?
 
-<div class="bordered-content messed-up-search">
+<div class={`bordered-content ${ styles['messed-up-search'] }`}>
   <input disabled type="text" id="messedUpSearchText" />
   <button disabled>
     <i class="fa fa-search"></i>
@@ -166,7 +173,7 @@ pretty good on my desktop machine.  Let's see how it looks on a mobile device...
 some sort of responsive behavior.
 
 <figure class="center scale">
-  <img src="./iphone-search.png" />
+  <img src={ imgIphoneSearch.src } />
   <figcaption>Mobile leaves something to be desired</figcaption>
 </figure>
 
@@ -176,7 +183,7 @@ above the fold this basically renders our search results as a giant popup advert
 Custom Search does have a configuration option that allows us to open the search results in a separate page... but
 then how is that better than just manually redirecting our visitors to a google search results page to begin with?
 
-<div class="lightbulb" v-repaint>
+<div class={ styles['lightbulb'] } v-repaint>
   <svg width="140" height="140">
     <line stroke-linecap="round"
           stroke-width="5"
@@ -214,11 +221,11 @@ Wait, that's _genius_!  We can give our visitors the same experience they would 
 (without any of the headache and third-party code inclusions) by just creating a search box that manually redirects
 them to a pre-populated Google search results page.
 
-<figure class="search-figure center">
+<figure class={`${styles['search-figure']} center`}>
   <div>
 
   ```html
-  &lt;template&gt;
+  <template>
     <div class="google-search">
       <button @click="search(text)">
         <i class="fa fa-search"></i>
@@ -228,9 +235,9 @@ them to a pre-populated Google search results page.
              v-on:keyup.13="search(text)"
              v-model="text" />
     </div>
-  &lt;/template&gt;
+  </template>
 
-  &lt;script&gt;
+  <script>
     export default {
       props: [
         'site'
@@ -254,9 +261,9 @@ them to a pre-populated Google search results page.
         }
       }
     }
-  &lt;/script&gt;
+  </script>
   ```
-  <div><google-search site="richsnapp.com"></google-search></div>
+  <div class={styles['google-search']}><GoogleSearch client:load site="richsnapp.com"></GoogleSearch></div>
   </div>
   <figcaption>Our google search vue component</figcaption>
 </figure>
@@ -266,142 +273,3 @@ Simple, effective, and overall works well enough!  It even has less ads, for wha
 winner!
 
 And that is how you add google search to a static website!
-
-<script>
-function messedUpSearch(elem) {
-  type("Hey Google, what's wrong with this site?");
-
-  function type(str) {
-    let keys = str.split("");
-    let key = 0;
-    let timeout;
-    setInterval(function() {
-      if (keys[key]) {
-        elem.value = elem.value + keys[key++];
-      } else if (!timeout) {
-        timeout = setTimeout(function() {
-          elem.value = "";
-          key = 0;
-          timeout = null;
-        }, 4000);
-      }
-    }, 75);
-  }
-}
-
-messedUpSearch(document.getElementById("messedUpSearchText"));
-
-export default {
-  title: "How to add search to your static website",
-  tags: ["webdev", "vue.js"],
-  mounted() {
-    messedUpSearch(this.$refs.messedUpSearchText);
-  },
-  components: {
-    GoogleSearch
-  }
-};
-</script>
-
-<style lang="less">
-@import "styles/variables.less";
-
-.lightbulb {
-  position: relative;
-  display: flex;
-  color: @gray;
-  font-size: 100px;
-  margin: 40px auto 20px;
-  width: 60px;
-  svg {
-    left: -32px;
-    top: -45px;
-    position: absolute;
-    color: #edef3f;
-  }
-}
-
-.search-figure {
-  & > div {
-    display: flex;
-    flex-direction: column;
-    code {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      border-bottom: 1px solid @gray-lighter;
-    }
-  }
-  .google-search {
-    margin: 20px auto 40px;
-  }
-}
-
-.styled-search {
-  display: block;
-  margin: 20px auto;
-}
-
-.regular-search {
-  width: 300px;
-  margin: 0 auto 20px;
-  display: flex;
-  input {
-    flex: 1 0 auto;
-  }
-}
-
-.messed-up-search {
-  position: relative;
-  overflow: auto;
-  padding: 30px;
-  width: 300px;
-  margin: 0 auto 20px;
-  background: url(./messed-up-search.png) -45px 0;
-  input {
-    position: absolute;
-    left: 35px;
-    top: 30px;
-    transform-origin: top center;
-    animation: swing 5s infinite;
-    background: none;
-    font-size: 12px;
-    width: 240px;
-    height: 30px;
-    border: 0;
-    border-bottom: 2px solid @gray-lighter;
-  }
-  button {
-    position: relative;
-    left: -15px;
-    top: -15px;
-    animation: spin 4s linear infinite;
-  }
-}
-
-@keyframes swing {
-  20% {
-    transform: rotate3d(0, 0, 1, 13deg);
-  }
-  40% {
-    transform: rotate3d(0, 0, 1, -10deg);
-  }
-  60% {
-    transform: rotate3d(0, 0, 1, 5deg);
-  }
-  80% {
-    transform: rotate3d(0, 0, 1, -5deg);
-  }
-  100% {
-    transform: rotate3d(0, 0, 1, 0deg);
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
-</style>

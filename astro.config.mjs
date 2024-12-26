@@ -6,10 +6,19 @@ import rehypeExternalLinks from "rehype-external-links";
 // https://astro.build/config
 export default defineConfig({
   site: "https://richsnapp.com",
-  integrations: [vue(), mdx()],
+  integrations: [
+    vue(),
+    mdx({
+      rehypePlugins: [
+        [rehypeExternalLinks, { target: "_blank", rel: ["noopener"] }],
+      ],
+    }),
+  ],
   markdown: {
-    rehypePlugins: [
-      [rehypeExternalLinks, { target: "_blank", rel: ["noopener"] }],
-    ],
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+      },
+    },
   },
 });
