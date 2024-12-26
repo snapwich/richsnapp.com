@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { title, date, tags, tldr } = Astro.props;
+console.log(Astro.props);
 ---
 
 <DefaultLayout title={title}>
@@ -47,6 +48,18 @@ const { title, date, tags, tldr } = Astro.props;
         </div>
       </div>
       <div class="col-md-10 md-clear">
+        {
+          tldr && (
+            <div class="tldr">
+              <em>tl;dr</em>
+              <ul>
+                {tldr.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
         <slot />
       </div>
     </div>
@@ -124,6 +137,20 @@ const { title, date, tags, tldr } = Astro.props;
     div {
       color: @gray-light;
       text-indent: 0;
+    }
+  }
+
+  .tldr {
+    font-family: @font-family-sans-serif;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    em {
+      font-weight: bold;
+    }
+    li {
+      line-height: 1.2em;
+      margin-bottom: 6px;
+      font-weight: 300;
     }
   }
 </style>
