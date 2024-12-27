@@ -50,7 +50,7 @@ console.log(Astro.props);
             <em>tl;dr</em>
             <ul>
               {tldr.map((item) => (
-                <li>{item}</li>
+                <li set:html={item} />
               ))}
             </ul>
           </div>
