@@ -11,7 +11,7 @@ import { parseSlugDate } from "../utils/date";
 export interface Props {
   posts: Array<{
     collection: string;
-    slug: string;
+    id: string;
     body: string;
     data: {
       title: string;
@@ -44,7 +44,7 @@ const { posts } = Astro.props;
 <>
   {
     posts.map(async (post) => {
-      const { slug, year, formattedDate } = parseSlugDate(post.slug);
+      const { slug, year, formattedDate } = parseSlugDate(post.id);
       const path = `/${post.collection}/${year}/${slug}`;
       return (
         <article class="page-preview">
