@@ -26,6 +26,12 @@ importers:
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
+      highcharts:
+        specifier: ^12.1.2
+        version: 12.1.2
+      highcharts-vue:
+        specifier: ^2.0.1
+        version: 2.0.1(highcharts@12.1.2)(vue@3.5.12(typescript@5.6.3))
       less:
         specifier: ^4.2.0
         version: 4.2.0
@@ -1565,6 +1571,15 @@ packages:
 
   hastscript@8.0.0:
     resolution: {integrity: sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==}
+
+  highcharts-vue@2.0.1:
+    resolution: {integrity: sha512-7yVaKvsWlx7OgmKFXE2D99fi/0tr2A85H4KUz3jL7CRQhAwvEvXgtDIyTBGLHJsOC5L9VlppAI7k6KfIi0j0hg==}
+    peerDependencies:
+      highcharts: '>=5.0.0'
+      vue: '>=3.0.0'
+
+  highcharts@12.1.2:
+    resolution: {integrity: sha512-paZ72q1um0zZT1sS+O/3JfXVSOLPmZ0zlo8SgRc0rEplPFPQUPc4VpkgQS8IUTueeOBgIWwVpAWyC9tBYbQ0kg==}
 
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
@@ -4471,6 +4486,13 @@ snapshots:
       hast-util-parse-selector: 4.0.0
       property-information: 6.5.0
       space-separated-tokens: 2.0.2
+
+  highcharts-vue@2.0.1(highcharts@12.1.2)(vue@3.5.12(typescript@5.6.3)):
+    dependencies:
+      highcharts: 12.1.2
+      vue: 3.5.12(typescript@5.6.3)
+
+  highcharts@12.1.2: {}
 
   hookable@5.5.3: {}
 

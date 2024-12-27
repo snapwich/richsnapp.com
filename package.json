@@ -18,6 +18,8 @@
     "bootstrap": "^3.4.1",
     "cheerio": "^1.0.0",
     "date-fns": "^3.6.0",
+    "highcharts": "^12.1.2",
+    "highcharts-vue": "^2.0.1",
     "less": "^4.2.0",
     "lightgallery": "^2.8.2",
     "lodash-es": "^4.17.21",
