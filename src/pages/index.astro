@@ -10,7 +10,7 @@ const articlePosts = await getCollection("article");
 
 const combinedPosts = [...blogPosts, ...articlePosts].sort(
   (a, b) =>
-    parseSlugDate(b.slug).date.valueOf() - parseSlugDate(a.slug).date.valueOf(),
+    parseSlugDate(b.id).date.valueOf() - parseSlugDate(a.id).date.valueOf(),
 );
 
 const tagSet = combinedPosts.reduce((memo, post) => {

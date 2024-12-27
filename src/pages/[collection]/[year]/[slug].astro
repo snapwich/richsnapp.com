@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BlogPage from "layouts/BlogPage.astro";
 import { parseSlugDate } from "utils/date";
 
@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const articlePosts = await getCollection("article");
   const combinedPosts = [...blogPosts, ...articlePosts];
   return combinedPosts.map((post) => {
-    const { year, slug } = parseSlugDate(post.slug);
+    const { year, slug } = parseSlugDate(post.id);
     return {
       params: {
         collection: post.collection,
@@ -21,9 +21,9 @@ export async function getStaticPaths() {
 }
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
-const formattedDate = parseSlugDate(post.slug).formattedDate;
+const formattedDate = parseSlugDate(post.id).formattedDate;
 ---
 
 <BlogPage
