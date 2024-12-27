@@ -292,9 +292,6 @@ article {
       //width: 100%;
       padding: 10px;
       font-size: .9em;
-      @media(max-width: @screen-us-max) {
-        border-radius: 0;
-      }
       & > *:first-child {
         display: inline !important;
         box-shadow: none;
@@ -315,8 +312,7 @@ article {
     clear: both;
     code {
       width: 100% !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
+      margin: 0 !important;
     }
     &.scale {
       .small();
@@ -339,9 +335,6 @@ article {
     }
     & > *:first-child {
       .bordered-content();
-      @media(max-width: @screen-us-max) {
-        border-radius: 0;
-      }
       width: 100%;
     }
     &.no-shadow > *:first-child {
@@ -440,7 +433,6 @@ article {
       & > *:first-child {
         display: block;
         margin: 0 auto;
-        border-radius: 0;
       }
       figcaption {
         text-align: center;

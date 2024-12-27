@@ -24,44 +24,39 @@ console.log(Astro.props);
     </header>
   </div>
   <div class="row">
-    <div class="row">
-      <div class="col-sm-12 col-md-2">
-        <div class="sharethis-bar" v-if="isPage">
-          <button class="btn st-custom-button twitter" data-network="twitter">
-            <i class="fa-brands fa-twitter"></i>
-          </button>
-          <button class="btn st-custom-button reddit" data-network="reddit">
-            <i class="fa-brands fa-reddit-alien"></i>
-          </button>
-          <button class="btn st-custom-button facebook" data-network="facebook">
-            <i class="fa-brands fa-facebook"></i>
-          </button>
-          <button class="btn st-custom-button linkedin" data-network="linkedin">
-            <i class="fa-brands fa-linkedin"></i>
-          </button>
-          <button
-            class="btn st-custom-button sms visible-xs"
-            data-network="sms"
-          >
-            <i class="fa fa-comment"></i>
-          </button>
-        </div>
+    <div class="col-sm-12 col-md-2">
+      <div class="sharethis-bar" v-if="isPage">
+        <button class="btn st-custom-button twitter" data-network="twitter">
+          <i class="fa-brands fa-twitter"></i>
+        </button>
+        <button class="btn st-custom-button reddit" data-network="reddit">
+          <i class="fa-brands fa-reddit-alien"></i>
+        </button>
+        <button class="btn st-custom-button facebook" data-network="facebook">
+          <i class="fa-brands fa-facebook"></i>
+        </button>
+        <button class="btn st-custom-button linkedin" data-network="linkedin">
+          <i class="fa-brands fa-linkedin"></i>
+        </button>
+        <button class="btn st-custom-button sms visible-xs" data-network="sms">
+          <i class="fa fa-comment"></i>
+        </button>
       </div>
-      <div class="col-md-10 md-clear">
-        {
-          tldr && (
-            <div class="tldr">
-              <em>tl;dr</em>
-              <ul>
-                {tldr.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </div>
-          )
-        }
-        <slot />
-      </div>
+    </div>
+    <div class="col-md-10 md-clear">
+      {
+        tldr && (
+          <div class="tldr">
+            <em>tl;dr</em>
+            <ul>
+              {tldr.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+      <slot />
     </div>
   </div>
 </DefaultLayout>
