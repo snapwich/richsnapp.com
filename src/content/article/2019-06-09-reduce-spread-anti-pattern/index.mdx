@@ -6,9 +6,12 @@ tldr:
   - javascript engines will probably never optimize this code
   - if you're using reduce ...spread for reasons of immutability, you should copy once or use immutable helper libraries
 ---
+import Chart from "./Chart.vue";
 import styles from "./styles.module.less";
+import imgV8Flow from "./v8-flow.png";
+import imgComplexityComparison from "./complexity-comparison.png";
 
-<section class="notice">
+<section class={ styles.notice }>
   <p>
     This article can also be read on
     <a href="https://medium.com/better-programming/the-reduce-spread-anti-pattern-fc0c1c0b23f6">Medium</a>
@@ -89,7 +92,7 @@ Several engines exist, but we're going to specifically talk about Chrome and Nod
 How the v8 engine works is a complex topic, but the basics are covered in this [excellent presentation](https://www.youtube.com/watch?time_continue=3&v=p-iiEDtpy6I).
 
 <figure class="small right">
-  <img src="./v8-flow.png" />
+  <img src={imgV8Flow.src} />
   <figcaption>V8's compiler pipeline - credit to <a href="https://twitter.com/fhinkel">@fhinkel</a></figcaption>
 </figure>
 
@@ -107,11 +110,12 @@ accurate picture of what our Javascript code will actually be doing.
 The following bytecode is generated from `reduce ...spread` with the important bits highlighted
 in yellow.
 <figure class="right">
-  <div class="split">
+  <div class={ styles.split }>
     <section>
-```// bytecode
+```
+// bytecode
 StackCheck
-<mark>CreateObjectLiteral [0], [0], #41, r0</mark>
+CreateObjectLiteral [0], [0], #41, r0
 Mov r0, r1
 Mov a0, r2
 <mark>CallRuntime [CopyDataProperties], r1-r2</mark>
@@ -120,16 +124,19 @@ ToName r1
 LdaNamedProperty a1, [2], [3]
 StaDataPropertyInLiteral r0, r1, #0, [5]
 Ldar r0
-Return</code></pre>
-    </section>
-    <section>
-      <pre><code class="language-c++">// builtin code generation
+Return
+```
+  </section>
+  <section>
+```
+// builtin code generation
 SetOrCopyDataProperties( /* ... */ ) {
 // ...
-          <mark>ForEachEnumerableOwnProperty</mark>(
+          ForEachEnumerableOwnProperty
+          (
             context, source_map, CAST(source), kEnumerationOrder,
             [=](TNode&lt;Name&gt; key, TNode&lt;Object&gt; value) {
-          <mark>CallBuiltin(Builtins::kSetPropertyInLiteral</mark>, context, target, key, value);
+            CallBuiltin(Builtins::kSetPropertyInLiteral, context, target, key, value);
         },
           if_runtime);
 // ...
@@ -182,7 +189,7 @@ description we could notate it as [𝜃(𝑛<sup>2</sup>) ≡ 𝑂(𝑛<sup>2</s
 </div>
 
 <figure class="smallest right">
-  <img src="./complexity-comparison.png" />
+  <img src={ imgComplexityComparison.src } />
   <figcaption>credit to <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=50321072">Cmglee - Own work, CC BY-SA 4.0</a></figcaption>
 </figure>
 
@@ -199,12 +206,7 @@ at our informative diagram seems to demonstrate that 𝑂(n) and 𝑂(n<sup>2</s
 characteristics. Let's see how they pan out in actual benchmarks.
 
 <figure>
-
-[//]: # (  <client-only>)
-
-[//]: # (    <chart :options="benchmarkData"></chart>)
-
-[//]: # (</client-only>)
+  <Chart client:only="vue" />
 </figure>
 
 I've included our two discussed solutions `reduce mutate` and `reduce...spread` in these tests as well as some
@@ -270,11 +272,14 @@ one of its parameters (the accumulator), and that's bad. But what potential bugs
 mutation in this case?
 
 Let's look at the code again, this time highlighting an important part.
-```
+
+<figure class="center">
+```javascript
 let result = items.reduce((acc, item) => ({
   ...acc, [item.name]: item.value
-}), <mark>{}</mark>)
+}), {}) // notice object literal for initialization
 ```
+</figure>
 
 The object we're avoiding mutation on is a reference _that we created_; in other words, mutating this parameter is
 not dangerous and worrying about mutating it is in-fact a case of premature de-optimization.

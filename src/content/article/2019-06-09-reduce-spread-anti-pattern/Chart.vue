@@ -1,19 +1,15 @@
-<script>
-import { map } from "lodash-es";
-import Highcharts from "highcharts";
-import exporting from "highcharts/modules/exporting";
+<template>
+  <HighchartVue :options="benchmarkData"></HighchartVue>
+</template>
 
-if (typeof Highcharts === "object") {
-  exporting(Highcharts);
-}
+<script>
+import { defineAsyncComponent } from "vue";
+import { map } from "lodash-es";
+import data from "./data.json";
 
 let chartData = {
   title: {
     text: "Operations per second",
-  },
-  chart: {
-    // type: "line"
-    // height: "50%"
   },
   tooltip: {
     enabled: false,
@@ -33,7 +29,7 @@ let chartData = {
       formatter: false,
     },
   },
-  series: map(require("./data.json"), (result, name, i) => ({
+  series: map(data, (result, name, i) => ({
     name,
     data: result,
   })),
@@ -41,8 +37,13 @@ let chartData = {
 
 export default {
   components: {
-    Chart: async () =>
-      process.browser ? (await import("highcharts-vue")).Chart : {},
+    HighchartVue: defineAsyncComponent({
+      loader: async () => {
+        await import("highcharts");
+        await import("highcharts/modules/exporting");
+        return import("highcharts-vue").then((mod) => mod.Chart);
+      },
+    }),
   },
   data() {
     return {
@@ -122,3 +123,18 @@ function updateRelativeTo(chart, relativeIndex) {
   });
 }
 </script>
+
+<style>
+.highcharts-root {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica,
+    sans-serif !important;
+  font-size: 1em !important;
+  font-weight: bold;
+}
+.highcharts-title {
+  font-weight: normal !important;
+}
+.highcharts-menu {
+  font-size: 1.6em !important;
+}
+</style>

@@ -1,10 +1,12 @@
 @import (reference) "styles/site.less";
 
-mark {
-  background-color: yellow;
-}
 .split {
   display: flex;
+  align-items: stretch;
+  code {
+    height: 100%;
+    box-shadow: none !important;
+  }
   @media (max-width: @screen-xs-max) {
     flex-direction: column;
     section + section {
@@ -18,6 +20,15 @@ mark {
         border-left: 1px solid @gray-lighter;
       }
     }
+  }
+  section:first-child span:nth-child(3) {
+    background-color: yellow;
+  }
+  section:nth-child(2) span:nth-child(4) {
+    background-color: yellow;
+  }
+  section:nth-child(2) span:nth-child(8) {
+    background-color: yellow;
   }
 }
 .good code::before {
