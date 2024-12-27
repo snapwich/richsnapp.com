@@ -26,11 +26,19 @@
       border-bottom: 1px solid @gray-lighter;
     }
   }
-  .google-search {
-    margin: 0 auto 0;
-    width: 50%;
-    padding: 20px;
+}
+
+.google-search {
+  display: flex !important;
+  margin: 0 auto 0 !important;
+  padding: 20px;
+  justify-content: center;
+  :global {
+    .google-search {
+      margin: 0 !important;
+    }
   }
+
 }
 
 .styled-search {

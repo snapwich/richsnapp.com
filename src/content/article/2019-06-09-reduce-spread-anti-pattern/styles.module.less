@@ -1,0 +1,45 @@
+@import (reference) "styles/site.less";
+
+mark {
+  background-color: yellow;
+}
+.split {
+  display: flex;
+  @media (max-width: @screen-xs-max) {
+    flex-direction: column;
+    section + section {
+      border-top: 1px solid @gray-lighter;
+    }
+  }
+  @media (min-width: @screen-sm-min) {
+    section {
+      width: 50%;
+      & + section {
+        border-left: 1px solid @gray-lighter;
+      }
+    }
+  }
+}
+.good code::before {
+  position: absolute;
+  content: "✔";
+  bottom: 0;
+  right: 5px;
+  color: green;
+  font-size: 40px;
+}
+
+.bad code::before {
+  position: absolute;
+  content: "❌";
+  bottom: 5px;
+  right: 5px;
+  color: red;
+  font-size: 30px;
+}
+
+.notice {
+  font-style: italic;
+  font-family: Georgia, serif;
+  margin-bottom: 2em;
+}

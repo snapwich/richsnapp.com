@@ -222,8 +222,6 @@ Wait, that's _genius_!  We can give our visitors the same experience they would 
 them to a pre-populated Google search results page.
 
 <figure class={`${styles['search-figure']} center`}>
-  <div>
-
   ```html
   <template>
     <div class="google-search">
@@ -263,11 +261,12 @@ them to a pre-populated Google search results page.
     }
   </script>
   ```
-  <div class={styles['google-search']}><GoogleSearch client:load site="richsnapp.com"></GoogleSearch></div>
-  </div>
-  <figcaption>Our google search vue component</figcaption>
 </figure>
 
+<figure class="center">
+  <div class={styles['google-search']}><GoogleSearch client:load site="richsnapp.com"></GoogleSearch></div>
+  <figcaption>Our google search vue component</figcaption>
+</figure>
 
 Simple, effective, and overall works well enough!  It even has less ads, for whatever reason.  I think we have a
 winner!
