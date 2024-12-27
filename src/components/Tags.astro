@@ -8,13 +8,11 @@ const { tags, className, ...rest } = Astro.props;
 ---
 
 <div class:list={["tags", className]} {...rest}>
-  <i class="fa fa-tags"></i>
-  {
+  <i class="fa fa-tags"></i><!--
+  -->{
     tags.map((tag, index) => (
-      <>
-        <a href={"/tags/" + tag}>{tag}</a>
-        <span>{index !== tags.length - 1 ? ", " : ""}</span>
-      </>
+      <><a href={"/tags/" + tag}>{tag}</a><!--
+        --><span>{index !== tags.length - 1 ? ", " : ""}</span></>
     ))
   }
 </div>
