@@ -139,6 +139,11 @@ export default defineComponent({
     async update() {
       let vm = this;
 
+      // Mock process.env for @babel/traverse
+      globalThis.process = {
+        env: {},
+      };
+
       Promise.all([
         import("prettier/standalone"),
         import("prettier/parser-babylon"),
