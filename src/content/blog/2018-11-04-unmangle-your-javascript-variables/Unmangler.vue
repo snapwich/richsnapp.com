@@ -161,7 +161,7 @@ export default defineComponent({
                 printWidth: Number.MAX_SAFE_INTEGER,
               });
             } catch (e) {
-              vm.error = e.message;
+              vm.error = typeof e === "object" && e.message ? e.message : e;
             }
             return code;
           }
@@ -175,7 +175,7 @@ export default defineComponent({
         }
 
         vm.code = prettier(vm.code, function (ast) {
-          traverse(ast, {
+          traverse.default(ast, {
             Scope(path) {
               let kindCount = {};
               function getName(kind, line) {

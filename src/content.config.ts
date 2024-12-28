@@ -8,7 +8,7 @@ const blog = defineCollection({
     tldr: z.array(z.string()).optional(),
   }),
   loader: glob({
-    pattern: ["**/*.mdx", "!**/node_modules/**"],
+    pattern: ["*/*.mdx"],
     base: "./src/content/blog",
   }),
 });
@@ -20,7 +20,7 @@ const article = defineCollection({
     tldr: z.array(z.string()).optional(),
   }),
   loader: glob({
-    pattern: ["**/*.mdx", "!**/node_modules/**"],
+    pattern: ["*/*.mdx"],
     base: "./src/content/article",
   }),
 });
