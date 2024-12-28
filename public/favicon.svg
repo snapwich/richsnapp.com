@@ -1,0 +1,38 @@
+<svg
+  width="64"
+  height="64"
+  viewBox="0 0 64 64"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background -->
+  <rect width="64" height="64" fill="#343a40"/>
+
+  <!-- Teal curly brace -->
+  <text
+    x="25%"
+    y="50%"
+    fill="#008080"
+    font-size="32"
+    font-family="Arial, sans-serif"
+    font-weight="bold"
+    dominant-baseline="middle"
+    text-anchor="middle"
+  >
+    {
+  </text>
+
+  <!-- rs text -->
+  <text
+    x="55%"
+    y="50%"
+    fill="#ffffff"
+    font-size="32"
+    font-family="Arial, sans-serif"
+    font-weight="bold"
+    dominant-baseline="middle"
+    text-anchor="middle"
+  >
+    rs
+  </text>
+</svg>
