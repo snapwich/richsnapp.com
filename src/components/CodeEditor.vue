@@ -27,13 +27,21 @@ export default defineComponent({
   components: {
     Codemirror,
   },
-  setup(props) {
+  emits: ["input"],
+  setup(props, { emit }) {
     const extensions = [javascript()];
     let myCode = ref(props.code);
     watch(
       () => props.code as any,
       (newVal) => {
         myCode.value = newVal;
+      },
+    );
+
+    watch(
+      () => myCode.value,
+      (newVal) => {
+        emit("input", newVal);
       },
     );
     return {
