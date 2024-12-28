@@ -5,7 +5,7 @@ export function parseSlugDate(slug: string) {
   const date = parse(datePart, "yyyy-MM-dd", new Date());
   return {
     year: format(date, "yyyy"),
-    slug: slug.split("-").slice(3).join("-"),
+    slug: slug.split("-").slice(1).join("-"),
     formattedDate: format(date, "MMMM do yyyy"),
     date,
   };
