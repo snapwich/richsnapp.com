@@ -1,11 +1,19 @@
 ---
-const { title, description, keywords } = Astro.props;
-const { pathname } = Astro.url;
-
 import BaseHead from "./shared/BaseHead.astro";
 import avatar from "./img/avatar.jpg";
+import type { ImageMetadata } from "astro";
 
 import GoogleSearch from "components/GoogleSearch.vue";
+
+interface Props {
+  title: string;
+  tags?: string[];
+  tldr?: string[];
+  image?: ImageMetadata;
+}
+
+const { title, tags, tldr, image } = Astro.props;
+const { pathname } = Astro.url;
 
 const currYear = new Date().getFullYear();
 
@@ -16,7 +24,7 @@ function isActive(path: string) {
 
 <html>
   <head>
-    <BaseHead title={title} />
+    <BaseHead title={title} image={image} />
     <style lang="less" is:global>
       @import (reference) "../styles/variables.less";
 
