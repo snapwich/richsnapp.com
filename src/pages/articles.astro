@@ -8,10 +8,11 @@ import PostPreviewList from "components/PostPreviewList.astro";
 const blogPosts = await getCollection("blog");
 const articlePosts = await getCollection("article");
 
-const combinedPosts = [...blogPosts, ...articlePosts].sort(
+const articlePostsSorted = articlePosts.sort(
   (a, b) =>
     parseSlugDate(b.id).date.valueOf() - parseSlugDate(a.id).date.valueOf(),
 );
+const combinedPosts = [...blogPosts, ...articlePosts];
 
 const tagSet = combinedPosts.reduce((memo, post) => {
   for (let tag of post.data.tags) {
@@ -24,7 +25,7 @@ const allTags = Array.from(tagSet).sort();
 
 <BasicPage>
   <Tags tags={allTags} className="top-tags" />
-  <PostPreviewList posts={articlePosts} />
+  <PostPreviewList posts={articlePostsSorted} />
 </BasicPage>
 
 <style lang="less">
