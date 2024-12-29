@@ -1,15 +1,17 @@
 ---
 import "styles/site.less";
 import "styles/github-gist.css";
+import type { ImageMetadata } from "astro";
 
 import avatar from "../img/avatar.jpg";
 
 interface Props {
   title: string;
   description?: string;
+  image?: ImageMetadata;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
 const headTitle = title ? `${title} - RichSnapp.com` : "RichSnapp.com";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -46,10 +48,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={headTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(avatar.src, Astro.url)} />
+<meta
+  property="og:image"
+  content={new URL(image ? image.src : avatar.src, Astro.url)}
+/>
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={headTitle} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(avatar.src, Astro.url)} />
+<meta
+  property="twitter:image"
+  content={new URL(image ? image.src : avatar.src, Astro.url)}
+/>

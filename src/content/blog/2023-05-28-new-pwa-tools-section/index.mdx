@@ -1,0 +1,33 @@
+---
+title: New PWA Tools Section with Offline Support!
+tags:
+  - blog
+  - tools
+image: ./desktop-install.png
+---
+import imgDesktopInstall from "./desktop-install.png";
+
+I've been working on a new section of the site for a bit and it's now ready to go. In the past I've received
+numerous requests to support offline capabilities with some of the tools I've created (specifically, the
+<a href="/blog/2020/9-25-rebalancing-your-lazy-portfolio">Lazy Portfolio Rebalancer</a> so I've created a new
+<a href="/tools">Tools</a> section of the site to support standalone [Progressive Web Apps](https://web.dev/progressive-web-apps/)
+that have offline support.
+To install using a Chrome-based browser (including Edge) visit the tool's page you're interested in and click the
+install button in the address bar.
+
+<figure class="right small">
+  <img src={ imgDesktopInstall.src } />
+  <figcaption>Install button as seen in Chrome.</figcaption>
+</figure>
+
+Because the service worker is installed on first page load you may need to refresh the page or app after
+installing to get the offline support to work correctly. Currently it is setup to use
+[runtime caching](https://developer.chrome.com/docs/workbox/caching-resources-during-runtime/) which means the
+service worker needs to be active before offline assets can be cached. If you're viewing this page it should
+probably just work though as you would have loaded the service worker now or on a previous page load.
+
+You can also install the apps on your mobile device by visiting the tool's page you want to install and choosing to
+add the app to your home screen. The offline support may vary depending on your device and browser (iOS devices may
+be specifically finicky thanks to Apple's lackluster and buggy support for Progressive Web Apps).
+
+Let me know what you think!
