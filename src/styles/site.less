@@ -313,6 +313,9 @@ article {
     code {
       width: 100% !important;
       margin: 0 !important;
+      @media(max-width: @screen-us-max) {
+        border-radius: 0;
+      }
     }
     &.scale {
       .small();
@@ -335,6 +338,9 @@ article {
     }
     & > *:first-child, & > astro-island > *:first-child {
       .bordered-content();
+      @media(max-width: @screen-us-max) {
+        border-radius: 0;
+      }
       width: 100%;
     }
     &.no-shadow > *:first-child {
