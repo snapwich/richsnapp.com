@@ -1,0 +1,29 @@
+@import "styles/variables.less";
+
+.spread-example {
+  background: #282828;
+  font-family: @font-family-serif;
+  font-weight: bold;
+  font-size: 35px;
+  white-space: nowrap;
+  & > div {
+    display: flex;
+    text-align: left;
+    margin: 0 20px;
+    div:last-child {
+      margin-left: auto;
+    }
+  }
+  .down {
+    color: red;
+  }
+  .up {
+    color: green;
+  }
+}
+
+@media (min-width: @screen-lg-min) {
+  .spreadsheet {
+    width: 1000px;
+  }
+}
