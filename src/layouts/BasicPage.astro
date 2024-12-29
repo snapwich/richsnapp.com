@@ -33,3 +33,13 @@ const displayTitle = title || frontmatter?.title;
     </div>
 
 </DefaultLayout>
+
+<style lang="less">
+  @import "styles/variables.less";
+
+  @media (min-width: @screen-sm-min) {
+    h1 {
+      margin-top: 0;
+    }
+  }
+</style>

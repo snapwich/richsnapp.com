@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import BasicPage from "layouts/BasicPage.astro";
 import { parseSlugDate } from "utils/date";
-import Tags from "components/Tags.astro";
 import PostPreviewList from "components/PostPreviewList.astro";
 
 const blogPosts = await getCollection("blog");
@@ -23,21 +22,6 @@ const tagSet = combinedPosts.reduce((memo, post) => {
 const allTags = Array.from(tagSet).sort();
 ---
 
-<BasicPage>
-  <Tags tags={allTags} className="top-tags" />
+<BasicPage title="Articles">
   <PostPreviewList posts={articlePostsSorted} />
 </BasicPage>
-
-<style lang="less">
-  @import "../styles/variables.less";
-
-  .top-tags {
-    font-size: 20px;
-    margin: 0 4em 2em;
-    text-align: center;
-    @media (max-width: @screen-sm-max) {
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-</style>

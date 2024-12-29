@@ -6,7 +6,7 @@ import type { ImageMetadata } from "astro";
 import GoogleSearch from "components/GoogleSearch.vue";
 
 interface Props {
-  title: string;
+  title?: string;
   tags?: string[];
   tldr?: string[];
   image?: ImageMetadata;
