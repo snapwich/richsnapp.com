@@ -8,6 +8,7 @@ const blog = defineCollection({
       tags: z.array(z.string()),
       tldr: z.array(z.string()).optional(),
       image: image().optional(),
+      imageSmall: image().optional().nullable(),
     }),
   loader: glob({
     pattern: ["*/*.mdx"],
@@ -22,6 +23,7 @@ const article = defineCollection({
       tags: z.array(z.string()),
       tldr: z.array(z.string()).optional(),
       image: image().optional(),
+      imageSmall: image().optional().nullable(),
     }),
   loader: glob({
     pattern: ["*/*.mdx"],
