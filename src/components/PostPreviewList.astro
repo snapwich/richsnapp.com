@@ -9,6 +9,7 @@ import Tags from "./Tags.astro";
 import { parseSlugDate } from "../utils/date";
 import { Picture } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import imgCover from "./assets/cover.jpg";
 
 export interface Props {
   posts: Array<{
@@ -19,6 +20,7 @@ export interface Props {
       title: string;
       tags: string[];
       image?: ImageMetadata;
+      imageSmall?: ImageMetadata;
     };
   }>;
 }
@@ -52,15 +54,24 @@ const { posts } = Astro.props;
       return post.body ? (
         <article class="page-preview">
           <header>
-            {post.data.image && (
-              <div class="cover-image">
+            <div class="cover-image">
+              {(post.data.imageSmall || post.data.imageSmall === null) && (
+                <div class="sm">
+                  <Picture
+                    src={post.data.imageSmall ? post.data.imageSmall : imgCover}
+                    alt={post.data.title}
+                    width="800"
+                  />
+                </div>
+              )}
+              <div class="lg">
                 <Picture
-                  src={post.data.image}
+                  src={post.data.image ? post.data.image : imgCover}
                   alt={post.data.title}
-                  height="800"
+                  height="400"
                 />
               </div>
-            )}
+            </div>
             <div class="header-info">
               <div class="date">{formattedDate}</div>
             </div>
@@ -147,10 +158,24 @@ const { posts } = Astro.props;
 
     .cover-image {
       overflow: hidden;
+      & > div {
+        height: 100%;
+      }
       img {
         height: 100%;
         width: auto;
         object-fit: cover;
+      }
+      .sm {
+        display: none;
+      }
+      @media (max-width: @screen-sm-max) {
+        .sm + .lg {
+          display: none;
+        }
+        .sm {
+          display: inline;
+        }
       }
     }
 
