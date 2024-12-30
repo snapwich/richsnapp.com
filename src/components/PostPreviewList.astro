@@ -38,6 +38,7 @@ async function markdownToHtml(markdown: string) {
 
 function getFirstParagraph(htmlContent: string) {
   const $ = cheerio.load(htmlContent);
+  $("aside").remove();
   const paragraphs = $("p").filter((i, el) => {
     return !$(el).text().trim().startsWith("import");
   });
