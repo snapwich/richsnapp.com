@@ -42,6 +42,7 @@ main {
 
 a:hover, a:visited, a:link, a:active {
   text-decoration: none;
+  color: inherit;
 }
 
 hr {
@@ -148,12 +149,9 @@ i {
 body {
   background-color: transparent;
   a.active {
-    border-bottom: 4px dotted @gray;
-    color: inherit;
-    &:hover {
-      color: inherit;
-      background-color: transparent;
-      cursor: default;
+    background-color: @brand-primary;
+    @media(max-width: @screen-sm-max) {
+      border-bottom: 4px dotted @gray;
     }
   }
   .wrapper {
