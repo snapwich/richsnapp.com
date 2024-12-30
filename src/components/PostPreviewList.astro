@@ -28,9 +28,10 @@ export interface Props {
 async function markdownToHtml(markdown: string) {
   const result = await unified()
     .use(remarkParse)
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(remarkRehype)
     .use(rehypeExternalLinks, { target: "_blank", rel: ["noopener"] })
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown);
   return result.toString();
 }
