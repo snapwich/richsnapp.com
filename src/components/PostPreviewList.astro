@@ -96,16 +96,20 @@ const { posts } = Astro.props;
   @import "../styles/variables.less";
   @import (reference) "../styles/site.less";
 
+  @cover-image-lg-size: 260px;
+  @cover-image-border-size: 5px;
+
   a {
     .no-underline();
   }
 
   .page-preview {
     position: relative;
-    margin-bottom: 2em;
-    border-left: 1px solid @gray-lighter;
+    margin-bottom: 3.5em;
+    border-left: @cover-image-border-size solid @brand-primary;
     padding-left: (@grid-gutter-width / 2);
     margin-left: -1 * (@grid-gutter-width / 2);
+    min-height: @cover-image-lg-size;
     @media (max-width: @screen-sm-max) {
       margin-bottom: 4em;
       border-left: none;
@@ -202,9 +206,9 @@ const { posts } = Astro.props;
       .cover-image {
         position: absolute;
         top: 0;
-        right: calc(100% + 1px);
-        width: 250px;
-        height: 250px;
+        right: calc(100% + @cover-image-border-size);
+        width: @cover-image-lg-size;
+        height: @cover-image-lg-size;
         &::after {
           content: "";
           position: absolute;
