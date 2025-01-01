@@ -10,10 +10,10 @@
 
   <!-- Teal curly brace -->
   <text
-    x="25%"
-    y="50%"
-    fill="#008080"
-    font-size="32"
+    x="16%"
+    y="52%"
+    fill="#b7dee6"
+    font-size="55"
     font-family="Arial, sans-serif"
     font-weight="bold"
     dominant-baseline="middle"
@@ -24,10 +24,10 @@
 
   <!-- rs text -->
   <text
-    x="55%"
-    y="50%"
+    x="60%"
+    y="52%"
     fill="#ffffff"
-    font-size="32"
+    font-size="50"
     font-family="Arial, sans-serif"
     font-weight="bold"
     dominant-baseline="middle"
