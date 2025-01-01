@@ -36,7 +36,7 @@
                 <currency-input
                   class="form-control contributionAmount"
                   v-model="contributionAmount"
-                  :currency="currency.code"
+                  :options="currencyOptions"
                 />
                 <span class="input-group-btn">
                   <button
@@ -124,7 +124,7 @@
             <currency-input
               class="form-control input-sm"
               v-model="asset.value"
-              :currency="currency.code"
+              :options="currencyOptions"
             />
           </td>
           <td class="currentPercentage">
@@ -178,15 +178,16 @@
 </template>
 
 <script lang="js">
+import { defineAsyncComponent } from "vue";
 import { clone, pick, zipObject, map, throttle, get } from "lodash-es";
 import VSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import currency from "currency.js";
-import { CurrencyInput } from "vue-currency-input";
-import { Chart } from "highcharts-vue";
+import CurrencyInput from "./CurrencyInput.vue";
 import { atob, btoa } from "isomorphic-base64";
 
-import { breakpoints } from "assets/screenSizes";
+import { breakpoints } from "styles/screenSizes";
+import { store } from "./lazyPortfolioState";
 
 const ENCODE_COLUMNS = ["name", "target", "value", "canBuySell"];
 
@@ -194,7 +195,11 @@ export default {
   components: {
     VSelect,
     CurrencyInput,
-    Chart,
+    Chart: defineAsyncComponent({
+      loader: async () => {
+        return import("highcharts-vue").then((mod) => mod.Chart);
+      },
+    }),
   },
   props: {
     funds: {
@@ -217,6 +222,10 @@ export default {
     },
     urlEncodedValue: {
       type: String,
+      default() {
+        const params = new URLSearchParams(location.search);
+        return params.get("p");
+      },
     },
     currencies: {
       type: Object,
@@ -259,6 +268,11 @@ export default {
     };
   },
   computed: {
+    currencyOptions() {
+      return {
+        currency: this.currency.code,
+      };
+    },
     urlEncoded: {
       get() {
         return btoa(
@@ -543,6 +557,7 @@ export default {
   },
   watch: {
     urlEncoded(val) {
+      store.urlEncodedValue = val;
       this.$emit("update:urlEncodedValue", val);
     },
     urlEncodedValue: {
@@ -667,13 +682,26 @@ export default {
 </script>
 
 <style lang="less">
-@import (reference) "../../assets/variables.less";
+@import (reference) "styles/variables.less";
 .vs__dropdown-menu {
   font-family: @font-family-monospace;
 }
+
+.highcharts-root {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica,
+    sans-serif !important;
+  font-size: 1em !important;
+  font-weight: bold;
+}
+.highcharts-title {
+  font-weight: normal !important;
+}
+.highcharts-menu {
+  font-size: 1.6em !important;
+}
 </style>
 <style lang="less" scoped>
-@import (reference) "../../assets/variables.less";
+@import (reference) "styles/variables.less";
 
 .btn-primary {
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -685,7 +713,7 @@ input,
 select,
 .name-input {
   background-color: lighten(@brand-primary, 12%);
-  ::v-deep .vs__dropdown-menu {
+  :deep(.vs__dropdown-menu) {
     background-color: lighten(@brand-primary, 12%);
   }
 }
