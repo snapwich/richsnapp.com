@@ -1,2 +1,3 @@
 packages:
+  - "src/components/**"
   - "src/content/**"
