@@ -118,6 +118,21 @@ importers:
         specifier: ^1.18.1
         version: 1.19.1
 
+  src/pages/tools/code-unmangler:
+    dependencies:
+      '@babel/traverse':
+        specifier: ^7.1.4
+        version: 7.26.4
+      '@types/babel__traverse':
+        specifier: ^7.20.6
+        version: 7.20.6
+      '@types/prettier':
+        specifier: ^1.18.1
+        version: 1.19.1
+      prettier:
+        specifier: ^1.18.1
+        version: 1.19.1
+
 packages:
 
   '@ampproject/remapping@2.3.0':
