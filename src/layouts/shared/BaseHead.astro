@@ -61,3 +61,44 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   property="twitter:image"
   content={new URL(image ? image.src : avatar.src, Astro.url)}
 />
+
+<script>
+  // google analytics
+  declare global {
+    interface Window {
+      dataLayer?: any[];
+    }
+  }
+
+  try {
+    if (localStorage.getItem("analytics") === "off") {
+      console.info("analytics disabled");
+    } else if (import.meta.env.PROD) {
+      init();
+    } else {
+      console.info("analytics disabled in dev mode");
+    }
+  } catch (e) {}
+
+  function init() {
+    let tag = document.createElement("script");
+    let scriptTags = document.getElementsByTagName("script")[0];
+    tag.async = true;
+    tag.src = "https://www.googletagmanager.com/gtag/js?id=G-FEZ9Y3YJWC";
+    if (scriptTags && scriptTags.parentNode) {
+      scriptTags.parentNode.insertBefore(tag, scriptTags);
+    } else {
+      console.error("error adding google analytics script");
+    }
+
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag(...args: any[]) {
+      window.dataLayer!.push(args);
+    }
+
+    gtag("js", new Date());
+
+    gtag("config", "G-FEZ9Y3YJWC");
+  }
+</script>
