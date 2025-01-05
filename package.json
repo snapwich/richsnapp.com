@@ -31,6 +31,7 @@
     "remark-html": "^16.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.0",
+    "sharp": "^0.33.5",
     "unified": "^11.0.5",
     "vue": "^3.4.38",
     "vue-codemirror": "^6.1.1"
