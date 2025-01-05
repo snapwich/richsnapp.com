@@ -7,12 +7,11 @@ import GoogleSearch from "components/GoogleSearch.vue";
 
 interface Props {
   title?: string;
-  tags?: string[];
-  tldr?: string[];
+  description?: string;
   image?: ImageMetadata;
 }
 
-const { title, tags, tldr, image } = Astro.props;
+const { title, description, image } = Astro.props;
 const { pathname } = Astro.url;
 
 const currYear = new Date().getFullYear();
@@ -24,7 +23,7 @@ function isActive(path: string) {
 
 <html>
   <head>
-    <BaseHead title={title} image={image} />
+    <BaseHead title={title} description={description} image={image} />
     <style lang="less" is:global>
       @import (reference) "../styles/variables.less";
 
