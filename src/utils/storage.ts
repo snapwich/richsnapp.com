@@ -1,31 +1,44 @@
-import { isPlainObject } from "lodash";
+import { isPlainObject } from "lodash-es";
 
 export function useStorage(prefix: string) {
-  let storagePrefix = prefix + ":";
+  const storagePrefix = prefix + ":";
+
+  // Check if the code is running in the browser environment
+  const isBrowser = typeof window !== "undefined";
 
   // localStorage and sessionStorage can be disabled by certain privacy restrictions, etc.
-  function canUseStorage(storage: Storage) {
-    let item = "storageTest";
+  function canUseStorage(storage: Storage | undefined) {
+    if (!isBrowser || !storage) {
+      return false;
+    }
+    const item = "storageTest";
     try {
       storage.setItem(item, item);
-      let getItem = storage.getItem(item);
+      const getItem = storage.getItem(item);
       storage.removeItem(item);
       return item === getItem;
     } catch (e) {
-      console.warn("access to local/session storage denied");
+      console.warn("access to local/session storage denied", e);
       return false;
     }
   }
 
-  function setItem(storage: Storage, key: string, item: unknown) {
+  function setItem(storage: Storage | undefined, key: string, item: unknown) {
+    if (!isBrowser || !storage) {
+      return;
+    }
     storage.setItem(storagePrefix + key, JSON.stringify(item));
   }
 
   function set(key: string, item: unknown, temp: boolean = false) {
-    let storage = temp ? global.sessionStorage : global.localStorage;
+    const storage = isBrowser
+      ? temp
+        ? window.sessionStorage
+        : window.localStorage
+      : undefined;
     if (canUseStorage(storage)) {
       if (
-        ["number", "string", "boolean", "null"].includes(typeof item) ||
+        ["number", "string", "boolean"].includes(typeof item) ||
         Array.isArray(item) ||
         isPlainObject(item) ||
         item === null
@@ -37,20 +50,29 @@ export function useStorage(prefix: string) {
 
   function get<T>(key: string): T | null {
     let item: string | null = null;
-    if (canUseStorage(global.sessionStorage)) {
-      item = global.sessionStorage.getItem(storagePrefix + key);
+    if (canUseStorage(isBrowser ? window.sessionStorage : undefined)) {
+      item = isBrowser
+        ? window.sessionStorage.getItem(storagePrefix + key)
+        : null;
     }
-    if (!item && canUseStorage(global.localStorage)) {
-      item = global.localStorage.getItem(storagePrefix + key);
+    if (!item && canUseStorage(isBrowser ? window.localStorage : undefined)) {
+      item = isBrowser
+        ? window.localStorage.getItem(storagePrefix + key)
+        : null;
     }
     if (item) {
-      return JSON.parse(item) as T;
+      try {
+        return JSON.parse(item) as T;
+      } catch (error) {
+        console.error(`Error parsing JSON for key ${key}`, error);
+        return null;
+      }
     }
     return null;
   }
 
   return {
     get,
-    set
+    set,
   };
 }

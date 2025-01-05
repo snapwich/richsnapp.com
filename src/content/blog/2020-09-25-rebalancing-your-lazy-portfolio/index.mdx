@@ -6,7 +6,7 @@ tags:
 image: ./lazyPortfolioGraph.png
 ---
 import LinkWrapper from "./LinkWrapper.vue";
-import LazyPortfolioWrapper from "./LazyPortfolioWrapper.vue";
+import LazyPortfolio from "components/LazyPortfolio/LazyPortfolio.vue";
 import styles from "./styles.module.less";
 
 <aside class={styles.update}>
@@ -28,8 +28,9 @@ a [target date fund](https://www.bogleheads.org/wiki/Target_date_funds), but if 
 when/why/how you rebalance then a lazy portfolio might be for you.
 
 <figure>
-    <LazyPortfolioWrapper
+    <LazyPortfolio
       client:only="vue"
+      starting-portfolio="Rick Ferri Lazy 40/40/20"
       />
 </figure>
 

@@ -185,6 +185,9 @@ import "vue-select/dist/vue-select.css";
 import currency from "currency.js";
 import CurrencyInput from "./CurrencyInput.vue";
 import { atob, btoa } from "isomorphic-base64";
+import currencies from "./currencies.json";
+import portfolios from "./lazyPortfolios.json";
+import funds from "./funds.json";
 
 import { breakpoints } from "styles/screenSizes";
 import { store } from "./lazyPortfolioState";
@@ -205,13 +208,13 @@ export default {
     funds: {
       type: Array,
       default() {
-        return [];
+        return funds;
       },
     },
     portfolios: {
       type: Array,
       default() {
-        return [];
+        return portfolios;
       },
     },
     startingPortfolio: {
@@ -224,12 +227,14 @@ export default {
       type: String,
       default() {
         const params = new URLSearchParams(location.search);
-        return params.get("p");
+        return params.get("p") ? params.get("p") : store.urlEncodedValue;
       },
     },
     currencies: {
       type: Object,
-      required: true,
+      default() {
+        return currencies;
+      },
     },
   },
   data({ currencies, urlEncodedValue }) {
@@ -351,6 +356,9 @@ export default {
     },
     allocationChart() {
       return {
+        accessibility: {
+          enabled: false,
+        },
         chart: {
           type: "pie",
           height: "50%",
