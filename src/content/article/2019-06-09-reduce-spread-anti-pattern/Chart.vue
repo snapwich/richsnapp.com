@@ -8,6 +8,9 @@ import { map } from "lodash-es";
 import data from "./data.json";
 
 let chartData = {
+  accessibility: {
+    enabled: false,
+  },
   title: {
     text: "Operations per second",
   },

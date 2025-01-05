@@ -4,7 +4,7 @@
 
 <script setup>
 import { useCurrencyInput } from "vue-currency-input";
-import { watch, defineProps, defineEmits, defineModel } from "vue";
+import { watch } from "vue";
 
 const props = defineProps({
   modelValue: String,

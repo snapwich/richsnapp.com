@@ -1,0 +1,10 @@
+---
+import Portfolio from "components/LazyPortfolio/LazyPortfolio.vue";
+import Link from "./_lazy-portfolio/Link.vue";
+import ToolPage from "layouts/ToolPage.astro";
+---
+
+<ToolPage>
+  <Portfolio client:only="vue" starting-portfolio="Rick Ferri Lazy 40/40/20" />
+  <Link client:only="vue" />
+</ToolPage>
