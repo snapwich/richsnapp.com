@@ -16,10 +16,21 @@ declare global {
 
 <div id="disqus_thread" data-identifier={identifier}></div>
 <script>
+  import { getCanonicalUrl } from "utils/links";
+
   window.disqus_config = function () {
     let data = document.getElementById("disqus_thread")!.dataset;
-    this.page.url = "https://richsnapp.com" + location.pathname;
-    this.page.identifier = data.identifier!;
+    let canonicalUrl = getCanonicalUrl();
+    if (canonicalUrl) {
+      this.page.url = canonicalUrl;
+    } else {
+      console.error("disqus canonical URL not found");
+    }
+    if (data.identifier) {
+      this.page.identifier = data.identifier;
+    } else {
+      console.error("#disqus_thread[data-identifier] not found");
+    }
   };
   (function () {
     var d = document,
