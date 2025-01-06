@@ -3,6 +3,7 @@
     v-bind="$attrs"
     class="code-editor"
     :extensions="extensions"
+    :style="{ height: '100%', flex: 1 }"
     v-model="myCode"
   ></codemirror>
 </template>
@@ -11,10 +12,6 @@
 .code-editor {
   font-size: 16px;
   line-height: normal;
-  .cm-content,
-  .cm-gutters {
-    min-height: 400px !important;
-  }
 }
 </style>
 

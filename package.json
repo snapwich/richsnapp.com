@@ -14,11 +14,9 @@
   "dependencies": {
     "@astrojs/mdx": "^4.0.3",
     "@astrojs/vue": "^5.0.3",
-    "@codemirror/lang-javascript": "^6.2.2",
     "astro": "^5.1.1",
     "bootstrap": "^3.4.1",
     "cheerio": "^1.0.0",
-    "codemirror": "^6.0.1",
     "date-fns": "^3.6.0",
     "highcharts": "^12.1.2",
     "highcharts-vue": "^2.0.1",
@@ -33,8 +31,7 @@
     "remark-rehype": "^11.1.0",
     "sharp": "^0.33.5",
     "unified": "^11.0.5",
-    "vue": "^3.4.38",
-    "vue-codemirror": "^6.1.1"
+    "vue": "^3.4.38"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",

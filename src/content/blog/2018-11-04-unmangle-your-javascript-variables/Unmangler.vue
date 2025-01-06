@@ -30,13 +30,15 @@
             </div>
           </div>
         </header>
-        <CodeEditor
-          :code="code"
-          :options="options"
-          @input="setCode"
-          @focus="clear"
-        >
-        </CodeEditor>
+        <div class="code-editor-wrapper">
+          <CodeEditor
+            :code="code"
+            :options="options"
+            @input="setCode"
+            @focus="clear"
+          >
+          </CodeEditor>
+        </div>
       </div>
     </figure>
   </div>
@@ -49,6 +51,11 @@
   font-family: @font-family-sans-serif2;
   .error {
     font-size: 14px;
+  }
+  .code-editor-wrapper {
+    display: grid;
+    min-height: 400px;
+    overflow-x: hidden;
   }
   header {
     display: flex;
@@ -120,7 +127,7 @@ export default defineComponent({
   },
   components: {
     CodeEditor: defineAsyncComponent({
-      loader: () => import("components/CodeEditor.vue"),
+      loader: () => import("components/CodeEditor/CodeEditor.vue"),
     }),
   },
   methods: {
