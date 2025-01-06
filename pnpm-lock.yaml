@@ -14,9 +14,6 @@ importers:
       '@astrojs/vue':
         specifier: ^5.0.3
         version: 5.0.3(astro@5.1.1(jiti@2.4.2)(less@4.2.0)(rollup@4.29.1)(typescript@5.6.3))(jiti@2.4.2)(less@4.2.0)(rollup@4.29.1)(vue@3.5.12(typescript@5.6.3))
-      '@codemirror/lang-javascript':
-        specifier: ^6.2.2
-        version: 6.2.2
       astro:
         specifier: ^5.1.1
         version: 5.1.1(jiti@2.4.2)(less@4.2.0)(rollup@4.29.1)(typescript@5.6.3)
@@ -26,9 +23,6 @@ importers:
       cheerio:
         specifier: ^1.0.0
         version: 1.0.0
-      codemirror:
-        specifier: ^6.0.1
-        version: 6.0.1
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
@@ -74,9 +68,6 @@ importers:
       vue:
         specifier: ^3.4.38
         version: 3.5.12(typescript@5.6.3)
-      vue-codemirror:
-        specifier: ^6.1.1
-        version: 6.1.1(codemirror@6.0.1)(vue@3.5.12(typescript@5.6.3))
     devDependencies:
       '@types/lodash-es':
         specifier: ^4.17.12
@@ -90,6 +81,18 @@ importers:
       typescript:
         specifier: ^5.5.4
         version: 5.6.3
+
+  src/components/CodeEditor:
+    dependencies:
+      '@codemirror/lang-javascript':
+        specifier: ^6.2.2
+        version: 6.2.2
+      codemirror:
+        specifier: ^6.0.1
+        version: 6.0.1
+      vue-codemirror:
+        specifier: ^6.1.1
+        version: 6.1.1(codemirror@6.0.1)(vue@3.5.12(typescript@5.6.3))
 
   src/components/LazyPortfolio:
     dependencies:
@@ -122,21 +125,6 @@ importers:
         version: 1.19.1
 
   src/pages/tools/_code-unmangler:
-    dependencies:
-      '@babel/traverse':
-        specifier: ^7.1.4
-        version: 7.26.4
-      '@types/babel__traverse':
-        specifier: ^7.20.6
-        version: 7.20.6
-      '@types/prettier':
-        specifier: ^1.18.1
-        version: 1.19.1
-      prettier:
-        specifier: ^1.18.1
-        version: 1.19.1
-
-  src/pages/tools/code-unmangler:
     dependencies:
       '@babel/traverse':
         specifier: ^7.1.4

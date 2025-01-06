@@ -32,12 +32,14 @@
         ></a>
       </div>
     </header>
-    <CodeEditor
-      :code="code"
-      :options="options"
-      @input="setCode"
-      @focus="clear"
-    ></CodeEditor>
+    <div class="wrapper">
+      <CodeEditor
+        :code="code"
+        :options="options"
+        @input="setCode"
+        @focus="clear"
+      ></CodeEditor>
+    </div>
   </div>
 </template>
 
@@ -64,12 +66,6 @@
 .code-editor {
   font-size: 16px;
   line-height: normal;
-  height: 100%;
-  .cm-editor,
-  .cm-content,
-  .cm-gutters {
-    height: 100% !important;
-  }
 }
 footer {
   border-top: 1px solid #ddd;
@@ -197,7 +193,7 @@ export default defineComponent({
   },
   components: {
     CodeEditor: defineAsyncComponent({
-      loader: () => import("components/CodeEditor.vue"),
+      loader: () => import("components/CodeEditor/CodeEditor.vue"),
     }),
   },
   methods: {
