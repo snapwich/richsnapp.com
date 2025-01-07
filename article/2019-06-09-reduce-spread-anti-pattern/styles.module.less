@@ -21,14 +21,11 @@
       }
     }
   }
-  section:first-child span:nth-child(3) {
-    background-color: yellow;
-  }
-  section:nth-child(2) span:nth-child(4) {
-    background-color: yellow;
-  }
-  section:nth-child(2) span:nth-child(8) {
-    background-color: yellow;
+  section:first-child span:nth-child(3) span, section:nth-child(2) span:nth-child(4) span, section:nth-child(2) span:nth-child(8) span {
+    background-color: yellow !important;
+    :global(html.dark-mode) & {
+      background-color: var(--text-underline) !important;
+    }
   }
 }
 .good code::before {
