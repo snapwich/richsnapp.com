@@ -64,7 +64,7 @@
     border-bottom: 1px solid #ddd;
     align-items: flex-end;
     font-size: 14px;
-    html.dark-mode & {
+    html.dark & {
       background-color: var(--background-color);
       border-bottom: 1px solid #393b3f;
     }
