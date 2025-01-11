@@ -1,6 +1,4 @@
 {
-  "name": "2018-11-04-unmangle-your-javascript-variables",
-  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@babel/traverse": "^7.1.4",
