@@ -1,0 +1,117 @@
+---
+title: Meet my new Astro blog, same as the old Nuxt blog
+tags:
+  - blog
+  - webdev
+  - vue
+  - astro
+  - pnpm
+image: ./preview-todo.png
+imageSmall: ./same-same.gif
+---
+
+import DarkModeSwitch from "components/DarkModeSwitch.astro";
+import ImgTodo from "./todo.png";
+import ImgSameSame from "./same-same.gif";
+
+This blog was created with Nuxt 2 [seven years ago](/blog/2018/01-07-we-have-a-blog) and served me well but in that time
+I have been working professionally with vanilla Javascript/Typescript, Vue, and now React. I have also been playing
+around with Svelte and Solid.js. Given my desire to constantly be learning and experimenting with new technologies it
+seemed time to use a static-site generator that would accommodate all of the above... Enter
+[Astro](https://astro.build/)! So welcome to my mostly-the-same-looking site that is now completely different!
+
+<figure class="smallest right">
+  <img src={ImgSameSame.src} alt="Same same, buf different..." />
+</figure>
+
+Astro is a static site generator that allows you to use multiple frontend component frameworks within the same project,
+or even page, by turning the various sections of your page into interactive
+[islands](https://docs.astro.build/en/concepts/islands/). It can server-render these components or allow you to bundle
+them into your page for client-side interactivity. It also includes its own server-rendered
+[Astro components](https://docs.astro.build/en/basics/astro-components/) which are great for basic functionality and
+page layouts. Finally, it has a concept of
+[Content Collections](https://docs.astro.build/en/guides/content-collections/) which allows me to continue writing
+[my posts](https://github.com/snapwich/richsnapp.com) in Markdown and aggregate them simply for my index and tag
+specific pages.
+
+## The process
+
+<figure class="smallest right">
+  <img src={ImgTodo.src} alt="Todoist list" />
+  <figcaption>Todoist list</figcaption>
+</figure>
+
+The steps I had to go through went something like this:
+
+- Refactored [Nuxt layouts](https://v2.nuxt.com/docs/directory-structure/layouts) to Astro components.
+- Refactored my [Nuxt pages directory](https://v2.nuxt.com/docs/directory-structure/pages) to Astro-compatible
+  [page routes](https://docs.astro.build/en/guides/routing).
+- Refactored my [Single-File Component](https://vuejs.org/guide/scaling-up/sfc.html) posts to [MDX](https://mdxjs.com/)
+  files. (This involved breaking some pages into multiple files, like css modules, js modules, etc).
+- Refactored my index and tag pages from using a custom content-globbing webpack plugin I wrote to using Astro's
+  [content collections](https://docs.astro.build/en/guides/content-collections/).
+- Converted my various Nuxt plugins to Astro components (such as Disqus, share buttons, Google Analytics, etc).
+- Updated my code blocks from using highlight.js for syntax highlighting to using
+  [Astro's built-in code block syntax highlighting](https://docs.astro.build/en/guides/syntax-highlighting/).
+- Refactored away my old Vue 2 lightbox dependency to using
+  [a vanilla js capable lightbox library](https://lightgalleryjs.com/) inside an Astro component since many pages will
+  not be Vue, let alone Vue 2.
+
+Some additional things I did since I was already deep into the refactoring groove:
+
+- Switched from NPM to [PNPM](https://pnpm.io/) to allow specific pages to have specific dependencies and slim down my
+  site's shared-bundle sizes.
+- Migrated my existing Vue components from Vue 2 to Vue 3.
+- Added light / dark mode (click on the sun/moon to try it out!) <DarkModeSwitch />
+- Added images to the preview blurbs on my index and tag pages.
+- Refactored my layouts into more
+  [composable parts vs a master layout that used conditional rendering](https://en.wikipedia.org/wiki/Composition_over_inheritance).
+  (What a nightmare that layout became)
+- Moved from [ShareThis library share buttons](https://sharethis.com/) to static [AddToAny](https://www.addtoany.com/)
+  links.
+
+## Some things I got for basically free
+
+Since this is now an Astro site no-longer using my dated and custom webpack plugin that was coupled to Nuxt 2 I am now
+able to use some out-of-the-box features that Astro provides to create things such as:
+
+- [A sitemap](https://www.richsnapp.com/sitemap-0.xml)
+- [An RSS feed](/rss.xml)
+- [Automatically optimized images](https://docs.astro.build/en/guides/images/)
+- Custom images for article previews and sharing (not really a specific feature, but dead-simple with Astro's content
+  collections). [Compare](https://web.archive.org/web/20241126052507/http://richsnapp.com/) and
+  [contrast](https://www.richsnapp.com)
+- The ability to have pages that can run basically any type of frontend framework. (Expect some blog pages with React
+  components coming soon!)
+- A bug-free build and mostly-painless upgrade experience. My webpack plugin for generating my Nuxt content worked,
+  however it had some annoying bugs... I was stuck sometimes needing to build multiple times because of a webpack loader
+  race-condition that I never took the time to solve; and it was coupled pretty heavily to Nuxt 2 since it modified
+  Nuxt's generated code to inject meta content into rendered pages. The plugin was the main reason I never upgraded to
+  Vue 3, Nuxt 3, or Vite.
+
+## Thinking in Astro
+
+The biggest mind-shift and friction with this refactor is changing my thinking around
+[how I handle javascript in my static rendered components](https://docs.astro.build/en/guides/client-side-scripts/#common-script-patterns).
+Component instances all share a single run of their &lt;script /&gt; tags which doesn't always seem intuitive. So make
+sure you remember the common patterns linked above, use a web component if you need to run instance-specific code in the
+browser, and realize there will be a strong boundary between server and browser code (ultimately a good tradeoff that
+still includes some ways to cross the boundary when needed).
+
+The biggest gotcha that I kept running into is including components (both Astro or other) and having them do nothing
+with no errors. If that happens consider where the code is running (server, browser, frontmatter, astro component, web
+component, etc) and remember that you may need
+[client directives](https://docs.astro.build/en/reference/directives-reference/) to accomplish some of your component's
+goals.
+
+## Things I still have to do
+
+There is one thing I still need to do to call this refactor a complete success, and that is to add back
+[offline support](/blog/2023/05-28-new-pwa-tools-section) to my [PWA tools](https://www.richsnapp.com/tools). I was
+using [Nuxt-PWA](https://pwa.nuxtjs.org/), but I am obviously not using that anymore. But even with Nuxt-PWA and
+[Workbox](https://web.dev/learn/pwa/workbox) I had bugs that I only became aware of after-the-fact when I would push
+updates... It turns out caching only a portion of your site's hashed assets is kind of complicated when your site is
+built as a whole package. So I'll figure that problem out (I will probably be utilizing PNPM to build my Tools pages
+separately so they can be cached as a whole) and maybe even write about how I solved it.
+
+Thanks for checking my new site out, I hope you like it!
