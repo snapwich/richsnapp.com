@@ -126,18 +126,3 @@ function updateRelativeTo(chart, relativeIndex) {
   });
 }
 </script>
-
-<style>
-.highcharts-root {
-  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica,
-    sans-serif !important;
-  font-size: 1em !important;
-  font-weight: bold;
-}
-.highcharts-title {
-  font-weight: normal !important;
-}
-.highcharts-menu {
-  font-size: 1.6em !important;
-}
-</style>
