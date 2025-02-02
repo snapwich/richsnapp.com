@@ -60,16 +60,35 @@ export default {
     getChartData() {
       let data = JSON.parse(JSON.stringify(chartData));
       return Object.assign(data, {
+        responsive: {
+          rules: [
+            {
+              condition: {
+                maxWidth: 768,
+              },
+              chartOptions: {
+                chart: {
+                  height: 600,
+                },
+              },
+            },
+          ],
+        },
         plotOptions: {
           series: {
             events: {
               click: (e) => {
                 updateRelativeTo(e.point.series.chart, e.point.series.index);
-              },
-              legendItemClick: (e) => {
-                updateRelativeTo(e.target.chart, e.target.index);
                 return false;
               },
+            },
+          },
+        },
+        legend: {
+          events: {
+            itemClick: (e) => {
+              updateRelativeTo(e.legendItem.chart, e.legendItem.index);
+              return false;
             },
           },
         },
