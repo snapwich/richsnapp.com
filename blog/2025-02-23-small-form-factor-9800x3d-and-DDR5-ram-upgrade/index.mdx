@@ -1,0 +1,144 @@
+---
+title: Small-form factor 9800x3d and DDR5 RAM upgrade
+tags:
+  - blog
+  - computers
+  - gaming
+image: ./IMG_9851.jpg
+---
+
+import { Image } from "astro:assets";
+import LightboxGallery from "components/LightboxGallery.astro";
+import styles from "./styles.module.less";
+import img9851 from "./IMG_9851.jpg";
+import img9857 from "./IMG_9857.jpg";
+import img9845 from "./IMG_9845.jpg";
+import img9846 from "./IMG_9846.jpg";
+import img9847 from "./IMG_9847.jpg";
+import img9848 from "./IMG_9848.jpg";
+import img9854 from "./IMG_9854.jpg";
+import img9855 from "./IMG_9855.jpg";
+import img9856 from "./IMG_9856.jpg";
+import img9858 from "./IMG_9858.jpg";
+import img9861 from "./IMG_9861.jpg";
+import img9863 from "./IMG_9863.jpg";
+
+My [Small-Form Factor Dan A4-H20 build with a 4090](/blog/2023/08-20-4090-in-an-a4-h2o) has been running great, but for
+whatever reason it felt like it was time for an upgrade. Since I don't think I'll be buying a 5090 anytime soon (the
+Founders Edition would be the only choice at this size and they are in short supply) it seemed like a new CPU was the
+next logical step.
+
+<figure class="small right">
+  <img src={img9857.src} alt="new asus b850-i" />
+  <figcaption>A standard PC building environment</figcaption>
+</figure>
+
+I was running a slightly-dated AMD 5800x3d, so the latest of the AMD Ryzen lineup seemed like the obvious choice.
+Unfortunately since they've updated to use the new AM5 socket compared to my AM4 motherboard that meant a new
+motherboard and RAM upgrade were in order as well. In the end I ended up with an AMD 9800x3d, ASUS ROG STRIX B850-I
+motherboard, and G.SKILL Flare X5 96GB (2 x 48GB and an increase over my previous 64GB total) DDR5 6000mhz RAM.
+
+I also went through the process of taking a heat gun to my NVME SSD and de-sheathed it to use the built-in heat sinks on
+the new motherboard. Honestly that was probably the most stressful part of the whole process as it was really stuck on
+there.
+
+The whole process probably took an hour and I'm happy to say the operation was a success; This case is surprisingly easy
+to work in despite its small size. The remainder of the day was spent fiddling with the Windows install (Microsoft can
+never make things easy).
+
+I leave you with some pictures of the process and a final spec list:
+
+<LightboxGallery>
+  <div class={styles.images}>
+    <Image src={img9851} data-src={img9851.src} height={200} alt="not a lot of pci-e riser cable fan clearance" />
+    <Image src={img9845} data-src={img9845.src} height={200} alt="not a lot of pci-e riser cable fan clearance" />
+    <Image src={img9846} data-src={img9846.src} height={200} alt="new asus b850-i" />
+    <Image src={img9847} data-src={img9847.src} height={200} alt="new asus b850-i" />
+    <Image src={img9848} data-src={img9848.src} height={200} alt="new asus b850-i" />
+    <Image src={img9854} data-src={img9854.src} height={200} alt="new asus b850-i" />
+    <Image src={img9855} data-src={img9855.src} height={200} alt="new asus b850-i" />
+    <Image src={img9856} data-src={img9856.src} height={200} alt="new asus b850-i" />
+    <Image src={img9858} data-src={img9858.src} height={200} alt="new asus b850-i" />
+    <Image src={img9861} data-src={img9861.src} height={200} alt="new asus b850-i" />
+    <Image src={img9863} data-src={img9863.src} height={200} alt="new asus b850-i" />
+  </div>
+</LightboxGallery>
+
+## Parts list
+
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <td class="pcpp-part-list-type">CPU</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/fPyH99/amd-ryzen-7-9800x3d-47-ghz-8-core-processor-100-1000001084wof">
+          AMD Ryzen 7 9800X3D 4.7 GHz 8-Core Processor
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="pcpp-part-list-type">CPU Cooler</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/jjytt6/ek-ek-aio-basic-240-77-cfm-liquid-cpu-cooler-ek-aio-basic-240">
+          EK EK-AIO Basic 240 77 CFM Liquid CPU Cooler
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Motherboard</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/ysJBD3/asus-rog-strix-b850-i-gaming-wifi-mini-itx-am5-motherboard-rog-strix-b850-i-gaming-wifi">
+          Asus ROG STRIX B850-I GAMING WIFI Mini ITX AM5 Motherboard
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Memory</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/6wzp99/gskill-flare-x5-96-gb-2-x-48-gb-ddr5-6000-cl30-memory-f5-6000j3036f48gx2-fx5">
+          G.Skill Flare X5 96 GB (2 x 48 GB) DDR5-6000 CL30 Memory
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Storage</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/hFP8TW/western-digital-wd_black-sn850p-for-ps5-4-tb-m2-2280-pcie-40-x4-nvme-solid-state-drive-wdbbyv0040bnc-wrsn">
+          Western Digital WD_BLACK SN850P for PS5 4 TB M.2-2280 PCIe 4.0 X4 NVME SSD
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Video Card</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/BCGbt6/nvidia-founders-edition-geforce-rtx-4090-24-gb-video-card-900-1g136-2530-000">
+          NVIDIA Founders Edition GeForce RTX 4090 24 GB
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Case</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/BCcG3C/dan-cases-a4-h20-a4-mini-itx-desktop-case-a4-h20-a4">
+          DAN Cases A4-H20 A4 Mini ITX Desktop Case
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Power Supply</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/GMbRsY/corsair-sf1000l-1000-w-80-gold-certified-fully-modular-sfx-power-supply-cp-9020246-na">
+          Corsair SF1000L 1000 W 80+ Gold Certified Fully Modular SFX
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Case Fans</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/YwmmP6/phanteks-ph-f120t30-67-cfm-120-mm-fans-3-pack-ph-f120t30_bg_3p">
+          Phanteks PH-F120T30 67 CFM 120 mm Fans 3-Pack
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
