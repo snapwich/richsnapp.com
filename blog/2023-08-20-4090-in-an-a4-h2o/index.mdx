@@ -10,52 +10,53 @@ tldr:
   - You'll need an angled 12VHPWR adapter to power the GPU.
 image: ./IMG_8906.jpg
 ---
-import { Image } from "astro:assets";
-import LightboxGallery from 'components/LightboxGallery.astro';
-import styles from "./styles.module.less";
-import img8906 from './IMG_8906.jpg';
-import imgCapFrame from './capframe.png';
-import img3080tiRiser from './3080ti-riser.png';
-import imgRiserNoRiser from './riser-no-riser.png';
-import imgDebugging from './debugging.jpg';
-import imgCloseShave from './a-close-shave.jpg';
-import img8899 from './IMG_8899.jpg';
-import img8904 from './IMG_8904.jpg';
-import img8901 from './IMG_8901.jpg';
-import img8902 from './IMG_8902.jpg';
-import img8905 from './IMG_8905.jpg';
-import img8908 from './IMG_8908.jpg';
 
-In continuing with the evolution of my small form factor PC I recently took to upgrading the GPU to an
-RTX 4090. Given that it was a bit challenging compared to my 3080ti both size wise as well as highlighting some issues
-I didn't even realized I had with the included pci-e 4.0 riser cable I thought I'd share my experience.
+import { Image } from "astro:assets";
+import LightboxGallery from "components/LightboxGallery.astro";
+import img8906 from "./IMG_8906.jpg";
+import imgCapFrame from "./capframe.png";
+import img3080tiRiser from "./3080ti-riser.png";
+import imgRiserNoRiser from "./riser-no-riser.png";
+import imgDebugging from "./debugging.jpg";
+import imgCloseShave from "./a-close-shave.jpg";
+import img8899 from "./IMG_8899.jpg";
+import img8904 from "./IMG_8904.jpg";
+import img8901 from "./IMG_8901.jpg";
+import img8902 from "./IMG_8902.jpg";
+import img8905 from "./IMG_8905.jpg";
+import img8908 from "./IMG_8908.jpg";
+
+In continuing with the evolution of my small form factor PC I recently took to upgrading the GPU to an RTX 4090. Given
+that it was a bit challenging compared to my 3080ti both size wise as well as highlighting some issues I didn't even
+realized I had with the included pci-e 4.0 riser cable I thought I'd share my experience.
 
 To begin with, does it fit? Yes it does.
+
 <figure class="center">
   <img src={img8906.src} alt="RTX 4090 in a4-h2o" />
   <figcaption>4090 in a4-h2o</figcaption>
 </figure>
 
 If you're familiar with this case one thing you might notice is that this is not the riser cable that comes with the
-case. When I first installed this video card into the computer I ended up with some interesting results. It ran
-well enough to get some good benchmark results; however, it had some consistent frame stuttering _and_ it would also
-black screen and/or crash somewhat infrequently. I already had some stuttering with my 3080 ti (which I considered
-normal) but it was much more pronounced with the 4090.
+case. When I first installed this video card into the computer I ended up with some interesting results. It ran well
+enough to get some good benchmark results; however, it had some consistent frame stuttering _and_ it would also black
+screen and/or crash somewhat infrequently. I already had some stuttering with my 3080 ti (which I considered normal) but
+it was much more pronounced with the 4090.
 
-Considering I couldn't get the PC to consistently crash and the stuttering was hard to quantify I decided I
-needed some software to objectively measure what was going on which led me to [CapFrameX](https://www.capframex.com/).
-The initial results made obvious what I was experiencing.
+Considering I couldn't get the PC to consistently crash and the stuttering was hard to quantify I decided I needed some
+software to objectively measure what was going on which led me to [CapFrameX](https://www.capframex.com/). The initial
+results made obvious what I was experiencing.
 
 <figure class="right small">
   <img src={imgCapFrame.src} alt="CapFrameX results" />
   <figcaption>CapFrameX results of 3080ti vs new 4090</figcaption>
 </figure>
 
-As you can see even though I was getting higher framerates with the 4090 the frametimes were much more erratic. This
-led me on a wild goose chase of trying to figure out what could be causing this issue. All said and done I ended up
-trying another 4090, two different PSUs (including a full-sized ATX PSU thinking maybe the SFX size was an issue),
-another motherboard, a new CPU, different ram, and eventually a new riser cable. FOUR different riser cables to be
-exact. The riser cable being an issue didn't even occur to me until I came across
+As you can see even though I was getting higher framerates with the 4090 the frametimes were much more erratic. This led
+me on a wild goose chase of trying to figure out what could be causing this issue. All said and done I ended up trying
+another 4090, two different PSUs (including a full-sized ATX PSU thinking maybe the SFX size was an issue), another
+motherboard, a new CPU, different ram, and eventually a new riser cable. FOUR different riser cables to be exact. The
+riser cable being an issue didn't even occur to me until I came across
 [this incredibly useful video](https://www.youtube.com/watch?v=KwfAF5XjXbM).
 
 I assumed that since the riser cable worked with my 3080 ti, upgrading to a new video card wouldn't make a difference.
@@ -68,24 +69,26 @@ just less noticeable... that is until I started capturing frametimes.
 </figure>
 
 The four riser cables I tried were:
-  - the one that came with the case: Lian Li PCI-E 4.0 Riser Cable
-  - two different [LINKUP cables](https://www.amazon.com/gp/product/B092JSJ5NY/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
-    (that specifically state compatibility with the 4090)
-  - and eventually: the Louqe [COBALT Gen4+ PCI-e 4.0 Riser Cable](https://shop.louqe.com/products/cobalt-rc260-twinax-gen4-pci-e-4-0-riser-cable)
 
-The last is the only one that worked as well as using no riser cable at all. No more black screens, no more crashes,
-and no more easily perceivable stuttering.
+- the one that came with the case: Lian Li PCI-E 4.0 Riser Cable
+- two different
+  [LINKUP cables](https://www.amazon.com/gp/product/B092JSJ5NY/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1) (that
+  specifically state compatibility with the 4090)
+- and eventually: the Louqe
+  [COBALT Gen4+ PCI-e 4.0 Riser Cable](https://shop.louqe.com/products/cobalt-rc260-twinax-gen4-pci-e-4-0-riser-cable)
+
+The last is the only one that worked as well as using no riser cable at all. No more black screens, no more crashes, and
+no more easily perceivable stuttering.
 
 <figure class="right">
   <img src={imgRiserNoRiser.src} alt="lian li riser cable versus louqe riser cable" />
   <figcaption>4090 using Lian-Li riser cable vs Louqe riser cable</figcaption>
 </figure>
 
-An important thing to note that this was my experience with two different ASUS motherboards, but according to the
-video I linked above talking about pcie 4.0 riser cable issues this _may_ vary with different motherboard / riser
-cable combinations given that there are not really any standard specs around riser cables. However, even if
-you don't use the same motherboard as mine I do recommend running tests to compare your results with and without the
-riser cable.
+An important thing to note that this was my experience with two different ASUS motherboards, but according to the video
+I linked above talking about pcie 4.0 riser cable issues this _may_ vary with different motherboard / riser cable
+combinations given that there are not really any standard specs around riser cables. However, even if you don't use the
+same motherboard as mine I do recommend running tests to compare your results with and without the riser cable.
 
 <figure>
   <img src={imgDebugging.src} alt="debugging the build on my test bench" />
@@ -99,36 +102,46 @@ riser cable.
   <figcaption>Modified Louqe cable</figcaption>
 </figure>
 
-If you do end up switching to something like the Louqe riser cable you'll find that by default it may not fit in
-your case. It's possible it didn't quite fit in mine because of my 30mm thick radiator fans (as opposed to the
-regular 25mm), but it might not fit even with regular thickness fans due to some framing around the case it bumps
-into. I ended up having to shave off some of the PCB on the riser cable to get it to fit and the cable itself actually
-rests partially inside the fan cowl. It doesn't quite touch but only has a clearance of a few millimeters at best...
-Something to be aware of. However, I'm not too concerned about the wires migrating into the fan considering the wires
-are pretty stiff and installing the cable means screwing it to the midplane which clamps the wires firmly in place.
+If you do end up switching to something like the Louqe riser cable you'll find that by default it may not fit in your
+case. It's possible it didn't quite fit in mine because of my 30mm thick radiator fans (as opposed to the regular 25mm),
+but it might not fit even with regular thickness fans due to some framing around the case it bumps into. I ended up
+having to shave off some of the PCB on the riser cable to get it to fit and the cable itself actually rests partially
+inside the fan cowl. It doesn't quite touch but only has a clearance of a few millimeters at best... Something to be
+aware of. However, I'm not too concerned about the wires migrating into the fan considering the wires are pretty stiff
+and installing the cable means screwing it to the midplane which clamps the wires firmly in place.
 
 Also you'll notice that this cable does not have a latch like most of the other riser cables; if you look at the
-pictures you'll notice that I actually used a zip tie to secure it in place. It felt pretty secure without the zip
-tie but I wasn't going to take any chances... especially with the weight of this giant GPU pulling against it.
+pictures you'll notice that I actually used a zip tie to secure it in place. It felt pretty secure without the zip tie
+but I wasn't going to take any chances... especially with the weight of this giant GPU pulling against it.
 
 Another thing to consider, the 4090 will not fit with the regular 12VHPWR cable poking out the side, at least not
 without some significant bending (which you don't want to do). I ended up using
-[this angled adapter](https://www.amazon.com/dp/B0BWDVP4WN?psc=1&ref=ppx_yo2ov_dt_b_product_details) to allow myself
-to plug it in without any bending. You could also get some custom PSU cables made that are angled; you can see in one
-of the picture I actually have a custom cablemod cable that I ended up not using because I ended up switching to a
+[this angled adapter](https://www.amazon.com/dp/B0BWDVP4WN?psc=1&ref=ppx_yo2ov_dt_b_product_details) to allow myself to
+plug it in without any bending. You could also get some custom PSU cables made that are angled; you can see in one of
+the picture I actually have a custom cablemod cable that I ended up not using because I ended up switching to a
 different power supply altogether.
 
 I leave you with a build list and some more pictures of the build process. Enjoy!
 
-<LightboxGallery>
-  <div class={styles.images}>
-    <Image src={img8899} data-src={img8899.src} height={200} alt="not a lot of pci-e riser cable fan clearance"  />
-    <Image src={img8904} data-src={img8904.src} height={200} alt="pci-e riser cable clearance with fan running" />
-    <Image src={img8901} data-src={img8901.src} height={200} alt="front view of open case with gpu in place" />
-    <Image src={img8902} data-src={img8902.src} height={200} alt="bottom view of open case with sandwich layout and cables out" />
-    <Image src={img8905} data-src={img8905.src} height={200} alt="bottom view of open case with sandwich layout and cables in" />
-    <Image src={img8908} data-src={img8908.src} height={200} alt="small-form factor build completed" />
-  </div>
+<LightboxGallery class="wall">
+  <a href={img8899.src}>
+    <Image src={img8899} height={200} alt="not a lot of pci-e riser cable fan clearance" />
+  </a>
+  <a href={img8904.src}>
+    <Image src={img8904} height={200} alt="pci-e riser cable clearance with fan running" />
+  </a>
+  <a href={img8901.src}>
+    <Image src={img8901} height={200} alt="front view of open case with gpu in place" />
+  </a>
+  <a href={img8902.src}>
+    <Image src={img8902} height={200} alt="bottom view of open case with sandwich layout and cables out" />
+  </a>
+  <a href={img8905.src}>
+    <Image src={img8905} height={200} alt="bottom view of open case with sandwich layout and cables in" />
+  </a>
+  <a href={img8908.src}>
+    <Image src={img8908} height={200} alt="small-form factor build completed" />
+  </a>
 </LightboxGallery>
 
 ## Parts list
@@ -139,39 +152,75 @@ Build list on [PCPartPicker.com](https://pcpartpicker.com/b/nbGqqs)
   <tbody>
     <tr>
       <td class="pcpp-part-list-type">CPU</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/CZ3gXL/amd-ryzen-7-5800x3d-34-ghz-8-core-processor-100-100000651wof">AMD Ryzen 7 5800X3D 3.4 GHz 8-Core</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/CZ3gXL/amd-ryzen-7-5800x3d-34-ghz-8-core-processor-100-100000651wof">
+          AMD Ryzen 7 5800X3D 3.4 GHz 8-Core
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">CPU Cooler</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/jjytt6/ek-ek-aio-basic-240-77-cfm-liquid-cpu-cooler-ek-aio-basic-240">EK EK-AIO Basic 240 77 CFM Liquid CPU Cooler</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/jjytt6/ek-ek-aio-basic-240-77-cfm-liquid-cpu-cooler-ek-aio-basic-240">
+          EK EK-AIO Basic 240 77 CFM Liquid CPU Cooler
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Motherboard</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/NqsnTW/asus-rog-strix-x570-i-gaming-mini-itx-am4-motherboard-rog-strix-x570-i-gaming">Asus ROG Strix X570-I Gaming Mini ITX AM4</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/NqsnTW/asus-rog-strix-x570-i-gaming-mini-itx-am4-motherboard-rog-strix-x570-i-gaming">
+          Asus ROG Strix X570-I Gaming Mini ITX AM4
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Memory</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/kmBhP6/gskill-ripjaws-v-64-gb-2-x-32-gb-ddr4-3600-memory-f4-3600c18d-64gvk">G.Skill Ripjaws V 64 GB (2 x 32 GB) DDR4-3600 CL18 Memory</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/kmBhP6/gskill-ripjaws-v-64-gb-2-x-32-gb-ddr4-3600-memory-f4-3600c18d-64gvk">
+          G.Skill Ripjaws V 64 GB (2 x 32 GB) DDR4-3600 CL18 Memory
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Storage</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/hFP8TW/western-digital-wd_black-sn850p-for-ps5-4-tb-m2-2280-pcie-40-x4-nvme-solid-state-drive-wdbbyv0040bnc-wrsn">Western Digital WD_BLACK SN850P for PS5 4 TB M.2-2280 PCIe 4.0 X4 NVME SSD</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/hFP8TW/western-digital-wd_black-sn850p-for-ps5-4-tb-m2-2280-pcie-40-x4-nvme-solid-state-drive-wdbbyv0040bnc-wrsn">
+          Western Digital WD_BLACK SN850P for PS5 4 TB M.2-2280 PCIe 4.0 X4 NVME SSD
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Video Card</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/BCGbt6/nvidia-founders-edition-geforce-rtx-4090-24-gb-video-card-900-1g136-2530-000">NVIDIA Founders Edition GeForce RTX 4090 24 GB</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/BCGbt6/nvidia-founders-edition-geforce-rtx-4090-24-gb-video-card-900-1g136-2530-000">
+          NVIDIA Founders Edition GeForce RTX 4090 24 GB
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Case</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/BCcG3C/dan-cases-a4-h20-a4-mini-itx-desktop-case-a4-h20-a4">DAN Cases A4-H20 A4 Mini ITX Desktop Case</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/BCcG3C/dan-cases-a4-h20-a4-mini-itx-desktop-case-a4-h20-a4">
+          DAN Cases A4-H20 A4 Mini ITX Desktop Case
+        </a>
+      </td>
     </tr>
-  <tr>
-    <td class="pcpp-part-list-type">Power Supply</td>
-    <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/GMbRsY/corsair-sf1000l-1000-w-80-gold-certified-fully-modular-sfx-power-supply-cp-9020246-na">Corsair SF1000L 1000 W 80+ Gold Certified Fully Modular SFX</a></td>
-  </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Power Supply</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/GMbRsY/corsair-sf1000l-1000-w-80-gold-certified-fully-modular-sfx-power-supply-cp-9020246-na">
+          Corsair SF1000L 1000 W 80+ Gold Certified Fully Modular SFX
+        </a>
+      </td>
+    </tr>
     <tr>
       <td class="pcpp-part-list-type">Case Fans</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/YwmmP6/phanteks-ph-f120t30-67-cfm-120-mm-fans-3-pack-ph-f120t30_bg_3p">Phanteks PH-F120T30 67 CFM 120 mm Fans 3-Pack</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/YwmmP6/phanteks-ph-f120t30-67-cfm-120-mm-fans-3-pack-ph-f120t30_bg_3p">
+          Phanteks PH-F120T30 67 CFM 120 mm Fans 3-Pack
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
