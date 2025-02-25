@@ -6,32 +6,33 @@ tags:
   - gaming
 image: ./IMG_4540.jpg
 ---
+
 import { Image } from "astro:assets";
-import image1 from './IMG_4637.jpg';
-import image2 from './IMG_4641.jpg';
-import image3 from './IMG_4540.jpg';
-import { gallery } from './styles.module.less';
-import LightboxGallery from 'components/LightboxGallery.astro';
+import image1 from "./IMG_4637.jpg";
+import image2 from "./IMG_4641.jpg";
+import image3 from "./IMG_4540.jpg";
+import { gallery } from "./styles.module.less";
+import LightboxGallery from "components/LightboxGallery.astro";
 
-Have you ever wanted a computer that is fast and powerful but also small, sleek, and sexy?  Surely such a
-combination cannot exist!  Well, prepare to feast your eyes upon this beautiful build I recently completed.
+Have you ever wanted a computer that is fast and powerful but also small, sleek, and sexy? Surely such a combination
+cannot exist! Well, prepare to feast your eyes upon this beautiful build I recently completed.
 
-<LightboxGallery class={gallery}>
+<LightboxGallery class={gallery} selector="img">
   <figure class="small right">
-      <img src={image1.src} alt="small PC all set up" data-src={image1.src}/>
-      <div>
-        <Image src={image2} alt="inside PC with AIO cooler installed" height={100} data-src={image2.src} />
-        <Image src={image3} alt="inside PC with CPU fan installed" height={100} data-src={image3.src} />
-      </div>
+    <img src={image1.src} alt="small PC all set up" data-src={image1.src} />
+    <div>
+      <Image src={image2} alt="inside PC with AIO cooler installed" height={100} data-src={image2.src} />
+      <Image src={image3} alt="inside PC with CPU fan installed" height={100} data-src={image3.src} />
+    </div>
   </figure>
 </LightboxGallery>
 
-About the size of an Xbox but with computing power to spare this sweet little package was born out of necessity.  I
+About the size of an Xbox but with computing power to spare this sweet little package was born out of necessity. I
 turned off my old desktop computer a few weeks ago when leaving for a business trip and arrived home only to find that
-it had given up the ghost never to be turned on again (bad motherboard).  I salvaged the parts I could while using the
+it had given up the ghost never to be turned on again (bad motherboard). I salvaged the parts I could while using the
 opportunity to upgrade some others and eventually ended up with the build we see here in its final form.
 
-Make no mistake, its creation was not without struggle.  Blood, sweat, tears, and possibly a few curse words were
+Make no mistake, its creation was not without struggle. Blood, sweat, tears, and possibly a few curse words were
 included in the process of making everything fit into this small technological carapace.
 
 If you would like more details on what's included or details on how to make your own (and possibly avoid some pitfalls
@@ -42,44 +43,104 @@ at [PCPartPicker.com](https://pcpartpicker.com/b/DV29TW).
   <tbody>
     <tr>
       <td>CPU</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/Mr2rxr/intel-core-i5-8600k-36ghz-6-core-processor-bx80684i58600k">Intel - Core i5-8600K 3.6GHz 6-Core Processor</a></td>
+      <td>
+        <a
+          target="_blank"
+          href="https://pcpartpicker.com/product/Mr2rxr/intel-core-i5-8600k-36ghz-6-core-processor-bx80684i58600k"
+        >
+          Intel - Core i5-8600K 3.6GHz 6-Core Processor
+        </a>
+      </td>
     </tr>
     <tr>
       <td>CPU Cooler</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/TDdFf7/cooler-master-masterliquid-lite-120-667-cfm-liquid-cpu-cooler-mlw-d12m-a20pw-r1">Cooler Master - MasterLiquid Lite 120 66.7 CFM Liquid CPU Cooler</a></td>
+      <td>
+        <a
+          target="_blank"
+          href="https://pcpartpicker.com/product/TDdFf7/cooler-master-masterliquid-lite-120-667-cfm-liquid-cpu-cooler-mlw-d12m-a20pw-r1"
+        >
+          Cooler Master - MasterLiquid Lite 120 66.7 CFM Liquid CPU Cooler
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Motherboard</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/VRjWGX/asus-rog-strix-z370-i-gaming-mini-itx-lga1151-motherboard-strix-z370-i-gaming">Asus - ROG Strix Z370-I Gaming Mini ITX LGA1151 Motherboard</a></td>
+      <td>
+        <a
+          target="_blank"
+          href="https://pcpartpicker.com/product/VRjWGX/asus-rog-strix-z370-i-gaming-mini-itx-lga1151-motherboard-strix-z370-i-gaming"
+        >
+          Asus - ROG Strix Z370-I Gaming Mini ITX LGA1151 Motherboard
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Memory</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/gWM323/corsair-vengeance-rgb-32gb-2-x-16gb-ddr4-3333-memory-cmr32gx4m2c3333c16">Corsair - Vengeance RGB 32GB (2 x 16GB) DDR4-3333 Memory</a></td>
+      <td>
+        <a
+          target="_blank"
+          href="https://pcpartpicker.com/product/gWM323/corsair-vengeance-rgb-32gb-2-x-16gb-ddr4-3333-memory-cmr32gx4m2c3333c16"
+        >
+          Corsair - Vengeance RGB 32GB (2 x 16GB) DDR4-3333 Memory
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Storage</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/FcGj4D/samsung-960-pro-20tb-m2-2280-solid-state-drive-mz-v6p2t0bw">Samsung - 960 Pro 2TB M.2-2280 Solid State Drive</a></td>
+      <td>
+        <a
+          target="_blank"
+          href="https://pcpartpicker.com/product/FcGj4D/samsung-960-pro-20tb-m2-2280-solid-state-drive-mz-v6p2t0bw"
+        >
+          Samsung - 960 Pro 2TB M.2-2280 Solid State Drive
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Video Card</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/vtqhP6/asus-geforce-rtx-2080-ti-11gb-turbo-video-card-turbo-rtx2080ti-11g">Asus - GeForce RTX 2080 Ti 11 GB Turbo Video Card</a></td>
+      <td>
+        <a
+          target="_blank"
+          href="https://pcpartpicker.com/product/vtqhP6/asus-geforce-rtx-2080-ti-11gb-turbo-video-card-turbo-rtx2080ti-11g"
+        >
+          Asus - GeForce RTX 2080 Ti 11 GB Turbo Video Card
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Case</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/RgVBD3/silverstone-rvz03b-mini-itx-desktop-case-rvz03b">Silverstone - RVZ03B Mini ITX Desktop Case</a></td>
+      <td>
+        <a
+          target="_blank"
+          href="https://pcpartpicker.com/product/RgVBD3/silverstone-rvz03b-mini-itx-desktop-case-rvz03b"
+        >
+          Silverstone - RVZ03B Mini ITX Desktop Case
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Power Supply</td>
-      <td><a target="_blank" href="https://www.newegg.com/Product/Product.aspx?Item=N82E16817151190">Seasonic FOCUS Plus Series SSR-850PX 850W 80+ Platinum ATX12V</a></td>
+      <td>
+        <a target="_blank" href="https://www.newegg.com/Product/Product.aspx?Item=N82E16817151190">
+          Seasonic FOCUS Plus Series SSR-850PX 850W 80+ Platinum ATX12V
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Case Fan</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/4QzZxr/silverstone-case-fan-fw121">Silverstone - FW121 32.6 CFM  120mm Fan</a></td>
+      <td>
+        <a target="_blank" href="https://pcpartpicker.com/product/4QzZxr/silverstone-case-fan-fw121">
+          Silverstone - FW121 32.6 CFM 120mm Fan
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Monitor</td>
-      <td><a target="_blank" href="https://pcpartpicker.com/product/rtJkcf/acer-monitor-xb270hubprz">Acer - XB270HU bprz 27.0" 2560x1440 144Hz Monitor</a></td>
+      <td>
+        <a target="_blank" href="https://pcpartpicker.com/product/rtJkcf/acer-monitor-xb270hubprz">
+          Acer - XB270HU bprz 27.0" 2560x1440 144Hz Monitor
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
-

@@ -6,8 +6,9 @@ tags:
   - gaming
 image: ./IMG_8170.jpg
 ---
+
 import { Image } from "astro:assets";
-import LightboxGallery from 'components/LightboxGallery.astro';
+import LightboxGallery from "components/LightboxGallery.astro";
 import styles from "./styles.module.less";
 
 import imgDrake from "./drake.jpg";
@@ -16,35 +17,46 @@ import img8170 from "./IMG_8170.jpg";
 import img8172 from "./IMG_8172.jpg";
 import img8157 from "./IMG_8157.jpg";
 
-The "[small, but powerful, gaming machine](/blog/2018/02-18-building-a-small-but-powerful-gaming-machine)" has seen
-a few new parts over the years but one of these parts (a new nvidia RTX 3080 ti founders edition) eventually pushed it
-beyond its cooling capabilities. My slim case was not well designed for handling the new [flow through](https://www.youtube.com/watch?v=SCBouoWoUh0)
-airflow design adopted by the newer RTX cards and any heavy usage caused the entire thing to fill with heat until
-eventually the PSU would call it quits. Ripping the top off of the case and adding a few extra USB fans
-helped to cool things off a bit but it was not a pretty sight, and the temperatures were still uncomfortably high...
+The "[small, but powerful, gaming machine](/blog/2018/02-18-building-a-small-but-powerful-gaming-machine)" has seen a
+few new parts over the years but one of these parts (a new nvidia RTX 3080 ti founders edition) eventually pushed it
+beyond its cooling capabilities. My slim case was not well designed for handling the new
+[flow through](https://www.youtube.com/watch?v=SCBouoWoUh0) airflow design adopted by the newer RTX cards and any heavy
+usage caused the entire thing to fill with heat until eventually the PSU would call it quits. Ripping the top off of the
+case and adding a few extra USB fans helped to cool things off a bit but it was not a pretty sight, and the temperatures
+were still uncomfortably high...
 
 <figure class="small right">
-  <img src={ imgDrake.src } />
+  <img src={imgDrake.src} />
   <figcaption>You vs. the case she tells you not to worry about.</figcaption>
 </figure>
 
-Finally, considering the difficulty I had getting hold of this new GPU and its status as the most
-expensive piece of my computer, I came to the realiziation that it was time for a better solution. A solution that was
-both prettier and smaller... Eventually I landed on the [dan & lian li a4-h2o](https://lian-li.com/product/a4h2o/).
-At 11 liters (compared to the 14.6 liters of my old case) this thing was not only smaller and cooler (both literally and
-figuratively) but it was also a _breeze_ to build. I cannot recommend it enough.
+Finally, considering the difficulty I had getting hold of this new GPU and its status as the most expensive piece of my
+computer, I came to the realiziation that it was time for a better solution. A solution that was both prettier and
+smaller... Eventually I landed on the [dan & lian li a4-h2o](https://lian-li.com/product/a4h2o/). At 11 liters (compared
+to the 14.6 liters of my old case) this thing was not only smaller and cooler (both literally and figuratively) but it
+was also a _breeze_ to build. I cannot recommend it enough.
 
-The new build actually runs _so_ cool that it has put overclocking back on the table. With a new 5950x and
-3080ti both running at peak efficiency inside it has put this mini-machine back in super computer
-territory, at least until next year.
+The new build actually runs _so_ cool that it has put overclocking back on the table. With a new 5950x and 3080ti both
+running at peak efficiency inside it has put this mini-machine back in super computer territory, at least until next
+year.
 
-<LightboxGallery>
-  <figure class={`${ styles.images } center`}>
-    <img alt="small-form-factor battlestation" src={ img8166.src } data-src={ img8166.src } />
+<LightboxGallery selector="img">
+  <figure class={`${styles.images} center`}>
+    <img alt="small-form-factor battlestation" src={img8166.src} data-src={img8166.src} />
     <div>
-      <Image alt="CPU and motherboard in small-form-factor PC without PSU" src={ img8170 } height="100" data-src={ img8170.src } />
-      <Image alt="CPU and motherobard in small-form-factor PC with PSU" src={ img8172 } height="100" data-src={ img8172.src } />
-      <Image alt="GPU in small-form-factor PC" src={ img8157 } height="100" data-src={ img8157.src }/>
+      <Image
+        alt="CPU and motherboard in small-form-factor PC without PSU"
+        src={img8170}
+        height="100"
+        data-src={img8170.src}
+      />
+      <Image
+        alt="CPU and motherobard in small-form-factor PC with PSU"
+        src={img8172}
+        height="100"
+        data-src={img8172.src}
+      />
+      <Image alt="GPU in small-form-factor PC" src={img8157} height="100" data-src={img8157.src} />
     </div>
     <figcaption>Some assembly required.</figcaption>
   </figure>
@@ -56,44 +68,83 @@ territory, at least until next year.
   <tbody>
     <tr>
       <td class="pcpp-part-list-type">CPU</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/Qk2bt6/amd-ryzen-9-5950x-34-ghz-16-core-processor-100-100000059wof">AMD Ryzen 9 5950X 3.4 GHz 16-Core Processor</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/Qk2bt6/amd-ryzen-9-5950x-34-ghz-16-core-processor-100-100000059wof">
+          AMD Ryzen 9 5950X 3.4 GHz 16-Core Processor
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">CPU Cooler</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/jjytt6/ek-ek-aio-basic-240-77-cfm-liquid-cpu-cooler-ek-aio-basic-240">EK EK-AIO Basic 240 77 CFM Liquid CPU Cooler</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/jjytt6/ek-ek-aio-basic-240-77-cfm-liquid-cpu-cooler-ek-aio-basic-240">
+          EK EK-AIO Basic 240 77 CFM Liquid CPU Cooler
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Motherboard</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/kbx2FT/asus-rog-strix-b450-i-gaming-mini-itx-am4-motherboard-strix-b450-i-gaming">Asus ROG Strix B450-I Gaming Mini ITX AM4 Motherboard</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/kbx2FT/asus-rog-strix-b450-i-gaming-mini-itx-am4-motherboard-strix-b450-i-gaming">
+          Asus ROG Strix B450-I Gaming Mini ITX AM4 Motherboard
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Memory</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/kmBhP6/gskill-ripjaws-v-64-gb-2-x-32-gb-ddr4-3600-memory-f4-3600c18d-64gvk">G.Skill Ripjaws V 64 GB (2 x 32 GB) DDR4-3600 CL18 Memory</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/kmBhP6/gskill-ripjaws-v-64-gb-2-x-32-gb-ddr4-3600-memory-f4-3600c18d-64gvk">
+          G.Skill Ripjaws V 64 GB (2 x 32 GB) DDR4-3600 CL18 Memory
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Storage</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/JJYQzy/western-digital-black-sn850-wheatsink-2-tb-m2-2280-nvme-solid-state-drive-wds200t1xhe">Western Digital Black SN850 (w/Heatsink) 2 TB M.2-2280 NVME Solid State Drive</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/JJYQzy/western-digital-black-sn850-wheatsink-2-tb-m2-2280-nvme-solid-state-drive-wds200t1xhe">
+          Western Digital Black SN850 (w/Heatsink) 2 TB M.2-2280 NVME Solid State Drive
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Video Card</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/c2kWGX/nvidia-geforce-rtx-3080-ti-12-gb-founders-edition-video-card-900-1g133-2518-000">NVIDIA GeForce RTX 3080 Ti 12 GB Founders Edition Video Card</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/c2kWGX/nvidia-geforce-rtx-3080-ti-12-gb-founders-edition-video-card-900-1g133-2518-000">
+          NVIDIA GeForce RTX 3080 Ti 12 GB Founders Edition Video Card
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Case</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/BCcG3C/dan-cases-a4-h20-a4-mini-itx-desktop-case-a4-h20-a4">DAN Cases A4-H20 A4 Mini ITX Desktop Case</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/BCcG3C/dan-cases-a4-h20-a4-mini-itx-desktop-case-a4-h20-a4">
+          DAN Cases A4-H20 A4 Mini ITX Desktop Case
+        </a>
+      </td>
     </tr>
-  <tr>
-    <td class="pcpp-part-list-type">Power Supply</td>
-    <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/nJrmP6/corsair-750-w-80-platinum-certified-fully-modular-sfx-power-supply-cp-9020186-na">Corsair SF 750 W 80+ Platinum Certified Fully Modular SFX Power Supply</a></td>
-  </tr>
+    <tr>
+      <td class="pcpp-part-list-type">Power Supply</td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/nJrmP6/corsair-750-w-80-platinum-certified-fully-modular-sfx-power-supply-cp-9020186-na">
+          Corsair SF 750 W 80+ Platinum Certified Fully Modular SFX Power Supply
+        </a>
+      </td>
+    </tr>
     <tr>
       <td class="pcpp-part-list-type">Case Fan</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/YwmmP6/phanteks-ph-f120t30-67-cfm-120-mm-fans-3-pack-ph-f120t30_bg_3p">Phanteks PH-F120T30 67 CFM 120 mm Fans 3-Pack</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/YwmmP6/phanteks-ph-f120t30-67-cfm-120-mm-fans-3-pack-ph-f120t30_bg_3p">
+          Phanteks PH-F120T30 67 CFM 120 mm Fans 3-Pack
+        </a>
+      </td>
     </tr>
     <tr>
       <td class="pcpp-part-list-type">Monitor</td>
-      <td class="pcpp-part-list-item"><a href="https://pcpartpicker.com/product/pGqBD3/asus-tuf-gaming-vg27aq-270-2560x1440-165-hz-monitor-vg27aq">Asus TUF Gaming VG27AQ 27.0" 2560x1440 165 Hz Monitor</a></td>
+      <td class="pcpp-part-list-item">
+        <a href="https://pcpartpicker.com/product/pGqBD3/asus-tuf-gaming-vg27aq-270-2560x1440-165-hz-monitor-vg27aq">
+          Asus TUF Gaming VG27AQ 27.0" 2560x1440 165 Hz Monitor
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
-

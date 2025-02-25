@@ -9,7 +9,6 @@ image: ./IMG_9851.jpg
 
 import { Image } from "astro:assets";
 import LightboxGallery from "components/LightboxGallery.astro";
-import styles from "./styles.module.less";
 import img9851 from "./IMG_9851.jpg";
 import img9857 from "./IMG_9857.jpg";
 import img9845 from "./IMG_9845.jpg";
@@ -48,20 +47,45 @@ never make things easy).
 
 I leave you with some pictures of the process and a final spec list:
 
-<LightboxGallery>
-  <div class={styles.images}>
-    <Image src={img9851} data-src={img9851.src} height={200} alt="not a lot of pci-e riser cable fan clearance" />
-    <Image src={img9845} data-src={img9845.src} height={200} alt="not a lot of pci-e riser cable fan clearance" />
-    <Image src={img9846} data-src={img9846.src} height={200} alt="new asus b850-i" />
-    <Image src={img9847} data-src={img9847.src} height={200} alt="new asus b850-i" />
-    <Image src={img9848} data-src={img9848.src} height={200} alt="new asus b850-i" />
-    <Image src={img9854} data-src={img9854.src} height={200} alt="new asus b850-i" />
-    <Image src={img9855} data-src={img9855.src} height={200} alt="new asus b850-i" />
-    <Image src={img9856} data-src={img9856.src} height={200} alt="new asus b850-i" />
-    <Image src={img9858} data-src={img9858.src} height={200} alt="new asus b850-i" />
-    <Image src={img9861} data-src={img9861.src} height={200} alt="new asus b850-i" />
-    <Image src={img9863} data-src={img9863.src} height={200} alt="new asus b850-i" />
-  </div>
+<LightboxGallery class="wall">
+  <a href={img9851.src}>
+    <Image class="img-responsive" src={img9851} height={200} alt="closeup of the asus b850-i motherboard" />
+  </a>
+  <a href={img9845.src}>
+    <Image class="img-responsive" src={img9845} height={200} alt="before the operation" />
+  </a>
+  <a href={img9846.src}>
+    <Image class="img-responsive" src={img9846} height={200} alt="old parts with psu removed" />
+  </a>
+  <a href={img9847.src}>
+    <Image
+      class="img-responsive"
+      src={img9847}
+      height={200}
+      alt="reaching hard to reach screws with my flexible screwdriver"
+    />
+  </a>
+  <a href={img9848.src}>
+    <Image class="img-responsive" src={img9848} height={200} alt="motherboard removed can see backside of gpu" />
+  </a>
+  <a href={img9854.src}>
+    <Image class="img-responsive" src={img9854} height={200} alt="nvme ssd de-sheathed" />
+  </a>
+  <a href={img9855.src}>
+    <Image class="img-responsive" src={img9855} height={200} alt="nvme ssd installed" />
+  </a>
+  <a href={img9856.src}>
+    <Image class="img-responsive" src={img9856} height={200} alt="pre-attached faceplate is a nice touch" />
+  </a>
+  <a href={img9858.src}>
+    <Image class="img-responsive" src={img9858} height={200} alt="new motherboard in place" />
+  </a>
+  <a href={img9861.src}>
+    <Image class="img-responsive" src={img9861} height={200} alt="running cabling through the bottom panel" />
+  </a>
+  <a href={img9863.src}>
+    <Image class="img-responsive" src={img9863} height={200} alt="all assembled" />
+  </a>
 </LightboxGallery>
 
 ## Parts list
