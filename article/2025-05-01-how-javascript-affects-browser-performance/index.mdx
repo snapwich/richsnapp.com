@@ -270,8 +270,9 @@ renders and free us from the tedium of manually editing the DOM.
 ## Layout shifts
 
 Layout shifts are when the browser changes the layout of the page after it has been painted. This can happen for a
-number of reasons, but one of the most common one (and the one we will concern ourselves with in this article) is when
-content is added to the page asynchronously by javascript.
+number of reasons, but one of the most common ones (and the one we will concern ourselves with in this article) is when
+content is added to the page asynchronously by javascript. The first solution you should look at is rendering as much
+as you can before first paint, e.g. server or static rendering, but let's explore after first paint.
 
 In the following example we have a series of cards that are being loaded into the page as part of a pagination
 component. The cards have been simulated to load with latency as if it were coming from a backend server. They've also
