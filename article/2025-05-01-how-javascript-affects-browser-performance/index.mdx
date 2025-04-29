@@ -39,7 +39,7 @@ pretty well with the goals listed above and that will be referenced throughout:
   when page content is loading. Content shifting can lead to a bad user experience when reading content or when
   attempting to interact with the website.
 - [Interaction to Next Paint (INP)](https://web.dev/articles/inp) - This is a newer metric that measures the time it
-  takes for the browser to respond to user input. When compared to the earlier metric 
+  takes for the browser to respond to user input. When compared to the earlier metric
   [First Input Delay (FID)](https://web.dev/articles/fid) which measured the time until the first event handler was
   called, INP measures the time until the next frame is painted after an event handler is called. It is a more accurate
   round trip assessment of the feedback loop between the user and the browser.
@@ -120,43 +120,45 @@ break that work up into smaller chunks that allow for the browser to still perfo
 `doSetTimeoutWork`, highlights this strategy by using `setTimeout` to break the continuing work out into tasks that are
 scheduled to run as part of the
 [event loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model#job_queue_and_event_loop).
-Both of these handlers are executing for roughly the same amount of time, but one is doing it in a way that allows the 
+Both of these handlers are executing for roughly the same amount of time, but one is doing it in a way that allows the
 browser to also do its work.
 
-Let's look at another example, this one even breaks the work into smaller chunks but these chunks are still enough to
-result in a poor frame rate. Try dragging the box below, then click `work()` and try again. See how the experience 
-changes:
+Let's look at another example, this one breaks the work into smaller chunks as suggested above but these chunks are
+designed to run with each frame and block for a certain amount of time in order to simulate a poor frame rate. Try
+dragging the box below, then click `work()`, then try dragging the box again. See how the experience changes:
 
 <FpsGraph client:load />
 <DraggableDemo client:load />
 
 ```javascript
-function work() {
-  if (!simulationActiveRef.current) {
-    simulationActiveRef.current = true;
-    setActive(true);
-    const blockDuration = 150;
-    const pauseDuration = 50;
-
-    function doBlock() {
-      if (!simulationActiveRef.current) return;
-      const startBlock = Date.now();
-      while (Date.now() - startBlock < blockDuration) {
-        noop();
-      }
-      if (simulationActiveRef.current) {
-        setTimeout(doBlock, pauseDuration);
-      } else {
-        simulationActiveRef.current = false;
-        setActive(false);
-      }
+  const TARGET_FPS = 15;
+  const targetFrameDuration = 1000 / TARGET_FPS;
+  const blockDuration = targetFrameDuration * 0.9;
+  function noop() {}
+  function chunk() {
+    if (!simulationActiveRef.current) {
+      return;
     }
-    doBlock();
-  } else {
-    simulationActiveRef.current = false;
-    setActive(false);
+    const blockStart = performance.now();
+    while (performance.now() - blockStart < blockDuration) {
+      noop();
+    }
+    animationFrameIdRef.current = requestAnimationFrame(chunk);
   }
-}
+  function work() {
+    if (simulationActiveRef.current) {
+      simulationActiveRef.current = false;
+      setIsActive(false);
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+        animationFrameIdRef.current = null;
+      }
+    } else {
+      simulationActiveRef.current = true;
+      setIsActive(true);
+      animationFrameIdRef.current = requestAnimationFrame(chunk);
+    }
+  }
 ```
 
 We can see that when the frame rate drops significantly so does our ability to interact with the page. This means it's
@@ -174,17 +176,17 @@ case.
 
 In this diagram (that I shamelessly copied from the article) we can see the operations that the browser performs when
 rendering to the page. Not all of these operations necessarily need to do work when creating a frame, it depends on how
-and what kind of work is being done. For example, if we can avoid making changes to a DOM element's `height` or `width`, 
-we may be able to avoid doing expensive layout calculations. In addition, using `absolute` positioning of elements can 
-also avoid layouts and improve performance (this is part of the magic behind libraries that implement virtualized 
+and what kind of work is being done. For example, if we can avoid making changes to a DOM element's `height` or `width`,
+we may be able to avoid doing expensive layout calculations. In addition, using `absolute` positioning of elements can
+also avoid layouts and improve performance (this is part of the magic behind libraries that implement virtualized
 scrolling).
 
-Some of the browser's operation, such as those that happen in the composite layer, don't even need to work in the same 
-thread. If we can restrict certain work to happen in composite layer we may be able to avoid having work that is 
-competing with the browser's javascript thread and all the other things that are happening on the page. 
+Some of the browser's operation, such as those that happen in the composite layer, don't even need to work in the same
+thread. If we can restrict certain work to happen in composite layer we may be able to avoid having work that is
+competing with the browser's javascript thread and all the other things that are happening on the page.
 
-Coming back to the scrolling behavior above: most browsers are able to perform scrolling as part of the composite layer 
-on a separate thread which allows for a seemingly responsive scrolling page even when the page is mostly unrespoonsive! 
+Coming back to the scrolling behavior above: most browsers are able to perform scrolling as part of the composite layer
+on a separate thread which allows for a seemingly responsive scrolling page even when the page is mostly unrespoonsive!
 
 Below I have an example of a component that is doing work in javascript in order to update a progress bar. In one case,
 `doAnimationFrameWork()`, it is using
@@ -240,16 +242,16 @@ Try each and see what it looks like. Then click `work()` and try both again and 
 
 <Pipeline dim={["Layout", "Paint"]} />
 
-It's important to note that this CSS animation is possible since the progress bar is loading a known amount. The same 
+It's important to note that this CSS animation is possible since the progress bar is loading a known amount. The same
 would be true if we were using a loader to represent an
 [indeterminate state](https://mui.com/material-ui/react-progress/#linear-indeterminate) when signaling loading. In other
-cases we may _require_ javascript to update the progress bar, such as if it's displaying actual real-time feedback 
-of an event. It's worthwhile considering what the best approach is for our use cases and whether we can have the browser 
+cases we may _require_ javascript to update the progress bar, such as if it's displaying actual real-time feedback
+of an event. It's worthwhile considering what the best approach is for our use cases and whether we can have the browser
 do some work for us.
 
 One last thing to consider is _when_ and _how many_ updates we are making to the DOM. We can consider what DOM operations
 we're doing and how they will affect the pixel pipeline's performance; but we can also leverage frontend frameworks to do
-some things for us such as [batching updates to the DOM](https://react.dev/learn/queueing-a-series-of-state-updates) to 
+some things for us such as [batching updates to the DOM](https://react.dev/learn/queueing-a-series-of-state-updates) to
 avoid unnecessary browser renders and free us from the tedium of manually editing the DOM.
 
 <div class="alert alert-info">
@@ -282,18 +284,18 @@ the content loads, the action buttons on the cards shift... maybe even as the us
 By default there's no indication to the user that content is even loading. Overall it's not a pleasant experience.
 
 <div class="alert alert-info">
-  You can confirm this poor experience on Chrome in real-time by opening your devtools, navigating to the performance tab, 
+  You can confirm this poor experience on Chrome in real-time by opening your devtools, navigating to the performance tab,
 	and watching how the different strategies in the demo affect your CLS score.
 </div>
 
 The most obvious solution in this case is to reserve space for the loading content. You can toggle the `Fixed Height`
-switch to see how this improves interacting with the pagination's page bar. 
+switch to see how this improves interacting with the pagination's page bar.
 
-You could also remove the request waterfall by pulling up the data needed so it's available in the original pagination 
-request. This improves both the content shift _and_ the load times (although as a frontend engineer this can sometimes 
-be out of your control). You can toggle `No Waterfall` to see how this improves things. 
+You could also remove the request waterfall by pulling up the data needed so it's available in the original pagination
+request. This improves both the content shift _and_ the load times (although as a frontend engineer this can sometimes
+be out of your control). You can toggle `No Waterfall` to see how this improves things.
 
-You can also use skeleton's (toggle `Skeletons` switch) if you want to prevent some layout shift as well as provide some 
+You can also use skeleton's (toggle `Skeletons` switch) if you want to prevent some layout shift as well as provide some
 visual feedback to the user that data is loading.
 
 Some frameworks, such as React and Vue, support a newish component called

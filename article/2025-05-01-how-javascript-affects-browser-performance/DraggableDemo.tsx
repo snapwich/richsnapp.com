@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -9,39 +9,48 @@ import Draggable from "react-draggable";
 import { Demo } from "./Demo.tsx";
 
 export function DraggableDemo() {
-  const [active, setActive] = useState(false);
-  const simulationActiveRef = useRef(false);
   const nodeRef = useRef<HTMLDivElement>(null!);
-
+  const [isActive, setIsActive] = useState(false);
+  const simulationActiveRef = useRef(false);
+  const animationFrameIdRef = useRef<number | null>(null);
+  const TARGET_FPS = 15;
+  const targetFrameDuration = 1000 / TARGET_FPS;
+  const blockDuration = targetFrameDuration * 0.9;
   function noop() {}
-
-  function work() {
+  function chunk() {
     if (!simulationActiveRef.current) {
-      simulationActiveRef.current = true;
-      setActive(true);
-      const blockDuration = 150;
-      const pauseDuration = 50;
-
-      function doBlock() {
-        if (!simulationActiveRef.current) return;
-        const startBlock = Date.now();
-        // do nothing for blockDuration
-        while (Date.now() - startBlock < blockDuration) {
-          noop();
-        }
-        if (simulationActiveRef.current) {
-          setTimeout(doBlock, pauseDuration);
-        } else {
-          simulationActiveRef.current = false;
-          setActive(false);
-        }
-      }
-      doBlock();
-    } else {
+      return;
+    }
+    const blockStart = performance.now();
+    while (performance.now() - blockStart < blockDuration) {
+      noop();
+    }
+    animationFrameIdRef.current = requestAnimationFrame(chunk);
+  }
+  function work() {
+    if (simulationActiveRef.current) {
       simulationActiveRef.current = false;
-      setActive(false);
+      setIsActive(false);
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+        animationFrameIdRef.current = null;
+      }
+    } else {
+      simulationActiveRef.current = true;
+      setIsActive(true);
+      animationFrameIdRef.current = requestAnimationFrame(chunk);
     }
   }
+
+  useEffect(() => {
+    return () => {
+      simulationActiveRef.current = false;
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+        animationFrameIdRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <Demo>
@@ -65,7 +74,7 @@ export function DraggableDemo() {
       <CardActions>
         <Stack direction="row" sx={{ flexWrap: "wrap", gap: 1 }}>
           <Button variant="contained" onClick={work}>
-            {active ? (
+            {isActive ? (
               <>
                 Stop work()
                 <CircularProgress
