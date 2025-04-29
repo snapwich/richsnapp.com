@@ -134,7 +134,9 @@ dragging the box below, then click `work()`, then try dragging the box again. Se
   const TARGET_FPS = 10;
   const targetFrameDuration = 1000 / TARGET_FPS;
   const blockDuration = targetFrameDuration * 0.9;
-  function noop() {}
+  function noop() {
+    return Math.random() * Math.random();
+  }
   function chunk() {
     if (!simulationActiveRef.current) {
       return;
