@@ -13,7 +13,7 @@ export function DraggableDemo() {
   const [isActive, setIsActive] = useState(false);
   const simulationActiveRef = useRef(false);
   const animationFrameIdRef = useRef<number | null>(null);
-  const TARGET_FPS = 15;
+  const TARGET_FPS = 10;
   const targetFrameDuration = 1000 / TARGET_FPS;
   const blockDuration = targetFrameDuration * 0.9;
   function noop() {}
