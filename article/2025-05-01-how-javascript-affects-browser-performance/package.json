@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.0.2",
+    "@mui/material": "^6.4.7",
+    "classnames": "^2.5.1",
+    "react-draggable": "^4.4.6",
+    "react-sparklines": "^1.7.0"
+  },
+  "devDependencies": {
+    "@types/react-sparklines": "^1.7.5"
+  }
+}

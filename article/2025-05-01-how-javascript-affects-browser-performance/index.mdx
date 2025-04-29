@@ -1,0 +1,314 @@
+---
+title: How Javascript affects browser performance
+tags:
+  - programming
+  - javascript
+  - optimization
+---
+
+import { FpsGraph } from "./FpsGraph";
+import { BusyDemo } from "./BusyDemo";
+import { AnimationDemo } from "./AnimationDemo";
+import { DraggableDemo } from "./DraggableDemo";
+import { LayoutShiftDemo } from "./LayoutShiftDemo";
+import Pipeline from "./Pipeline.astro";
+
+With the move towards frontend frameworks the web is becoming increasingly loaded with javascript. It used to be that
+you could disable javascript and have a usable web experience but for the most part that is no longer the case. In some
+ways it is good that we are building websites with more functionality than ever existed in the past. But it is also a
+double-edged sword that requires us to craft our applications in a way that contributes to a good user experience. I'm
+going to talk about some of the metrics that are used to measure performance and how these metrics can be impacted by the
+javascript we write.
+
+When I think of a good user experience from a performance perspective here are some of the things that come to mind for
+me:
+
+- Fast loading
+- Minimal pop-in or content shifting
+- Fast feedback to user input (clicks, typing, scrolling, dragging, etc) with smooth and fluid motion
+
+A tool made by Google called [Lighthouse](https://developers.google.com/web/tools/lighthouse) has some metrics that align
+pretty well with the goals listed above and that will be referenced throughout:
+
+- [Largest Contentful Paint (LCP)](https://web.dev/articles/lcp) - Compared to the older but long-time used
+  [First Contentful Paint (FCP)](https://web.dev/articles/fcp) which measured the time until content is first painted to
+  the screen, LCP measures the time it takes for the largest element on the page to be painted. So similar in purpose
+  but more relevant to the user experience as users usually care more about when the page is usable than when the first
+  piece of content was rendered.
+- [Cumulative Layout Shift (CLS)](https://web.dev/articles/cls) - This measures the amount of layout shifts that occur
+  when page content is loading. Content shifting can lead to a bad user experience when reading content or when
+  attempting to interact with the website.
+- [Interaction to Next Paint (INP)](https://web.dev/articles/inp) - This is a newer metric that measures the time it
+  takes for the browser to respond to user input. When compared to the earlier metric 
+  [First Input Delay (FID)](https://web.dev/articles/fid) which measured the time until the first event handler was
+  called, INP measures the time until the next frame is painted after an event handler is called. It is a more accurate
+  round trip assessment of the feedback loop between the user and the browser.
+
+Most of these metrics can be impacted by the network requests and backend performance, but here we are going to focus on
+the impact that our javascript code can have.
+
+## Javascript in the browser
+
+One of the most important things to understand about how javascript works in the browser is that it is single-threaded.
+This means that only one piece of javascript (excluding web workers) can run at a time. This is important to keep in
+mind when considering the metrics above, especially in this age of single-page apps, as your frontend code has a
+distinct impact on all of them.
+
+It's worth noting that your code is not just competing with other javascript code (including third-party code), but it's
+also competing with the browser itself. If you are doing a lot of work it can impact the browser's ability to do its own
+work such as responding to user input and rendering. An example of this can be seen below:
+
+<FpsGraph client:load />
+<BusyDemo client:load />
+
+Above this demo you can see a graph that is refreshing every second to show how many
+[frames per second](https://en.wikipedia.org/wiki/Frame_rate) the browser is rendering. We have two buttons
+that, when clicked, simulate executing some work in javascript that updates your application (specifically using
+[React](https://react.dev/) in this case). The first button, `work()`, executes a loop that counts up to 3000
+milliseconds and updates a text field with the value during each iteration.
+
+```javascript
+const [time, setTime] = useState(0);
+
+function work() {
+  const start = Date.now();
+  while (Date.now() - start < 3000) {
+    setTime(Date.now() - start);
+  }
+}
+
+function doSetTimeoutWork() {
+  const start = Date.now();
+  function workChunk() {
+    const elapsed = Date.now() - start;
+    setTime(elapsed);
+    if (elapsed < 3000) {
+      setTimeout(workChunk, 0);
+    }
+  }
+  workChunk();
+}
+
+// jsx
+<TextField label="Time" value={time} />
+
+<Button variant="contained" onClick={work}>
+  work();
+</Button>
+<Button variant="contained" onClick={doSetTimeoutWork}>
+  doSetTimeoutWork();
+</Button>
+```
+
+Do you notice what happens when you click the button?
+
+- The click handler executes our `work()` function
+- As the handler is executing the main browser thread is blocked
+- setTime (through React) batches updates to the text field but the browser is unable to render the updates until the
+  thread is unblocked
+
+This highlights two ways how our frontend code can impact our metrics:
+
+1. The long round-trip time between when the button was clicked and when the text field updates results in a poor user
+   experience as shown by a poor INP score.
+2. In a single-page app our code may be responsible for rendering the contents of the page which means long-running code
+   at load can impact us two-fold by both slowing our apps ability to generate content and slowing the browser's ability
+   to paint the content to the page. This could be indicated by a poor LCP score.
+
+The obvious solution is to do less work especially during the initial page load. But for the work we need to do we can
+break that work up into smaller chunks that allow for the browser to still perform its functions. The second button,
+`doSetTimeoutWork`, highlights this strategy by using `setTimeout` to break the continuing work out into tasks that are
+scheduled to run as part of the
+[event loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model#job_queue_and_event_loop).
+Both of these handlers are executing for roughly the same amount of time, but one is doing it in a way that allows the 
+browser to also do its work.
+
+Let's look at another example, this one even breaks the work into smaller chunks but these chunks are still enough to
+result in a poor frame rate. Try dragging the box below, then click `work()` and try again. See how the experience 
+changes:
+
+<FpsGraph client:load />
+<DraggableDemo client:load />
+
+```javascript
+function work() {
+  if (!simulationActiveRef.current) {
+    simulationActiveRef.current = true;
+    setActive(true);
+    const blockDuration = 150;
+    const pauseDuration = 50;
+
+    function doBlock() {
+      if (!simulationActiveRef.current) return;
+      const startBlock = Date.now();
+      while (Date.now() - startBlock < blockDuration) {
+        noop();
+      }
+      if (simulationActiveRef.current) {
+        setTimeout(doBlock, pauseDuration);
+      } else {
+        simulationActiveRef.current = false;
+        setActive(false);
+      }
+    }
+    doBlock();
+  } else {
+    simulationActiveRef.current = false;
+    setActive(false);
+  }
+}
+```
+
+We can see that when the frame rate drops significantly so does our ability to interact with the page. This means it's
+not just a matter of letting the browser do its work, but allowing it to do its work in a consistent and timely manner.
+Interestingly this is an area where the lighthouse metrics might not indicate a serious problem, but the user experience
+definitely will...
+
+## The pixel pipeline
+
+If you were really attentive while "simulating work" you may have noticed that page scrolling seems mostly unaffected by
+our lowered framerate. [This article](https://web.dev/articles/rendering-performance) provides a hint of why that is the
+case.
+
+<Pipeline />
+
+In this diagram (that I shamelessly copied from the article) we can see the operations that the browser performs when
+rendering to the page. Not all of these operations necessarily need to do work when creating a frame, it depends on how
+and what kind of work is being done. For example, if we can avoid making changes to a DOM element's `height` or `width`, 
+we may be able to avoid doing expensive layout calculations. In addition, using `absolute` positioning of elements can 
+also avoid layouts and improve performance (this is part of the magic behind libraries that implement virtualized 
+scrolling).
+
+Some of the browser's operation, such as those that happen in the composite layer, don't even need to work in the same 
+thread. If we can restrict certain work to happen in composite layer we may be able to avoid having work that is 
+competing with the browser's javascript thread and all the other things that are happening on the page. 
+
+Coming back to the scrolling behavior above: most browsers are able to perform scrolling as part of the composite layer 
+on a separate thread which allows for a seemingly responsive scrolling page even when the page is mostly unrespoonsive! 
+
+Below I have an example of a component that is doing work in javascript in order to update a progress bar. In one case,
+`doAnimationFrameWork()`, it is using
+[requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame) in order to
+schedule javascript work that will update the progress bar with each frame. In the other case, `doCssTransition()`,
+it is setting a css transition property onto the element which is allowing the browser to handle the animation.
+
+<FpsGraph client:load />
+<AnimationDemo client:load />
+
+```javascript
+function doAnimationFrameWork() {
+  const start = Date.now();
+  function update() {
+    const elapsed = Date.now() - start;
+    if (elapsed < 3000) {
+      setProgress((elapsed / 3000) * 100);
+      requestAnimationFrame(update);
+    } else {
+      setProgress(100);
+    }
+  }
+  update();
+}
+
+function doCssTransition() {
+  setCssTransition(true);
+  setProgress(100);
+}
+
+// jsx
+<LinearProgress
+  variant="determinate"
+  value={progress}
+  sx={
+    !cssTransition
+      ? {
+          "& .MuiLinearProgress-bar": {
+            transition: "none",
+          },
+        }
+      : {
+          "& .MuiLinearProgress-bar": {
+            transitionDuration: "3s",
+          },
+        }
+  }
+/>;
+```
+
+Try each and see what it looks like. Then click `work()` and try both again and see how the experience changes. Doing
+[work in the composite layer](https://web.dev/articles/stick-to-compositor-only-properties-and-manage-layer-count) while skipping the layout and paint layers is one way to improve the performance of our page.
+
+<Pipeline dim={["Layout", "Paint"]} />
+
+It's important to note that this CSS animation is possible since the progress bar is loading a known amount. The same 
+would be true if we were using a loader to represent an
+[indeterminate state](https://mui.com/material-ui/react-progress/#linear-indeterminate) when signaling loading. In other
+cases we may _require_ javascript to update the progress bar, such as if it's displaying actual real-time feedback 
+of an event. It's worthwhile considering what the best approach is for our use cases and whether we can have the browser 
+do some work for us.
+
+One last thing to consider is _when_ and _how many_ updates we are making to the DOM. We can consider what DOM operations
+we're doing and how they will affect the pixel pipeline's performance; but we can also leverage frontend frameworks to do
+some things for us such as [batching updates to the DOM](https://react.dev/learn/queueing-a-series-of-state-updates) to 
+avoid unnecessary browser renders and free us from the tedium of manually editing the DOM.
+
+<div class="alert alert-info">
+  A note on "rendering." Browser rendering and rendering in a framework such as React or Vue are two different "forms"
+  of rendering not to be confused with each other. In browser rendering we're talking about the process of representing
+  the existing DOM tree as pixels on the page. In a framework like React the process of rendering is javascript
+  executing a component's render function to generate an element tree consisting of javascript objects. The two are
+  related but not the same. For instance, you can "render" a component in React that will result in no browser render if
+  [React's reconciliation process](https://legacy.reactjs.org/docs/reconciliation.html) determines that no browser
+  render needs to take place. Therefore avoiding React renders may not be the performance gain you think it is, but
+  perhaps reducing the amount of work you do in a render function could have benefit.
+</div>
+
+## Layout shifts
+
+Layout shifts are when the browser changes the layout of the page after it has been painted. This can happen for a
+number of reasons, but one of the most common one (and the one we will concern ourselves with in this article) is when
+content is added to the page asynchronously by javascript.
+
+In the following example we have a series of cards that are being loaded into the page as part of a pagination
+component. The cards have been simulated to load with latency as if it were coming from a backend server. They've also
+been simulated to load the word definitions themselves separately as part of
+[a request waterfall](https://tanstack.com/query/latest/docs/framework/react/guides/request-waterfalls) to simulate a
+common scenario where all the data is not immediately available in the initial request.
+
+<LayoutShiftDemo client:visible />
+
+As you click through the pages you can see how this affects the user experience. The pagination's page bar itself moves as
+the content loads, the action buttons on the cards shift... maybe even as the user may be attempting to click them.
+By default there's no indication to the user that content is even loading. Overall it's not a pleasant experience.
+
+<div class="alert alert-info">
+  You can confirm this poor experience on Chrome in real-time by opening your devtools, navigating to the performance tab, 
+	and watching how the different strategies in the demo affect your CLS score.
+</div>
+
+The most obvious solution in this case is to reserve space for the loading content. You can toggle the `Fixed Height`
+switch to see how this improves interacting with the pagination's page bar. 
+
+You could also remove the request waterfall by pulling up the data needed so it's available in the original pagination 
+request. This improves both the content shift _and_ the load times (although as a frontend engineer this can sometimes 
+be out of your control). You can toggle `No Waterfall` to see how this improves things. 
+
+You can also use skeleton's (toggle `Skeletons` switch) if you want to prevent some layout shift as well as provide some 
+visual feedback to the user that data is loading.
+
+Some frameworks, such as React and Vue, support a newish component called
+[&lt;Suspense&gt;](https://react.dev/reference/react/Suspense) that allow for more graceful handling of loading states,
+especially if you have nested components each of which may be loading their own data. Suspense allows you to delegate
+control of loading states up the component tree similar to how
+[Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) work.
+
+You change the `Loading Strategy` to `use w/ Suspense` (in this case `use` is referencing
+[the new `use` hook in React 19](https://react.dev/reference/react/use)) you can see examples of how the loading behaves
+differently when wrapping different areas of the tree such as: the whole list, the individual cards, the card body, or
+none/all of the above!
+
+<div class="alert alert-info">
+  If you turn both "Skeletons" and "Fixed Height" on, you may notice that "useEffect + No Waterfall on" looks basically
+  identical to "Suspense + No Waterfall off + Whole List"... However there is a slight difference, can you tell what it
+  is?
+</div>

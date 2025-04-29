@@ -1,0 +1,47 @@
+@import (reference) "styles/site.less";
+
+.graph {
+  display: flex;
+  position: relative;
+  height: 50px;
+  padding-top: 5px;
+  user-select: none;
+  & > * {
+    flex: 1;
+  }
+  svg circle {
+    display: none;
+  }
+}
+
+.fps {
+  position: absolute;
+  right: 10px;
+  font-size: 36px;
+}
+.content {
+  padding: 20px;
+}
+
+.strobe {
+  animation: strobe-effect 0.1s ease-in-out;
+}
+
+@keyframes strobe-effect {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.demo {
+  margin-bottom: 20px;
+  p {
+    text-indent: 0 !important;
+  }
+}

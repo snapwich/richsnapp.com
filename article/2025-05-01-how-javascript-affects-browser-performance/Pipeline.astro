@@ -1,0 +1,78 @@
+---
+const { dim = [] } = Astro.props;
+---
+
+<style lang="less">
+  @import (reference) "styles/site.less";
+
+  .pipeline {
+    display: grid;
+    font-size: 20px;
+    @media (max-width: @screen-xs-max) {
+      font-size: 14px;
+    }
+    grid-gap: 2px;
+    grid-template-columns: repeat(5, 1fr) 1em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .step {
+    --bg: #000;
+    position: relative;
+    background-image: var(--bg);
+    color: #fff;
+    white-space: nowrap;
+    //padding: 0.667em 0.667em 0.667em 1.333em;
+    padding: 6px 6px 6px 10%;
+    clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0% 100%, 5% 50%, 0% 0%);
+  }
+
+  /* individual colours */
+  .js {
+    --bg: #efc459;
+    background-image: linear-gradient(to right, var(--bg), var(--bg));
+    z-index: 5;
+  } /* yellow  */
+  .css {
+    --bg: #9b7fe6;
+    background-image: linear-gradient(to right, var(--bg), var(--bg));
+    z-index: 4;
+  } /* purple  */
+  .layout {
+    --bg: #9b7fe6;
+    background-image: linear-gradient(to right, var(--bg), var(--bg));
+    z-index: 3;
+  } /* same purple but dimmed */
+  .paint {
+    --bg: #74b265;
+    background-image: linear-gradient(to right, var(--bg), var(--bg));
+    z-index: 2;
+  } /* green   */
+  .composite {
+    --bg: #74b265;
+    background-image: linear-gradient(to right, var(--bg), var(--bg));
+    z-index: 1;
+  } /* green   */
+
+  /* faded steps */
+  .dim {
+    opacity: 0.25;
+  }
+</style>
+
+<div class="pipeline">
+  <span class={`step js ${dim.includes("Javascript") ? "dim" : ""}`}
+    >Javascript</span
+  >
+  <span class={`step css ${dim.includes("Style") ? "dim" : ""}`}>Style</span>
+  <span class={`step layout ${dim.includes("Layout") ? "dim" : ""}`}
+    >Layout</span
+  >
+  <span class={`step paint ${dim.includes("Paint") ? "dim" : ""}`}>Paint</span>
+  <span class={`step composite ${dim.includes("Composite") ? "dim" : ""}`}
+    >Composite</span
+  >
+</div>
