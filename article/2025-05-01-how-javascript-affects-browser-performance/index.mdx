@@ -4,6 +4,7 @@ tags:
   - programming
   - javascript
   - optimization
+image: ./JSnail.png
 ---
 
 import { FpsGraph } from "./FpsGraph";
@@ -271,8 +272,8 @@ renders and free us from the tedium of manually editing the DOM.
 
 Layout shifts are when the browser changes the layout of the page after it has been painted. This can happen for a
 number of reasons, but one of the most common ones (and the one we will concern ourselves with in this article) is when
-content is added to the page asynchronously by javascript. The first solution you should look at is rendering as much
-as you can before first paint, e.g. server or static rendering, but let's explore after first paint.
+content is added to the page asynchronously by javascript. The first solution you should look at is rendering as much as
+you can before first paint, e.g. server or static rendering, but let's explore after first paint.
 
 In the following example we have a series of cards that are being loaded into the page as part of a pagination
 component. The cards have been simulated to load with latency as if it were coming from a backend server. They've also
@@ -317,3 +318,40 @@ none/all of the above!
   identical to "Suspense + No Waterfall off + Whole List"... However there is a slight difference, can you tell what it
   is?
 </div>
+
+## Performance Tradeoffs
+
+One thing you may notice is that these performance metrics are sometimes at odds with each other and the user experience
+as a whole.
+
+At a previous job (two previous jobs to be precise) I worked as an architect on a popular open-source project called
+[Prebid.js](https://prebid.org/product-suite/prebidjs/). This library is used by publishers to monetize their websites
+through advertising in a process called [header bidding](https://en.wikipedia.org/wiki/Header_bidding), "header" in this
+case referring to the HTML &lt;head&gt; of a document and "bidding" referring to the live auction that occurs as soon as
+the page starts loading.
+
+It was often requested that Prebid.js yield the main thread
+[to improve FCP](https://github.com/prebid/Prebid.js/issues/5054) or
+[IMP](https://github.com/prebid/Prebid.js/issues/10062), and while these are worthy goals they were usually focused on a
+improving a single metric without
+[considering the overall user experience](https://github.com/prebid/Prebid.js/issues/10062#issuecomment-1601277686).
+Perhaps part of the problem is metrics such as Cumulative Layout Shift
+[didn't exist until 2020](https://developer.chrome.com/blog/lighthouse-6-0) and initial page has always been everything.
+It's always important to consider these metrics together as a whole... and maybe even metrics that are not part of the
+Lighthouse rubric but are important to you and your users.
+
+Ultimately I always thought the best direction for Prebid.js would be to
+[reduce the amount of work it does](https://github.com/prebid/Prebid.js/issues/6361#issuecomment-811494883), improving
+LCP and INP while also
+[being responsible with its time](https://github.com/prebid/Prebid.js/pull/8106#discussion_r895043944) in a way that
+would reduce CLS as well.
+
+Another example of considering tradeoffs is this site itself. You may have noticed I use custom web fonts. My
+performance scores in Lighthouse have always been penalized due to loading the fonts in the head and purposefully
+blocking rendering until they're loaded. This choice was made to avoid
+[Flash of Unstyled Text (FOUT)](https://fonts.google.com/knowledge/glossary/fout). I could always just remove the fonts
+entirely, but I think they improve the user experience and readability... This creates a tradeoff where this site may
+load slightly slower on first visit to have, in my opinion, a better overall user experience.
+
+Always consider these performance metrics as a whole and remember:
+[user experience comes first!](https://x.com/snapwich/status/1101206558204223489)
