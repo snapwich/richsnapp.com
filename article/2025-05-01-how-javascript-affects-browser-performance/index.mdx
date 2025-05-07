@@ -68,6 +68,7 @@ clicked, simulate executing some work in javascript that updates your applicatio
 [React](https://react.dev/) in this case). The first button, `work()`, executes a loop that counts up to 3000
 milliseconds and updates a text field with the value during each iteration.
 
+<figure class="center">
 ```javascript
 const [time, setTime] = useState(0);
 
@@ -100,6 +101,7 @@ function doSetTimeoutWork() {
   doSetTimeoutWork();
 </Button>
 ```
+</figure>
 
 Do you notice what happens when you click the button?
 
@@ -131,6 +133,7 @@ dragging the box below, then click `work()`, then try dragging the box again. Se
 <FpsGraph client:load />
 <DraggableDemo client:load />
 
+<figure class="center">
 ```javascript
 const TARGET_FPS = 10;
 const targetFrameDuration = 1000 / TARGET_FPS;
@@ -161,6 +164,7 @@ function work() {
   }
 }
 ```
+</figure>
 
 We can see that when the frame rate drops significantly so does our ability to interact with the page. This means it's
 not just a matter of letting the browser do its work, but allowing it to do its work in a consistent and timely manner.
@@ -198,6 +202,7 @@ is setting a css transition property onto the element which is allowing the brow
 <FpsGraph client:load />
 <AnimationDemo client:load />
 
+<figure class="center">
 ```javascript
 function doAnimationFrameWork() {
   const start = Date.now();
@@ -237,6 +242,7 @@ function doCssTransition() {
   }
 />;
 ```
+</figure>
 
 Try each and see what it looks like. Then click `work()` and try both again and see how the experience changes. Doing
 [work in the composite layer](https://web.dev/articles/stick-to-compositor-only-properties-and-manage-layer-count) while
