@@ -14,8 +14,13 @@ export function BusyDemo() {
 
   function work() {
     const start = Date.now();
-    while (Date.now() - start < 3000) {
-      setTime(Date.now() - start);
+    let last = 0;
+    let curr = last;
+    while ((curr = Date.now() - start) < 3000) {
+      if (curr > last) {
+        setTime(Date.now() - start);
+        last = curr;
+      }
     }
   }
 
