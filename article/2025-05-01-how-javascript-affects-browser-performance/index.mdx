@@ -191,7 +191,7 @@ thread. If we can restrict certain work to happen in composite layer we may be a
 competing with the browser's javascript thread and all the other things that are happening on the page.
 
 Coming back to the scrolling behavior above: most browsers are able to perform scrolling as part of the composite layer
-on a separate thread which allows for a seemingly responsive scrolling page even when the page is mostly unrespoonsive!
+on a separate thread which allows for a seemingly responsive scrolling page even when the page is mostly unresponsive!
 
 Below I have an example of a component that is doing work in javascript in order to update a progress bar. In one case,
 `doAnimationFrameWork()`, it is using
