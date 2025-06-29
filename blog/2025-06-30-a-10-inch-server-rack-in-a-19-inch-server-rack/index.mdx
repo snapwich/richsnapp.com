@@ -1,0 +1,200 @@
+---
+title: Yo dawg, I heard you like server racks so I made you a 10-inch rack that mounts in a 19-inch rack
+tags:
+  - 3d-printing
+  - networking
+image: ./cover.jpg
+tldr:
+  - I made custom rack rails that mount horizontally inside a 19-inch server rack to create a 10-inch rack
+  - The rails and some of my custom 10-inch trays are available for download <a href="#files">at the bottom of this
+    page</a>
+---
+
+import LightboxGallery from "components/LightboxGallery.astro";
+import { Picture, Image } from "astro:assets";
+import img0059 from "./IMG_0059.jpg";
+import img0060 from "./IMG_0060.jpg";
+import img0061 from "./IMG_0061.jpg";
+import img0062 from "./IMG_0062.jpg";
+import img0077 from "./IMG_0077.jpg";
+import img0108 from "./IMG_0108.jpg";
+import img0111 from "./IMG_0111.jpg";
+import img0127 from "./IMG_0127.jpg";
+import img0130 from "./IMG_0130.jpg";
+import img0169 from "./IMG_0169.jpg";
+import img0190 from "./IMG_0190.jpg";
+import img0193 from "./IMG_0193.jpg";
+import img0207 from "./IMG_0207.jpg";
+import img0209 from "./IMG_0209.jpg";
+import styles from "./styles.module.less";
+
+The standard server rack is 19 inches wide with 1.75 inch tall rack units. This means most rack equipment you'll find
+readily available for purchase is standardized around this 19-inch rack size. However, most 3d printers do not have a
+bed size capable of printing a full 19-inch tray. Due to this limitation, you'll find most 3d printable rack trays are
+either designed to be
+[modular and interconnected](https://makerworld.com/en/models/1032069-openrack-1u-a-modular-server-rack-system) so they
+can be printed in smaller pieces, or they are designed for smaller racks such as the increasingly more common
+[10 inch server rack size](https://makerworld.com/en/models/search?keyword=tag:%2010%20inch) popular with DIY
+enthusiasts. This smaller size allows for a full tray to be printed in a 256mm x 256mm printer bed (like that of my
+[BambuLabs X1C](https://us.store.bambulab.com/products/x1-carbon)) as a single print. But what if you want both? What if
+you want easily available 19-inch rack equipment alongside your own custom 10-inch trays?
+
+<LightboxGallery class={styles.gallery} selector="img">
+  <figure class="small right">
+    <Picture src={img0062} alt="two rails, 10 inches apart" layout="full-width" data-src={img0062.src} />
+    <div>
+      <Picture
+        src={img0059}
+        alt="a rail custom fabricated by sendcutsend"
+        layout="constrained"
+        data-src={img0059.src}
+        height={250}
+      />
+      <Picture
+        src={img0060}
+        alt="profile view of custom rail"
+        layout="constrained"
+        height={250}
+        data-src={img0060.src}
+      />
+      <Picture
+        src={img0061}
+        alt="profile view of custom rail"
+        layout="constrained"
+        height={250}
+        data-src={img0061.src}
+      />
+    </div>
+  </figure>
+</LightboxGallery>
+
+I have seen racks on racks and racks next to racks, but I figured why not a rack-mountable rack? And for
+space-efficiency we might as well mount it sideways!
+
+So that's essentially what I've done. I've created two rack rails that each mount into 1u of a 19-inch rack and are
+meant to be 4u apart (although I suppose they could be any distance) which takes up a total of 6u (or 10.5 inches) of
+19-inch rack space to give you 10u of usable 10-inch rack space while at the same time being somewhat reminiscent of a
+[blade enclosure](https://en.wikipedia.org/wiki/Blade_server).
+
+The only downside of this approach is that since the 10-inch rack is mounted sideways you will need to have 10-inch
+trays that are okay with being mounted sideways. This can be a problem as many off-the-shelf designs are made to have
+devices just resting on them, not necessarily mounted to them. However, given the 10-inch space is very DIY this seems
+like a reasonable trade-off considering you can now easily design and print your own custom trays to go in your sideways
+10-inch rack!
+
+I used [SendCutSend](https://sendcutsend.com/) to fabricate the rails out of powder-coated .059" Mild Steel, and you too
+can have them custom fabricated using the [provided DXF file](/files/19to10inchRail.zip).
+
+<LightboxGallery class={styles.gallery} selector="img">
+  <figure class="center">
+    <Picture
+      src={img0077}
+      alt="19-inch prototype rack with 10-inch rack rails inside"
+      layout="full-width"
+      data-src={img0077.src}
+    />
+    <div>
+      <Picture
+        src={img0108}
+        alt="front view of 19-inch prototype rack with 10-inch rack inside"
+        layout="constrained"
+        data-src={img0108.src}
+        height={250}
+      />
+      <Picture
+        src={img0111}
+        alt="rear view of 19-inch prototype rack with 10-inch rack inside"
+        layout="constrained"
+        data-src={img0111.src}
+        height={250}
+      />
+      <Picture
+        src={img0127}
+        alt="front view of 19-inch prototype rack with 10-inch rack inside and 19-inch components"
+        layout="constrained"
+        data-src={img0127.src}
+        height={250}
+      />
+      <Picture
+        src={img0130}
+        alt="rear view of 19-inch prototype rack with 10-inch rack inside and 19-inch components"
+        layout="constrained"
+        data-src={img0130.src}
+        height={250}
+      />
+    </div>
+  </figure>
+</LightboxGallery>
+
+I've been prototyping my 10-inch rack rails in a 19-inch desktop rack I've designed above,
+[and you can print it yourself](https://makerworld.com/en/models/1531095-desktop-19-inch-prototyping-server-rack) if
+you'd like.
+
+Here's some pictures of the completed 10-inch rack (that contains my
+[Raspberry-Pi Kubernetes cluster](https://www.richsnapp.com/article/2024/07-05-prepping-for-the-cka)) being installed
+inside my 19-inch rack stuffed in a utility closet alongside all my other networking equipment.
+
+<LightboxGallery class={styles.gallery} selector="img">
+  <figure class="center">
+    <Picture src={img0193} alt="completed 10-inch rack resting on side" layout="full-width" data-src={img0193.src} />
+    <div>
+      <Picture
+        src={img0190}
+        alt="me holding the completed 10-inch rack"
+        layout="constrained"
+        data-src={img0190.src}
+        height={250}
+      />
+      <Picture
+        src={img0169}
+        alt="a raspberry pi 5 on its tray before installing it in the kuberenetes cluster inside the 10-inch rack"
+        layout="constrained"
+        data-src={img0169.src}
+        height={250}
+      />
+      <Picture
+        src={img0209}
+        alt="front view of my 19-inch rack in the utility closet"
+        layout="constrained"
+        data-src={img0209.src}
+        height={250}
+      />
+      <Picture
+        src={img0207}
+        alt="zoomed-in front view of my 19-inch rack in the utility closet"
+        layout="constrained"
+        data-src={img0207.src}
+        height={250}
+      />
+    </div>
+  </figure>
+</LightboxGallery>
+
+## Files
+
+I've desinged a few 10-inch trays that I've made available for download on [MakerWorld](https://makerworld.com/).
+
+- [10 inch rack mount kit for a Protectli Vault FW4B / FW4C](https://makerworld.com/en/models/1531176-10-inch-rack-mount-kit-protectli-vault-fw4b-fw4c)
+- [OpenRack 1U TP-Link 5-Port Switch Insert](https://makerworld.com/en/models/1411977-openrack-1u-tp-link-5-port-switch-insert)
+  which fits inside an [OpenRack](https://makerworld.com/en/models/1032069-openrack-1u-a-modular-server-rack-system)
+  compatible tray.
+- [10 inch TP-Link TL-SG105MPE power brick holder](https://makerworld.com/en/models/1531117-10-inch-tp-link-tl-sg105mpe-power-brick-holder)
+  for the above switch.
+- [10 inch server rack cable comb manager](https://makerworld.com/en/models/1531135-10-inch-server-rack-cable-comb-manager)
+
+#### 10-inch rails as DXF file or pre-configured SendCutSend cart
+
+[The DXF file](/files/19to10inchRail.zip) for the rails themselves can be sent for fabrication at
+[SendCutSend](https://sendcutsend.com/) or any other fabricator that accepts a DXF file. For my rail material I used CRS
+A36/1008 Mild Steel (.059") and had it powder-coated in glossy black.
+
+I've also created a shareable [SendCutSend cart](https://cart.sendcutsend.com/rgwybjul7tez) that you can use if you just
+want to order the pre-configured rails directly from SendCutSend.
+
+## Additional notes
+
+I've been printing all the trays with [BambuLab PETG-HF](https://us.store.bambulab.com/products/petg-hf) and the rack
+itself is printed with [BambuLab PLA Basic](https://us.store.bambulab.com/products/pla-basic-filament).
+
+The Raspberry Pi Rack Mount is [a GeeekPi tray available on Amazon](https://www.amazon.com/dp/B0DM9978LY) (I figured I
+needed at least one component _not_ made by me so I could confirm everything was dimensionally sound).
