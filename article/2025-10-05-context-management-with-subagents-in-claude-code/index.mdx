@@ -1,0 +1,134 @@
+---
+title: Context Management with Subagents in Claude Code
+tags:
+  - ai
+  - programming
+image: ./subagents.png
+---
+
+import imgSelfAttention from "./self-attention.png";
+import imgAgentManifest from "./agent-manifest.png";
+import imgAgentDocResearcher from "./agent-doc-researcher.png";
+
+If you're using agentic AI today, there's a good chance you're using Claude Code; and if you're using Claude Code,
+there's a good chance you've heard of, or maybe even used, subagents. If you're like me though, when you first heard of
+subagents you may have been confused about how they differ from the
+[custom slash commands](https://docs.claude.com/en/docs/claude-code/slash-commands#custom-slash-commands) you may
+already be using, or if they're meant for something entirely different, like managing concurrent workloads. So let's
+talk a bit about what they are and what problem they are solving.
+
+## The problem with context windows
+
+In the past LLMs were created using various architectures like serial RNNs or LSTMs. That changed with the introduction
+of the transformer architecture (introduced in 2017 and later popularized by ChatGPT) that uses a mechanism called
+[attention](<https://en.wikipedia.org/wiki/Attention_(machine_learning)>) to generate its output.
+
+<figure class="smallest right">
+  <img src={imgSelfAttention.src} alt="RNN vs Self-attention" />
+  <figcaption>
+    from: https://classic.d2l.ai/chapter_attention-mechanisms/self-attention-and-positional-encoding.html
+  </figcaption>
+</figure>
+
+The previous models processed text sequentially, propagating information step by step. Transformers, by contrast, use
+self-attention, where each token can directly attend to every other token in the context. Since the model can
+selectively focus on the most relevant parts of the input rather than relying on sequential memory, this makes them much
+better at adhering to prompts. However, strong prompt adherence also comes with a downside: because they consider the
+entire context window there is the risk of diffusion that causes important details to be diluted among less relevant
+ones.
+
+In short, self-attention is a double-edged sword: it enables stronger conditioning on prompts, sharpening focus when
+relevant context is present, but it also makes the models more vulnerable to distraction, as irrelevant context injects
+competing associations that dilute focus and broaden the output distribution.
+
+## Methods for managing context
+
+The practical implication for us is that managing the content of the context window becomes critical. Long conversations
+that span multiple topics can dilute relevance, making it harder for the model to maintain focus on any single topic; or
+in the case of agentic models, to stay aligned with a particular task. Some of the methods you may or may not have used:
+
+- Practicing proper prompt hygiene by writing succinct but relevant prompts while avoiding tangential topics (e.g.
+  starting a new conversation for a new topic).
+- Invoking context compaction (such as `/compact`) to summarize and prune the previous context.
+- Using a retrieval-augmented generation (RAG) like strategy to pull in the most relevant context as opposed to
+  everything. (for agents, Anthropic refers to this as the "just in time" approach and differentiates it from RAG due to
+  a lack of pre-processing).
+- Splitting a conversation with multiple topics into multiple conversations and carrying forward the relevant
+  information in note files in the file-system
+  ([the memory tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/memory-tool) [currently in beta] may help
+  to automate this).
+- Avoiding tool bloat with expensive web fetches, tool usage, and MCP services (the new
+  [context editing features](https://www.anthropic.com/news/context-management) may help reduce some of the impact of
+  tools).
+- Rewinding and forking a conversation (`Esc + Esc`) to spin off a context window that doesn't include all the
+  irrelevant context from the current conversation after the fork point.
+
+If you would like to read more about context management in general, check out this
+[great entry on Anthropic's blog](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
+
+## Using Claude Code Subagents to manage context
+
+Claude Code has introduced the concept of [subagents](https://docs.claude.com/en/docs/claude-code/sub-agents) that help
+automate some of the methods above that are used for managing context. Essentially a subagent is an agent that can be
+invoked during an existing session either automatically (if the model selects it by description, similar to MCP) or
+manually using the `@` symbol and the agent's name. When this happens, the subagent will have its own context window and
+execution loop.
+
+<figure>
+  <img src={imgAgentManifest.src} alt="Frontmatter of a subagent definition" />
+  <figcaption>An agent definition</figcaption>
+</figure>
+
+You can think of a subagent as an LLM function call:
+
+- **Arguments:** When invoked the coordinator passes the agent its own prompt and task list that is tailored towards its
+  specific responsibilities.
+- **Execution scope:** It can then do work in a regular agentic flow separate from your current conversation using its
+  own context window and only the tools it has been specifically granted permission to use.
+- **Return value:** Once it has completed its task list it can return a concise resulting context that is included into
+  the original conversation (its return, not viewable by default but available using `ctrl-o`).
+
+Compared to the context management methods above this process as a whole combines aspects of: RAG-style targeted
+retrieval (grabbing relevant information at runtime), tool-use isolation (encapsulating tool usage in a separate
+context), conversation splitting (running in its own agentic loop), and context compaction (returning summaries rather
+than transcripts).
+
+<figure>
+  <img src={imgAgentDocResearcher.src} alt="Example usage of a subagent doing research" />
+  <figcaption>Example usage of custom @agent-docs-researcher</figcaption>
+</figure>
+
+The agent can be created using `/agents` and either be manually specified or automatically generated from a basic
+prompt. There's also some built-in agents (such as `@agent-general-purpose`) if you are hoping to manage context bloat
+but don't really need an agent tailored toward a specific purpose.
+
+## Downsides of Subagents in Claude Code
+
+So far we've discussed how a subagent can be used and the benefits it provides, but there are some downsides. Two that I
+can think of:
+
+1. **Lack of concurrency:** The subagents in Claude Code are not meant for concurrent execution. You might think that
+   spinning off a subagent (sounds like a thread, right?) would allow for multiple subagents. However, while they do
+   execute asynchronously, any commands sent while the subagent is working will be queued. If you want concurrency
+   you'll need separate conversations using some sort of git worktrees + terminal multiplexer + note sharing through the
+   filesystem workflow. _Note: this may not be true for subagents executed using the
+   [Claude Agent SDK](https://docs.claude.com/en/api/agent-sdk/subagents)_
+2. **Lack of insight:** While you can see and approve tool usage, its thinking and its general agentic loop will be
+   obscured from you. By default, a subagent will expose almost no details about the context happening within. However,
+   using `ctrl-o` to expand your message history does allow you to see the context that the subagent included in your
+   conversation, such as its prompt and its summary results.
+
+## Use cases
+
+In my mind, subagents are useful for either very context expensive tasks or very targeted but tangential tasks.
+
+For instance, I like to use my `@agent-docs-planner` in planning mode to do web searches, web fetches, and various other
+things that load a lot of data. This makes sure that the task I'm starting has the most up-to-date information. I'll
+have the agent summarize the documentation it finds in a way that doesn't bloat my context straight out of the gate in
+the way it would if I included all the documentation, but at the same time gives the model up-to-date information that
+may have not been present during the model's initial training.
+
+During implementation, it may make sense to use a subagent for verifying work or doing some cross-cutting task that may
+be tangentially related to the current task. The decision on whether you would use a custom slash command or a subagent
+to do this work should be entirely dependent on whether the generated context would be relevant to your current
+conversation and whether you want insight into the work that is being performed.
