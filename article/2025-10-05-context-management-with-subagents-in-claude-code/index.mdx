@@ -110,16 +110,19 @@ but don't really need an agent tailored toward a specific purpose.
 So far we've discussed how a subagent can be used and the benefits it provides, but there are some downsides. Two that I
 can think of:
 
-1. **Lack of concurrency:** The subagents in Claude Code are not meant for concurrent execution. You might think that
-   spinning off a subagent (sounds like a thread, right?) would allow for multiple subagents. However, while they do
-   execute asynchronously, any commands sent while the subagent is working will be queued. If you want concurrency
-   you'll need separate conversations using some sort of git worktrees + terminal multiplexer + note sharing through the
-   filesystem workflow. _Note: this may not be true for subagents executed using the
-   [Claude Agent SDK](https://docs.claude.com/en/api/agent-sdk/subagents)_
-2. **Lack of insight:** While you can see and approve tool usage, its thinking and its general agentic loop will be
+1. **Lack of insight:** While you can see and approve tool usage, its thinking and its general agentic loop will be
    obscured from you. By default, a subagent will expose almost no details about the context happening within. However,
    using `ctrl-o` to expand your message history does allow you to see the context that the subagent included in your
    conversation, such as its prompt and its summary results.
+2. **Lack of concurrency management:** This subagent feature in Claude Code is not meant for managing concurrent
+   execution. You might think that spinning off a subagent (sounds like a thread, right?) would mean these are _meant_
+   for running multiple subagents at the same time; and in-fact, if you ask Claude Code to use "subagents" to do some
+   concurrent tasks it may use the Task Tool to start multiple instances and do just that. However the type of subagent
+   discussed in this article, while they do execute asynchronously, will queue any commands sent while it is working. If
+   you want concurrency orchestration you'll need manage separate conversations, multiple "subagent" tasks with the Task
+   tool, or use some sort of git worktrees + terminal multiplexer + note sharing through the filesystem workflow. _Note:
+   this may not be true for subagents executed using the
+   [Claude Agent SDK](https://docs.claude.com/en/api/agent-sdk/subagents)_
 
 ## Use cases
 
