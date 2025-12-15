@@ -17,6 +17,7 @@ import imgContainerClaude from "./containerClaude.png";
 import TmuxDiagram from "./TmuxDiagram.astro";
 import imgLazvim from "./lazyvim.png";
 import imgWorkflow from "./workflow-explained.png";
+import StickyPinnable from "./StickyPinnable.astro";
 
 Before AI came along, my coding workflow was something like this: open up IntelliJ, checkout a branch, start coding.
 Sometimes I would switch between branches to review someone else's code, or maybe just to tackle a different problem for
@@ -233,11 +234,13 @@ Host dev.home
 Then getting into the container to start working is as simple as `ssh dev.home`.
 
 <div>
-<LightboxGallery selector="img" style="position: sticky; top: 10px; z-index: 999">
-  <figure>
-    <img src={imgWorkflow.src} alt="Inside the container" />
-  </figure>
-</LightboxGallery>
+<StickyPinnable top={10}>
+  <LightboxGallery selector="img">
+    <figure>
+      <img src={imgWorkflow.src} alt="Inside the container" />
+    </figure>
+  </LightboxGallery>
+</StickyPinnable>
 
 ### Directory structure
 

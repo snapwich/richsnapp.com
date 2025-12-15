@@ -1,0 +1,160 @@
+---
+interface Props {
+  top?: number;
+}
+const { top = 0 } = Astro.props;
+---
+
+<div class="sticky-sentinel"></div>
+<sticky-pinnable data-top={top}>
+  <slot />
+  <button class="pin-toggle" type="button" title="Unpin image">
+    <i class="fa fa-thumbtack pinned-icon"></i>
+    <i class="fa fa-thumbtack-slash unpinned-icon"></i>
+  </button>
+</sticky-pinnable>
+
+<style lang="less" define:vars={{ top: `${top}px` }}>
+  @import "styles/variables.less";
+
+  .sticky-sentinel {
+    position: absolute;
+    top: 0;
+    height: 1px;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  sticky-pinnable {
+    display: block;
+    position: sticky;
+    top: var(--top);
+    z-index: 999;
+  }
+
+  sticky-pinnable.unpinned {
+    position: relative;
+    top: auto;
+  }
+
+  .pin-toggle {
+    position: absolute;
+    bottom: 6px;
+    right: -60px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition:
+      opacity 1s ease,
+      transform 1s ease;
+    pointer-events: none;
+
+    @media (max-width: @screen-us-max) {
+      bottom: -15px;
+      right: -20px;
+    }
+    @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+      bottom: -15px;
+      right: -15px;
+    }
+    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      bottom: -15px;
+      right: -15px;
+    }
+    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      bottom: -15px;
+      right: -80px;
+    }
+    @media (min-width: @screen-lg-min) {
+      bottom: -15px;
+      right: -95px;
+    }
+  }
+
+  .pin-toggle:hover {
+    background: rgba(0, 0, 0, 1);
+  }
+
+  .pin-toggle.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .pin-toggle .unpinned-icon {
+    display: none;
+  }
+
+  .pin-toggle.unpinned .pinned-icon {
+    display: none;
+  }
+
+  .pin-toggle.unpinned .unpinned-icon {
+    display: inline;
+  }
+</style>
+
+<script>
+  class StickyPinnable extends HTMLElement {
+    private sentinel: HTMLElement | null = null;
+    private button: HTMLElement | null = null;
+    private observer: IntersectionObserver | null = null;
+    private isPinned = true;
+    private isStuck = false;
+
+    connectedCallback() {
+      this.sentinel = this.previousElementSibling as HTMLElement;
+      this.button = this.querySelector(".pin-toggle");
+
+      if (!this.sentinel?.classList.contains("sticky-sentinel") || !this.button)
+        return;
+
+      const top = parseInt(this.dataset.top || "0", 10);
+
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            this.isStuck = !entry.isIntersecting;
+            this.updateButtonVisibility();
+          });
+        },
+        {
+          rootMargin: `-${top + 1}px 0px 0px 0px`,
+          threshold: 0,
+        },
+      );
+
+      this.observer.observe(this.sentinel);
+
+      this.button.addEventListener("click", () => {
+        this.isPinned = !this.isPinned;
+        this.classList.toggle("unpinned", !this.isPinned);
+        this.button?.classList.toggle("unpinned", !this.isPinned);
+        this.button?.setAttribute(
+          "title",
+          this.isPinned ? "Unpin image" : "Pin image",
+        );
+        this.updateButtonVisibility();
+      });
+    }
+
+    private updateButtonVisibility() {
+      if (!this.button) return;
+      const shouldShow = this.isPinned ? this.isStuck : true;
+      this.button.classList.toggle("visible", shouldShow);
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+    }
+  }
+
+  customElements.define("sticky-pinnable", StickyPinnable);
+</script>
