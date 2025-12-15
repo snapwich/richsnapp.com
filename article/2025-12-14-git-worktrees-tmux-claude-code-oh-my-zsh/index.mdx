@@ -167,6 +167,8 @@ The [Dockerfile](https://github.com/snapwich/dev/blob/main/Dockerfile) for this 
 container I recommend forking both the dev and dotfiles repos, updating the `Dockerfile` to point at your dotfiles fork,
 and then replacing [my public keys](https://github.com/snapwich/dotfiles/tree/master/ssh/.ssh) with your own.
 
+{/*prettier-ignore*/}
+<figure class="center">
 ```sh
 git clone git@github.com:snapwich/dev
 # build the container in the background
@@ -174,6 +176,7 @@ git clone git@github.com:snapwich/dev
 # see the container running
 docker ps
 ```
+</figure>
 
 You can also add other `./ssh/authorized_keys` by using `./dsh` to shell into the container and copy/paste them or
 transfer them using [scp](https://man7.org/linux/man-pages/man1/scp.1.html). `./dsh` puts you in the container as the
@@ -184,17 +187,18 @@ limited `sudo` and you cannot ssh into the container as `root`, both for securit
 At this point, I clone any repositories I am working on inside the container, add any necessary env files, and install
 any applications that I haven't added to my `Dockerfile`.
 
+{/*prettier-ignore*/}
+<figure class="center">
 ```sh
 ssh dev@localhost -p 2222
 mkdir -p ~/repos/richsnapp.com
 git clone git@github.com:snapwich/richsnapp.com ~/repos/richsnapp.com/default
 npm install -g pnpm @anthropic-ai/claude-code
 
-# the first time you run nvim it will install all the plugins specified in ~/.config/nvim/lazy-lock.json.
-nvim
-# add necessary env files
-nvim ~/.zprofile.d/anthropic-keys.sh
-```
+nvim ~/.zprofile.d/anthropic-keys.sh # add necessary env files
+
+````
+</figure>
 
 ### SSH Config
 
@@ -202,22 +206,29 @@ When ssh'ing into the container you'll probably want to forward some ports from 
 disable log output (to prevent channel errors interfering with `nvim` and such), specify the custom port, etc... It
 would normally look something like this:
 
+{/*prettier-ignore*/}
+<figure class="center">
 ```sh
 ssh -p 2222 -q dev@localhost -L 4321:localhost:4321
-```
+````
+
+</figure>
 
 Rather than remember to type all that I usually set up an
 [ssh config](https://man7.org/linux/man-pages/man5/ssh_config.5.html) that I bind to a DNS name that I create for my
 container. In `~/.ssh/config` on the HOST machine:
 
-```sshconfig
+{/*prettier-ignore*/}
+<figure class="center">
+```plaintext
 Host dev.home
   User dev
   Port 2222
-  IdentityFile ~/.ssh/id_rsa # or whatever private key you associated with authorized_keys on the container
+  IdentityFile ~/.ssh/id_rsa # private key associated with authorized_keys in container
   LogLevel QUIET
   LocalForward 4321 localhost:4321
 ```
+</figure>
 
 Then getting into the container to start working is as simple as `ssh dev.home`.
 
@@ -298,11 +309,14 @@ in, etc. Just some convenience methods.
 
 Working on a feature in an isolated workspace is as simple as:
 
+{/*prettier-ignore*/}
+<figure class="center">
 ```sh
 gwtmux feature-branch
 pnpm install
 nvim .
 ```
+</figure>
 
 </div>
 
@@ -396,7 +410,7 @@ If you have easy solutions for either of those things let me know, but they're o
   </dd>
   <dt>What `tmux` hotkeys should I have memorized?</dt>
   <dd>
-```
+```plaintext
 ctrl-b c        # create new tmux window (if you want to make one outside of gwtmux)
 ctrl-b %        # create vertical split tmux pane
 ctrl-b "        # create horizontal split tmux pane
