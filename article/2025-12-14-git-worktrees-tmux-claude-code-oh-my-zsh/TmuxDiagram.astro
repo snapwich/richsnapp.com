@@ -1,0 +1,108 @@
+<style>
+  .tmux-diagram {
+    display: grid;
+    color: var(--text-heading) !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    font-family: Courier New;
+    text-align: center;
+  }
+
+  .tmux-session {
+    display: grid;
+    gap: 0.5rem;
+    background: #6fa8dc;
+    border: 1px solid #333;
+    padding: 0.5rem;
+  }
+
+  .tmux-session-label {
+    font-weight: 600;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .tmux-windows {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .tmux-window {
+    display: grid;
+    gap: 0.25rem;
+    background: #e06666;
+    border: 1px solid #333;
+    padding: 0.5rem;
+  }
+
+  .tmux-window-label {
+    font-weight: 600;
+    padding: 0.25rem;
+  }
+
+  .tmux-panes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.25rem;
+  }
+
+  .tmux-panes--single {
+    grid-template-columns: 1fr;
+  }
+
+  .tmux-pane {
+    background: #6aa84f;
+    border: 1px solid #333;
+    padding: 0.5rem 0.25rem;
+    font-weight: 600;
+  }
+
+  .tmux-server {
+    grid-column: 1 / -1;
+    background: #333;
+    color: #ddd;
+    padding: 1rem 0.25rem;
+    font-weight: 700;
+  }
+</style>
+
+<div class="tmux-diagram">
+  <div class="tmux-session">
+    <div class="tmux-windows">
+      <div class="tmux-window">
+        <div class="tmux-panes tmux-panes--single">
+          <div class="tmux-pane">pane</div>
+        </div>
+        <div class="tmux-window-label">window</div>
+      </div>
+      <div class="tmux-window">
+        <div class="tmux-panes">
+          <div class="tmux-pane">pane</div>
+          <div class="tmux-pane">pane</div>
+        </div>
+        <div class="tmux-window-label">window</div>
+      </div>
+      <div class="tmux-window hidden-xs hidden-md">
+        <div class="tmux-panes">
+          <div class="tmux-pane">pane</div>
+          <div class="tmux-pane">pane</div>
+        </div>
+        <div class="tmux-window-label">window</div>
+      </div>
+    </div>
+    <div class="tmux-session-label">session</div>
+  </div>
+  <div class="tmux-session">
+    <div class="tmux-windows">
+      <div class="tmux-window">
+        <div class="tmux-panes tmux-panes--single">
+          <div class="tmux-pane">pane</div>
+        </div>
+        <div class="tmux-window-label">window</div>
+      </div>
+    </div>
+    <div class="tmux-session-label">session</div>
+  </div>
+  <div class="tmux-server">tmux server</div>
+</div>
