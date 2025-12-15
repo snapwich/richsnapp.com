@@ -146,8 +146,9 @@ I have my container set up to use [Oh My Zsh](https://ohmyz.sh/) for my shell, b
 the correct places. You should be using a dotfile manager like Stow (or [chezmoi](https://www.chezmoi.io/)) whether
 you're working in a container or not as it allows you to easily version control your configuration files.
 
-Of particular note is my `.zprofile` with `.zprofile.d/` directory pattern which allows you to add various env files to
-the container when started for the first time, such as anthropic keys.
+Of particular note is [my .zprofile](https://github.com/snapwich/dotfiles/blob/master/zsh/.zprofile) with
+[.zprofile.d/ directory pattern](https://github.com/search?q=repo%3Asnapwich%2Fdotfiles%20.zprofile.d&type=code) which
+allows you to add various env files to the container when started for the first time, such as anthropic keys.
 
 ### The Agents (Claude Code in my case)
 
