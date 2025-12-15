@@ -6,9 +6,9 @@ const { top = 0 } = Astro.props;
 ---
 
 <div class="sticky-sentinel"></div>
-<sticky-pinnable data-top={top}>
+<sticky-pinnable class="unpinned" data-top={top}>
   <slot />
-  <button class="pin-toggle" type="button" title="Unpin image">
+  <button class="pin-toggle unpinned visible" type="button" title="Pin image">
     <i class="fa fa-thumbtack pinned-icon"></i>
     <i class="fa fa-thumbtack-slash unpinned-icon"></i>
   </button>
@@ -106,7 +106,7 @@ const { top = 0 } = Astro.props;
     private sentinel: HTMLElement | null = null;
     private button: HTMLElement | null = null;
     private observer: IntersectionObserver | null = null;
-    private isPinned = true;
+    private isPinned = false;
     private isStuck = false;
 
     connectedCallback() {

@@ -322,8 +322,6 @@ nvim .
 ```
 </figure>
 
-</div>
-
 ## Putting it all together
 
 Once everything is running I usually treat my container as a long-running dev machine. I have worked out of the same
@@ -349,6 +347,8 @@ If you restart your host machine your docker container will be in a stopped stat
 restart the dev container with `./up.sh` in the [dev repo](https://github.com/snapwich/dev). This requires that the
 previous ssh-agent socket (usually in `/tmp`) that was originally used to create the container exists so it can be
 re-mounted. `./up.sh` will walk you through this process of recreating it if it doesn't exist.
+
+</div>
 
 ## Downsides
 
