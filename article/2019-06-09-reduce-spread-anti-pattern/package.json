@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "dependencies": {
+    "highcharts": "catalog:highcharts",
+    "highcharts-vue": "catalog:highcharts"
+  },
+  "peerDependencies": {
+    "vue": "catalog:vue3"
+  }
+}
