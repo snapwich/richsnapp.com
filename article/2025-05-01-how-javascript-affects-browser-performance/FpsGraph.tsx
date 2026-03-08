@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 import { FPSCounter } from "./FPSCounter.tsx";
-import styles from "./styles.module.less";
+import styles from "./styles.module.scss";
 
 // import Box from "@mui/material/Box";
 

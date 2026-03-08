@@ -1,4 +1,4 @@
-@import "styles/variables.less";
+@use "styles/variables" as *;
 
 .gallery {
   img {
@@ -10,7 +10,7 @@
     justify-content: space-between;
     gap: 15px;
   }
-  @media (max-width: @screen-us-max) {
+  @media (max-width: $screen-us-max) {
     figure {
       padding-left: 15px;
     }

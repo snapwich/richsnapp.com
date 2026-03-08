@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
-import styles from "./styles.module.less";
+import styles from "./styles.module.scss";
 
 export function FPSCounter({
   onUpdate,

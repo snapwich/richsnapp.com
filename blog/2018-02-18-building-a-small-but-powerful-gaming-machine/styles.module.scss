@@ -1,4 +1,4 @@
-@import "styles/variables.less";
+@use "styles/variables" as *;
 
 .gallery {
   img {
@@ -7,7 +7,7 @@
   div {
     display: flex;
     margin-top: 15px;
-    @media (max-width: @screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       margin-left: 15px;
     }
     img {

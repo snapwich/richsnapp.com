@@ -1,15 +1,15 @@
 
-@import "styles/variables.less";
+@use "styles/variables" as *;
 
 .lightbulb {
   position: relative;
   display: flex;
-  color: @gray;
+  color: $gray;
   font-size: 100px;
   margin: 40px auto 20px;
   width: 60px;
   :global(html.dark) & {
-    color: @gray-lighter;
+    color: $gray-lighter;
   }
   svg {
     left: -32px;
@@ -26,7 +26,7 @@
     code {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom: 1px solid @gray-lighter;
+      border-bottom: 1px solid $gray-lighter;
     }
   }
 }
@@ -76,7 +76,7 @@
     width: 240px;
     height: 30px;
     border: 0;
-    border-bottom: 2px solid @gray-lighter;
+    border-bottom: 2px solid $gray-lighter;
   }
   button {
     position: relative;

@@ -5,7 +5,7 @@ import {
 } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import React, { useMemo, useEffect } from "react";
-import styles from "./styles.module.less";
+import styles from "./styles.module.scss";
 
 declare global {
   interface WindowEventMap {

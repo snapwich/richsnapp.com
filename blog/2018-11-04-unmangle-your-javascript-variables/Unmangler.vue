@@ -44,11 +44,11 @@
   </div>
 </template>
 
-<style lang="less" scoped>
-@import (reference) "styles/site.less";
+<style lang="scss" scoped>
+@use "styles/variables" as *;
 
 .unminify {
-  font-family: @font-family-sans-serif2;
+  font-family: $font-family-sans-serif2;
   .error {
     font-size: 14px;
   }
@@ -80,7 +80,7 @@
         background-color: #eee;
       }
       &.disabled {
-        .opacity(0.65);
+        opacity: 0.65;
       }
       .dropdown-menu {
         font-size: 14px;

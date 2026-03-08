@@ -14,8 +14,8 @@ const { top = 0 } = Astro.props;
   </button>
 </sticky-pinnable>
 
-<style lang="less" define:vars={{ top: `${top}px` }}>
-  @import "styles/variables.less";
+<style lang="scss" define:vars={{ top: `${top}px` }}>
+  @use "styles/variables" as *;
 
   .sticky-sentinel {
     position: absolute;
@@ -57,23 +57,23 @@ const { top = 0 } = Astro.props;
       transform 1s ease;
     pointer-events: none;
 
-    @media (max-width: @screen-us-max) {
+    @media (max-width: $screen-us-max) {
       bottom: -15px;
       right: -20px;
     }
-    @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+    @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max) {
       bottom: -15px;
       right: -15px;
     }
-    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
       bottom: -15px;
       right: -15px;
     }
-    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
       bottom: -15px;
       right: -80px;
     }
-    @media (min-width: @screen-lg-min) {
+    @media (min-width: $screen-lg-min) {
       bottom: -15px;
       right: -95px;
     }

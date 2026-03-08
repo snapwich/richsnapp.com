@@ -2,13 +2,13 @@
 const { dim = [] } = Astro.props;
 ---
 
-<style lang="less">
-  @import (reference) "styles/site.less";
+<style lang="scss">
+  @use "styles/variables" as *;
 
   .pipeline {
     display: grid;
     font-size: 20px;
-    @media (max-width: @screen-xs-max) {
+    @media (max-width: $screen-xs-max) {
       font-size: 14px;
     }
     grid-gap: 2px;
