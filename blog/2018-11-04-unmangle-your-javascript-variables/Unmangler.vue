@@ -6,26 +6,45 @@
     <figure class="right">
       <div>
         <header>
-          <div>
-            <button class="btn btn-sm" @click="update">Unminify</button>
-          </div>
-          <div class="input-group" :class="{ disabled: !rename }">
-            <span class="input-group-addon" @click="rename = !rename">
-              <input type="checkbox" v-model="rename" /> unmangle
-              <span class="hidden-xs">variable names</span> as a
+          <button class="btn btn-sm" @click="update">Unminify</button>
+          <div
+            class="input-group input-group-sm"
+            :class="{ disabled: !rename }"
+          >
+            <div class="input-group-text" @click="rename = !rename">
+              <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                v-model="rename"
+              />
+            </div>
+            <span class="input-group-text">
+              <span
+                >unmangle
+                <span class="d-none d-sm-inline">variable names</span> as
+                a</span
+              >
             </span>
-            <div class="input-group-btn" :class="{ open: typeOpen }">
+            <div class="dropdown-wrapper">
               <button
                 type="button"
                 :disabled="!rename"
-                class="btn btn-sm dropdown-toggle"
+                class="btn btn-outline-secondary dropdown-toggle"
                 @click="typeOpen = true"
               >
                 {{ typeSelected }}
               </button>
-              <ul class="dropdown-menu">
-                <li><a @click="typeSelected = 'script'">script</a></li>
-                <li><a @click="typeSelected = 'module'">module</a></li>
+              <ul class="dropdown-menu" :class="{ show: typeOpen }">
+                <li>
+                  <a class="dropdown-item" @click="typeSelected = 'script'"
+                    >script</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" @click="typeSelected = 'module'"
+                    >module</a
+                  >
+                </li>
               </ul>
             </div>
           </div>
@@ -62,7 +81,7 @@
     padding: 5px 10px;
     background-color: #f7f7f7;
     border-bottom: 1px solid #ddd;
-    align-items: flex-end;
+    align-items: center;
     font-size: 14px;
     html.dark & {
       background-color: var(--background-color);
@@ -70,26 +89,43 @@
     }
     .btn {
       font-size: 14px;
-      border: 1px solid #ccc;
     }
     .input-group {
-      width: 1%;
-      .input-group-addon {
-        cursor: pointer;
-        font-size: 14px;
-        background-color: #eee;
-      }
+      width: auto;
       &.disabled {
         opacity: 0.65;
       }
-      .dropdown-menu {
-        font-size: 14px;
+      .input-group-text {
+        html.dark & {
+          background-color: #393b3f;
+          color: var(--text-color);
+          border-color: #495057;
+        }
+      }
+      .btn {
+        html.dark & {
+          color: var(--text-color) !important;
+          background-color: #6c747c !important;
+          border-color: #495057 !important;
+        }
+      }
+      .dropdown-wrapper {
+        position: relative;
+        display: flex;
+        margin-left: calc(var(--bs-border-width, 1px) * -1);
+        .btn {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+        .dropdown-menu {
+          top: 100%;
+        }
       }
     }
     a {
       cursor: pointer;
     }
-    div {
+    & > div {
       flex: 0 0 auto;
       margin-left: 20px;
     }
@@ -126,7 +162,7 @@ export default defineComponent({
   mounted() {
     window.addEventListener("click", this.close, true);
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener("click", this.close, true);
   },
   components: {
