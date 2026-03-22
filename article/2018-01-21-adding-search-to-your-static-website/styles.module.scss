@@ -4,13 +4,10 @@
 .lightbulb {
   position: relative;
   display: flex;
-  color: $gray;
+  color: light-dark(#{$gray}, #{$gray-lighter});
   font-size: 100px;
   margin: 40px auto 20px;
   width: 60px;
-  :global(html.dark) & {
-    color: $gray-lighter;
-  }
   svg {
     left: -32px;
     top: -45px;

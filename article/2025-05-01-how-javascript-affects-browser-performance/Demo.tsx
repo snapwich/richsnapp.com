@@ -15,7 +15,7 @@ declare global {
 
 export function Demo({ children }: { children: React.ReactNode }) {
   const theme = createTheme({
-    cssVariables: { colorSchemeSelector: "class" },
+    cssVariables: { colorSchemeSelector: '[data-theme="%s"]' },
     colorSchemes: { dark: true },
     typography: {
       button: {
@@ -27,7 +27,7 @@ export function Demo({ children }: { children: React.ReactNode }) {
   const initialMode = useMemo(
     () =>
       typeof document !== "undefined" &&
-      document.documentElement.classList.contains("dark")
+      document.documentElement.dataset.theme === "dark"
         ? "dark"
         : "light",
     [],

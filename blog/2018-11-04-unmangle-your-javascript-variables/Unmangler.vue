@@ -80,12 +80,11 @@
     display: flex;
     padding: 5px 10px;
     background-color: #f7f7f7;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--color-border-subtle);
     align-items: center;
     font-size: 14px;
-    html.dark & {
+    [data-theme="dark"] & {
       background-color: var(--background-color);
-      border-bottom: 1px solid #393b3f;
     }
     .btn {
       font-size: 14px;
@@ -96,17 +95,17 @@
         opacity: 0.65;
       }
       .input-group-text {
-        html.dark & {
-          background-color: #393b3f;
+        [data-theme="dark"] & {
+          background-color: var(--color-surface-raised);
           color: var(--text-color);
-          border-color: #495057;
+          border-color: var(--color-border);
         }
       }
       .btn {
-        html.dark & {
-          color: var(--text-color) !important;
-          background-color: #6c747c !important;
-          border-color: #495057 !important;
+        [data-theme="dark"] & {
+          color: var(--text-color);
+          background-color: var(--color-btn-secondary-bg);
+          border-color: var(--color-border);
         }
       }
       .dropdown-wrapper {
