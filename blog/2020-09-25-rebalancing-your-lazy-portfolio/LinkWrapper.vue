@@ -2,7 +2,7 @@
 .link-area {
   margin: 20px 0;
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--color-surface-input);
 }
 </style>
 
