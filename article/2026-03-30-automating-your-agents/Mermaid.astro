@@ -1,0 +1,60 @@
+---
+interface Props {
+  chart: string;
+}
+const { chart } = Astro.props;
+---
+
+<div class="mermaid-container" data-chart={chart}></div>
+
+<script>
+  import mermaid from "mermaid";
+
+  let idCounter = 0;
+
+  function initMermaid() {
+    document
+      .querySelectorAll<HTMLElement>(".mermaid-container")
+      .forEach((el) => {
+        if (el.dataset.rendered) return;
+        el.dataset.rendered = "true";
+
+        const chart = el.dataset.chart!;
+        let renderCount = 0;
+        const baseId = `mermaid-${idCounter++}`;
+
+        // Render inside shadow DOM to isolate from page styles
+        const shadow = el.attachShadow({ mode: "open" });
+        const root = document.createElement("div");
+        root.style.textAlign = "center";
+        shadow.appendChild(root);
+
+        function getMermaidTheme(theme?: string) {
+          const t = theme ?? document.documentElement.dataset.theme;
+          return t === "dark" ? "dark" : "default";
+        }
+
+        async function render(theme?: string) {
+          const id = `${baseId}-${renderCount++}`;
+          // Full reset + reinitialize to force theme change
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: getMermaidTheme(theme),
+            flowchart: { useMaxWidth: false, padding: 10 },
+          });
+          root.innerHTML = "";
+          const { svg } = await mermaid.render(id, chart);
+          root.innerHTML = svg;
+        }
+
+        render();
+
+        // theme-change fires before DOM attribute updates, so read from event.detail
+        window.addEventListener("theme-change", ((e: CustomEvent) => {
+          render(e.detail);
+        }) as EventListener);
+      });
+  }
+
+  initMermaid();
+</script>
