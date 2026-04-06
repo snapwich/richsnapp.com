@@ -67,7 +67,7 @@
 @use "styles/variables" as *;
 
 .unminify {
-  font-family: $font-family-sans-serif2;
+  font-family: $font-body;
   .error {
     font-size: 14px;
   }
