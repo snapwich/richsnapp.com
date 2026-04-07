@@ -11,9 +11,7 @@ tldr:
 image: ./just-ralph.png
 ---
 
-import { Picture, Image } from "astro:assets";
 import imgJrInProgress from "./jr-in-progress.png";
-import imgJustRalph from "./just-ralph.png";
 import Mermaid from "./Mermaid.astro";
 
 If you've been paying attention to the agentic coding space lately, you've probably come across the concept of a "ralph
@@ -22,7 +20,7 @@ straightforward: put your AI coding agent in a bash loop and let it churn throug
 file that tells the agent how to read its state from disk (a task list, a progress file, specs), pick the next piece of
 work, implement it, commit, and exit. Then the loop restarts, the agent reads the updated state, and does it again.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```sh
 while true; do claude --print PROMPT.md; done
@@ -33,10 +31,6 @@ Fire and forget. You kick it off before bed and wake up to a pile of commits.
 
 It's a compelling idea, so I started experimenting with it and learned a bit about why ralph loops have the reputation
 they do.
-
-<figure class="right">
-  <Image src={imgJustRalph} alt="Just... Ralph" layout="full-width" />
-</figure>
 
 ## The problem with Ralph
 
@@ -120,7 +114,7 @@ jr organizes work into two levels: **features** and **tasks**. A feature maps to
 Tasks are sequential units of work within the worktree that map to a series of commits.
 [More on that here](https://github.com/snapwich/jr/blob/main/docs/workflow.md) if you're interested.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="right small">
 ```
 ric-3km6 [closed][feature] E2E Test Baseline
@@ -178,7 +172,7 @@ jr needs to work. jr uses [GNU stow](https://www.gnu.org/software/stow/) (a syml
 project. This means jr's config and commands stay in sync with jr itself so that updating jr updates all your jr
 projects.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="right small">
 ```
 my-project/                    # project root
@@ -340,7 +334,7 @@ but have separate sets of recipes that they use. Using recipes helps the subagen
 For you, the `justfile` is your main source of control. Approve a feature, request changes with feedback, inspect
 tickets, check the status of running work, watch agent sessions, manage worktrees.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure>
 ```sh
 Available recipes:

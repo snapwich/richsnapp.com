@@ -84,7 +84,7 @@
     align-items: center;
     font-size: 14px;
     [data-theme="dark"] & {
-      background-color: var(--background-color);
+      background-color: var(--bg);
     }
     .btn {
       font-size: 14px;
@@ -97,15 +97,15 @@
       .input-group-text {
         [data-theme="dark"] & {
           background-color: var(--color-surface-raised);
-          color: var(--text-color);
-          border-color: var(--color-border);
+          color: var(--text);
+          border-color: var(--border);
         }
       }
       .btn {
         [data-theme="dark"] & {
-          color: var(--text-color);
+          color: var(--text);
           background-color: var(--color-btn-secondary-bg);
-          border-color: var(--color-border);
+          border-color: var(--border);
         }
       }
       .dropdown-wrapper {

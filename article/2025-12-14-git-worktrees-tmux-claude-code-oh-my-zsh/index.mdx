@@ -12,7 +12,6 @@ image: ./architect.jpg
 ---
 
 import LightboxGallery from "components/LightboxGallery.astro";
-import imgArchitect from "./architect.jpg";
 import imgContainerClaude from "./containerClaude.png";
 import TmuxDiagram from "./TmuxDiagram.astro";
 import imgLazvim from "./lazyvim.png";
@@ -29,11 +28,6 @@ given moment, each with their own associated terminals, IDEs, and AI agents.
 Things have changed for me, to say the least. Looking things up on Google and Stack Overflow is a rarity. I'm planning
 with Claude, I'm asking questions and getting answers from Claude; and when it comes time to code, Claude is doing most
 of the coding. I have become The Architect, commanding my army of AI Agents through a terminal multiplexer.
-
-<figure>
-  <img src={imgArchitect.src} alt="The Architect from The Matrix in front of his monitors" />
-  <figcaption>The Architect in The Matrix monitoring his Claude agents (probably)</figcaption>
-</figure>
 
 ## The What and Why of the Tools
 
@@ -169,7 +163,7 @@ The [Dockerfile](https://github.com/snapwich/dev/blob/main/Dockerfile) for this 
 container I recommend forking both the dev and dotfiles repos, updating the `Dockerfile` to point at your dotfiles fork,
 and then replacing [my public keys](https://github.com/snapwich/dotfiles/tree/master/ssh/.ssh) with your own.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```sh
 git clone git@github.com:snapwich/dev
@@ -189,7 +183,7 @@ limited `sudo` and you cannot ssh into the container as `root`, both for securit
 At this point, I clone any repositories I am working on inside the container, add any necessary env files, and install
 any applications that I haven't added to my `Dockerfile`.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```sh
 ssh dev@localhost -p 2222
@@ -220,7 +214,7 @@ Rather than remember to type all that I usually set up an
 [ssh config](https://man7.org/linux/man-pages/man5/ssh_config.5.html) that I bind to a DNS name that I create for my
 container. In `~/.ssh/config` on the HOST machine:
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```plaintext
 Host dev.home
@@ -250,7 +244,7 @@ repo's name. This is the ideal structure I've found for working with `git worktr
 actual repository usually checked out to `main` / `master` (but it can be checked out to anything, think of it as a
 temporary scratch workspace) with all the additional worktrees being siblings to `default`.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="smallest right">
 ```
 repos
@@ -313,7 +307,7 @@ in, etc. Just some convenience methods.
 
 Working on a feature in an isolated workspace is as simple as:
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```sh
 gwtmux feature-branch

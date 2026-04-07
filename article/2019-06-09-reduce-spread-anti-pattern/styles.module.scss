@@ -25,7 +25,7 @@
   section:nth-child(2) span:nth-child(4) span,
   section:nth-child(2) span:nth-child(8) span {
     // !important required to override Shiki's inline style on code spans
-    background-color: light-dark(yellow, var(--text-underline)) !important;
+    background-color: light-dark(yellow, var(--accent-light)) !important;
   }
 }
 .good code::before {
