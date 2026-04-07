@@ -8,7 +8,7 @@ tags:
 image: ./preview-todo.png
 ---
 
-import DarkModeSwitch from "components/DarkModeSwitch.astro";
+import ThemeToggle from "components/ThemeToggle.astro";
 import ImgTodo from "./todo.png";
 import ImgSameSame from "./same-same.gif";
 
@@ -60,7 +60,7 @@ Some additional things I did since I was already deep into the refactoring groov
 - Switched from NPM to [PNPM](https://pnpm.io/) to allow specific pages to have specific dependencies and slim down my
   site's shared-bundle sizes.
 - Migrated my existing Vue components from Vue 2 to Vue 3.
-- Added light / dark mode (click on the sun/moon to try it out!) <DarkModeSwitch />
+- Added light / dark mode (try it out!) <ThemeToggle />
 - Added images to the preview blurbs on my index and tag pages.
 - Refactored my layouts into more
   [composable parts vs a master layout that used conditional rendering](https://en.wikipedia.org/wiki/Composition_over_inheritance).
