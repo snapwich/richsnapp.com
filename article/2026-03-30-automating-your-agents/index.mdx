@@ -207,7 +207,7 @@ an actual blocker that an agentic orchestrator may ignore or "solve" itself. Thi
 makes it easy to iteratively improve the workflow as well as write a test suite that allows AI to iterate on and improve
 the loop over time.
 
-<figure class="right">
+<figure class="right borderless">
   <Mermaid
     chart={`flowchart TD
     A[Ready work] --> B[Start agent]
@@ -245,7 +245,7 @@ reviewer approves or an iteration limit is hit, at which point it escalates to t
 
 In the future I plan to make this pipeline configurable with custom subagents and flows.
 
-<figure class="center">
+<figure class="center borderless">
   <Mermaid
     chart={`flowchart LR
     A[Coder] -->|commit| B[Reviewer]
@@ -292,7 +292,7 @@ or did it drift?
 It considers dependent features as well. Does the current design as implemented meet the need of the features to come?
 Were there requirements missing from the plan that have now surfaced?
 
-<figure class="right small">
+<figure class="right small borderless">
   <Mermaid
     chart={`flowchart TD
     A[Tasks done] --> B[Architect]
