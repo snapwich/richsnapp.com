@@ -6,7 +6,9 @@
     <figure class="right">
       <div>
         <header>
-          <button class="btn btn-sm" @click="update">Unminify</button>
+          <button class="btn btn-sm btn-outline-secondary" @click="update">
+            Unminify
+          </button>
           <div
             class="input-group input-group-sm"
             :class="{ disabled: !rename }"
@@ -83,11 +85,15 @@
     border-bottom: 1px solid var(--color-border-subtle);
     align-items: center;
     font-size: 14px;
+    font-family: $font-heading;
     [data-theme="dark"] & {
       background-color: var(--bg);
     }
     .btn {
-      font-size: 14px;
+      font-size: inherit;
+    }
+    .input-group-text {
+      font-size: inherit;
     }
     .input-group {
       width: auto;
