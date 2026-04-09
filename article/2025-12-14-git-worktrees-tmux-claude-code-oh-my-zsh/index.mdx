@@ -17,7 +17,6 @@ import imgContainerClaude from "./containerClaude.png";
 import TmuxDiagram from "./TmuxDiagram.astro";
 import imgLazvim from "./lazyvim.png";
 import imgWorkflow from "./workflow-explained.png";
-import StickyPinnable from "./StickyPinnable.astro";
 
 Before AI came along, my coding workflow was something like this: open up IntelliJ, checkout a branch, start coding.
 Sometimes I would switch between branches to review someone else's code, or maybe just to tackle a different problem for
@@ -164,7 +163,7 @@ The [Dockerfile](https://github.com/snapwich/dev/blob/main/Dockerfile) for this 
 container I recommend forking both the dev and dotfiles repos, updating the `Dockerfile` to point at your dotfiles fork,
 and then replacing [my public keys](https://github.com/snapwich/dotfiles/tree/master/ssh/.ssh) with your own.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```sh
 git clone git@github.com:snapwich/dev
@@ -184,7 +183,7 @@ limited `sudo` and you cannot ssh into the container as `root`, both for securit
 At this point, I clone any repositories I am working on inside the container, add any necessary env files, and install
 any applications that I haven't added to my `Dockerfile`.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```sh
 ssh dev@localhost -p 2222
@@ -215,7 +214,7 @@ Rather than remember to type all that I usually set up an
 [ssh config](https://man7.org/linux/man-pages/man5/ssh_config.5.html) that I bind to a DNS name that I create for my
 container. In `~/.ssh/config` on the HOST machine:
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```plaintext
 Host dev.home
@@ -229,14 +228,13 @@ Host dev.home
 
 Then getting into the container to start working is as simple as `ssh dev.home`.
 
+<LightboxGallery selector="img">
+  <figure class="center">
+    <img src={imgWorkflow.src} data-src={imgWorkflow.src} alt="Inside the container" />
+  </figure>
+</LightboxGallery>
+
 <div>
-<StickyPinnable top={10}>
-  <LightboxGallery selector="img">
-    <figure>
-      <img src={imgWorkflow.src} alt="Inside the container" />
-    </figure>
-  </LightboxGallery>
-</StickyPinnable>
 
 ### Directory structure
 
@@ -245,7 +243,7 @@ repo's name. This is the ideal structure I've found for working with `git worktr
 actual repository usually checked out to `main` / `master` (but it can be checked out to anything, think of it as a
 temporary scratch workspace) with all the additional worktrees being siblings to `default`.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="smallest right">
 ```
 repos
@@ -308,7 +306,7 @@ in, etc. Just some convenience methods.
 
 Working on a feature in an isolated workspace is as simple as:
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center">
 ```sh
 gwtmux feature-branch
