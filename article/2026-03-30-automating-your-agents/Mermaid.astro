@@ -40,7 +40,7 @@ const { chart } = Astro.props;
           mermaid.initialize({
             startOnLoad: false,
             theme: getMermaidTheme(theme),
-            flowchart: { useMaxWidth: false, padding: 10 },
+            flowchart: { useMaxWidth: true, padding: 6 },
           });
           root.innerHTML = "";
           const { svg } = await mermaid.render(id, chart);
