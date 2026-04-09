@@ -96,7 +96,7 @@ retrieval (grabbing relevant information at runtime), tool-use isolation (encaps
 context), conversation splitting (running in its own agentic loop), and context compaction (returning summaries rather
 than transcripts).
 
-<figure class="center">
+<figure class="center borderless">
   <img src={imgAgentDocResearcher.src} alt="Example usage of a subagent doing research" />
   <figcaption>Example usage of custom @agent-docs-researcher</figcaption>
 </figure>
@@ -114,15 +114,20 @@ can think of:
    obscured from you. By default, a subagent will expose almost no details about the context happening within. However,
    using `ctrl-o` to expand your message history does allow you to see the context that the subagent included in your
    conversation, such as its prompt and its summary results.
-2. **Lack of concurrency management:** This subagent feature in Claude Code is not meant for managing concurrent
+2. ~**Lack of concurrency management:** This subagent feature in Claude Code is not meant for managing concurrent
    execution. You might think that spinning off a subagent (sounds like a thread, right?) would mean these are _meant_
    for running multiple subagents at the same time; and in-fact, if you ask Claude Code to use "subagents" to do some
    concurrent tasks it may use the Task Tool to start multiple instances and do just that. However the type of subagent
    discussed in this article, while they do execute asynchronously, will queue any commands sent while it is working. If
    you want concurrency orchestration you'll need to manage separate conversations, multiple "subagent" tasks with the
-   Task tool, or use some sort of git worktrees + terminal multiplexer + note sharing through the filesystem workflow.
-   _Note: this may not be true for subagents executed using the
-   [Claude Agent SDK](https://docs.claude.com/en/api/agent-sdk/subagents)_
+   Task tool, or use some sort of git worktrees + terminal multiplexer + note sharing through the filesystem workflow.~
+
+<div class="alert alert-info">
+  **Update**: As I've worked with subagents more I've come to understand them as being a primitive for execution as
+  opposed to a concurrency manager themselves. Given that, Claude Code itself can utilize subagents to facilitate
+  concurrency as part of Tasks or Swarms. I also use them as a primitive in my own orchestration layer that allows for
+  concurrency, [I wrote about it here](/article/2026/03-30-automating-your-agents).
+</div>
 
 ## Use cases
 
