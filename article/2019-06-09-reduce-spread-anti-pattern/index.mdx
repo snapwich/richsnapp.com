@@ -36,11 +36,18 @@ let items = [
   // ...
 ];
 
-// use reduce to build the new map into an accumulator // we'll refer to this as "reduce mutate" let result =
-items.reduce((acc, item) => { acc[item.name] = item.value; return acc; }, {})
+// use reduce to build the new map into an accumulator 
+// we'll refer to this as "reduce mutate" 
+let result = items.reduce((acc, item) => { 
+  acc[item.name] = item.value; 
+  return acc; 
+}, {});
 
-// equivalent as as a for loop let result = {}; for(let item of items) { result[item.name] = item.value; }
-
+// equivalent as as a for loop 
+let result = {}; 
+for(let item of items) { 
+  result[item.name] = item.value;
+}
 ````
 </figure>
 
