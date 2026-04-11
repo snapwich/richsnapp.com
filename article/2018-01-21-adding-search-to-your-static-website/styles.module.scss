@@ -1,20 +1,4 @@
-
 @use "styles/variables" as *;
-
-.lightbulb {
-  position: relative;
-  display: flex;
-  color: light-dark(#{$gray}, #{$gray-lighter});
-  font-size: 100px;
-  margin: 40px auto 20px;
-  width: 60px;
-  svg {
-    left: -32px;
-    top: -45px;
-    position: absolute;
-    color: #edef3f;
-  }
-}
 
 .search-figure {
   & > div {
@@ -38,7 +22,6 @@
       margin: 0 !important;
     }
   }
-
 }
 
 .styled-search {

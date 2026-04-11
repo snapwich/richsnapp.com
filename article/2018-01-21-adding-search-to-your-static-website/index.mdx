@@ -14,6 +14,7 @@ import imgGoogleDom from "./google-dom.png";
 import imgStyledSearch from "./styled-search.png";
 import imgIphoneSearch from "./iphone-search.png";
 import GoogleSearch from "components/GoogleSearch/GoogleSearch.vue";
+import { Icon } from "astro-icon/components";
 import styles from "./styles.module.scss";
 
 One of the most important features that a website can have is a method to effectively search its content. There's no
@@ -155,7 +156,7 @@ widget... Couldn't it end up looking even worse than it did originally? Couldn't
 <div class={`bordered-content ${styles["messed-up-search"]}`}>
   <input disabled type="text" id="messedUpSearchText" />
   <button disabled>
-    <i class="fa fa-search"></i>
+    <Icon name="fa6-solid:magnifying-glass" />
   </button>
 </div>
 
@@ -179,20 +180,7 @@ this basically renders our search results as a giant popup advertisement on mobi
 have a configuration option that allows us to open the search results in a separate page... but then how is that better
 than just manually redirecting our visitors to a google search results page to begin with?
 
-<div class={styles["lightbulb"]} v-repaint>
-  <svg width="140" height="140">
-    <line stroke-linecap="round" stroke-width="5" stroke="currentColor" x1="40" y1="110" x2="20" y2="125" />
-    <line stroke-linecap="round" stroke-width="5" stroke="currentColor" x1="30" y1="80" x2="5" y2="80" />
-    <line stroke-linecap="round" stroke-width="5" stroke="currentColor" x1="40" y1="50" x2="20" y2="35" />
-    <line stroke-linecap="round" stroke-width="5" stroke="currentColor" x1="70" y1="15" x2="70" y2="40" />
-    <line stroke-linecap="round" stroke-width="5" stroke="currentColor" x1="100" y1="50" x2="120" y2="35" />
-    <line stroke-linecap="round" stroke-width="5" stroke="currentColor" x1="110" y1="80" x2="135" y2="80" />
-    <line stroke-linecap="round" stroke-width="5" stroke="currentColor" x1="100" y1="110" x2="120" y2="125" />
-  </svg>
-  <i class="fa-regular fa-lightbulb"></i>
-</div>
-
-Wait, that's _genius_! We can give our visitors the same experience they would have had with Google Custom Search
+Or... We can give our visitors the same experience they would have had with Google Custom Search
 (without any of the headache and third-party code inclusions) by just creating a search box that manually redirects them
 to a pre-populated Google search results page.
 
