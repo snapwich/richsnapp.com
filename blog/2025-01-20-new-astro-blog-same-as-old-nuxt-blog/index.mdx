@@ -9,6 +9,7 @@ image: ./preview-todo.png
 heroDisabled: true
 ---
 
+import { Image } from "astro:assets";
 import ThemeToggle from "components/ThemeToggle.astro";
 import ImgTodo from "./todo.png";
 import ImgSameSame from "./same-same.gif";
@@ -36,7 +37,7 @@ specific pages.
 ## The process
 
 <figure class="smallest right">
-  <img src={ImgTodo.src} alt="Todoist list" />
+  <Image src={ImgTodo} alt="Todoist list" />
   <figcaption>Todoist list</figcaption>
 </figure>
 

@@ -6,6 +6,7 @@ tags:
 image: ./subagents.png
 ---
 
+import { Image } from "astro:assets";
 import imgSelfAttention from "./self-attention.png";
 import imgAgentManifest from "./agent-manifest.png";
 import imgAgentDocResearcher from "./agent-doc-researcher.png";
@@ -24,7 +25,7 @@ of the transformer architecture (introduced in 2017 and later popularized by Cha
 [attention](<https://en.wikipedia.org/wiki/Attention_(machine_learning)>) to generate its output.
 
 <figure class="smallest right">
-  <img src={imgSelfAttention.src} alt="RNN vs Self-attention" />
+  <Image src={imgSelfAttention} alt="RNN vs Self-attention" />
   <figcaption>
     from [Self-Attention and Positional
     Encoding](https://classic.d2l.ai/chapter_attention-mechanisms/self-attention-and-positional-encoding.html)
@@ -79,7 +80,7 @@ manually using the `@` symbol and the agent's name. When this happens, the subag
 execution loop.
 
 <figure class="right">
-  <img src={imgAgentManifest.src} alt="Frontmatter of a subagent definition" />
+  <Image src={imgAgentManifest} alt="Frontmatter of a subagent definition" />
   <figcaption>An agent definition</figcaption>
 </figure>
 
@@ -98,7 +99,7 @@ context), conversation splitting (running in its own agentic loop), and context 
 than transcripts).
 
 <figure class="center borderless">
-  <img src={imgAgentDocResearcher.src} alt="Example usage of a subagent doing research" />
+  <Image src={imgAgentDocResearcher} alt="Example usage of a subagent doing research" />
   <figcaption>Example usage of custom @agent-docs-researcher</figcaption>
 </figure>
 

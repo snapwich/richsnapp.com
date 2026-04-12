@@ -8,6 +8,7 @@ imageSmall: null
 heroCaption: Yup, it's a Google Product
 ---
 
+import { Image } from "astro:assets";
 import imgGoogleSiteSearch from "./google-site-search.png";
 import imgFirstAttempt from "./first-attempt.png";
 import imgGoogleDom from "./google-dom.png";
@@ -51,7 +52,7 @@ We'll create a little spot at the top of our page for the &lt;gcse:searchbox-onl
 javascript snippet somewhere into the document, and away we go!
 
 <figure>
-  <img src={imgFirstAttempt.src} />
+  <Image src={imgFirstAttempt} alt="" />
   <figcaption>Behold the beauty of Goggle Costom Sorch!</figcaption>
 </figure>
 
@@ -59,7 +60,7 @@ It's a thing of beauty, isn't it...? I figured it'd take some work to get it loo
 just looks plain broken... Let's dig into the DOM that was added to our site to see what created this monstrosity.
 
 <figure class="scale">
-  <img src={imgGoogleDom.src} />
+  <Image src={imgGoogleDom} alt="" />
 </figure>
 
 The first thing you may notice is that this thing was inserted directly into our page. No
@@ -170,7 +171,7 @@ pretty good on my desktop machine. Let's see how it looks on a mobile device... 
 sort of responsive behavior.
 
 <figure class="center scale">
-  <img src={imgIphoneSearch.src} />
+  <Image src={imgIphoneSearch} alt="" />
   <figcaption>Mobile leaves something to be desired</figcaption>
 </figure>
 

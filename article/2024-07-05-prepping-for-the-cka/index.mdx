@@ -17,6 +17,7 @@ image: ./IMG_9504.jpg
 heroForce: true
 ---
 
+import { Image } from "astro:assets";
 import img9504 from "./IMG_9504.jpg";
 import LightboxGallery from "components/LightboxGallery.astro";
 
@@ -74,7 +75,7 @@ bare-metal clusters and who is interested in doing the sysadmin and networking s
 
 <LightboxGallery selector={"img"}>
   <figure class="small right">
-    <img src={img9504.src} data-src={img9504.src} />
+    <Image src={img9504} alt="" data-src={img9504.src} />
     <figcaption>My Raspberry Pi cluster</figcaption>
   </figure>
 </LightboxGallery>

@@ -6,6 +6,7 @@ tags:
 image: ./desktop-install.png
 ---
 
+import { Image } from "astro:assets";
 import imgDesktopInstall from "./desktop-install.png";
 
 I've been working on a new section of the site for a bit and it's now ready to go. In the past I've received numerous
@@ -17,7 +18,7 @@ Apps](https://web.dev/progressive-web-apps/) that have offline support. To insta
 (including Edge) visit the tool's page you're interested in and click the install button in the address bar.
 
 <figure class="right small">
-  <img src={imgDesktopInstall.src} />
+  <Image src={imgDesktopInstall} alt="" />
   <figcaption>Install button as seen in Chrome.</figcaption>
 </figure>
 

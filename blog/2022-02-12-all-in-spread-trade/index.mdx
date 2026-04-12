@@ -10,6 +10,7 @@ imageSmall: ./stonks.jpg
 heroVideo: "https://www.youtube.com/embed/ejW4f6liOS8?start=473"
 ---
 
+import { Image } from "astro:assets";
 import styles from "./styles.module.scss";
 import imgSpreadEqual from "./spread-equal.png";
 import imgSpreadMarketCap from "./spread-market-cap.png";
@@ -90,7 +91,7 @@ on Nov 8th of last year with any amount of funds (using the provided stock ratio
 2.42%** as of Feb 12th (today).
 
 <figure>
-  <img src={imgSpreadMarketCap.src} />
+  <Image src={imgSpreadMarketCap} alt="" />
   <figcaption>The market cap weighted spread trade's performance since inception</figcaption>
 </figure>
 
@@ -98,7 +99,7 @@ As you can see from the chart, this position has never been positive but _has_ b
 less-than-stellar earnings reports from FB and NFLX.
 
 <figure class="small right">
-  <img v-img src={imgSpreadEqual.src} />
+  <Image src={imgSpreadEqual} alt="" />
   <figcaption>The equal-weighted spread trade's performance since inception</figcaption>
 </figure>
 

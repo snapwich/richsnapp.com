@@ -7,6 +7,7 @@ tags:
 image: ./k8s-cluster.jpg
 ---
 
+import { Image } from "astro:assets";
 import LightboxGallery from "components/LightboxGallery.astro";
 import imgK8sCluster from "./k8s-cluster.jpg";
 
@@ -23,7 +24,7 @@ you are in the market and are so inclined, just change the details first ;)
 
 <LightboxGallery selector="img">
   <figure class="small right">
-    <img src={imgK8sCluster.src} data-src={imgK8sCluster.src} />
+    <Image src={imgK8sCluster} alt="" data-src={imgK8sCluster.src} />
     <figcaption>With k8s anything can be a node, including all my miscellaneous hardware!</figcaption>
   </figure>
 </LightboxGallery>

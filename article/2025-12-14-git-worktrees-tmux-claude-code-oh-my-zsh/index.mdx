@@ -12,6 +12,7 @@ image: ./architect.jpg
 heroCaption: The Architect in The Matrix monitoring his Claude agents (probably)
 ---
 
+import { Image } from "astro:assets";
 import LightboxGallery from "components/LightboxGallery.astro";
 import imgContainerClaude from "./containerClaude.png";
 import TmuxDiagram from "./TmuxDiagram.astro";
@@ -53,7 +54,7 @@ them at once with each of them capable of calamity at any moment.
 
 <figure class="smallest right">
   <div style="background: #111; padding: 10px; text-align: center;">
-    <img src={imgContainerClaude.src} alt="Claude in jail" />
+    <Image src={imgContainerClaude} alt="Claude in jail" />
   </div>
   <figcaption>Trust is built in a container</figcaption>
 </figure>
@@ -125,7 +126,7 @@ pretty is not one of those things).
 
 <LightboxGallery selector="img">
   <figure class="center">
-    <img src={imgLazvim.src} data-src={imgLazvim.src} alt="Screenshot of LazyVim from lazyvim.org" />
+    <Image src={imgLazvim} data-src={imgLazvim.src} alt="Screenshot of LazyVim from lazyvim.org" />
     <figcaption>Screenshot of LazyVim from [lazyvim.org](https://www.lazyvim.org)</figcaption>
   </figure>
 </LightboxGallery>
@@ -230,7 +231,7 @@ Then getting into the container to start working is as simple as `ssh dev.home`.
 
 <LightboxGallery selector="img">
   <figure class="center">
-    <img src={imgWorkflow.src} data-src={imgWorkflow.src} alt="Inside the container" />
+    <Image src={imgWorkflow} data-src={imgWorkflow.src} alt="Inside the container" />
   </figure>
 </LightboxGallery>
 
