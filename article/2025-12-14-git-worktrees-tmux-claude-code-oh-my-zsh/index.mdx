@@ -53,10 +53,10 @@ If you're using the workflow I'm about to outline, this problem is only amplifie
 them at once with each of them capable of calamity at any moment.
 
 <figure class="smallest right">
-  <div style="background: #111; padding: 10px; text-align: center;">
-    <Image src={imgContainerClaude} alt="Claude in jail" />
-  </div>
-  <figcaption>Trust is built in a container</figcaption>
+<div style="background: #111; padding: 10px; text-align: center;">
+  <Image src={imgContainerClaude} alt="Claude in jail" />
+</div>
+<figcaption>Trust is built in a container</figcaption>
 </figure>
 
 The name of the game is risk mitigation. You want to make sure that
@@ -89,7 +89,7 @@ in `feature-branch`. Because of this git worktrees will be essential.
 ### Tmux
 
 <figure class="small right borderless">
-  <TmuxDiagram />
+<TmuxDiagram />
 </figure>
 
 [`tmux`](https://github.com/tmux/tmux/wiki) is a
@@ -108,7 +108,7 @@ highlight the appropriate tab/window when an agent has finished a task or is ask
 feature for being truly efficient with your concurrently running agents.
 
 <div class="alert alert-info">
-  <b>Note:</b> In Claude Code, sending notifications as terminal bells needs to be configured in `/config`.
+<b>Note:</b> In Claude Code, sending notifications as terminal bells needs to be configured in `/config`.
 </div>
 
 ### Neovim
@@ -125,10 +125,10 @@ features that were present in something like Intellij or VS Code. Some things it
 pretty is not one of those things).
 
 <LightboxGallery selector="img">
-  <figure class="center">
-    <Image src={imgLazvim} data-src={imgLazvim.src} alt="Screenshot of LazyVim from lazyvim.org" />
-    <figcaption>Screenshot of LazyVim from [lazyvim.org](https://www.lazyvim.org)</figcaption>
-  </figure>
+<figure class="center">
+  <Image src={imgLazvim} data-src={imgLazvim.src} alt="Screenshot of LazyVim from lazyvim.org" />
+  <figcaption>Screenshot of LazyVim from [lazyvim.org](https://www.lazyvim.org)</figcaption>
+</figure>
 </LightboxGallery>
 
 I personally started with [LazyVim](https://www.lazyvim.org/) as a base and then customized from there. I would highly
@@ -219,23 +219,21 @@ container. In `~/.ssh/config` on the HOST machine:
 <figure class="center">
 ```plaintext
 Host dev.home
-  User dev
-  Port 2222
-  IdentityFile ~/.ssh/id_rsa # private key associated with authorized_keys in container
-  LogLevel QUIET
-  LocalForward 4321 localhost:4321
+User dev
+Port 2222
+IdentityFile ~/.ssh/id_rsa # private key associated with authorized_keys in container
+LogLevel QUIET
+LocalForward 4321 localhost:4321
 ```
 </figure>
 
 Then getting into the container to start working is as simple as `ssh dev.home`.
 
 <LightboxGallery selector="img">
-  <figure class="center">
-    <Image src={imgWorkflow} data-src={imgWorkflow.src} alt="Inside the container" />
-  </figure>
+<figure class="center">
+  <Image src={imgWorkflow} data-src={imgWorkflow.src} alt="Inside the container" />
+</figure>
 </LightboxGallery>
-
-<div>
 
 ### Directory structure
 
@@ -249,11 +247,11 @@ temporary scratch workspace) with all the additional worktrees being siblings to
 ```
 repos
 └── richsnapp.com
-    ├── PR-123-create-thing
-    ├── PR-124-fix-thing
-    ├── PR-125-review-thing
-    ├── default
-    └── docs
+  ├── PR-123-create-thing
+  ├── PR-124-fix-thing
+  ├── PR-125-review-thing
+  ├── default
+  └── docs
 ```
 </figure>
 
@@ -341,8 +339,6 @@ If you restart your host machine your docker container will be in a stopped stat
 restart the dev container with `./up.sh` in the [dev repo](https://github.com/snapwich/dev). This requires that the
 previous ssh-agent socket (usually in `/tmp`) that was originally used to create the container exists so it can be
 re-mounted. `./up.sh` will walk you through this process of recreating it if it doesn't exist.
-
-</div>
 
 ## Downsides
 
