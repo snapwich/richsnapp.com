@@ -18,6 +18,7 @@ import imgContainerClaude from "./containerClaude.png";
 import TmuxDiagram from "./TmuxDiagram.astro";
 import imgLazvim from "./lazyvim.png";
 import imgWorkflow from "./workflow-explained.png";
+import Step from "components/Step.astro";
 
 Before AI came along, my coding workflow was something like this: open up IntelliJ, checkout a branch, start coding.
 Sometimes I would switch between branches to review someone else's code, or maybe just to tackle a different problem for
@@ -53,10 +54,10 @@ If you're using the workflow I'm about to outline, this problem is only amplifie
 them at once with each of them capable of calamity at any moment.
 
 <figure class="smallest right">
-<div style="background: #111; padding: 10px; text-align: center;">
-  <Image src={imgContainerClaude} alt="Claude in jail" />
-</div>
-<figcaption>Trust is built in a container</figcaption>
+  <div style="background: #111; padding: 10px; text-align: center;">
+    <Image src={imgContainerClaude} alt="Claude in jail" />
+  </div>
+  <figcaption>Trust is built in a container</figcaption>
 </figure>
 
 The name of the game is risk mitigation. You want to make sure that
@@ -89,7 +90,7 @@ in `feature-branch`. Because of this git worktrees will be essential.
 ### Tmux
 
 <figure class="small right borderless">
-<TmuxDiagram />
+  <TmuxDiagram />
 </figure>
 
 [`tmux`](https://github.com/tmux/tmux/wiki) is a
@@ -108,7 +109,7 @@ highlight the appropriate tab/window when an agent has finished a task or is ask
 feature for being truly efficient with your concurrently running agents.
 
 <div class="alert alert-info">
-<b>Note:</b> In Claude Code, sending notifications as terminal bells needs to be configured in `/config`.
+  <b>Note:</b> In Claude Code, sending notifications as terminal bells needs to be configured in `/config`.
 </div>
 
 ### Neovim
@@ -125,10 +126,10 @@ features that were present in something like Intellij or VS Code. Some things it
 pretty is not one of those things).
 
 <LightboxGallery selector="img">
-<figure class="center">
-  <Image src={imgLazvim} data-src={imgLazvim.src} alt="Screenshot of LazyVim from lazyvim.org" />
-  <figcaption>Screenshot of LazyVim from [lazyvim.org](https://www.lazyvim.org)</figcaption>
-</figure>
+  <figure class="center">
+    <Image src={imgLazvim} data-src={imgLazvim.src} alt="Screenshot of LazyVim from lazyvim.org" />
+    <figcaption>Screenshot of LazyVim from [lazyvim.org](https://www.lazyvim.org)</figcaption>
+  </figure>
 </LightboxGallery>
 
 I personally started with [LazyVim](https://www.lazyvim.org/) as a base and then customized from there. I would highly
@@ -164,7 +165,7 @@ The [Dockerfile](https://github.com/snapwich/dev/blob/main/Dockerfile) for this 
 container I recommend forking both the dev and dotfiles repos, updating the `Dockerfile` to point at your dotfiles fork,
 and then replacing [my public keys](https://github.com/snapwich/dotfiles/tree/master/ssh/.ssh) with your own.
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure class="center">
 ```sh
 git clone git@github.com:snapwich/dev
@@ -184,7 +185,7 @@ limited `sudo` and you cannot ssh into the container as `root`, both for securit
 At this point, I clone any repositories I am working on inside the container, add any necessary env files, and install
 any applications that I haven't added to my `Dockerfile`.
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure class="center">
 ```sh
 ssh dev@localhost -p 2222
@@ -215,7 +216,7 @@ Rather than remember to type all that I usually set up an
 [ssh config](https://man7.org/linux/man-pages/man5/ssh_config.5.html) that I bind to a DNS name that I create for my
 container. In `~/.ssh/config` on the HOST machine:
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure class="center">
 ```plaintext
 Host dev.home
@@ -229,11 +230,7 @@ LocalForward 4321 localhost:4321
 
 Then getting into the container to start working is as simple as `ssh dev.home`.
 
-<LightboxGallery selector="img">
-<figure class="center">
-  <Image src={imgWorkflow} data-src={imgWorkflow.src} alt="Inside the container" />
-</figure>
-</LightboxGallery>
+<Step image={imgWorkflow} textPosition="right">
 
 ### Directory structure
 
@@ -242,8 +239,8 @@ repo's name. This is the ideal structure I've found for working with `git worktr
 actual repository usually checked out to `main` / `master` (but it can be checked out to anything, think of it as a
 temporary scratch workspace) with all the additional worktrees being siblings to `default`.
 
-{/* prettier-ignore */}
-<figure class="smallest right">
+{/*prettier-ignore*/}
+<figure class="center">
 ```
 repos
 └── richsnapp.com
@@ -270,6 +267,8 @@ that come up with using a bare repo in a way it was not intended. I've found usi
 structure with a regular git repo is a lot easier to work with and really doesn't have any downsides other than
 requiring `git -C default` if you want to run git commands outside of the worktrees (which is rare).
 
+</Step>
+
 ### The `gwtmux` command
 
 The general rule that is followed for managing multiple worktrees at the same time is that 1 tmux window = 1 git
@@ -284,20 +283,26 @@ at the start of every shell session making it available for use.
 
 Its usage is pretty simple and the commands can be run from any tmux window.
 
+{/*prettier-ignore*/}
+<figure class="center">
 ```sh
-# create tmux window and worktree named after github PR (requires authenticated `gh` cli)
+# create tmux window and worktree named after github PR
+# (requires authenticated `gh` cli)
 gwtmux 123
-# create tmux window, worktree, and branch (will create branch if doesn't exist, or checkout if exists locally or remotely)
+# create tmux window, worktree, and branch
+# will create branch or checkout if exists local or remote
 gwtmux my-local-or-remote-branch
-# close current tmux window (but leave worktree folder and branch)
+# close tmux window (but leave worktree and branch)
 gwtmux -d
-# close current tmux window and delete worktree folder (but leave branch)
+# close tmux window and delete worktree
 gwtmux -dw
-# close current tmux window, delete worktree folder, safely delete branch
-gwtmux -dwb # or gwtmux -dwB to force delete unmerged branch
-# close current tmux window, delete worktree folder, delete local and remote branch
+# close tmux window, delete worktree, safe delete branch
+gwtmux -dwb # gwtmux -dwB to force delete unmerged branch
+# close tmux window, delete worktree, delete branches
+# (local and remote)
 gwtmux -dwBr
 ```
+</figure>
 
 That's the gist of it. You can also do some other things like `gwtmux` with no arguments to open ALL the worktrees that
 exist in a folder with each in their own tmux window; or `gwtmux -d <name>` to close windows other than the one you're
@@ -305,7 +310,7 @@ in, etc. Just some convenience methods.
 
 Working on a feature in an isolated workspace is as simple as:
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure class="center">
 ```sh
 gwtmux feature-branch
