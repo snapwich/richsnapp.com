@@ -21,7 +21,7 @@ straightforward: put your AI coding agent in a bash loop and let it churn throug
 file that tells the agent how to read its state from disk (a task list, a progress file, specs), pick the next piece of
 work, implement it, commit, and exit. Then the loop restarts, the agent reads the updated state, and does it again.
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure class="center">
 ```sh
 while true; do claude --print PROMPT.md; done
@@ -115,7 +115,7 @@ jr organizes work into two levels: **features** and **tasks**. A feature maps to
 Tasks are sequential units of work within the worktree that map to a series of commits.
 [More on that here](https://github.com/snapwich/jr/blob/main/docs/workflow.md) if you're interested.
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure class="right small">
 ```
 ric-3km6 [closed][feature] E2E Test Baseline
@@ -173,7 +173,7 @@ jr needs to work. jr uses [GNU stow](https://www.gnu.org/software/stow/) (a syml
 project. This means jr's config and commands stay in sync with jr itself so that updating jr updates all your jr
 projects.
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure class="right small">
 ```
 my-project/                    # project root
@@ -208,7 +208,7 @@ an actual blocker that an agentic orchestrator may ignore or "solve" itself. Thi
 makes it easy to iteratively improve the workflow as well as write a test suite that allows AI to iterate on and improve
 the loop over time.
 
-<figure class="right borderless">
+<figure class="right borderless center-micro">
   <Mermaid
     chart={`flowchart TD
     A[Ready work] --> B[Start agent]
@@ -246,7 +246,7 @@ reviewer approves or an iteration limit is hit, at which point it escalates to t
 
 In the future I plan to make this pipeline configurable with custom subagents and flows.
 
-<figure class="center borderless">
+<figure class="center borderless center-micro">
   <Mermaid
     chart={`flowchart LR
     A[Coder] -->|commit| B[Reviewer]
@@ -293,7 +293,7 @@ or did it drift?
 It considers dependent features as well. Does the current design as implemented meet the need of the features to come?
 Were there requirements missing from the plan that have now surfaced?
 
-<figure class="right smallest borderless">
+<figure class="right smallest borderless center-micro">
   <Mermaid
     chart={`flowchart TD
     A[Tasks done] --> B[Architect]
@@ -335,7 +335,7 @@ but have separate sets of recipes that they use. Using recipes helps the subagen
 For you, the `justfile` is your main source of control. Approve a feature, request changes with feedback, inspect
 tickets, check the status of running work, watch agent sessions, manage worktrees.
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure>
 ```sh
 Available recipes:
