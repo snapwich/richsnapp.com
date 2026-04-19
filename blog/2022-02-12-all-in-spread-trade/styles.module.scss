@@ -23,6 +23,6 @@
 
 @media (min-width: $screen-lg-min) {
   .spreadsheet {
-    width: 1000px;
+    width: min(1000px, 120%);
   }
 }
