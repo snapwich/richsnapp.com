@@ -11,23 +11,22 @@ tldr:
   - The 20% breaks into three categories&colon; planning gaps (25%), taste iteration (44%), and bugs/drift (31%)
 ---
 
+import { Image } from "astro:assets";
 import Steps from "components/Steps.astro";
 import Step from "components/Step.astro";
 import Mermaid from "./Mermaid.astro";
-import imgConceptVsFinal from "./concept-vs-final.png";
+import imgHomepageConcept from "./homepage-concept.png";
 import imgJustTree from "./refactor-tree.png";
-import imgSpecTable from "./spec-table.png";
-import imgSmallMixin from "./small-mixin.png";
 import imgHomepageBefore from "./homepage-before.png";
 import imgHomepageAfter from "./homepage-after.png";
 import imgHomepagePrePolish from "./homepage-pre-polish.png";
-import imgToc from "./toc.png";
-import imgFontSwap from "./font-swap.png";
-import imgEyebrow from "./eyebrow.png";
-import imgTopbarConcept from "./topbar-concept.png";
+import imgNoTableOfContents from "./no-table-of-contents.jpg";
+import imgHamburger from "./hamburger.jpg";
 import imgFigureReview from "./figure-review.png";
-import imgThemeToggle from "./theme-toggle.png";
-import imgScreenshotDiff from "./screenshot-diff.png";
+import imgThemeToggle from "./theme-toggle-iteration.png";
+import imgDiffShift from "./diff-shift.png";
+import imgBeforeShift from "./before-shift.png";
+import imgAfterShift from "./after-shift.png";
 
 This site looks different. If you're a returning reader you've probably noticed by now. I redesigned the whole thing
 using [jr](/article/2026/automating-your-agents), the AI orchestrator I built on top of Claude Code, git worktrees, and
@@ -57,7 +56,7 @@ short, where my own taste needed to take over, and where the automated process i
 
 <Steps>
 
-<Step image={imgConceptVsFinal}  alt="Concept design HTML side by side with the final site" label="The Concept Designs">
+<Step image={imgHomepageConcept}  alt="Concept design HTML side by side with the final site" label="The Concept Designs">
 
 The concept designs were created as static HTML files in Claude's web interface. They defined the color system,
 typography, component structure, and layout grid. Agents referenced specific line numbers in these files when
@@ -74,27 +73,7 @@ components, homepage). Two more features — Style Cleanup and Code Simplificati
 
 </Step>
 
-<Step image={imgSpecTable} alt="Components with vs without concept specs and their post-merge fix counts" label="Spec Depth = Quality">
-
-The clearest signal from the retros: **spec completeness directly predicted output quality.** Components with complete
-concept specs (Pill, PostCard, Breadcrumb, PrevNextNav) needed zero post-merge corrections. Components where the spec
-covered appearance but not behavior or accessibility (ThemeToggle) or had no spec at all (ShareButtons) accounted for 7
-post-merge fix commits. The ThemeToggle looked right in the topbar but broke when embedded in articles — duplicate IDs,
-missing contrast, broken focus states. None of that was in the concept.
-
-</Step>
-
-<Step image={imgSmallMixin} textPosition="left" alt="Ticket note showing the .small() mixin discovery during LESS to Sass migration" label="Agent Discovery">
-
-The agents made genuinely non-obvious discoveries. During the LESS-to-Sass migration, a coder found that a `.small()`
-mixin call inside a `figure` block resolved to a _local_ `&.small` selector — float and width styling — not Bootstrap's
-global `.small` which only sets font-size. The agent recognized the distinction, created a dedicated
-`@mixin figure-small()` in Sass, and left a note on the parent ticket so sibling tasks would know. This is the kind of
-careful, context-aware work the orchestrator produces when the task is well-scoped.
-
-</Step>
-
-<Step image={imgHomepageBefore} imageAfter={imgHomepageAfter} alt="The homepage after the orchestrator built it in 15 minutes" label="Homepage in 15 Minutes">
+<Step image={imgHomepageBefore} imageAfter={imgHomepagePrePolish} alt="The homepage after the orchestrator built it in 15 minutes" label="Homepage in 15 Minutes">
 
 The homepage was a clean orchestrator win. The coder and reviewer completed 813 lines across two tasks in about 15
 minutes. The data layer was cleanly extracted with 13 unit tests, and the coder independently recognized that
@@ -110,7 +89,7 @@ image sizing — all required manual iteration. The orchestrator built the struc
 
 </Step>
 
-<Step image={imgToc} alt="Table of Contents in the sidebar and mobile hamburger menu" label="Planning Gap: The Missing ToC">
+<Step image={imgNoTableOfContents} alt="Table of Contents in the sidebar and mobile hamburger menu" label="Planning Gap: The Missing ToC">
 
 The biggest planning gap: the Table of Contents. Six commits, ~750 lines, integrated into both the sidebar and the
 mobile hamburger menu. It wasn't in any plan, concept, or ticket. The original site didn't even have one. But the
@@ -122,28 +101,7 @@ its new font API.
 
 </Step>
 
-<Step image={imgFontSwap} textPosition="left" alt="Before and after comparison of Newsreader vs Noto Serif body text" label="Taste: The Font Swap">
-
-The plan specified Newsreader for body text. The agents implemented it faithfully. Five days later, I switched back to
-Noto Serif — it didn't read the way I expected at body sizes. Alongside the swap, I noticed the darker background in
-dark mode made text harder to read without reducing the font weight to 300 — a common luminosity problem. I scoped the
-lighter weight to article body text only. Roboto Mono needed to stay at 400 in dark mode or it looked too thin. These
-are typographic nuances that emerge from sustained reading, not from a mockup.
-
-</Step>
-
-<Step image={imgEyebrow} alt="Avatar covering the eyebrow on desktop, and mobile view with eyebrow visible" label="Taste: The Eyebrow">
-
-I opted for a photo avatar instead of the concept's gradient circle — I wanted the site to feel more personal. I made it
-larger at desktop sizes (120px) with a scroll-driven shrink animation. But this covered the "Latest Article" eyebrow
-text above the hero, so I removed it. On mobile, where the avatar was already small, the hero article lost its
-distinction without the label. So I added it back at smaller breakpoints only. Two commits — the first deleted 70 lines,
-the second added 70 lines — for responsive behavior that only made sense after seeing the avatar interaction at multiple
-viewport sizes.
-
-</Step>
-
-<Step image={imgTopbarConcept} textPosition="left" alt="Concept topbar design compared to the shipped 757-line Topbar component" label="Taste: Concept vs Reality">
+<Step image={imgHamburger} textPosition="left" alt="Concept topbar design compared to the shipped 757-line Topbar component" caption="Original mock. Hamburger added later with Claude. Designed custom dropdown." label="Taste: Concept vs Reality">
 
 The concept topbar was 52 lines of CSS — a static mockup with no hamburger menu, no responsive behavior, no theme-aware
 avatars. The shipped Topbar component is 757 lines. The gap between "visual guide" and "implementable spec" was
@@ -152,13 +110,15 @@ exactly was painful; I went with what came out and refined from there.
 
 </Step>
 
-<Step image={imgFigureReview} alt="Figure system ticket notes showing 5 review rounds and architect self-diagnosis" label="Drift: Figure System Review">
+<Step image={imgFigureReview} alt="Figure system ticket notes showing 5 review rounds and architect self-diagnosis" label="Drift: Figure System Review" caption="Figure going outside of tablet viewport and displaying source code above it">
 
 The figure system was the highest-drama feature. Five review rounds before merging. The architect approved round one
-with "0 significant gaps" — I immediately found four visual bugs. The architect's self-diagnosis after round three: _"I
-should have been using the browser to inspect computed styles at specific breakpoints for each figure variant."_ Even
-after five rounds, eight more fix commits followed post-merge — including `astro-island` wrapper elements breaking CSS
-child selectors, a framework-specific interaction no plan anticipated.
+with "0 significant gaps" — I immediately found four visual bugs. The architect's self-diagnosis after round three:
+
+> I should have been using the browser to inspect computed styles at specific breakpoints for each figure variant
+
+Even after five rounds, eight more fix commits followed post-merge — including `astro-island` wrapper elements breaking
+CSS child selectors, a library-specific interaction no plan anticipated.
 
 </Step>
 
@@ -172,17 +132,28 @@ without noticing that different default breakpoint pixel values broke container 
 
 </Step>
 
-<Step image={imgScreenshotDiff} alt="Visual regression diff output showing expected vs actual screenshots" label="Screenshot Tests">
+<Step image={imgBeforeShift} imageAfter={imgAfterShift} alt="Visual regression diff output showing expected vs actual screenshots" label="Screenshot Tests" caption="What you see during a screenshot diff when a margin slightly changed">
 
-Screenshot tests (visual regression) were consistently bad for AI automation but useful for me as a human. The agents
-_ran_ them but couldn't meaningfully interpret hundreds of diffs — 280 out of 320 marked as "expected." Real regressions
-hid among expected changes. For me, making a scoped change and running before/after caught regressions on pages I
-wouldn't have checked manually. Same tool, different value — a human making a targeted change can evaluate a handful of
-diffs meaningfully, while an agent reviewing a wholesale redesign cannot.
+Running before/after screenshot tests were super helpful for me to catch regressions on all the pages I wouldn't have
+checked manually.
+
+<figure>
+  <Image src={imgDiffShift} alt="" />
+  <figcaption>What AI sees when a margin slightly changed</figcaption>
+</figure>
+
+Screenshot tests and visual regression were consistently bad and rarely caught with AI automation. The agents _ran_ them
+but couldn't meaningfully interpret hundreds of diffs with slight differences. Real regressions hid among expected
+changes.
 
 </Step>
 
 </Steps>
+
+> "Screenshot diff images were read at too low resolution to identify specific CSS issues — I should have been using the
+> browser to inspect computed styles at specific breakpoints for each figure variant."
+>
+> &mdash; Architect Reviewer Agent
 
 ## Takeaways
 
@@ -195,7 +166,7 @@ making correct autonomous architectural decisions. Meaningful code review catchi
 
 After the orchestrated features merged, 81 manual commits followed. They break into three categories:
 
-{/* prettier-ignore */}
+{/*prettier-ignore*/}
 <figure class="center borderless center-micro">
 <Mermaid chart={`pie title 81 Post-Orchestration Commits
     "Planning Gaps" : 20
