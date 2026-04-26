@@ -1,0 +1,307 @@
+---
+// Two-row stacked-bar comparison for the cleanup breakdown.
+// Both rows show the same three categories so the inversion
+// (planning gaps small in commits, large in LoC) reads at a glance.
+---
+
+<figure
+  class="cleanup-breakdown center borderless center-micro"
+  aria-label="Cleanup work breakdown by commit count and lines of code"
+>
+  <div class="cb-body">
+    <div class="cb-row">
+      <div class="row-meta">
+        <span class="row-label">By commits</span>
+        <span class="row-total"><b>90</b><em>total</em></span>
+      </div>
+      <div
+        class="bar-stack"
+        role="img"
+        aria-label="By commits: 20% planning gaps (18), 37% taste (33), 43% bugs and drift (39)"
+      >
+        <div class="anno-track">
+          <div class="anno anno--planning" style="--w: 20%;">
+            <span class="anno-cat">Planning gaps</span>
+            <span class="anno-pct">20%</span>
+            <span class="anno-meta">18 commits</span>
+          </div>
+          <div class="anno anno--taste" style="--w: 37%;">
+            <span class="anno-cat">Taste</span>
+            <span class="anno-pct">37%</span>
+            <span class="anno-meta">33 commits</span>
+          </div>
+          <div class="anno anno--bugs" style="--w: 43%;">
+            <span class="anno-cat">Bugs / drift</span>
+            <span class="anno-pct">43%</span>
+            <span class="anno-meta">39 commits</span>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="seg seg--planning" style="--w: 20%;"></div>
+          <div class="seg seg--taste" style="--w: 37%;"></div>
+          <div class="seg seg--bugs" style="--w: 43%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cb-row">
+      <div class="row-meta">
+        <span class="row-label">By lines of code</span>
+        <span class="row-total"><b>10,698</b><em>total</em></span>
+      </div>
+      <div
+        class="bar-stack"
+        role="img"
+        aria-label="By lines of code: 52% planning gaps (5,557), 22% taste (2,316), 26% bugs and drift (2,825)"
+      >
+        <div class="anno-track">
+          <div class="anno anno--planning" style="--w: 52%;">
+            <span class="anno-cat">Planning gaps</span>
+            <span class="anno-pct">52%</span>
+            <span class="anno-meta">5,557 lines</span>
+          </div>
+          <div class="anno anno--taste" style="--w: 22%;">
+            <span class="anno-cat">Taste</span>
+            <span class="anno-pct">22%</span>
+            <span class="anno-meta">2,316 lines</span>
+          </div>
+          <div class="anno anno--bugs" style="--w: 26%;">
+            <span class="anno-cat">Bugs / drift</span>
+            <span class="anno-pct">26%</span>
+            <span class="anno-meta">2,825 lines</span>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="seg seg--planning" style="--w: 52%;"></div>
+          <div class="seg seg--taste" style="--w: 22%;"></div>
+          <div class="seg seg--bugs" style="--w: 26%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style lang="scss">
+    @use "../../../styles/variables" as *;
+
+    .cleanup-breakdown {
+      --c-planning: var(--accent);
+      --c-taste: light-dark(#b88a4a, #d4ad74);
+      --c-bugs: light-dark(#a8543f, #d08772);
+      --gap: 3px;
+
+      margin: 2.25rem 0 2.5rem;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    // figure.cleanup-breakdown > .cb-body needed to beat the article figure
+    // first-child rule (article figure > :first-child:not(style)) which forces
+    // display: block on what would otherwise be our grid container.
+    figure.cleanup-breakdown > .cb-body {
+      display: grid;
+      gap: 2.75rem;
+      padding: 1.4rem 0 0.4rem;
+      width: 100%;
+      min-width: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .cb-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
+      gap: 1.4rem;
+      align-items: end;
+      min-width: 0;
+    }
+
+    .row-meta {
+      display: grid;
+      gap: 0.3rem;
+      align-content: end;
+      padding-bottom: 0.15rem;
+    }
+
+    .row-label {
+      @include section-label(10.5px, 0.13em);
+      color: var(--text-soft);
+    }
+
+    .row-total {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-family: $font-heading;
+      line-height: 1;
+
+      b {
+        font-weight: 500;
+        font-size: 1.95rem;
+        color: var(--text);
+        font-feature-settings: "tnum" 1;
+        letter-spacing: -0.02em;
+      }
+
+      em {
+        font-style: normal;
+        font-size: 10.5px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+      }
+    }
+
+    .bar-stack {
+      display: grid;
+      gap: 0.5rem;
+      min-width: 0;
+    }
+
+    .anno-track {
+      display: flex;
+      width: 100%;
+      gap: var(--gap);
+      min-width: 0;
+    }
+
+    .anno {
+      width: var(--w);
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      column-gap: 0.5rem;
+      row-gap: 0.05rem;
+      align-content: end;
+      padding-right: 0.4rem;
+      color: var(--text);
+      font-family: $font-heading;
+      line-height: 1.1;
+
+      &--planning {
+        --anno-color: var(--c-planning);
+      }
+      &--taste {
+        --anno-color: var(--c-taste);
+      }
+      &--bugs {
+        --anno-color: var(--c-bugs);
+      }
+    }
+
+    .anno-cat {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      @include section-label(10px, 0.1em, var(--anno-color));
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .anno-pct {
+      grid-column: 1;
+      grid-row: 2;
+      font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      font-feature-settings: "tnum" 1;
+      align-self: baseline;
+    }
+
+    .anno-meta {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: 10.5px;
+      color: var(--text-faint);
+      letter-spacing: 0.04em;
+      font-feature-settings: "tnum" 1;
+      align-self: baseline;
+      white-space: nowrap;
+    }
+
+    .bar {
+      display: flex;
+      width: 100%;
+      min-width: 0;
+      height: 18px;
+      gap: var(--gap);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .seg {
+      width: var(--w);
+      min-width: 0;
+      height: 100%;
+      transition: filter 0.18s ease;
+
+      &--planning {
+        background: var(--c-planning);
+      }
+      &--taste {
+        background: var(--c-taste);
+      }
+      &--bugs {
+        background: var(--c-bugs);
+      }
+    }
+
+    // Stack count below the percentage so narrow segments don't truncate it.
+    .anno {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+
+      .anno-pct {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .anno-meta {
+        grid-column: 1;
+        grid-row: 3;
+        align-self: start;
+        margin-top: 1px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      figure.cleanup-breakdown > .cb-body {
+        gap: 2rem;
+      }
+
+      .cb-row {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+      }
+
+      .row-meta {
+        display: flex;
+        align-items: baseline;
+        gap: 0.65rem;
+        padding-bottom: 0;
+      }
+
+      .row-total b {
+        font-size: 1.4rem;
+      }
+
+      .anno-cat {
+        font-size: 9.5px;
+      }
+
+      .anno-pct {
+        font-size: 1rem;
+      }
+
+      .anno-meta {
+        display: none;
+      }
+
+      .bar {
+        height: 14px;
+      }
+    }
+  </style>
+</figure>
