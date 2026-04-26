@@ -5,10 +5,10 @@ tags:
   - blog
   - programming
 tldr:
-  - I used <a href="/article/2026/automating-your-agents">jr</a> to orchestrate 13 features across 45+ tasks for a full
-    site redesign, then spent 81 more commits on manual polish
-  - The orchestrator handled ~80% of the structural work; the remaining ~20% was irreducibly human
-  - The 20% breaks into three categories&colon; planning gaps (25%), taste iteration (44%), and bugs/drift (31%)
+  - You can't one-shot a non-trivial project. I used <a href="/article/2026/automating-your-agents">jr</a> to
+    orchestrate the structural work in 9 PRs, then needed 90+ human-directed commits to finish it
+  - The orchestrator wrote ~10k lines autonomously; the human-directed cleanup touched another ~10k
+  - Cleanup splits into planning gaps (20% of commits, 52% of LoC), bugs / drift (43%), and taste (37%)
 ---
 
 import { Image } from "astro:assets";
@@ -28,97 +28,97 @@ import imgDiffShift from "./diff-shift.png";
 import imgBeforeShift from "./before-shift.png";
 import imgAfterShift from "./after-shift.png";
 
-This site looks different. If you're a returning reader you've probably noticed by now. I redesigned the whole thing
-using [jr](/article/2026/automating-your-agents), the AI orchestrator I built on top of Claude Code, git worktrees, and
-the workflow I described in my [last article](/article/2026/automating-your-agents). If you haven't read that, the short
-version: jr breaks work into features and tasks, runs AI agents in isolated worktrees with code review and architect
-review at each stage, and gates for human review before merging. It's mostly autonomous, but human-in-the-loop where it
-matters.
-
-I set out to test whether an exhaustive plan plus orchestrated AI agents could handle a non-trivial redesign from end to
-end. The site needed a Bootstrap 3-to-5 upgrade, a LESS-to-Sass migration, a complete layout overhaul, new components, a
-homepage redesign, dark mode cleanup, and a new typography system. Not a greenfield project — a refactor of a live site
-with existing content, URLs, and functionality that all needed to be preserved.
-
-The answer: the orchestrator got me about 80% of the way there. The remaining 20% was irreducibly human. Not because the
-tooling failed, but because certain categories of work fundamentally resist automation. Here's what that looked like.
+I just refactored my whole website into a completely new design, looks pretty good right? Would you believe me if I told
+you I one-shot this whole project in one day using my
+[AI orchestrated workflow](/article/2026/03-30-automating-your-agents)? No? Good, you shouldn't because I didn't. It's
+hard to believe given all the AI hype and hyperbole being spread these days telling the internet that entire
+applications are being coded overnight by agents given an initial prompt and left to run on their own. Let me show you
+the process goes in real life for people who are actually making useful things.
 
 ## The process
 
-I started by creating HTML mockups in Claude for the key pages — homepage, blog post, tags page. These served as visual
-targets, not pixel-perfect specs. Then I wrote a detailed refactor plan covering tests, migrations, layout, and
-components. jr's `/plan-features` command broke it into 11 features with 30+ tasks in dependency order — E2E tests first
-as a safety net, then infrastructure migrations, then visual changes. Two more features were added after the initial
-plan to address gaps. Each feature maps to a PR, each task to a commit.
+The one-shot narrative hides what comes before any agent can run. I built HTML mockups in Claude's web interface for the
+key pages - homepage, blog post, tags page - to serve as visual targets. I wrote a detailed refactor plan covering
+tests, migrations, layout, and components. jr's `/plan-features` command broke it into 11 features with 30+ tasks in
+dependency order - E2E tests first as a safety net, then infrastructure migrations, then visual changes. Two more
+features were added after the initial plan to cover gaps. That's all human work upfront, before a single autonomous
+commit landed.
 
-What follows is a walk through the key moments of this redesign — what the orchestrator handled, where the plan fell
-short, where my own taste needed to take over, and where the automated process introduced bugs I had to fix.
+What follows is a walk through the key moments of this redesign - what the orchestrator handled, where the plan fell
+short, where my own taste needed to take over, and where the automated process introduced bugs I had to direct an agent
+to fix one at a time.
 
 <Steps>
 
-<Step image={imgHomepageConcept}  alt="Concept design HTML side by side with the final site" label="The Concept Designs">
+<Step image={imgHomepageConcept} alt="Concept design HTML side by side with the final site" label="The Concept Designs">
 
-The concept designs were created as static HTML files in Claude's web interface. They defined the color system,
-typography, component structure, and layout grid. Agents referenced specific line numbers in these files when
-implementing components. These concepts were explicitly "visual guides only" — they captured what the site should look
-like but couldn't capture how it should _feel_ to use.
+Static HTML mockups built by hand in Claude's web interface. Color system, typography, component structure, layout grid.
+Agents referenced specific line numbers in these files when implementing components. The concepts were explicitly visual
+guides - they captured what the site should look like but couldn't capture how it should _feel_ to use, and they weren't
+an implementable spec. Someone has to decide what the thing is before any orchestrator can build it. That someone wasn't
+an agent.
 
 </Step>
 
 <Step image={imgJustTree} textPosition="left" alt="just tree output showing the full ticket hierarchy" label="The Ticket Hierarchy">
 
-`/jr:plan-features` broke an intial planning session into 11 features with dependencies. E2E tests first, then
+`/jr:plan-features` decomposed an initial planning session into 11 features with dependencies. E2E tests first, then
 infrastructure (LESS→Sass, Bootstrap 3→5, dark mode cleanup), then visual changes (figures, typography, layout,
-components, homepage). Two more features — Style Cleanup and Code Simplification — were added later to cover gaps.
+components, homepage). Two more features - Style Cleanup and Code Simplification - were added later to cover gaps the
+plan missed. The plan, the dependency ordering, the gap-filling: all human judgment, all upfront. The orchestrator
+inherits a tree, it doesn't grow one.
 
 </Step>
 
-<Step image={imgHomepageBefore} imageAfter={imgHomepagePrePolish} alt="The homepage after the orchestrator built it in 15 minutes" label="Homepage in 15 Minutes">
+<Step image={imgHomepageBefore} imageAfter={imgHomepagePrePolish} alt="The homepage after the orchestrator built it in 15 minutes" label="The Easy Part">
 
-The homepage was a clean orchestrator win. The coder and reviewer completed 813 lines across two tasks in about 15
-minutes. The data layer was cleanly extracted with 13 unit tests, and the coder independently recognized that
-DefaultLayout's content wrapper would block the full-width hero and created a separate HomeLayout. Good autonomous
-architectural decisions.
+The homepage is the kind of win the one-shot narrative is built on. Coder and reviewer agents completed 813 lines across
+two tasks in about 15 minutes, fully autonomously. The data layer extracted with 13 unit tests; the coder independently
+recognized that DefaultLayout's content wrapper would block the full-width hero and created a separate HomeLayout.
+Genuinely good autonomous architectural work. This is what people screenshot. It's also where the autonomous part ends.
 
 </Step>
 
-<Step image={imgHomepagePrePolish} imageAfter={imgHomepageAfter} textPosition="left" alt="Homepage before and after manual polish commits" label="Homepage Polish">
+<Step image={imgHomepagePrePolish} imageAfter={imgHomepageAfter} textPosition="left" alt="Homepage before and after polish commits" label="The Hard Part">
 
-But 12+ polish commits followed. Hero padding, avatar positioning, eyebrow visibility, sidebar search colors, preview
-image sizing — all required manual iteration. The orchestrator built the structure; the human refined the feel.
+Then 13 human-directed commits to finish the homepage. Hero padding, avatar position, eyebrow visibility on mobile,
+preview image sizing, hero figcaption color, sidebar search button colors, on-this-page spacing. None of it
+intellectually difficult. None of it done by the orchestrator. Each one a specific instruction from me to an agent: fix
+this exact thing. The structure took 15 minutes; getting from structure to shippable took me directing fixes one at a
+time.
 
 </Step>
 
 <Step image={imgNoTableOfContents} alt="Table of Contents in the sidebar and mobile hamburger menu" label="Planning Gap: The Missing ToC">
 
-The biggest planning gap: the Table of Contents. Six commits, ~750 lines, integrated into both the sidebar and the
-mobile hamburger menu. It wasn't in any plan, concept, or ticket. The original site didn't even have one. But the
+The biggest planning gap: the Table of Contents. Seven commits, ~850 lines added, integrated into both the sidebar and
+the mobile hamburger menu. It wasn't in any plan, concept, or ticket. The original site didn't even have one. But the
 redesign moved primary navigation from a sidebar running down the right margin into the topbar. All my figures had been
-designed to avoid that sidebar space — and now it was empty. Something felt missing. A ToC was the obvious use for that
+designed to avoid that sidebar space - and now it was empty. Something felt missing. A ToC was the obvious use for that
 space, but I couldn't have planned for it because the need only emerged from seeing the finished layout. Other gaps: the
-Steps component you're reading right now, swapping Font Awesome for astro-icons, and an Astro framework upgrade to use
-its new font API.
+Steps component you're reading right now (nine commits to build), swapping Font Awesome for astro-icons, and an Astro
+framework upgrade to use its new font API. None of these were in the original plan. All of them were necessary once I
+saw the result.
 
 </Step>
 
 <Step image={imgHamburger} textPosition="left" alt="Concept topbar design compared to the shipped 757-line Topbar component" caption="Original mock. Hamburger added later with Claude. Designed custom dropdown." label="Taste: Concept vs Reality">
 
-The concept topbar was 52 lines of CSS — a static mockup with no hamburger menu, no responsive behavior, no theme-aware
+The concept topbar was 52 lines of CSS - a static mockup with no hamburger menu, no responsive behavior, no theme-aware
 avatars. The shipped Topbar component is 757 lines. The gap between "visual guide" and "implementable spec" was
-enormous, and the agents could only bridge the structural part of it. Getting the orchestrator to match the concept
-exactly was painful; I went with what came out and refined from there.
+enormous, and the agents could only bridge the structural part of it. Trying to direct the orchestrator to match the
+concept exactly was painful enough that I gave up and took what came out, then refined from there. That refinement is
+taste work, and taste work is where one-shot claims fall apart fastest: there is no spec for "looks right".
 
 </Step>
 
 <Step image={imgFigureReview} alt="Figure system ticket notes showing 5 review rounds and architect self-diagnosis" label="Drift: Figure System Review" caption="Figure going outside of tablet viewport and displaying source code above it">
 
-The figure system was the highest-drama feature. Five review rounds before merging. The architect approved round one
-with "0 significant gaps" — I immediately found four visual bugs. The architect's self-diagnosis after round three:
-
-> I should have been using the browser to inspect computed styles at specific breakpoints for each figure variant
-
-Even after five rounds, eight more fix commits followed post-merge — including `astro-island` wrapper elements breaking
-CSS child selectors, a library-specific interaction no plan anticipated.
+The figure system was the highest-drama feature. Five review rounds before merging. The architect agent approved round
+one with "0 significant gaps" - I immediately found four visual bugs. Even after five rounds, nine more fix commits
+followed post-merge. The infamous one was a 4-line CSS change for `astro-island` wrapper elements breaking child
+selectors - hours of debugging for four lines, because no automated reviewer was actually rendering the page and looking
+at it.
 
 </Step>
 
@@ -127,82 +127,108 @@ CSS child selectors, a library-specific interaction no plan anticipated.
 The ThemeToggle took three separate commits to fix. The agents restyled it per the concept, but accessibility
 requirements (contrast ratios, focus states) kept conflicting with the visual design. Each fix regressed the other
 direction. The root issue: the concept itself wasn't contrast-appropriate, so the agents were working toward a target
-that was inherently inaccessible. The Bootstrap 3→5 upgrade had a similar pattern — three automated actors all approved
+that was inherently inaccessible. The Bootstrap 3→5 upgrade had a similar pattern - three automated actors all approved
 without noticing that different default breakpoint pixel values broke container widths across the entire site.
 
 </Step>
 
 <Step image={imgBeforeShift} imageAfter={imgAfterShift} alt="Visual regression diff output showing expected vs actual screenshots" label="Screenshot Tests" caption="What you see during a screenshot diff when a margin slightly changed">
 
-Running before/after screenshot tests were super helpful for me to catch regressions on all the pages I wouldn't have
-checked manually.
+Running before/after screenshot tests was the one piece of automation that actually caught regressions on pages I
+wouldn't have checked manually. Without it, the bug count would have been higher.
 
 <figure>
   <Image src={imgDiffShift} alt="" />
   <figcaption>What AI sees when a margin slightly changed</figcaption>
 </figure>
 
-Screenshot tests and visual regression were consistently bad and rarely caught with AI automation. The agents _ran_ them
-but couldn't meaningfully interpret hundreds of diffs with slight differences. Real regressions hid among expected
-changes.
+But the agents themselves couldn't usefully interpret the diffs. They _ran_ the tests, then waved through hundreds of
+near-identical visual changes. Real regressions hid among expected changes. The tests were a tool I used; they were not
+a tool the agents could use without me.
 
 </Step>
 
 </Steps>
 
-> "Screenshot diff images were read at too low resolution to identify specific CSS issues — I should have been using the
-> browser to inspect computed styles at specific breakpoints for each figure variant."
->
-> &mdash; Architect Reviewer Agent
-
 ## Takeaways
 
-### The 80/20 split
+### What the structural win hides
 
-The orchestrator produced the structural backbone of a complete site redesign — LESS-to-Sass conversion, Bootstrap
-upgrade, component system, layout refactor, homepage — in a fraction of the time it would have taken manually. Where the
-specs were detailed and the concepts existed, the output was genuinely good. First-pass approval on most tasks. Agents
-making correct autonomous architectural decisions. Meaningful code review catching real bugs.
+The orchestrator did produce the structural backbone of a complete site redesign - LESS-to-Sass conversion, Bootstrap
+upgrade, component system, layout refactor, homepage - autonomously, in nine PRs. Where the specs were detailed and the
+concepts existed, the output was genuinely good. First-pass approval on most tasks. Agents making correct autonomous
+architectural decisions. Meaningful code review catching real bugs. This is the part of the workflow that fits the
+one-shot narrative, and it's a real accelerator.
 
-After the orchestrated features merged, 81 manual commits followed. They break into three categories:
+But it isn't the project. After the orchestrated features merged, 90 human-directed commits followed - me directing
+agents to fix one specific thing at a time. Same total volume of code touched as the orchestrator itself.
 
-{/*prettier-ignore*/}
+{/* prettier-ignore */}
 <figure class="center borderless center-micro">
-<Mermaid chart={`pie title 81 Post-Orchestration Commits
-    "Planning Gaps" : 20
-    "Taste / Preference" : 36
-    "Bugs / Drift" : 25
+<Mermaid chart={`pie title 90 Human-Directed Commits
+    "Planning Gaps" : 18
+    "Taste / Preference" : 33
+    "Bugs / Drift" : 39
 `} />
 </figure>
 
-**Planning gaps** (25%) exist because you can't fully specify what you want until you see what you have. The Table of
-Contents wasn't in any plan because the need only became apparent from using the redesigned site. No amount of upfront
-planning eliminates this class of requirement — it's inherent to creative work.
+{/* prettier-ignore */}
+<figure class="center borderless center-micro">
+<Mermaid chart={`pie title Lines of Code Touched (10,698 total)
+    "Planning Gaps" : 5557
+    "Taste / Preference" : 2316
+    "Bugs / Drift" : 2825
+`} />
+</figure>
 
-**Taste iteration** (44%) exists because design is embodied judgment. You can specify "Newsreader for body text" but you
-can't spec whether it _reads well_ at body sizes in dark mode at 2am. That requires a human sitting with the output and
-reacting to it.
+The two charts tell different stories. By commit count, bugs and drift dominate (43%) - lots of small fixes for things
+the orchestrator broke or never finished. By LoC, planning gaps dominate (52% of lines from 20% of commits) - because
+the orchestrator missed entire features that needed building from scratch.
 
-**Bugs and drift** (31%) are the one category that could theoretically shrink. The figure system's five review rounds
-happened because the automated reviewers weren't actually _looking_ at the output. As agents get better at visual
-reasoning, this will shrink. But it won't disappear — the `<astro-island>` CSS interaction was invisible to any analysis
-short of rendering the page.
+**Planning gaps** exist because you can't fully specify what you want until you see what you have. The Table of Contents
+wasn't in any plan; the need only became apparent from using the redesigned site. The Steps component you're reading
+right now also wasn't planned. Neither were the icon-library swap or the Astro framework upgrade. No amount of upfront
+planning eliminates this class of requirement - it's inherent to creative work, and "one-shot" implies the spec was
+complete to start with. It never is.
+
+**Bugs and drift** are the category I'd most expect to shrink as agents improve. The architect agent's own
+self-diagnosis after the figure system fiasco:
+
+> Screenshot diff images were read at too low resolution to identify specific CSS issues - I should have been using the
+> browser to inspect computed styles at specific breakpoints for each figure variant.
+
+The agents weren't actually _looking_ at the output. Better visual reasoning will help. But it won't eliminate this
+category - the `<astro-island>` CSS interaction was a 4-line fix that took hours to find precisely because no automated
+tool was rendering the page and noticing it looked wrong.
+
+**Taste / preference** is the unbounded category. I could keep tweaking forever; I chose a stopping point that felt
+shippable to me. A different person would have stopped earlier or kept going longer. This is the category that's hardest
+to argue is "necessary" - but it's also the category where one-shot claims fall apart fastest, because there is no spec
+for "looks right" and no agent can decide when you're done.
 
 ### The role of the framework
 
-Using Astro helped: its component model gave agents clear boundaries, and content collections provided typed schemas.
-The architecture mapped naturally to jr's feature/task decomposition. It also hurt in specific ways — `<astro-island>`
-wrapper elements broke CSS child selectors in figures, and scoped style compilation broke dark mode attribute selectors.
-But the component model was essential. Without clear component boundaries, decomposing work into parallel-safe tasks
-would have been much harder. The framework gave the orchestrator natural seams to cut along.
+Astro helped, materially. Its component model gave agents clear boundaries to work within - the homepage's coder agent
+independently recognized that DefaultLayout's content wrapper would block the full-width hero and created a separate
+HomeLayout, the kind of decision that's only possible when the framework gives you obvious seams. Content collections
+provided typed schemas. The architecture mapped naturally to jr's feature/task decomposition.
+
+It also hurt in specific ways - `<astro-island>` wrapper elements broke CSS child selectors in figures, and scoped style
+compilation broke dark mode attribute selectors. Both were drift commits I had to direct agents to fix.
+
+But on net the framework was essential. Without clear component boundaries, drift would have been worse: cross-cutting
+CSS changes would have rippled across files instead of staying contained. The 9-commit figure-system cleanup stayed
+mostly inside `_figures.scss`. Nine commits, ~70 total lines changed. That kind of containment is what the framework
+buys you.
 
 ### Against the one-shot narrative
 
-If you're evaluating agentic workflows against the "one-shot a full project" narrative: you can't. Not for a non-trivial
-project where you want to exert heavy influence over the result. But an orchestrated workflow can get you the structural
-80% with genuine quality — the kind of code you'd review and ship. And that 80% is a massive accelerator.
+If you're evaluating agentic workflows against the "one-shot a full project" narrative: you can't, for any non-trivial
+project where you care how it turns out. The orchestrator gave me a strong structural backbone, but a backbone is not a
+project. Filling in what the plan missed, fixing what the agents broke, and pushing the result through my own taste was
+90 human-directed commits and the same volume of code as the orchestrator produced.
 
-The time I spent on the 20% was substantial — 81 commits over several weeks of iterating. But the output was minimal in
-terms of lines changed (tens or hundreds compared to the thousands the agents produced). I _chose_ to invest that time
-to inject my preferred refinement into the end result. The orchestrator built the house. I chose the paint colors,
-adjusted the furniture, and fixed the squeaky hinges. Both parts were necessary. Neither could have replaced the other.
+That's still a massive accelerator. I would not have built this site this fast on my own. But the part the orchestrator
+can do without me is the part the one-shot narrative implicitly claims is the whole job, and it isn't. The orchestrator
+did the framing and the rough plumbing. I had to direct an agent to do everything that makes a house livable, one fix at
+a time. Both parts were necessary. The autonomous part is real. So is the part nobody talks about.
