@@ -118,7 +118,8 @@ directing fixes one at a time.
 
 </Step>
 
-<Step image={imgNoTableOfContents} alt="Table of Contents in the sidebar and mobile hamburger menu" label="Planning Gap: The Missing ToC">
+<Step image={imgNoTableOfContents} alt="Demonstration of the top bar being moved and empty content where Table of
+  Contents ended up" label="Planning Gap: The Missing ToC">
 
 This was the biggest planning gap: the Table of Contents. Seven commits, ~850 lines added, integrated into both the
 sidebar and the mobile hamburger menu. It wasn't in any plan, concept, or ticket mainly because my original site didn't
@@ -150,7 +151,7 @@ in a spec it would be code and you would be done as soon as it was written.
 
 </Step>
 
-<Step image={imgFigureReview} alt="Figure system ticket notes showing 5 review rounds and architect self-diagnosis" label="Drift: Figure System Review" caption="Figure going outside of tablet viewport and displaying source code above it">
+<Step image={imgFigureReview} alt="A figure being clipped off the left side of the page and displaying buggy code output" label="Drift: Figure System Review" caption="Figure going outside of tablet viewport and displaying source code above it">
 
 The implementation of my complex figures into the new redesign had the most back-and-forth thrashing between agents.
 Five total review rounds before merging - the architect itself caught issues on two of them, approved on two more that I
@@ -166,7 +167,7 @@ future.
 
 </Step>
 
-<Step image={imgThemeToggle} textPosition="left" alt="ThemeToggle showing accessibility contrast conflicting with concept design" label="Drift: Accessibility vs Design">
+<Step image={imgThemeToggle} textPosition="left" alt="ThemeToggle showing accessibility contrast conflicting with concept design" label="Drift: Accessibility vs Design" caption="Iterating on the ThemeToggle component">
 
 The ThemeToggle took three separate commits to fix. The agents restyled it per the concept, but accessibility
 requirements (contrast ratios, focus states) kept conflicting with the visual design. Each fix regressed the other
