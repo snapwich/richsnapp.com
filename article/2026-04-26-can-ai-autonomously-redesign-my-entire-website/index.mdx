@@ -222,11 +222,6 @@ touched as the orchestrator itself.
 
 <CleanupBreakdown />
 
-**Planning gaps** exist because you can't fully specify what you want until you see what you have, as chronicled above.
-The Table of Contents wasn't planned. The Steps component you're reading right now also wasn't planned. Neither were the
-icon-library swap that came mid-implementation or the Astro framework upgrade I needed to support it. No amount of
-upfront planning resolves every concern in a non-trivial project.
-
 **Bugs and drift** are issues I'd classify as poor prompt adherence. These were issues with features defined in the spec
 but either misunderstood, poorly implemented, or completely ignored by agents. This is the category I'd most expect to
 shrink as agents improve. The architect agent's own self-diagnosis after the figure system fiasco:
@@ -235,7 +230,13 @@ shrink as agents improve. The architect agent's own self-diagnosis after the fig
 > browser to inspect computed styles at specific breakpoints for each figure variant.
 
 The agents had trouble with visual output and semantic output such as accessibility trees didn't always highlight visual
-issues. Better visual reasoning will help, but it won't eliminate this category.
+issues. Better visual reasoning will help, but it won't eliminate this category. Better context could perhaps help
+agents to remember to check results against every breakpoint (but not guaranteed).
+
+**Planning gaps** exist because you can't fully specify what you want until you see what you have, as chronicled above.
+The Table of Contents wasn't planned. The Steps component you're reading right now also wasn't planned. Neither were the
+icon-library swap that came mid-implementation or the Astro framework upgrade I needed to support it. No amount of
+upfront planning resolves every concern in a non-trivial project.
 
 **Taste / preference** is the unbounded category. I could keep tweaking forever; I chose a stopping point that felt
 "complete" to me. A different person would have stopped earlier or kept going longer. This is the category that's
@@ -245,6 +246,14 @@ to you personally.
 
 ### Conclusion
 
-This redesign project was massively accelerated by AI, I would not have refactored this site this fast on my own. But
-don't be fooled by the AI "thought leaders" suggesting AI can be left to run with minimal guidance and produce anything
-other than AI slop.
+The graphs above I think are a pretty good indicator of where we're at right now with agentic AI. If you're using a
+human-in-the-loop orchestrated workflow [like mine](/article/2026/03-30-automating-your-agents) where it's mostly
+hands-off and you're basically just reviewing PRs and doing some cleanup afterwards you can autonomously do a
+significant portion of the work. It will also get better as models improve and bugs/drift from spec becomes less of an
+issue. More planning can _maybe_ reduce some of the gap, but not all of it; this is just a fundamental problem of work
+that made agile so successful. It's also worth noting that this is comparing output, not time: that the orchestration
+portion probably took hours compared to the few days I probably spent tweaking the site after-the-fact.
+
+That being said this redesign project was massively accelerated by AI, I would not have refactored this site this fast
+on my own. But don't be fooled by the AI "thought leaders" suggesting AI can be left to run with minimal guidance and
+produce anything other than AI slop.

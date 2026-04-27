@@ -1,45 +1,53 @@
 ---
-// Two-row stacked-bar comparison for the cleanup breakdown.
-// Both rows show the same three categories so the inversion
-// (planning gaps small in commits, large in LoC) reads at a glance.
+// Two-row stacked-bar comparison covering all redesign work.
+// Order: orchestrator, then bugs (the category that shrinks as
+// models improve), then planning gaps and taste (the ones that
+// won't fully collapse). The inversion - orchestrator small in
+// commits, ~half in LoC - reads at a glance.
 ---
 
 <figure
   class="cleanup-breakdown center borderless center-micro"
-  aria-label="Cleanup work breakdown by commit count and lines of code"
+  aria-label="Redesign work breakdown by commit count and lines of code"
 >
   <div class="cb-body">
     <div class="cb-row">
       <div class="row-meta">
         <span class="row-label">By commits</span>
-        <span class="row-total"><b>90</b><em>total</em></span>
+        <span class="row-total"><b>99</b><em>total</em></span>
       </div>
       <div
         class="bar-stack"
         role="img"
-        aria-label="By commits: 20% planning gaps (18), 37% taste (33), 43% bugs and drift (39)"
+        aria-label="By commits: 9% orchestrator (9), 40% bugs and drift (39), 18% planning gaps (18), 33% taste (33)"
       >
         <div class="anno-track">
-          <div class="anno anno--planning" style="--w: 20%;">
+          <div class="anno anno--orch" style="--w: 9.1%;">
+            <span class="anno-cat">Orchestrator</span>
+            <span class="anno-pct">9%</span>
+            <span class="anno-meta">9 commits</span>
+          </div>
+          <div class="anno anno--bugs" style="--w: 39.4%;">
+            <span class="anno-cat">Bugs / drift</span>
+            <span class="anno-pct">40%</span>
+            <span class="anno-meta">39 commits</span>
+          </div>
+          <div class="anno anno--planning" style="--w: 18.2%;">
             <span class="anno-cat">Planning gaps</span>
-            <span class="anno-pct">20%</span>
+            <span class="anno-pct">18%</span>
             <span class="anno-meta">18 commits</span>
           </div>
-          <div class="anno anno--taste" style="--w: 37%;">
+          <div class="anno anno--taste" style="--w: 33.3%;">
             <span class="anno-cat">Taste</span>
-            <span class="anno-pct">37%</span>
+            <span class="anno-pct">33%</span>
             <span class="anno-meta">33 commits</span>
-          </div>
-          <div class="anno anno--bugs" style="--w: 43%;">
-            <span class="anno-cat">Bugs / drift</span>
-            <span class="anno-pct">43%</span>
-            <span class="anno-meta">39 commits</span>
           </div>
         </div>
         <div class="bar">
-          <div class="seg seg--planning" style="--w: 20%;"></div>
-          <div class="seg seg--taste" style="--w: 37%;"></div>
-          <div class="seg seg--bugs" style="--w: 43%;"></div>
+          <div class="seg seg--orch" style="--w: 9.1%;"></div>
+          <div class="seg seg--bugs" style="--w: 39.4%;"></div>
+          <div class="seg seg--planning" style="--w: 18.2%;"></div>
+          <div class="seg seg--taste" style="--w: 33.3%;"></div>
         </div>
       </div>
     </div>
@@ -47,34 +55,40 @@
     <div class="cb-row">
       <div class="row-meta">
         <span class="row-label">By lines of code</span>
-        <span class="row-total"><b>10,698</b><em>total</em></span>
+        <span class="row-total"><b>20,886</b><em>total</em></span>
       </div>
       <div
         class="bar-stack"
         role="img"
-        aria-label="By lines of code: 52% planning gaps (5,557), 22% taste (2,316), 26% bugs and drift (2,825)"
+        aria-label="By lines of code: 49% orchestrator (10,188), 13% bugs and drift (2,825), 27% planning gaps (5,557), 11% taste (2,316)"
       >
         <div class="anno-track">
-          <div class="anno anno--planning" style="--w: 52%;">
+          <div class="anno anno--orch" style="--w: 48.8%;">
+            <span class="anno-cat">Orchestrator</span>
+            <span class="anno-pct">49%</span>
+            <span class="anno-meta">10,188 lines</span>
+          </div>
+          <div class="anno anno--bugs" style="--w: 13.5%;">
+            <span class="anno-cat">Bugs / drift</span>
+            <span class="anno-pct">13%</span>
+            <span class="anno-meta">2,825 lines</span>
+          </div>
+          <div class="anno anno--planning" style="--w: 26.6%;">
             <span class="anno-cat">Planning gaps</span>
-            <span class="anno-pct">52%</span>
+            <span class="anno-pct">27%</span>
             <span class="anno-meta">5,557 lines</span>
           </div>
-          <div class="anno anno--taste" style="--w: 22%;">
+          <div class="anno anno--taste" style="--w: 11.1%;">
             <span class="anno-cat">Taste</span>
-            <span class="anno-pct">22%</span>
+            <span class="anno-pct">11%</span>
             <span class="anno-meta">2,316 lines</span>
-          </div>
-          <div class="anno anno--bugs" style="--w: 26%;">
-            <span class="anno-cat">Bugs / drift</span>
-            <span class="anno-pct">26%</span>
-            <span class="anno-meta">2,825 lines</span>
           </div>
         </div>
         <div class="bar">
-          <div class="seg seg--planning" style="--w: 52%;"></div>
-          <div class="seg seg--taste" style="--w: 22%;"></div>
-          <div class="seg seg--bugs" style="--w: 26%;"></div>
+          <div class="seg seg--orch" style="--w: 48.8%;"></div>
+          <div class="seg seg--bugs" style="--w: 13.5%;"></div>
+          <div class="seg seg--planning" style="--w: 26.6%;"></div>
+          <div class="seg seg--taste" style="--w: 11.1%;"></div>
         </div>
       </div>
     </div>
@@ -84,10 +98,12 @@
     @use "../../../styles/variables" as *;
 
     .cleanup-breakdown {
+      --c-orch: light-dark(#6c7480, #9aa3b0);
       --c-planning: var(--accent);
       --c-taste: light-dark(#b88a4a, #d4ad74);
       --c-bugs: light-dark(#a8543f, #d08772);
       --gap: 3px;
+      --orch-gap: 10px;
 
       margin: 2.25rem 0 2.5rem;
       width: 100%;
@@ -178,6 +194,10 @@
       font-family: $font-heading;
       line-height: 1.1;
 
+      &--orch {
+        --anno-color: var(--c-orch);
+        margin-right: calc(var(--orch-gap) - var(--gap));
+      }
       &--planning {
         --anno-color: var(--c-planning);
       }
@@ -237,6 +257,10 @@
       height: 100%;
       transition: filter 0.18s ease;
 
+      &--orch {
+        background: var(--c-orch);
+        margin-right: calc(var(--orch-gap) - var(--gap));
+      }
       &--planning {
         background: var(--c-planning);
       }
