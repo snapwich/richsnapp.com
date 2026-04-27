@@ -8,7 +8,7 @@ tldr:
   - <a href="https://en.wikipedia.org/wiki/Betteridge%27s_law_of_headlines">Betteridge's law of headlines</a> says "no"
   - <a href="/article/2026/03-30-automating-your-agents">My orchestrator</a> wrote ~10k lines autonomously; and I
     directed agents to touch up another ~10k
-  - Cleanup commits came came from planning gaps (20% of commits), bugs / drift (43%), and taste / tweaking (37%)
+  - Cleanup commits came from planning gaps (20% of commits), bugs / drift (43%), and taste / tweaking (37%)
   - I don't think it's possible today to one-shot any non-trivial project, despite many claiming otherwise
 image: ./homepage-before.png
 heroCaption: This website, pre-AI
@@ -32,8 +32,8 @@ import imgDiffShift from "./diff-shift.png";
 import imgBeforeShift from "./before-shift.png";
 import imgAfterShift from "./after-shift.png";
 
-I just refactored my whole website into a completely new design, looks pretty good right? Would you believe me if I told
-you I one-shot this whole thing in one day using my
+I just refactored my whole website into a completely new design. Looks pretty good, right? Would you believe me if I
+told you I one-shot this whole thing in one day using my
 [AI orchestrated workflow](/article/2026/03-30-automating-your-agents)? No? Good, you shouldn't because I didn't. It's
 hard to believe given all the AI hype and hyperbole spreading on social media that entire applications are being
 one-shot by agents that are left to run on their own for hours or days. Let me show you how the process goes in reality
@@ -64,8 +64,8 @@ In addition, two more feature loops were added after the initial set of features
 accessibility issues missed during the initial implementation (similar to a `/simplify` round suggested by Anthropic
 themselves). A dead-click area on the theme toggle plus six other issues bundled together (Style Cleanup), avatar sizing
 wrong on tools pages (Code Simplification). Without a human (me) catching these problems the final product would have
-drifted significantly farther from what I finally shipped. The reviewing agents caught some things but many others
-things were left for me to find.
+drifted significantly farther from what I finally shipped. The reviewing agents caught some things but many other things
+were left for me to find.
 
 What follows is a walk through the key moments of this redesign - what the orchestrator handled, where the plan fell
 short, where my own taste needed to take over, and where the automated process introduced bugs that I had to correct
@@ -130,7 +130,7 @@ finished layout with my actual content.
 
 Other gaps: this Steps component you're reading this content in right now (nine commits to build), swapping Font Awesome
 for astro-icons, and an Astro framework upgrade so that I could use its new fonts API. None of these were in the
-original plan, but all of them were important piece of the final result.
+original plan, but all of them were important pieces of the final result.
 
 </Step>
 
@@ -140,7 +140,7 @@ The concept's topbar was 52 lines of CSS - a static mockup with no hamburger men
 in mobile), and no avatars (a personal touch). The shipped Topbar component is 757 lines. The gap between "visual guide"
 and "implementable spec" was enormous, and the agents could only bridge the structural part of it.
 
-Trying to get the orchestrator to match the concept exactly was painful (but who among us have never pushed back against
+Trying to get the orchestrator to match the concept exactly was painful (but who among us has never pushed back against
 a designer asking for pixel-perfection?)... Enough so that I gave up and took what came out and then refined from there.
 
 Final refinement is taste work, and taste work is where one-shot claims fall apart fastest: there is no spec that can
@@ -151,7 +151,7 @@ in a spec it would be code and you would be done as soon as it was written.
 
 <Step image={imgFigureReview} alt="Figure system ticket notes showing 5 review rounds and architect self-diagnosis" label="Drift: Figure System Review" caption="Figure going outside of tablet viewport and displaying source code above it">
 
-The implementation of my complex figures into the new redesign had the most back and forth thrashing between agents.
+The implementation of my complex figures into the new redesign had the most back-and-forth thrashing between agents.
 Five total review rounds before merging - the architect itself caught issues on two of them, approved on two more that I
 then had to reject, then a final approval. Round one it approved with "0 significant gaps" and I immediately found four
 visual bugs. Even after all five rounds, nine more fix commits followed post-merge.
@@ -179,7 +179,7 @@ default breakpoint pixel values broke container widths across the entire site.
 
 <Step image={imgBeforeShift} imageAfter={imgAfterShift} alt="Visual regression diff output showing expected vs actual screenshots" label="Screenshot Tests" caption="What you see during a screenshot diff when a margin slightly changed">
 
-I came up with a structure for before/after screenshot tests that I would recommend to anyone doing frontend work
+I came up with a structure for before/after screenshot tests that I would recommend to anyone doing frontend work with
 agents. A test suite that generates screenshots for every page at every breakpoint and runs with a `before` and `after`
 command to do before/after any significant change that could generate regressions.
 
@@ -188,7 +188,7 @@ spotting visual differences and determining if they are intended or not.
 
 I would run `pnpm run test:screenshots:before` before I had agents do something, and then run
 `pnpm run test:screenshots:after` after they did it to determine if they had done what I had asked, and most
-importantly; had they done it without visually breaking something else in the process.
+importantly, had they done it without visually breaking something else in the process.
 
 <figure>
   <Image src={imgDiffShift} alt="" />
@@ -229,9 +229,9 @@ shrink as agents improve. The architect agent's own self-diagnosis after the fig
 > Screenshot diff images were read at too low resolution to identify specific CSS issues - I should have been using the
 > browser to inspect computed styles at specific breakpoints for each figure variant.
 
-The agents had trouble with visual output and semantic output such as accessibility trees didn't always highlight visual
-issues. Better visual reasoning will help, but it won't eliminate this category. Better context could perhaps help
-agents to remember to check results against every breakpoint (but not guaranteed).
+The agents had trouble with visual output, and semantic output (such as accessibility trees) didn't always highlight
+visual issues. Better visual reasoning will help, but it won't eliminate this category. Better context could perhaps
+help agents remember to check results against every breakpoint, but that's not guaranteed.
 
 **Planning gaps** exist because you can't fully specify what you want until you see what you have, as chronicled above.
 The Table of Contents wasn't planned. The Steps component you're reading right now also wasn't planned. Neither were the
@@ -252,7 +252,7 @@ hands-off and you're basically just reviewing PRs and doing some cleanup afterwa
 significant portion of the work. It will also get better as models improve and bugs/drift from spec becomes less of an
 issue. More planning can _maybe_ reduce some of the gap, but not all of it; this is just a fundamental problem of work
 that made agile so successful. It's also worth noting that this is comparing output, not time: that the orchestration
-portion probably took hours compared to the few days I probably spent tweaking the site after-the-fact.
+portion probably took hours compared to the few days I spent tweaking the site after the fact.
 
 That being said this redesign project was massively accelerated by AI, I would not have refactored this site this fast
 on my own. But don't be fooled by the AI "thought leaders" suggesting AI can be left to run with minimal guidance and
