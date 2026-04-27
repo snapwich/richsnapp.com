@@ -8,9 +8,10 @@ tldr:
   - <a href="https://en.wikipedia.org/wiki/Betteridge%27s_law_of_headlines">Betteridge's law of headlines</a> says "no"
   - <a href="/article/2026/03-30-automating-your-agents">My orchestrator</a> wrote ~10k lines autonomously; and I
     directed agents to touch up another ~10k
-  - Cleanup commits came from planning gaps (20% of commits), bugs / drift (43%), and taste / tweaking (37%)
+  - The breakdown of lines modified during this whole project was 49% automated AI, 13% bugs / drift fixes, 27% planning
+    gaps, and 11% taste / tweaking.
   - I don't think it's possible today to one-shot any non-trivial project, despite many claiming otherwise
-image: ./homepage-before.png
+image: ./homepage-before-old.jpg
 heroCaption: This website, pre-AI
 ---
 
@@ -32,8 +33,8 @@ import imgDiffShift from "./diff-shift.png";
 import imgBeforeShift from "./before-shift.png";
 import imgAfterShift from "./after-shift.png";
 
-I just refactored my whole website into a completely new design. Looks pretty good, right? Would you believe me if I
-told you I one-shot this whole thing in one day using my
+I just refactored my whole website into a completely new design without writing any code myself. Looks pretty good,
+right? Would you believe me if I told you I one-shot this whole thing in one day using my
 [AI orchestrated workflow](/article/2026/03-30-automating-your-agents)? No? Good, you shouldn't because I didn't. It's
 hard to believe given all the AI hype and hyperbole spreading on social media that entire applications are being
 one-shot by agents that are left to run on their own for hours or days. Let me show you how the process goes in reality
@@ -251,8 +252,8 @@ human-in-the-loop orchestrated workflow [like mine](/article/2026/03-30-automati
 hands-off and you're basically just reviewing PRs and doing some cleanup afterwards you can autonomously do a
 significant portion of the work. It will also get better as models improve and bugs/drift from spec becomes less of an
 issue. More planning can _maybe_ reduce some of the gap, but not all of it; this is just a fundamental problem of work
-that made agile so successful. It's also worth noting that this is comparing output, not time: that the orchestration
-portion probably took hours compared to the few days I spent tweaking the site after the fact.
+that made agile so successful. It's also worth noting that this is comparing output, not time: the orchestration portion
+probably took hours compared to the few days I spent planning before and then tweaking after.
 
 That being said this redesign project was massively accelerated by AI, I would not have refactored this site this fast
 on my own. But don't be fooled by the AI "thought leaders" suggesting AI can be left to run with minimal guidance and
