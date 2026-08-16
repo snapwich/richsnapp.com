@@ -5,7 +5,8 @@ tldr:
   - reduce ...spread belongs to a different complexity class than the optimal solutions, which is bad
   - javascript engines will probably never optimize this code
   - if you're using reduce ...spread for reasons of immutability, you should copy once or use immutable helper libraries
-image: ./complexity-comparison.png 
+image: ./complexity-comparison.png
+heroCaption: Blasting off at the speed of n log<sub>2</sub> n
 ---
 
 import { Image } from "astro:assets";
@@ -36,16 +37,16 @@ let items = [
   // ...
 ];
 
-// use reduce to build the new map into an accumulator 
-// we'll refer to this as "reduce mutate" 
-let result = items.reduce((acc, item) => { 
-  acc[item.name] = item.value; 
-  return acc; 
+// use reduce to build the new map into an accumulator
+// we'll refer to this as "reduce mutate"
+let result = items.reduce((acc, item) => {
+  acc[item.name] = item.value;
+  return acc;
 }, {});
 
-// equivalent as as a for loop 
-let result = {}; 
-for(let item of items) { 
+// equivalent as as a for loop
+let result = {};
+for(let item of items) {
   result[item.name] = item.value;
 }
 ````
