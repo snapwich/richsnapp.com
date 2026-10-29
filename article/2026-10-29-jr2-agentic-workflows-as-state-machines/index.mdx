@@ -1,0 +1,138 @@
+---
+title: "Managing agentic workflows with state machines: jr2"
+tags:
+  - ai
+  - programming
+image: ./title-slide.jpg
+heroCaption: Live at Forge Utah
+heroVideo: "https://www.youtube.com/embed/q_Z7yTz93w0"
+heroVideoAspect: 1772 / 1080
+---
+
+import SlideDeck from "./SlideDeck.astro";
+
+I gave a talk a month ago at [Forge Utah](https://www.youtube.com/@ForgeUtah) about running agents in state machines and
+introduced the first public release of jr2, the successor to [jr](/article/2026/03-30-automating-your-agents). jr was a
+bash loop that drove coding agents. jr2 is a kit for building agentic workflows as [xstate](https://stately.ai/docs)
+state machines. Each Agent runs in its own Kubernetes pod, off your laptop, and an Orchestrator in the cluster drives
+them. The [docs](https://snapwich.github.io/jr2/) tell how to use it.
+
+jr2 is open source (MIT), at [github.com/snapwich/jr2](https://github.com/snapwich/jr2).
+
+## The slides
+
+These are the slides as I presented them, without the live demo. The demo ran against a cluster beside the deck, so it
+cannot run here. To see it, [watch the recording at 26:15](https://www.youtube.com/watch?v=q_Z7yTz93w0&t=1575s).
+
+<SlideDeck />
+
+## What's changed since this presentation
+
+These are new since the talk, or were not in the deck. All are in 0.4.0 or 0.5.0:
+
+- **Effects.** A Machine can now do work outside itself. An Effect is an actor slot beside `agent()`, and it runs at
+  most once unless you mark it idempotent. A ledger keeps that true across an Orchestrator restart. There are four
+  kinds: `command` runs a command in the Workspace, `http` calls a URL and can send a file as its body, `push` pushes a
+  branch and can sign it, and `dispatch` starts another run.
+  ([ADR-0067](https://snapwich.github.io/jr2/reference/decisions/0067-an-effect-is-an-actor-slot-and-runs-at-most-once-unless-marked-idempotent),
+  [ADR-0071](https://snapwich.github.io/jr2/reference/decisions/0071-a-run-starts-a-run-through-a-dispatch-effect))
+- **Effectors.** The Custodian holds the keys that the Agent uses. An Effect that needs a secret runs in an Effector: a
+  container that holds the Effect's secrets and runs nothing for the Agent. You name each secret once, in a top-level
+  `secrets` list in `jr2.config.ts`, and jr2 works out where it goes.
+  ([ADR-0068](https://snapwich.github.io/jr2/reference/decisions/0068-an-effector-holds-an-effects-secrets-and-signs-its-wire))
+- **Sizing and capacity.** A Workspace states a Size (CPU and memory), and jr2 reserves all of it. When the cluster is
+  full, a Workspace waits in a visible `placing` state.
+  ([ADR-0060](https://snapwich.github.io/jr2/reference/decisions/0060-a-workspace-states-its-size-and-jr2-reserves-all-of-it),
+  [ADR-0064](https://snapwich.github.io/jr2/reference/decisions/0064-a-workspace-waits-for-capacity))
+- **Conversations survive a Harness restart.** The deck shows that a run outlives its Orchestrator. An Agent's
+  conversation also outlives its Harness: a restart cuts the current Turn, and the next Turn continues the same
+  conversation.
+  ([ADR-0021](https://snapwich.github.io/jr2/reference/decisions/0021-workspace-continuity-is-a-lease-that-answers-back),
+  [ADR-0031](https://snapwich.github.io/jr2/reference/decisions/0031-menu-only-agents-run-on-the-instance-harness))
+- **The Briefing.** jr2 tells the model facts about its seat that it cannot find out for itself: its working directory,
+  its CPUs and Size, its Allowed picks, and what happened to its last Turn. It never tells the model about the task.
+  ([ADR-0062](https://snapwich.github.io/jr2/reference/decisions/0062-jr2-briefs-the-agent-on-its-seat-never-on-its-task))
+- **Charts.** In the talk, Agents that write runtime Machines was on a "the future?" slide. It is in jr2 now. A Chart is
+  a workflow written only as JSON: xstate's own config, with states, transitions and named parts, and no code. So an
+  Agent can write a Chart and run it, with no commit and no redeploy. A Chart runs under a Chart wrapper, a Machine that
+  lends it Agents, Effects and other parts by name, and sets its limits. Everything with authority (URLs, commands,
+  secrets) stays in the wrapper.
+  ([ADR-0070](https://snapwich.github.io/jr2/reference/decisions/0070-a-machine-lends-its-parts-to-a-chart))
+- **Assemblies.** The Orchestrator is now a released image, the same as the Harness and the operator. `jr2 up` publishes
+  the Instance's workflows and config to the running Orchestrator as an Assembly. A publish reloads the Orchestrator
+  without restarting it, and a run keeps the Assembly it started with.
+  ([ADR-0069](https://snapwich.github.io/jr2/reference/decisions/0069-the-orchestrator-is-a-kit-image-and-an-instance-publishes-its-assembly))
+- **Docs in the Kit.** jr2 has a [docs site](https://snapwich.github.io/jr2/) now. The same docs ship inside the Kit,
+  and `jr2 init` writes an `AGENTS.md` and a `CLAUDE.md` that index them. So your own assistant can read them and
+  [write a Machine for you](https://snapwich.github.io/jr2/get-started/have-your-assistant-write-a-machine).
+  ([ADR-0072](https://snapwich.github.io/jr2/reference/decisions/0072-the-docs-ship-inside-the-kit-and-an-instances-agents-md-indexes-them))
+- **`jr2 check`.** It runs the typecheck and the Machine walk of `jr2 up`, with no cluster. `jr2 up` also tests each
+  model in the catalog before it changes the cluster. ([CLI reference](https://snapwich.github.io/jr2/reference/cli))
+- **`fail()`.** A Machine can end a run `failed` with a named Failure. A failure that nothing catches also ends the run
+  `failed`.
+  ([ADR-0073](https://snapwich.github.io/jr2/reference/decisions/0073-a-machine-fails-a-run-with-fail-and-an-uncaught-failure-ends-it-failed))
+- **Workspaces without a repo.** A Workspace can have no Repo Slot. Its Agents and Effects, if any, share `/work`, as
+  the steps of one GitHub Actions or CircleCI job share one folder. So a Workspace can work as a CI runner (with or
+  without Agents!), with no clone and no placeholder repo.
+  ([ADR-0005](https://snapwich.github.io/jr2/reference/decisions/0005-sandbox-pod-composition))
+- **More decisions.** The deck says 57 decisions. There are 72 now, in the
+  [decision records](https://snapwich.github.io/jr2/reference/decisions).
+
+## Coming in v1
+
+v1 is a compatibility promise. After v1, the authoring surface, `jr2.config.ts`, the CLI, the HTTP API and
+`@jr2/machines` stay stable, and a breaking change waits for v2. This list is the minimum set of features that I want
+jr2 to support, and to make stable, before I make that promise. The details can change, but these features are coming:
+
+- **Tenancy and Callers.** The Instance is the unit of tenancy, and many Instances on one cluster do not interfere. jr2
+  records the Caller of each action from outside a Machine: the start of a run, a Gate answer, a cancel. Scoped tokens
+  can only start runs, or only answer Gates.
+- **MCP tools for Agents.** An Agent can already reach external systems today, through Effects. The Machine decides when
+  an Effect runs, and its secrets stay in the Effector, so that is the more controlled path. MCP tools are for an Agent
+  that must use tools freely, when it decides to. MCP becomes the one way to give an Agent tools. An Agent definition
+  names its MCP servers, remote (HTTPS) or local in the Sandbox. The control stays: the Custodian holds each server's
+  credential, the same as the model key, and the Agent sees only a stand-in for the key.
+- **OAuth grants.** You give consent once, from the CLI, and every run in the Instance uses the grant. The Instance
+  Effector refreshes the token. When a refresh fails, jr2 says so.
+- **See and manage what runs.** `jr2 ls`, `jr2 ssh`, `jr2 logs` and `jr2 rm` for Workspaces. A Gate inbox that lists
+  every open Gate across runs. Run history. The conversation in the Console.
+- **Upgrades.** A parked run survives a minor or patch upgrade of the Kit. Across a major, `jr2 up` names the runs that
+  would drift, and refuses until you drain or cancel them. And a `jr2 upgrade` command.
+- **Control.** An egress allowlist (the default stays open, so `npm install` works) and a spend ceiling for each run.
+- **Machine-created Worktrees.** Worktrees are in jr2 now, but the Orchestrator makes them before an Agent starts. In
+  v1, a Machine can make its own Worktrees. The Worktree API can change a bit for this.
+
+## Further out
+
+These are ideas that I want to explore after v1. They are not commitments.
+
+- **An MCP server to control jr2 from your own assistant.** This is not the MCP tools above, which are for Agents. This
+  one is for you: Claude Code or another assistant starts runs, reads their status and answers Gates. The v1 Gate inbox
+  and scoped Caller tokens are the base for it.
+- **microVMs.** A container shares the node's kernel with the Agent's code. A microVM gives each Workspace its own
+  kernel. microVMs are probably coming, but how is not decided. One path is
+  [Agent Substrate](https://github.com/agent-substrate/substrate), which runs each actor in a gVisor or microVM sandbox,
+  and snapshots an idle actor so that it can resume on any node. That would also let a parked Workspace release its pod.
+  jr2 keeps its Size close to Substrate's and its Sandbox close to
+  [agent-sandbox](https://github.com/kubernetes-sigs/agent-sandbox)'s, so that move stays possible.
+
+## Try it
+
+You need Node.js 24 or later, Docker, kind and kubectl. jr2 needs Kubernetes 1.35 or later.
+
+{/* prettier-ignore */}
+<figure class="center">
+```sh
+npm i -g @jr2/cli
+kind create cluster --name jr2
+jr2 init my-agents
+cd my-agents && npm i
+jr2 up
+jr2 run ping
+```
+</figure>
+
+[Get started](https://snapwich.github.io/jr2/get-started/install) goes through these steps, and then connects a model.
+The [glossary](https://snapwich.github.io/jr2/reference/glossary) has the terms, and the
+[decision records](https://snapwich.github.io/jr2/reference/decisions) tell why jr2 is the way it is. The source is at
+[github.com/snapwich/jr2](https://github.com/snapwich/jr2).

@@ -1,0 +1,43 @@
+---
+// The talk's reveal.js deck, built as one self-contained page (see slides.html) and shown in an
+// iframe so its styles stay out of the site's. reveal.js scales the 1280×720 deck to the frame.
+// slides.html is built from snapwich/jr2 docs/intro/slides at 9367f3f: the live demo stack is
+// replaced by one slide that links to it in the recording, the demo scripts are removed, reveal's
+// scroll view is off, the mermaid diagrams are pre-rendered to SVG, and everything is inlined.
+import slidesUrl from "./slides.html?url";
+---
+
+<figure class="slide-deck">
+  <div class="frame">
+    <iframe
+      src={slidesUrl}
+      title="Slides: Agentic workflows as state machines, off your laptop"
+      loading="lazy"
+      allow="fullscreen"
+      allowfullscreen></iframe>
+  </div>
+  <figcaption>
+    Arrow keys or swipe to move. <a
+      href={slidesUrl}
+      target="_blank"
+      rel="noopener">Open&nbsp;full&nbsp;screen&nbsp;↗</a
+    >
+  </figcaption>
+</figure>
+
+<style>
+  .slide-deck .frame {
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0a0f1a;
+  }
+
+  .slide-deck iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
