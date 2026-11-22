@@ -1,0 +1,13 @@
+// The tool card of the Tools page, as one bordered card in the text.
+.toolCard {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-inset);
+
+  &.toolCard a:global(.post-card) {
+    padding: 0;
+    border-bottom: 0;
+  }
+}

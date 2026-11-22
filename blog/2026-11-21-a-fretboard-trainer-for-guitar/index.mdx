@@ -1,0 +1,102 @@
+---
+title: A fretboard trainer for guitar
+tags:
+  - tools
+  - guitar
+  - music
+image: ./fretboard.png
+heroDisabled: true
+tldr:
+  - An interactive guitar fretboard that helps you learn scales, modes, positions and chords
+  - It runs in the browser at <a href="/tools/fretboard">/tools/fretboard</a>, and each setting is saved in the link
+---
+
+import PostCard from "components/PostCard.astro";
+import imgFretboard from "./fretboard.png";
+import styles from "./styles.module.scss";
+
+Most scale charts for guitar show you one box of dots at a time. You learn the box, then the next box, and it is not
+clear how they connect or why a mode is anything more than a different box. This tool shows you a scale as one pattern
+of notes on the full neck, and it shows you which notes move when you change something.
+
+<div class={styles.toolCard}>
+  <PostCard
+    title="Fretboard Trainer"
+    href="/tools/fretboard"
+    excerpt="Learn guitar scales as a few note patterns, with positions, chords, playback and a drone."
+    image={imgFretboard}
+  />
+</div>
+
+## Scales, modes and keys
+
+The idea behind the tool is that a small number of note patterns make most of the scales you will use. The major scale
+pattern gives you seven modes. If you know where that pattern is on the neck, then Dorian or Mixolydian is the same
+pattern with a different home note.
+
+- **Scale** selects the pattern. There are eleven: major, harmonic minor, melodic minor, pentatonic, blues, double
+  harmonic, whole tone, diminished, bebop dominant, bebop major and Persian.
+- **Mode** selects the home note in that pattern, for example
+  [D Dorian](/tools/fretboard?key=D&family=major&mode=dorian).
+- **Key** moves the pattern up or down the neck.
+
+A change of mode keeps the notes and moves the home note, and a change of key moves the full pattern. When you change
+the scale, the neck shows which notes moved and where they went.
+[A minor](/tools/fretboard?key=A&family=major&mode=aeolian&chord=off) to A harmonic minor is one note: G becomes G♯. You
+can see that it is one note, and you can see each place on the neck where it occurs.
+
+The labels on the notes can be note names, intervals, or nothing (for when you want to test yourself).
+
+## Positions
+
+A position is the part of the scale that is in reach of one hand. The tool has the two usual systems, CAGED and three
+notes per string, and it also includes some classical and diagonal runs. You can step through the positions or drag the
+highlighted band along the neck. The notes outside the position stay visible but dimmed, so you can always see how one
+position connects to the next.
+
+## Chords
+
+The Chords row shows the chords of the key as triads or as 7th chords. Select one and the neck shows a shape for that
+chord in the current position, with the chord tones marked on the scale. Move the position and the chord gets a new
+shape there, so you can find the same chord in each part of the neck.
+
+Below it, the Quality row lets you change a chord: make the V a V7, make a minor chord major, use a sus4, or put a
+different note in the bass.
+
+## Name a chord
+
+Select notes on the neck, or type a shape such as `x32010`, and you get:
+
+- **Names**: each name that those notes can have. `x32210` is Am with C in the bass, and it is also a C6 with no 5th.
+  The tool lists the two.
+- **Show as**: where that chord is. Each chip is a key (or a mode, or a different scale) that has the chord, with its
+  roman numeral. Select a chip and the panel moves there.
+
+If a song has a chord that is not in the key, Show as can tell you which mode or scale it comes from and which notes
+change.
+
+## Playback
+
+The play button plays what the neck shows: the scale in the current position, or the selected chord as an arpeggio, as a
+strum, or as the whole position. You can set the tempo, and you can change the chord or the position while it plays.
+There is also a drone on the home note. A drone is a quick way to hear what a mode sounds like, because you hear each
+note that you play against the home note.
+
+## Your guitar
+
+The frets on the neck are not all the same width. As on a real guitar, each fret is narrower than the one before it, so
+the frets near the nut are wide and the high frets are close together. Most fretboard diagrams online draw each fret the
+same width. With similar proportions, a shape on the screen looks like the shape under your fingers, and you can find a
+position on your own guitar much more quickly.
+
+Under the neck you can set the tuning (standard, E♭ or D), a capo up to fret 7, and the fret where the neck joins the
+body (acoustic, classical or electric), so the picture agrees with the guitar in your hands.
+
+## Share or save for later
+
+Each setting is in the address of the page. Copy the link and you get the same scale, key, position and chords when you
+open it again. For example, here are
+[the 7th chords of A minor](/tools/fretboard?key=A&family=major&mode=aeolian&chords=7).
+
+Give it a try, and leave a comment below with what you think. If you find a bug, you can also submit it as an
+[issue on GitHub](https://github.com/snapwich/richsnapp.com/issues).
